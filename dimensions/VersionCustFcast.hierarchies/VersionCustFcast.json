@@ -1,0 +1,113 @@
+{
+	"@type":"Hierarchy",
+	"Name":"VersionCustFcast",
+	"Elements":
+	[
+		{
+			"Name":"Report Flag",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"History",
+			"Type":"Consolidated"
+		},
+		{
+			"Name":"Sellout",
+			"Type":"Consolidated"
+		},
+		{
+			"Name":"Sellout TY",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"Sellout LY",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"Working Outlook",
+			"Type":"Consolidated"
+		},
+		{
+			"Name":"Outlook",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"Forecast",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"Prior Year",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"Actual",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"Forecast NY",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"2 Years Prior",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"Sellout 2 Years Prior",
+			"Type":"Numeric"
+		}
+	],
+	"Edges":
+	[
+		{
+			"ParentName":"History",
+			"ComponentName":"Actual",
+			"Weight":1
+		},
+		{
+			"ParentName":"History",
+			"ComponentName":"Prior Year",
+			"Weight":1
+		},
+		{
+			"ParentName":"History",
+			"ComponentName":"2 Years Prior",
+			"Weight":1
+		},
+		{
+			"ParentName":"Sellout",
+			"ComponentName":"Sellout TY",
+			"Weight":1
+		},
+		{
+			"ParentName":"Sellout",
+			"ComponentName":"Sellout LY",
+			"Weight":1
+		},
+		{
+			"ParentName":"Sellout",
+			"ComponentName":"Sellout 2 Years Prior",
+			"Weight":1
+		},
+		{
+			"ParentName":"Working Outlook",
+			"ComponentName":"Forecast",
+			"Weight":1
+		},
+		{
+			"ParentName":"Working Outlook",
+			"ComponentName":"Forecast NY",
+			"Weight":1
+		},
+		{
+			"ParentName":"Working Outlook",
+			"ComponentName":"Outlook",
+			"Weight":1
+		}
+	],
+	"Subsets@Code.links":
+	[
+		"VersionCustFcast.subsets/Cust3MthRRTemp.json",
+		"VersionCustFcast.subsets/FlagProductsByCustomerTemp.json",
+		"VersionCustFcast.subsets/WorkingForecast.json"
+	]
+}

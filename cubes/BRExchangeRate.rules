@@ -1,0 +1,24 @@
+# Cube name: BRExchangeRate
+# Description:
+# V1.00 - 2022-09-12 - Jithu Varghese - CPM Group : initial version
+SKIPCHECK;
+
+# ['FXRate' ] = C: ConsolidatedAvg( 2 , 'BRExchangeRate', !BusinessUnit, !FiscalMonth, !Currency, !BRExchangeRateMeasure  ) ;
+
+['FXRate' ] = C: 0 ;
+
+['Currency', 'AUD-Outlook'] =  N: If ( DB( 'BRAsFiscalMonth' , 'Actual' , 'Corporate', !FiscalMonth , 'Actual Flag' ) = 1 
+                         , DB( 'BRExchangeRate', !BusinessUnit, !FiscalMonth, 'AUD-MonthEnd' , !Version, !BRExchangeRateMeasure   )
+                         , STET ) ;
+                         
+                         
+ ['Currency', 'USD-Budget'] =  [ 'Currency','AUD-Budget' ] \['Currency', 'BUS',  'AUD-Budget' ];
+ ['Currency', 'EUR-Budget'] =  [ 'Currency','AUD-Budget' ] \['Currency', 'BDE',  'AUD-Budget' ];                               
+
+                              
+FEEDERS;
+
+['Currency','AUD-Budget'] => ['EUR-Budget'];
+['Currency','AUD-Budget'] => ['USD-Budget'];
+
+['Currency', 'AUD-MonthEnd']  => ['AUD-Outlook'];

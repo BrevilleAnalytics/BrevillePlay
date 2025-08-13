@@ -1,0 +1,30 @@
+{
+	"@type":"Chore",
+	"Name":"Update PnLPlan Actuals and currency conversion",
+	"StartTime":"2022-12-13T21:02Z",
+	"DSTSensitive":true,
+	"Active":false,
+	"ExecutionMode":"SingleCommit",
+	"Frequency":"P1DT00H00M00S",
+	"Tasks":
+	[
+		{
+			"Step":0,
+			"Parameters":
+			[
+				{
+					"Name":"pExecutionGroup",
+					"Value":""
+				},
+				{
+					"Name":"pLine",
+					"Value":"00008"
+				}
+			],
+			"Process":
+			{
+				"@id":"Processes('sySequenceMaster')"
+			}
+		}
+	]
+}

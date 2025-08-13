@@ -1,0 +1,15 @@
+{
+	"@type":"Cube",
+	"Name":"syTM1Login",
+	"Rules@Code.link":"syTM1Login.rules",
+	"Dimensions":
+	[
+		{
+			"@id":"Dimensions('syTM1LoginClient')"
+		},
+		{
+			"@id":"Dimensions('syTM1LoginTime')"
+		}
+	],
+	"Views@Code.links":[]
+}

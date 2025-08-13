@@ -1,0 +1,16 @@
+{
+	"@type":"Subset",
+	"Name":"TempCMBHK",
+	"Elements":
+	[
+		{
+			"@id":"Dimensions('CMBHKForecastMeasure')/Hierarchies('CMBHKForecastMeasure')/Elements('Gross Sales')"
+		},
+		{
+			"@id":"Dimensions('CMBHKForecastMeasure')/Hierarchies('CMBHKForecastMeasure')/Elements('Cost of Goods Sold')"
+		},
+		{
+			"@id":"Dimensions('CMBHKForecastMeasure')/Hierarchies('CMBHKForecastMeasure')/Elements('Rebates')"
+		}
+	]
+}

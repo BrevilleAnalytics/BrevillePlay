@@ -1,0 +1,96 @@
+{
+	"@type":"Hierarchy",
+	"Name":"MDMGLMeasure",
+	"Elements":
+	[
+		{
+			"Name":"Parent Level 1",
+			"Type":"String"
+		},
+		{
+			"Name":"Parent Level 2",
+			"Type":"String"
+		},
+		{
+			"Name":"Parent Level 3",
+			"Type":"String"
+		},
+		{
+			"Name":"Parent Level 4",
+			"Type":"String"
+		},
+		{
+			"Name":"Parent Level 5",
+			"Type":"String"
+		},
+		{
+			"Name":"Parent Level 6",
+			"Type":"String"
+		},
+		{
+			"Name":"Parent Level 7",
+			"Type":"String"
+		},
+		{
+			"Name":"Parent Level 8",
+			"Type":"String"
+		},
+		{
+			"Name":"Parent Level 9",
+			"Type":"String"
+		},
+		{
+			"Name":"Parent Level 10",
+			"Type":"String"
+		},
+		{
+			"Name":"Expense Classify",
+			"Type":"String"
+		},
+		{
+			"Name":"Child Code",
+			"Type":"String"
+		},
+		{
+			"Name":"Child Weight",
+			"Type":"String"
+		},
+		{
+			"Name":"Caption",
+			"Type":"String"
+		},
+		{
+			"Name":"Remove",
+			"Type":"String"
+		},
+		{
+			"Name":"Validation Message",
+			"Type":"String"
+		},
+		{
+			"Name":"Visible",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"sParentLevel1",
+			"Type":"String"
+		},
+		{
+			"Name":"sParentLevel2",
+			"Type":"String"
+		},
+		{
+			"Name":"sParentLevel3",
+			"Type":"String"
+		},
+		{
+			"Name":"sParentLevel4",
+			"Type":"String"
+		},
+		{
+			"Name":"BalanceSheetFlag",
+			"Type":"String"
+		}
+	],
+	"Subsets@Code.links":[]
+}

@@ -1,0 +1,75 @@
+#region Prolog
+
+#****Begin: Generated Statements***
+#****End: Generated Statements****
+
+
+#------------------------------------------------------------------------------------------
+# Description: This process is used to create default view for TI process which is using cube as a DataSource.
+#	       This process should be executed only on DEV environment. 
+# Parameters
+  # pCube : Cube Name or All
+#------------------------------------------------------------------------------------------
+
+#------------------------------------------------------------------------------------------
+# Modification History:
+# V1.00 - 2021-05-011 - Mariusz Perz : initial draft
+
+#------------------------------------------------------------------------------------------
+
+#------------------------------------------------------------------------------------------
+#Region # Constants
+
+sViewName = 'SyDefaultForTI';
+nCounter = 1;
+nDimSiz = 0;
+
+#Region # Constants
+#------------------------------------------------------------------------------------------
+
+#------------------------------------------------------------------------------------------
+#Region # Create Default View For TI Process
+
+If( UPPER( pCube ) @= 'ALL' );
+  nDimSiz = DIMSIZ ( '}Cubes' );
+Else;
+  If( DIMIX( '}Cubes', pCube ) > 0 );
+    nDimSiz = 1;
+  Else;
+    sMessage = 'Invalid pCube parameter: ' | pCube;
+    LogOutPut( 'error', sMessage );
+  EndIf;
+EndIf;
+
+While ( nCounter <= nDimSiz );
+  If( UPPER( pCube ) @= 'ALL' );
+    sCube = DimNm ( '}Cubes', nCounter );
+  Else;
+    sCube = pCube;
+  EndIf;
+  If( Subst ( sCube, 1, 1 ) @<> '}' );
+    If( ViewExists ( sCube, sViewName ) = 0 );
+      ViewCreate ( sCube, sViewName );
+    EndIf;
+  EndIf;
+nCounter = nCounter + 1;
+End;
+
+#EndRegion # Create Default View For TI Process
+#------------------------------------------------------------------------------------------
+#endregion
+#region Metadata
+
+#****Begin: Generated Statements***
+#****End: Generated Statements****
+#endregion
+#region Data
+
+#****Begin: Generated Statements***
+#****End: Generated Statements****
+#endregion
+#region Epilog
+
+#****Begin: Generated Statements***
+#****End: Generated Statements****
+#endregion

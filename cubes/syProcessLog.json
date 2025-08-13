@@ -1,0 +1,23 @@
+{
+	"@type":"Cube",
+	"Name":"syProcessLog",
+	"Dimensions":
+	[
+		{
+			"@id":"Dimensions('}Clients')"
+		},
+		{
+			"@id":"Dimensions('syProcessLog')"
+		},
+		{
+			"@id":"Dimensions('syProcessLogLineItem')"
+		},
+		{
+			"@id":"Dimensions('syProcessLogMeasure')"
+		}
+	],
+	"Views@Code.links":
+	[
+		"syProcessLog.views/Default.json"
+	]
+}

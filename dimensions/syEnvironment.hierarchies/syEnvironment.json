@@ -1,0 +1,16 @@
+{
+	"@type":"Hierarchy",
+	"Name":"syEnvironment",
+	"Elements":
+	[
+		{
+			"Name":"Breville",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"BrevillePlay",
+			"Type":"Numeric"
+		}
+	],
+	"Subsets@Code.links":[]
+}

@@ -1,0 +1,5 @@
+{
+	"@type":"Subset",
+	"Name":"App.AllProducts",
+	"Expression":"{TM1FILTERBYLEVEL(TM1SUBSETALL([Product].[Product]) , 0)}"
+}

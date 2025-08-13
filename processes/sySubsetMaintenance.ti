@@ -1,0 +1,127 @@
+#region Prolog
+#****Begin: Generated Statements***
+#****End: Generated Statements****
+
+
+#~~~~~~~~~ Process Description ~~~~~~~~~~~~~~~~
+# Description: Process to update subsets as per sySubsetMaintenance setup
+# For now supports. only primary hierarachies
+# Modification History
+# V1.00 - 2021-04-16 - dbarchukov@tcs.woolworths.com
+# parameters
+# pDimName: dimesnion to update. If blamk update all dimensions
+
+# General Constants
+sProcess = GetProcessName();
+sTimestamp = TimSt( Now, '\Y\m\d\h\i\s' );
+sRandomInt = NumberToString( INT( RAND( ) * 1000 ));
+s_UniqueName  =  sProcess |'.'| sTimestamp | '.' | sRandomInt;
+
+sSub_Src = '}System.Src.' | s_UniqueName ;
+sView_Src = '}System.Src.' | s_UniqueName ;
+
+
+
+#Process Constants
+sCubeName = 'sySubsetMaintenance';
+pTemp = CellGetN ( 'syEnvironment' , 'Breville' , 'pTemp' ) ;
+
+
+################ prepare source ################
+
+# create temp cubeview
+ViewCreate( sCubeName, sView_Src, pTemp ) ;
+
+# create temp subsets and assign it to the view
+i_TabDim = 1 ;
+While( TabDim( sCubeName, i_TabDim ) @<> '' ) ;
+   sDim = TabDim( sCubeName, i_TabDim ) ;
+
+   If( sDim @= 'sySubsetMaintenanceMeasure' ) ;
+      sMDX = '{[sySubsetMaintenanceMeasure].[sySubsetMaintenanceMeasure].[Subset]}' ;
+   ElseIf( sDim @= '}Dimensions' ) ;
+# in case dimname parameter is empty, skip the condition
+		If(pDimName @<> '');
+        	sMDX = '{ [' | sDim | '].[' | pDimName | '] }' ;
+        Else;
+         	sMDX = '{[' | sDim | '].[' | sDim | '].Levels(0).MEMBERS}' ;       
+        Endif;
+   Else ;
+      sMDX = '{TM1FILTERBYLEVEL( {TM1SUBSETALL( [' | sDim | '] )}, 0)}' ;
+   EndIf ;
+
+   SubsetCreateByMDX( sSub_Src, sMDX, pTemp ) ;
+   ViewSubsetAssign( sCubeName, sView_Src, sDim, sSub_Src ) ;
+   i_TabDim = i_TabDim + 1 ;
+End;
+
+
+#Keep the rules, as some MDX queries could be based on rules
+ViewExtractSkipZeroesSet( sCubeName, sView_Src, 1 ) ;
+ViewExtractSkipCalcsSet( sCubeName, sView_Src, 1) ;
+ViewExtractSkipRuleValuesSet( sCubeName, sView_Src, 0) ;
+
+
+
+
+DataSourceType = 'VIEW' ;
+DataSourceNameForServer = sCubeName ;
+DataSourceCubeview = sView_Src ;
+
+
+
+#endregion
+#region Metadata
+#****Begin: Generated Statements***
+#****End: Generated Statements****
+#endregion
+#region Data
+#****Begin: Generated Statements***
+#****End: Generated Statements****
+
+
+sMDX = CellGetS(sCubeName, vDimName, vsyLineItem, 'MDX');
+sAlias = CellGetS(sCubeName, vDimName, vsyLineItem, 'Alias');
+sExpandAbove = CellGetS(sCubeName, vDimName, vsyLineItem, 'Expand Above');
+sConverToStatic = CellGetS(sCubeName, vDimName, vsyLineItem, 'Convert To Static');
+sHierarchy= CellGetS(sCubeName, vDimName, vsyLineItem, 'Hierarchy');
+
+
+If(sHierarchy @= '');
+	sHierarchy = vDimName;
+endif;
+
+
+
+#--- Create a Subset
+
+if(HierarchySubsetExists(vDimName, sHierarchy, vValue)=0);
+	HierarchySubsetCreate(vDimName, sHierarchy, vValue, 0);
+endif;
+
+#--- Set an MDX
+HierarchySubsetMDXSet(vDimName, sHierarchy, vValue,sMDX);
+
+#-- convert to static condition
+if(sConverToStatic @= 'Y');
+	HierarchySubsetMDXSet(vDimName, sHierarchy, vValue,'');
+endif;
+
+#-- Set an Alias
+if(sAlias @<> '');
+	SubsetAliasSet(vDimName,  vValue, sAlias);
+	HierarchySubsetAliasSet(vDimName,sHierarchy, vValue, sAlias);
+endif;
+
+#Subset above doe not have a hierarchy equivalent 
+# Due to luck of function, use the direct dimesnion mae with Subset
+if(sExpandAbove @= 'Y');
+	SubsetExpandAboveSet(vDimName| ':'|sHierarchy, vValue, 1 );
+else;
+	SubsetExpandAboveSet(vDimName| ':'|sHierarchy, vValue, 0 );
+endif;
+#endregion
+#region Epilog
+#****Begin: Generated Statements***
+#****End: Generated Statements****
+#endregion

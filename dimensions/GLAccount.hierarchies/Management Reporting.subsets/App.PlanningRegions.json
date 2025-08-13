@@ -1,0 +1,5 @@
+{
+	"@type":"Subset",
+	"Name":"App.PlanningRegions",
+	"Expression":"{[GLAccount].[Management Reporting].[Depreciation & amortisation expense],EXCEPT(DRILLDOWNMEMBER({[GLAccount].[Management Reporting].[Marketing expenses]} , {[GLAccount].[Management Reporting].[Marketing expenses]} , RECURSIVE) , {[GLAccount].[Management Reporting].[Marketing Corporate ATL],[GLAccount].[Management Reporting].[Marketing Corporate BTL],[GLAccount].[Management Reporting].[Marketing Corporate Committed],[GLAccount].[Management Reporting].[Marketing Corporate Uncommitted],[GLAccount].[Management Reporting].[Marketing Specialty ATL],[GLAccount].[Management Reporting].[Marketing Specialty BTL]}),DRILLDOWNMEMBER({[GLAccount].[Management Reporting].[Overhead and other expenses]} , {[GLAccount].[Management Reporting].[Overhead and other expenses]} , RECURSIVE)}"
+}

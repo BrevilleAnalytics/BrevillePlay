@@ -1,0 +1,42 @@
+{
+	"@type":"Chore",
+	"Name":"Update PnLPlan Outlook currency conversion",
+	"StartTime":"2022-12-13T21:03Z",
+	"DSTSensitive":true,
+	"Active":false,
+	"ExecutionMode":"SingleCommit",
+	"Frequency":"P1DT00H00M00S",
+	"Tasks":
+	[
+		{
+			"Step":0,
+			"Parameters":
+			[
+				{
+					"Name":"pBU",
+					"Value":""
+				},
+				{
+					"Name":"psProcessReference",
+					"Value":""
+				},
+				{
+					"Name":"pssyProcessLog",
+					"Value":""
+				},
+				{
+					"Name":"psTITracker",
+					"Value":""
+				},
+				{
+					"Name":"pVersion",
+					"Value":"Outlook"
+				}
+			],
+			"Process":
+			{
+				"@id":"Processes('CubePnLPlanUpdateCurrencyConversionOutLook')"
+			}
+		}
+	]
+}

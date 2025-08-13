@@ -1,0 +1,40 @@
+{
+	"@type":"Hierarchy",
+	"Name":"syCubeCopyTemplate",
+	"Elements":
+	[
+		{
+			"Name":"Outlook Snapshot with Filter",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"Outlook Snapshot",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"Budget Snapshot",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"Budget Snapshot with Filter",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"Copy Budget To Outlook",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"Copy Budget To Outlook with Filter",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"Vanguard Purchases Snapshot",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"Manual Snapshot",
+			"Type":"Numeric"
+		}
+	],
+	"Subsets@Code.links":[]
+}

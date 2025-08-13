@@ -1,0 +1,37 @@
+{
+	"@type":"Subset",
+	"Name":"Lease Repayment",
+	"Elements":
+	[
+		{
+			"@id":"Dimensions('BSLeaseMeasure')/Hierarchies('BSLeaseMeasure')/Elements('Lease Liability - Australian Dollars')"
+		},
+		{
+			"@id":"Dimensions('BSLeaseMeasure')/Hierarchies('BSLeaseMeasure')/Elements('B/Fwd Liability')"
+		},
+		{
+			"@id":"Dimensions('BSLeaseMeasure')/Hierarchies('BSLeaseMeasure')/Elements('Interest Expense')"
+		},
+		{
+			"@id":"Dimensions('BSLeaseMeasure')/Hierarchies('BSLeaseMeasure')/Elements('Lease Repayment')"
+		},
+		{
+			"@id":"Dimensions('BSLeaseMeasure')/Hierarchies('BSLeaseMeasure')/Elements('Principal')"
+		},
+		{
+			"@id":"Dimensions('BSLeaseMeasure')/Hierarchies('BSLeaseMeasure')/Elements('C/Fwd Liability')"
+		},
+		{
+			"@id":"Dimensions('BSLeaseMeasure')/Hierarchies('BSLeaseMeasure')/Elements('Right-of-Use Asset - Australian Dollars')"
+		},
+		{
+			"@id":"Dimensions('BSLeaseMeasure')/Hierarchies('BSLeaseMeasure')/Elements('B/Fwd RoU Asset')"
+		},
+		{
+			"@id":"Dimensions('BSLeaseMeasure')/Hierarchies('BSLeaseMeasure')/Elements('Dep''n Charge')"
+		},
+		{
+			"@id":"Dimensions('BSLeaseMeasure')/Hierarchies('BSLeaseMeasure')/Elements('C/Fwd RoU Asset')"
+		}
+	]
+}

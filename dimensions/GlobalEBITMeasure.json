@@ -1,0 +1,13 @@
+{
+	"@type":"Dimension",
+	"Name":"GlobalEBITMeasure",
+	"AllLeavesHierarchyName":"",
+	"DefaultHierarchy":
+	{
+		"@id":"Dimensions('GlobalEBITMeasure')/Hierarchies('GlobalEBITMeasure')"
+	},
+	"Hierarchies@Code.links":
+	[
+		"GlobalEBITMeasure.hierarchies/GlobalEBITMeasure.json"
+	]
+}

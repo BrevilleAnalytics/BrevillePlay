@@ -1,0 +1,5 @@
+{
+	"@type":"Subset",
+	"Name":"App.MarketingRegion",
+	"Expression":"{FILTER(TM1FILTERBYLEVEL(TM1SUBSETALL([GLAccount].[GLAccount]) , 0) , (INSTR(1 , [GLAccount].[GLAccount].CURRENTMEMBER.PROPERTIES(\"ExpenseClassify\") , \"Marketing Region\" , 1) >= 1))}"
+}

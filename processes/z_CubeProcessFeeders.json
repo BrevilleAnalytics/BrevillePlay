@@ -1,0 +1,21 @@
+{
+	"@type":"Process",
+	"Name":"z_CubeProcessFeeders",
+	"HasSecurityAccess":false,
+	"Code@Code.link":"z_CubeProcessFeeders.ti",
+	"UIData":"_ParameterConstraints=e30=€",
+	"DataSource":
+	{
+		"Type":"None"
+	},
+	"Parameters":
+	[
+		{
+			"Name":"pCubeName",
+			"Prompt":"",
+			"Value":"CF Reporting",
+			"Type":"String"
+		}
+	],
+	"Variables":[]
+}

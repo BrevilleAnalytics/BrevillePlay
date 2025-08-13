@@ -1,0 +1,48 @@
+{
+	"@type":"Hierarchy",
+	"Name":"MeasureCustFcast",
+	"Elements":
+	[
+		{
+			"Name":"Returned Units",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"Shipped Units",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"Gross Sales",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"Net Sales",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"Contribution Margin",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"Contribution Margin per Unit",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"Net Sales per Unit",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"Report Flag",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"Shipped Units % Growth",
+			"Type":"Numeric"
+		}
+	],
+	"Subsets@Code.links":
+	[
+		"MeasureCustFcast.subsets/Cust3MthRRTemp.json",
+		"MeasureCustFcast.subsets/FlagProductsByCustomerTemp.json"
+	]
+}

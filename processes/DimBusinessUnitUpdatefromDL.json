@@ -1,0 +1,52 @@
+{
+	"@type":"Process",
+	"Name":"DimBusinessUnitUpdatefromDL",
+	"HasSecurityAccess":false,
+	"Code@Code.link":"DimBusinessUnitUpdatefromDL.ti",
+	"UIData":"_ParameterConstraints=e30=€",
+	"VariablesUIData":
+	[
+		"VarType=32€ColType=827€"
+	],
+	"DataSource":
+	{
+		"Type":"ODBC",
+		"dataSourceNameForClient":"prd-aea-asyn-abi-fpa-ibm",
+		"dataSourceNameForServer":"prd-aea-asyn-abi-fpa-ibm",
+		"password":"z]5PdE4@dyTi79C=CDrOC>swMHnP0lp?QUIO;wH:abSy8Tb=>c`<8BfD??IWlHw0e4DNtiUego<hGQ7?GSTS7m?[`mp7<<Bfv`M]A[]L17D=`g&4QZ_WaF8MpQxO0;bpOfWht[Lzio?BB?YfZzodq?:0waclBVDv5[;Px91_>ZXfI`akU=aLxBMW4[BH_#C\\`MqEnMuQ",
+		"query":"SET NOCOUNT ON; \r\n  SELECT distinct businessUnit\r\n  FROM [dbo].[Actual_Expenses]\r\n  UNION\r\n  SELECT \r\n      distinct [BusinessUnit]\r\n  FROM [dbo].[ActualCM]",
+		"userName":"sql_fpa_ibm_prd_readonly",
+		"usesUnicode":true
+	},
+	"Parameters":
+	[
+		{
+			"Name":"psProcessReference",
+			"Prompt":"",
+			"Value":"",
+			"Type":"String"
+		},
+		{
+			"Name":"pssyProcessLog",
+			"Prompt":"To enable or disable Process Log - Y/N",
+			"Value":"",
+			"Type":"String"
+		},
+		{
+			"Name":"psTITracker",
+			"Prompt":"To enable or disable syTI Tracker - Y/N",
+			"Value":"",
+			"Type":"String"
+		}
+	],
+	"Variables":
+	[
+		{
+			"Name":"vBU",
+			"Type":"String",
+			"Position":1,
+			"StartByte":0,
+			"EndByte":0
+		}
+	]
+}

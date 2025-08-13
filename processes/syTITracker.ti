@@ -1,0 +1,261 @@
+#region Prolog
+#****Begin: Generated Statements***
+#****End: Generated Statements****
+
+#<Purpose>
+# This process is executed by all other relevant processes. This process logs Start / End time / User / Parameters
+#<Purpose\>
+
+#<Author>
+# Cornerstone
+#<Author\>
+
+#<Last Modified>
+
+#<Last Modified\>
+
+#<Parameters>
+# pProcessName: The name of the process that executes this process
+# pTime: The Start or End time passed through to this process
+# pStatus: 1 = Process start; 0 = Process End
+# pParameterN: The parameters used by the process that need to be tracked
+#<Parameters\>
+
+#<Execute Method>
+# Executed by all processes that need to be tracked
+#<Execute Method\>
+
+#<Processes Executed>
+#<Processes Executed\>
+
+#<Execute Schedule>
+# Run at all times when tracked processes are executed
+#<Execute Schedule\>
+
+#<Esitmated Run Time>
+# <1 second
+#<Esitmated Run Time\>
+
+# Log TI Process
+# N/A
+
+# Declare constants
+# Time values from pTime for dimension selections
+
+#Cater for UTC time of PA SaaS Server
+pTime = pTime  + CellGetN( 'syEnvironment' , psServer , 'AEST TimeZone') / 24 ;
+
+sYear = TIMST ( pTime, '\Y' );
+sMonth = TIMST ( pTime, '\m' );
+sDay = TIMST ( pTime, '\d' );
+sHour = TIMST ( pTime, '\h' );
+sMin = TIMST ( pTime, '\i' );
+sSec = TIMST ( pTime, '\s' );
+
+
+# Time Converter to local time
+#nLocalDateFormatter = NewDateFormatter(CellGetS('syControl',psServer,'Server locale'), CellGetS('syEnvironment',psServer,'default user timezone'), 'serial', 'full', 'datetime');
+#sDateFormat = 'yyyy-MM-dd HH:mm:ss';
+#sLocaltTimeStamp = FormatDate(Now, sDateFormat, nLocalDateFormatter);
+#sDateTime = ParseDate(sLocaltTimeStamp, sDateFormat, nLocalDateFormatter);
+
+# Test Format of time period
+# sFile = SUBST( GetProcessErrorFileDirectory, 1, LONG( GetProcessErrorFileDirectory ) - 5 ) | 'errorcheck.csv';
+
+#sYear = Subst(sLocaltTimeStamp, 1, 4);
+#sMonth = Subst(sLocaltTimeStamp, 6, 2);
+#sDay = Subst(sLocaltTimeStamp, 9, 2);
+#sHour = Subst(sLocaltTimeStamp, 12, 2);
+#sMin = Subst(sLocaltTimeStamp, 15, 2);
+#sSec = Subst(sLocaltTimeStamp, 18, 2);
+
+# Test the validity of local time zone
+# ASCIIOutput(sFile, sLocaltTimeStamp, sDay, sHour,sMin, sSec );
+
+IF ( DIMIX ( 'syClient', pTM1User ) = 0 );
+	sTM1User = 'Unknown';
+ELSE;
+	sTM1User = pTM1User;
+ENDIF;	
+
+# Process control
+
+# Turn off cube logging on control cube - no PI lock
+# N/A
+
+# check for free slot - we need to deal with processes
+# running within the same time frames
+nMaxCount = ELCOMPN ( 'syIndex', 'All Sys Index' );
+nContinue = 1;
+i = 0;
+sIndex = '';
+WHILE ( nContinue = 1 );
+  i = i + 1;
+  sIndex = ELCOMP ( 'syIndex', 'All Sys Index', i );
+  # check stop time to see if we already used this slot
+  nEndTime = CellGetN ( 'syTITracker', sTM1User, pProcessName, sYear, sMonth, sDay, sHour, sMin, sSec, sIndex, 'End Time' );
+  IF ( nEndTime = 0 );
+    # break from the loop with next unused slot
+    nContinue = 0;
+  ENDIF;
+END;
+
+# trap for blank sIndex
+IF ( sIndex @= '' );
+  ProcessError;
+ENDIF;
+
+# status of 1 = process is commencing
+# status if 0 = process is ending
+#Cater for UTC time of PA SaaS Server - Local time conversion
+ nTimeValue = NOW + CellGetN( 'syEnvironment',psServer,'AEST TimeZone')/24;
+ 
+IF ( pStatus = 1 );
+	sMeasure = 'Start Time';
+ELSEIF ( pStatus = 0 );
+	sMeasure = 'End Time';
+ELSE;
+	ProcessError;
+ENDIF;
+  # Parameters passed through by TI processes are captured in the Sys TI Tracker.
+  # The reason is because some TI processes are generic / modular / parameter driven and this information
+  # will prove useful when debugging TI processes
+  CellPutN ( nTimeValue, 'syTITracker', sTM1User, pProcessName, sYear, sMonth, sDay, sHour, sMin, sSec, sIndex, sMeasure );
+  CellPutS ( pParameter01, 'syTITracker', sTM1User, pProcessName, sYear, sMonth, sDay, sHour, sMin, sSec, sIndex, 'Parameter01');
+  CellPutS ( pParameter02, 'syTITracker', sTM1User, pProcessName, sYear, sMonth, sDay, sHour, sMin, sSec, sIndex, 'Parameter02');
+  CellPutS ( pParameter03, 'syTITracker', sTM1User, pProcessName, sYear, sMonth, sDay, sHour, sMin, sSec, sIndex, 'Parameter03');
+  CellPutS ( pParameter04, 'syTITracker', sTM1User, pProcessName, sYear, sMonth, sDay, sHour, sMin, sSec, sIndex, 'Parameter04');
+  CellPutS ( pParameter05, 'syTITracker', sTM1User, pProcessName, sYear, sMonth, sDay, sHour, sMin, sSec, sIndex, 'Parameter05');
+  CellPutS ( pParameter06, 'syTITracker', sTM1User, pProcessName, sYear, sMonth, sDay, sHour, sMin, sSec, sIndex, 'Parameter06');
+  CellPutS ( pParameter07, 'syTITracker', sTM1User, pProcessName, sYear, sMonth, sDay, sHour, sMin, sSec, sIndex, 'Parameter07');
+  CellPutS ( pParameter08, 'syTITracker', sTM1User, pProcessName, sYear, sMonth, sDay, sHour, sMin, sSec, sIndex, 'Parameter08');
+  CellPutS ( pParameter09, 'syTITracker', sTM1User, pProcessName, sYear, sMonth, sDay, sHour, sMin, sSec, sIndex, 'Parameter09');
+  CellPutS ( pParameter10, 'syTITracker', sTM1User, pProcessName, sYear, sMonth, sDay, sHour, sMin, sSec, sIndex, 'Parameter10');
+  CellPutS ( pParameter11, 'syTITracker', sTM1User, pProcessName, sYear, sMonth, sDay, sHour, sMin, sSec, sIndex, 'Parameter11');
+  CellPutS ( pParameter12, 'syTITracker', sTM1User, pProcessName, sYear, sMonth, sDay, sHour, sMin, sSec, sIndex, 'Parameter12');
+  CellPutS ( pParameter13, 'syTITracker', sTM1User, pProcessName, sYear, sMonth, sDay, sHour, sMin, sSec, sIndex, 'Parameter13');
+  CellPutS ( pParameter14, 'syTITracker', sTM1User, pProcessName, sYear, sMonth, sDay, sHour, sMin, sSec, sIndex, 'Parameter14');
+  CellPutS ( pParameter15, 'syTITracker', sTM1User, pProcessName, sYear, sMonth, sDay, sHour, sMin, sSec, sIndex, 'Parameter15');
+  CellPutS ( pParameter16, 'syTITracker', sTM1User, pProcessName, sYear, sMonth, sDay, sHour, sMin, sSec, sIndex, 'Parameter16');
+  CellPutS ( pParameter17, 'syTITracker', sTM1User, pProcessName, sYear, sMonth, sDay, sHour, sMin, sSec, sIndex, 'Parameter17');
+  CellPutS ( pParameter18, 'syTITracker', sTM1User, pProcessName, sYear, sMonth, sDay, sHour, sMin, sSec, sIndex, 'Parameter18');
+  CellPutS ( pParameter19, 'syTITracker', sTM1User, pProcessName, sYear, sMonth, sDay, sHour, sMin, sSec, sIndex, 'Parameter19');
+  CellPutS ( pParameter20, 'syTITracker', sTM1User, pProcessName, sYear, sMonth, sDay, sHour, sMin, sSec, sIndex, 'Parameter20');
+  CellPutS ( pParameter21, 'syTITracker', sTM1User, pProcessName, sYear, sMonth, sDay, sHour, sMin, sSec, sIndex, 'Parameter21');
+  CellPutS ( pParameter22, 'syTITracker', sTM1User, pProcessName, sYear, sMonth, sDay, sHour, sMin, sSec, sIndex, 'Parameter22');
+  CellPutS ( pParameter23, 'syTITracker', sTM1User, pProcessName, sYear, sMonth, sDay, sHour, sMin, sSec, sIndex, 'Parameter23');
+  CellPutS ( pParameter24, 'syTITracker', sTM1User, pProcessName, sYear, sMonth, sDay, sHour, sMin, sSec, sIndex, 'Parameter24');
+  CellPutS ( pParameter25, 'syTITracker', sTM1User, pProcessName, sYear, sMonth, sDay, sHour, sMin, sSec, sIndex, 'Parameter25');
+
+  CellPutS ( pSystemMessage, 'syTITracker', sTM1User, pProcessName, sYear, sMonth, sDay, sHour, sMin, sSec, sIndex, 'System Message');
+  CellPutN ( pRecordCount, 'syTITracker', sTM1User, pProcessName, sYear, sMonth, sDay, sHour, sMin, sSec, sIndex, 'Record Count' );
+  CellPutN ( pPrologMinorErrorCount, 'syTITracker', sTM1User, pProcessName, sYear, sMonth, sDay, sHour, sMin, sSec, sIndex, 'Prolog Minor Error Count' );
+  CellPutN ( pMetaDataMinorErrorCount, 'syTITracker', sTM1User, pProcessName, sYear, sMonth, sDay, sHour, sMin, sSec, sIndex, 'MetaData Minor Error Count' );
+  CellPutN ( pDataMinorErrorCount, 'syTITracker', sTM1User, pProcessName, sYear, sMonth, sDay, sHour, sMin, sSec, sIndex, 'Data Minor Error Count' );
+  
+  CellPutN ( pDebug, 'syTITracker', sTM1User, pProcessName, sYear, sMonth, sDay, sHour, sMin, sSec, sIndex, 'pDebug' );
+
+  # Last Run
+  CellPutN ( nTimeValue, 'syTITracker', 'Last Run', pProcessName, 'Last Run', 'Last Run', 'Last Run', 'Last Run', 'Last Run', 'Last Run', sIndex, sMeasure );
+  CellPutS ( pParameter01, 'syTITracker','Last Run', pProcessName, 'Last Run', 'Last Run', 'Last Run', 'Last Run', 'Last Run', 'Last Run', sIndex, 'Parameter01');
+  CellPutS ( pParameter02, 'syTITracker','Last Run', pProcessName, 'Last Run', 'Last Run', 'Last Run', 'Last Run', 'Last Run', 'Last Run', sIndex, 'Parameter02');
+  CellPutS ( pParameter03, 'syTITracker','Last Run', pProcessName, 'Last Run', 'Last Run', 'Last Run', 'Last Run', 'Last Run', 'Last Run', sIndex, 'Parameter03');
+  CellPutS ( pParameter04, 'syTITracker','Last Run', pProcessName, 'Last Run', 'Last Run', 'Last Run', 'Last Run', 'Last Run', 'Last Run', sIndex, 'Parameter04');
+  CellPutS ( pParameter05, 'syTITracker','Last Run', pProcessName, 'Last Run', 'Last Run', 'Last Run', 'Last Run', 'Last Run', 'Last Run', sIndex, 'Parameter05');
+  CellPutS ( pParameter06, 'syTITracker','Last Run', pProcessName, 'Last Run', 'Last Run', 'Last Run', 'Last Run', 'Last Run', 'Last Run', sIndex, 'Parameter06');
+  CellPutS ( pParameter07, 'syTITracker','Last Run', pProcessName, 'Last Run', 'Last Run', 'Last Run', 'Last Run', 'Last Run', 'Last Run', sIndex, 'Parameter07');
+  CellPutS ( pParameter08, 'syTITracker','Last Run', pProcessName, 'Last Run', 'Last Run', 'Last Run', 'Last Run', 'Last Run', 'Last Run', sIndex, 'Parameter08');
+  CellPutS ( pParameter09, 'syTITracker','Last Run', pProcessName, 'Last Run', 'Last Run', 'Last Run', 'Last Run', 'Last Run', 'Last Run', sIndex, 'Parameter09');
+  CellPutS ( pParameter10, 'syTITracker','Last Run', pProcessName, 'Last Run', 'Last Run', 'Last Run', 'Last Run', 'Last Run', 'Last Run', sIndex, 'Parameter10');
+  CellPutS ( pParameter11, 'syTITracker','Last Run', pProcessName, 'Last Run', 'Last Run', 'Last Run', 'Last Run', 'Last Run', 'Last Run', sIndex, 'Parameter11');
+  CellPutS ( pParameter12, 'syTITracker','Last Run', pProcessName, 'Last Run', 'Last Run', 'Last Run', 'Last Run', 'Last Run', 'Last Run', sIndex, 'Parameter12');
+  CellPutS ( pParameter13, 'syTITracker','Last Run', pProcessName, 'Last Run', 'Last Run', 'Last Run', 'Last Run', 'Last Run', 'Last Run', sIndex, 'Parameter13');
+  CellPutS ( pParameter14, 'syTITracker','Last Run', pProcessName, 'Last Run', 'Last Run', 'Last Run', 'Last Run', 'Last Run', 'Last Run', sIndex, 'Parameter14');
+  CellPutS ( pParameter15, 'syTITracker','Last Run', pProcessName, 'Last Run', 'Last Run', 'Last Run', 'Last Run', 'Last Run', 'Last Run', sIndex, 'Parameter15');
+  CellPutS ( pParameter16, 'syTITracker','Last Run', pProcessName, 'Last Run', 'Last Run', 'Last Run', 'Last Run', 'Last Run', 'Last Run', sIndex, 'Parameter16');
+  CellPutS ( pParameter17, 'syTITracker','Last Run', pProcessName, 'Last Run', 'Last Run', 'Last Run', 'Last Run', 'Last Run', 'Last Run', sIndex, 'Parameter17');
+  CellPutS ( pParameter18, 'syTITracker','Last Run', pProcessName, 'Last Run', 'Last Run', 'Last Run', 'Last Run', 'Last Run', 'Last Run', sIndex, 'Parameter18');
+  CellPutS ( pParameter19, 'syTITracker','Last Run', pProcessName, 'Last Run', 'Last Run', 'Last Run', 'Last Run', 'Last Run', 'Last Run', sIndex, 'Parameter19');
+  CellPutS ( pParameter20, 'syTITracker','Last Run', pProcessName, 'Last Run', 'Last Run', 'Last Run', 'Last Run', 'Last Run', 'Last Run', sIndex, 'Parameter20');
+  CellPutS ( pParameter21, 'syTITracker','Last Run', pProcessName, 'Last Run', 'Last Run', 'Last Run', 'Last Run', 'Last Run', 'Last Run', sIndex, 'Parameter21');
+  CellPutS ( pParameter22, 'syTITracker','Last Run', pProcessName, 'Last Run', 'Last Run', 'Last Run', 'Last Run', 'Last Run', 'Last Run', sIndex, 'Parameter22');
+  CellPutS ( pParameter23, 'syTITracker','Last Run', pProcessName, 'Last Run', 'Last Run', 'Last Run', 'Last Run', 'Last Run', 'Last Run', sIndex, 'Parameter23');
+  CellPutS ( pParameter24, 'syTITracker','Last Run', pProcessName, 'Last Run', 'Last Run', 'Last Run', 'Last Run', 'Last Run', 'Last Run', sIndex, 'Parameter24');
+  CellPutS ( pParameter25, 'syTITracker','Last Run', pProcessName, 'Last Run', 'Last Run', 'Last Run', 'Last Run', 'Last Run', 'Last Run', sIndex, 'Parameter25');
+
+  CellPutS ( pSystemMessage, 'syTITracker','Last Run', pProcessName, 'Last Run', 'Last Run', 'Last Run', 'Last Run', 'Last Run', 'Last Run', sIndex, 'System Message');
+  CellPutN ( pRecordCount, 'syTITracker','Last Run', pProcessName, 'Last Run', 'Last Run', 'Last Run', 'Last Run', 'Last Run', 'Last Run', sIndex, 'Record Count' );
+  CellPutN ( pPrologMinorErrorCount, 'syTITracker','Last Run', pProcessName, 'Last Run', 'Last Run', 'Last Run', 'Last Run', 'Last Run', 'Last Run', sIndex, 'Prolog Minor Error Count' );
+  CellPutN ( pMetaDataMinorErrorCount, 'syTITracker','Last Run', pProcessName, 'Last Run', 'Last Run', 'Last Run', 'Last Run', 'Last Run', 'Last Run', sIndex, 'MetaData Minor Error Count' );
+  CellPutN ( pDataMinorErrorCount, 'syTITracker','Last Run', pProcessName, 'Last Run', 'Last Run', 'Last Run', 'Last Run', 'Last Run', 'Last Run', sIndex, 'Data Minor Error Count' );
+  
+  CellPutN ( pDebug, 'syTITracker','Last Run', pProcessName, 'Last Run', 'Last Run', 'Last Run', 'Last Run', 'Last Run', 'Last Run', sIndex, 'pDebug' );
+
+
+
+
+
+  # Last Run by Specific User
+  CellPutN ( nTimeValue,   'syTITracker', sTM1User, pProcessName, 'Last Run', 'Last Run', 'Last Run', 'Last Run', 'Last Run', 'Last Run', sIndex, sMeasure );
+  CellPutS ( pParameter01, 'syTITracker', sTM1User, pProcessName, 'Last Run', 'Last Run', 'Last Run', 'Last Run', 'Last Run', 'Last Run', sIndex, 'Parameter01');
+  CellPutS ( pParameter02, 'syTITracker', sTM1User, pProcessName, 'Last Run', 'Last Run', 'Last Run', 'Last Run', 'Last Run', 'Last Run', sIndex, 'Parameter02');
+  CellPutS ( pParameter03, 'syTITracker', sTM1User, pProcessName, 'Last Run', 'Last Run', 'Last Run', 'Last Run', 'Last Run', 'Last Run', sIndex, 'Parameter03');
+  CellPutS ( pParameter04, 'syTITracker', sTM1User, pProcessName, 'Last Run', 'Last Run', 'Last Run', 'Last Run', 'Last Run', 'Last Run', sIndex, 'Parameter04');
+  CellPutS ( pParameter05, 'syTITracker', sTM1User, pProcessName, 'Last Run', 'Last Run', 'Last Run', 'Last Run', 'Last Run', 'Last Run', sIndex, 'Parameter05');
+  CellPutS ( pParameter06, 'syTITracker', sTM1User, pProcessName, 'Last Run', 'Last Run', 'Last Run', 'Last Run', 'Last Run', 'Last Run', sIndex, 'Parameter06');
+  CellPutS ( pParameter07, 'syTITracker', sTM1User, pProcessName, 'Last Run', 'Last Run', 'Last Run', 'Last Run', 'Last Run', 'Last Run', sIndex, 'Parameter07');
+  CellPutS ( pParameter08, 'syTITracker', sTM1User, pProcessName, 'Last Run', 'Last Run', 'Last Run', 'Last Run', 'Last Run', 'Last Run', sIndex, 'Parameter08');
+  CellPutS ( pParameter09, 'syTITracker', sTM1User, pProcessName, 'Last Run', 'Last Run', 'Last Run', 'Last Run', 'Last Run', 'Last Run', sIndex, 'Parameter09');
+  CellPutS ( pParameter10, 'syTITracker', sTM1User, pProcessName, 'Last Run', 'Last Run', 'Last Run', 'Last Run', 'Last Run', 'Last Run', sIndex, 'Parameter10');
+  CellPutS ( pParameter11, 'syTITracker', sTM1User, pProcessName, 'Last Run', 'Last Run', 'Last Run', 'Last Run', 'Last Run', 'Last Run', sIndex, 'Parameter11');
+  CellPutS ( pParameter12, 'syTITracker', sTM1User, pProcessName, 'Last Run', 'Last Run', 'Last Run', 'Last Run', 'Last Run', 'Last Run', sIndex, 'Parameter12');
+  CellPutS ( pParameter13, 'syTITracker', sTM1User, pProcessName, 'Last Run', 'Last Run', 'Last Run', 'Last Run', 'Last Run', 'Last Run', sIndex, 'Parameter13');
+  CellPutS ( pParameter14, 'syTITracker', sTM1User, pProcessName, 'Last Run', 'Last Run', 'Last Run', 'Last Run', 'Last Run', 'Last Run', sIndex, 'Parameter14');
+  CellPutS ( pParameter15, 'syTITracker', sTM1User, pProcessName, 'Last Run', 'Last Run', 'Last Run', 'Last Run', 'Last Run', 'Last Run', sIndex, 'Parameter15');
+  CellPutS ( pParameter16, 'syTITracker', sTM1User, pProcessName, 'Last Run', 'Last Run', 'Last Run', 'Last Run', 'Last Run', 'Last Run', sIndex, 'Parameter16');
+  CellPutS ( pParameter17, 'syTITracker', sTM1User, pProcessName, 'Last Run', 'Last Run', 'Last Run', 'Last Run', 'Last Run', 'Last Run', sIndex, 'Parameter17');
+  CellPutS ( pParameter18, 'syTITracker', sTM1User, pProcessName, 'Last Run', 'Last Run', 'Last Run', 'Last Run', 'Last Run', 'Last Run', sIndex, 'Parameter18');
+  CellPutS ( pParameter19, 'syTITracker', sTM1User, pProcessName, 'Last Run', 'Last Run', 'Last Run', 'Last Run', 'Last Run', 'Last Run', sIndex, 'Parameter19');
+  CellPutS ( pParameter20, 'syTITracker', sTM1User, pProcessName, 'Last Run', 'Last Run', 'Last Run', 'Last Run', 'Last Run', 'Last Run', sIndex, 'Parameter20');
+  CellPutS ( pParameter21, 'syTITracker', sTM1User, pProcessName, 'Last Run', 'Last Run', 'Last Run', 'Last Run', 'Last Run', 'Last Run', sIndex, 'Parameter21');
+  CellPutS ( pParameter22, 'syTITracker', sTM1User, pProcessName, 'Last Run', 'Last Run', 'Last Run', 'Last Run', 'Last Run', 'Last Run', sIndex, 'Parameter22');
+  CellPutS ( pParameter23, 'syTITracker', sTM1User, pProcessName, 'Last Run', 'Last Run', 'Last Run', 'Last Run', 'Last Run', 'Last Run', sIndex, 'Parameter23');
+  CellPutS ( pParameter24, 'syTITracker', sTM1User, pProcessName, 'Last Run', 'Last Run', 'Last Run', 'Last Run', 'Last Run', 'Last Run', sIndex, 'Parameter24');
+  CellPutS ( pParameter25, 'syTITracker', sTM1User, pProcessName, 'Last Run', 'Last Run', 'Last Run', 'Last Run', 'Last Run', 'Last Run', sIndex, 'Parameter25');
+
+  CellPutS ( pSystemMessage, 'syTITracker', sTM1User, pProcessName, 'Last Run', 'Last Run', 'Last Run', 'Last Run', 'Last Run', 'Last Run', sIndex, 'System Message');
+  CellPutN ( pRecordCount, 'syTITracker', sTM1User, pProcessName, 'Last Run', 'Last Run', 'Last Run', 'Last Run', 'Last Run', 'Last Run', sIndex, 'Record Count' );
+  CellPutN ( pPrologMinorErrorCount, 'syTITracker', sTM1User, pProcessName, 'Last Run', 'Last Run', 'Last Run', 'Last Run', 'Last Run', 'Last Run', sIndex, 'Prolog Minor Error Count' );
+  CellPutN ( pMetaDataMinorErrorCount, 'syTITracker', sTM1User, pProcessName, 'Last Run', 'Last Run', 'Last Run', 'Last Run', 'Last Run', 'Last Run', sIndex, 'MetaData Minor Error Count' );
+  CellPutN ( pDataMinorErrorCount, 'syTITracker', sTM1User, pProcessName, 'Last Run', 'Last Run', 'Last Run', 'Last Run', 'Last Run', 'Last Run', sIndex, 'Data Minor Error Count' );
+  
+  CellPutN ( pDebug, 'syTITracker', sTM1User, pProcessName, 'Last Run', 'Last Run', 'Last Run', 'Last Run', 'Last Run', 'Last Run', sIndex, 'pDebug' );
+  
+
+
+
+  
+# post update
+
+#endregion
+#region Metadata
+
+#****Begin: Generated Statements***
+#****End: Generated Statements****
+#endregion
+#region Data
+
+#****Begin: Generated Statements***
+#****End: Generated Statements****
+#endregion
+#region Epilog
+#****Begin: Generated Statements***
+#****End: Generated Statements****
+
+
+# Turn on cube logging on control cube - no PI lock
+# N/A
+
+# Log TI Process
+# Dont log this process - there are no parameters and it has no functions
+#endregion

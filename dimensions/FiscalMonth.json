@@ -1,0 +1,15 @@
+{
+	"@type":"Dimension",
+	"Name":"FiscalMonth",
+	"AllLeavesHierarchyName":"Leaves",
+	"DefaultHierarchy":
+	{
+		"@id":"Dimensions('FiscalMonth')/Hierarchies('FiscalMonth')"
+	},
+	"Hierarchies@Code.links":
+	[
+		"FiscalMonth.hierarchies/FiscalMonth.json",
+		"FiscalMonth.hierarchies/YTD.json",
+		"FiscalMonth.hierarchies/YTG.json"
+	]
+}

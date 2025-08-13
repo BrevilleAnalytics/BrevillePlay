@@ -1,0 +1,19 @@
+{
+	"@type":"Subset",
+	"Name":"}System.Tgt.CubeCMRunRatesRatiosCalc.20230124230533.256",
+	"Elements":
+	[
+		{
+			"@id":"Dimensions('Theatre')/Hierarchies('Theatre')/Elements('APAC')"
+		},
+		{
+			"@id":"Dimensions('Theatre')/Hierarchies('Theatre')/Elements('Americas')"
+		},
+		{
+			"@id":"Dimensions('Theatre')/Hierarchies('Theatre')/Elements('EMEA')"
+		},
+		{
+			"@id":"Dimensions('Theatre')/Hierarchies('Theatre')/Elements('Corporate')"
+		}
+	]
+}

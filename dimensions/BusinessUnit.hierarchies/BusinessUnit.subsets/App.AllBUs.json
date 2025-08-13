@@ -1,0 +1,5 @@
+{
+	"@type":"Subset",
+	"Name":"App.AllBUs",
+	"Expression":"{{TM1FILTERBYLEVEL(TM1SUBSETALL([BusinessUnit].[BusinessUnit]) , 0)}}"
+}

@@ -1,0 +1,31 @@
+{
+	"@type":"Subset",
+	"Name":"Pick.Years",
+	"Elements":
+	[
+		{
+			"@id":"Dimensions('FiscalMonth')/Hierarchies('FiscalMonth')/Elements('2023')"
+		},
+		{
+			"@id":"Dimensions('FiscalMonth')/Hierarchies('FiscalMonth')/Elements('2024')"
+		},
+		{
+			"@id":"Dimensions('FiscalMonth')/Hierarchies('FiscalMonth')/Elements('2025')"
+		},
+		{
+			"@id":"Dimensions('FiscalMonth')/Hierarchies('FiscalMonth')/Elements('2026')"
+		},
+		{
+			"@id":"Dimensions('FiscalMonth')/Hierarchies('FiscalMonth')/Elements('2027')"
+		},
+		{
+			"@id":"Dimensions('FiscalMonth')/Hierarchies('FiscalMonth')/Elements('2028')"
+		},
+		{
+			"@id":"Dimensions('FiscalMonth')/Hierarchies('FiscalMonth')/Elements('2029')"
+		},
+		{
+			"@id":"Dimensions('FiscalMonth')/Hierarchies('FiscalMonth')/Elements('2030')"
+		}
+	]
+}

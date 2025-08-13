@@ -1,0 +1,8 @@
+#region Prolog
+
+DimName = 'BSLeaseLocation';
+ParentName = 'Total';
+
+DimensionElementInsertDirect (DimName, '', pLeaseDesc,'N');
+DimensionElementComponentAddDirect(DimName, ParentName,pLeaseDesc, 1);
+#endregion

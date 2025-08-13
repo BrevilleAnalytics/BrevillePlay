@@ -1,0 +1,4929 @@
+{
+	"@type":"Hierarchy",
+	"Name":"Management Reporting",
+	"Elements":
+	[
+		{
+			"Name":"All Management Reporting",
+			"Type":"Consolidated"
+		},
+		{
+			"Name":"CM%",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"EBIT%",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"GM%",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"Profit After Tax",
+			"Type":"Consolidated"
+		},
+		{
+			"Name":"Profit Before Tax",
+			"Type":"Consolidated"
+		},
+		{
+			"Name":"Below the line",
+			"Type":"Consolidated"
+		},
+		{
+			"Name":"620101",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"620102",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"620103",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"620104",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"620105",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"620106",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"620107",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"620108",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"620109",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"620110",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"620111",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"620112",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"750101",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"750102",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"750103",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"750104",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"750105",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"750106",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"750107",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"750108",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"750109",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"750110",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"750111",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"750112",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"EBIT",
+			"Type":"Consolidated"
+		},
+		{
+			"Name":"Depreciation & amortisation expense",
+			"Type":"Consolidated"
+		},
+		{
+			"Name":"Amortisation",
+			"Type":"Consolidated"
+		},
+		{
+			"Name":"710201",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"710202",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"710203",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"710204",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"710205",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"710206",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"710207",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"710208",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"Depreciation",
+			"Type":"Consolidated"
+		},
+		{
+			"Name":"Depreciation - Leasing",
+			"Type":"Consolidated"
+		},
+		{
+			"Name":"710150",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"Depreciation - PP&E",
+			"Type":"Consolidated"
+		},
+		{
+			"Name":"710101",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"710102",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"710103",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"710104",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"710105",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"710106",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"710107",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"710108",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"710109",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"710110",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"710112",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"EBITDA",
+			"Type":"Consolidated"
+		},
+		{
+			"Name":"Contribution Margin",
+			"Type":"Consolidated"
+		},
+		{
+			"Name":"Freight",
+			"Type":"Consolidated"
+		},
+		{
+			"Name":"550101",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"550102",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"550103",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"550104",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"550105",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"550106",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"Freight CM",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"Gross Margin",
+			"Type":"Consolidated"
+		},
+		{
+			"Name":"COGS",
+			"Type":"Consolidated"
+		},
+		{
+			"Name":"500102",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"500103",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"500104",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"500105",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"500106",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"500107",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"500108",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"500109",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"500110",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"501001",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"501002",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"501003",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"501004",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"501005",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"501006",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"501007",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"501008",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"501009",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"501010",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"501011",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"501101",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"501102",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"501103",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"501110",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"501111",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"501201",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"501202",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"501203",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"501204",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"501205",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"501206",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"501207",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"501208",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"501301",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"501302",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"501303",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"Cost of Goods Sold CM",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"COGS FX Variance",
+			"Type":"Consolidated"
+		},
+		{
+			"Name":"COGS FX Variance CM",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"Net Sales",
+			"Type":"Consolidated"
+		},
+		{
+			"Name":"Gross Sales",
+			"Type":"Consolidated"
+		},
+		{
+			"Name":"400101",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"400102",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"400103",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"400104",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"400105",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"400106",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"401001",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"401002",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"401003",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"401004",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"401005",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"401006",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"401007",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"450101",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"450110",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"460001",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"460002",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"460003",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"Gross Sales CM",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"Promotions",
+			"Type":"Consolidated"
+		},
+		{
+			"Name":"410102",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"SKU Promo Costs CM",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"Settlement discounts and rebates",
+			"Type":"Consolidated"
+		},
+		{
+			"Name":"410101",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"410103",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"410104",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"410105",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"410106",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"410107",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"410108",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"Rebates CM",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"Warranty",
+			"Type":"Consolidated"
+		},
+		{
+			"Name":"550200",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"550201",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"550202",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"550203",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"550204",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"550205",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"550206",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"550207",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"550208",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"550209",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"550210",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"550211",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"550212",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"550213",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"550214",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"550215",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"550216",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"550217",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"550218",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"550219",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"Warranty CM",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"Marketing expenses",
+			"Type":"Consolidated"
+		},
+		{
+			"Name":"Corporate Marketing - GTM",
+			"Type":"Consolidated"
+		},
+		{
+			"Name":"Marketing Corporate ATL",
+			"Type":"Consolidated"
+		},
+		{
+			"Name":"600501",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"600502",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"600503",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"600504",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"600505",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"600506",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"600507",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"600508",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"600509",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"600510",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"600511",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"600512",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"600513",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"600514",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"600515",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"600516",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"600517",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"600518",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"600519",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"600520",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"600521",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"Marketing Corporate BTL",
+			"Type":"Consolidated"
+		},
+		{
+			"Name":"600601",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"600602",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"600603",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"600604",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"600605",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"600606",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"600607",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"600608",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"600619",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"600620",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"600650",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"600651",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"Marketing Corporate Committed",
+			"Type":"Consolidated"
+		},
+		{
+			"Name":"600701",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"Marketing Corporate Uncommitted",
+			"Type":"Consolidated"
+		},
+		{
+			"Name":"600660",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"Corporate Marketing - Specialty",
+			"Type":"Consolidated"
+		},
+		{
+			"Name":"Marketing Specialty ATL",
+			"Type":"Consolidated"
+		},
+		{
+			"Name":"600522",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"600523",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"600524",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"600525",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"600526",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"600527",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"600528",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"600529",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"600530",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"600531",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"600532",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"600533",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"600534",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"600535",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"600536",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"600537",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"600538",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"600539",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"600540",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"600541",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"600542",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"600652",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"Marketing Specialty BTL",
+			"Type":"Consolidated"
+		},
+		{
+			"Name":"600609",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"600610",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"600611",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"600612",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"600613",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"600614",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"600615",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"600616",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"600617",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"600618",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"Regional Marketing",
+			"Type":"Consolidated"
+		},
+		{
+			"Name":"Marketing Region ATL",
+			"Type":"Consolidated"
+		},
+		{
+			"Name":"600101",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"600102",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"600103",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"600104",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"600105",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"600106",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"600107",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"600108",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"600109",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"600110",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"600111",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"600112",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"600113",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"600114",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"600115",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"600116",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"600117",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"600118",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"600119",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"600120",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"600121",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"600201",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"Marketing Region BTL",
+			"Type":"Consolidated"
+		},
+		{
+			"Name":"600301",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"600302",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"600303",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"600304",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"600305",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"600306",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"600307",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"Marketing Region Committed",
+			"Type":"Consolidated"
+		},
+		{
+			"Name":"600401",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"600402",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"600403",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"600404",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"Regional Marketing - APAC DTC",
+			"Type":"Consolidated"
+		},
+		{
+			"Name":"600410",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"Other Income",
+			"Type":"Consolidated"
+		},
+		{
+			"Name":"610101",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"610102",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"Overhead and other expenses",
+			"Type":"Consolidated"
+		},
+		{
+			"Name":"Corporate expenses",
+			"Type":"Consolidated"
+		},
+		{
+			"Name":"642001",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"642002",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"642003",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"642004",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"642005",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"642006",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"642007",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"642008",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"642009",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"642010",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"Customer related expenses",
+			"Type":"Consolidated"
+		},
+		{
+			"Name":"Other customer expenses",
+			"Type":"Consolidated"
+		},
+		{
+			"Name":"634055",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"634056",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"634057",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"634058",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"PDD",
+			"Type":"Consolidated"
+		},
+		{
+			"Name":"634051",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"634052",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"634053",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"634054",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"Employee benefits expenses",
+			"Type":"Consolidated"
+		},
+		{
+			"Name":"Capitalised S&W",
+			"Type":"Consolidated"
+		},
+		{
+			"Name":"630125",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"630126",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"630127",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"630128",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"Capitalised T&E",
+			"Type":"Consolidated"
+		},
+		{
+			"Name":"630304",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"630413",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"630415",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"Demonstrators",
+			"Type":"Consolidated"
+		},
+		{
+			"Name":"630204",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"LTI and deferred remuneration",
+			"Type":"Consolidated"
+		},
+		{
+			"Name":"630115",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"630130",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"Other employee expenses",
+			"Type":"Consolidated"
+		},
+		{
+			"Name":"630124",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"630201",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"630202",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"630203",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"630205",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"630206",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"630207",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"630208",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"630209",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"630210",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"Salary & Wages",
+			"Type":"Consolidated"
+		},
+		{
+			"Name":"630101",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"630102",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"630103",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"630104",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"630105",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"630106",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"630109",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"630110",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"630111",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"630112",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"630113",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"630116",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"630119",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"630120",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"630121",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"630122",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"630123",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"632051",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"Share based payments - NED",
+			"Type":"Consolidated"
+		},
+		{
+			"Name":"630129",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"STI",
+			"Type":"Consolidated"
+		},
+		{
+			"Name":"630114",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"Third-party labour",
+			"Type":"Consolidated"
+		},
+		{
+			"Name":"630107",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"630108",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"Travel & Entertainment",
+			"Type":"Consolidated"
+		},
+		{
+			"Name":"630301",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"630302",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"630303",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"630401",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"630402",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"630403",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"630404",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"630405",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"630406",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"630407",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"630408",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"630409",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"630410",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"630411",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"630412",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"630414",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"630501",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"IT expenses",
+			"Type":"Consolidated"
+		},
+		{
+			"Name":"Capitalised IT expenses",
+			"Type":"Consolidated"
+		},
+		{
+			"Name":"637019",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"IT consulting",
+			"Type":"Consolidated"
+		},
+		{
+			"Name":"637007",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"Other IT expenses",
+			"Type":"Consolidated"
+		},
+		{
+			"Name":"637002",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"637006",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"637008",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"637009",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"637010",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"637011",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"637012",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"Software & hardware maintenance",
+			"Type":"Consolidated"
+		},
+		{
+			"Name":"637003",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"637004",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"637005",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"Net FX gain/(loss)",
+			"Type":"Consolidated"
+		},
+		{
+			"Name":"639001",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"639002",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"639003",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"639004",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"639101",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"639102",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"Other general administrative",
+			"Type":"Consolidated"
+		},
+		{
+			"Name":"Capitalised admin expenses",
+			"Type":"Consolidated"
+		},
+		{
+			"Name":"638028",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"Insurance",
+			"Type":"Consolidated"
+		},
+		{
+			"Name":"638030",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"638031",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"638032",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"638033",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"Other admin expenses",
+			"Type":"Consolidated"
+		},
+		{
+			"Name":"601114",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"601117",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"630117",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"630118",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"632052",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"638011",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"638012",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"638013",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"638014",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"638015",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"638016",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"638018",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"638019",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"638020",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"638021",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"638022",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"638023",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"638026",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"638027",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"638029",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"638034",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"638035",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"638036",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"638037",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"639201",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"639202",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"640101",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"640102",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"640103",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"640104",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"640105",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"641001",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"Shipping & pallets",
+			"Type":"Consolidated"
+		},
+		{
+			"Name":"638024",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"638025",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"Premises, lease & utilities",
+			"Type":"Consolidated"
+		},
+		{
+			"Name":"Capitalised occupancy costs",
+			"Type":"Consolidated"
+		},
+		{
+			"Name":"633116",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"Occupancy costs",
+			"Type":"Consolidated"
+		},
+		{
+			"Name":"633001",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"633002",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"633003",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"633004",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"633101",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"633102",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"633103",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"633104",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"633105",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"633106",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"633107",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"633108",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"633109",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"633110",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"633111",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"633112",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"633113",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"633114",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"633115",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"633201",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"Product development expenses",
+			"Type":"Consolidated"
+		},
+		{
+			"Name":"Capitalised product development",
+			"Type":"Consolidated"
+		},
+		{
+			"Name":"600662",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"601124",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"Product development",
+			"Type":"Consolidated"
+		},
+		{
+			"Name":"600661",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"601111",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"601112",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"601113",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"601115",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"601116",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"601118",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"601119",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"601120",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"601121",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"601122",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"601123",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"601125",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"601126",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"Professional fees",
+			"Type":"Consolidated"
+		},
+		{
+			"Name":"Accounting, audit & tax fees",
+			"Type":"Consolidated"
+		},
+		{
+			"Name":"635001",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"635002",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"635003",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"635004",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"635005",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"635006",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"635007",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"635023",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"635025",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"635026",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"635027",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"635028",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"635030",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"635031",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"635035",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"Capitalised consulting fees",
+			"Type":"Consolidated"
+		},
+		{
+			"Name":"635153",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"Consulting fees",
+			"Type":"Consolidated"
+		},
+		{
+			"Name":"635151",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"635152",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"Legal fees",
+			"Type":"Consolidated"
+		},
+		{
+			"Name":"635008",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"635009",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"635010",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"635011",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"635012",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"635013",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"635014",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"635015",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"635016",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"635017",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"635018",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"635019",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"635020",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"635021",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"635022",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"Telecommunications",
+			"Type":"Consolidated"
+		},
+		{
+			"Name":"636001",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"636002",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"636003",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"636004",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"Net interest income/(expense)",
+			"Type":"Consolidated"
+		},
+		{
+			"Name":"720101",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"720102",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"720103",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"720104",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"720105",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"720106",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"720110",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"740101",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"740102",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"Other finance expenses",
+			"Type":"Consolidated"
+		},
+		{
+			"Name":"730101",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"730102",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"730103",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"Tax expense",
+			"Type":"Consolidated"
+		},
+		{
+			"Name":"760101",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"760102",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"760103",
+			"Type":"Numeric"
+		}
+	],
+	"Edges":
+	[
+		{
+			"ParentName":"All Management Reporting",
+			"ComponentName":"CM%",
+			"Weight":0
+		},
+		{
+			"ParentName":"All Management Reporting",
+			"ComponentName":"EBIT%",
+			"Weight":0
+		},
+		{
+			"ParentName":"All Management Reporting",
+			"ComponentName":"GM%",
+			"Weight":0
+		},
+		{
+			"ParentName":"All Management Reporting",
+			"ComponentName":"Profit After Tax",
+			"Weight":1
+		},
+		{
+			"ParentName":"Profit After Tax",
+			"ComponentName":"Profit Before Tax",
+			"Weight":1
+		},
+		{
+			"ParentName":"Profit After Tax",
+			"ComponentName":"Tax expense",
+			"Weight":1
+		},
+		{
+			"ParentName":"Profit Before Tax",
+			"ComponentName":"Below the line",
+			"Weight":1
+		},
+		{
+			"ParentName":"Profit Before Tax",
+			"ComponentName":"EBIT",
+			"Weight":1
+		},
+		{
+			"ParentName":"Profit Before Tax",
+			"ComponentName":"Net interest income/(expense)",
+			"Weight":1
+		},
+		{
+			"ParentName":"Profit Before Tax",
+			"ComponentName":"Other finance expenses",
+			"Weight":1
+		},
+		{
+			"ParentName":"Below the line",
+			"ComponentName":"620101",
+			"Weight":1
+		},
+		{
+			"ParentName":"Below the line",
+			"ComponentName":"620102",
+			"Weight":1
+		},
+		{
+			"ParentName":"Below the line",
+			"ComponentName":"620103",
+			"Weight":1
+		},
+		{
+			"ParentName":"Below the line",
+			"ComponentName":"620104",
+			"Weight":1
+		},
+		{
+			"ParentName":"Below the line",
+			"ComponentName":"620105",
+			"Weight":1
+		},
+		{
+			"ParentName":"Below the line",
+			"ComponentName":"620106",
+			"Weight":1
+		},
+		{
+			"ParentName":"Below the line",
+			"ComponentName":"620107",
+			"Weight":1
+		},
+		{
+			"ParentName":"Below the line",
+			"ComponentName":"620108",
+			"Weight":1
+		},
+		{
+			"ParentName":"Below the line",
+			"ComponentName":"620109",
+			"Weight":1
+		},
+		{
+			"ParentName":"Below the line",
+			"ComponentName":"620110",
+			"Weight":1
+		},
+		{
+			"ParentName":"Below the line",
+			"ComponentName":"620111",
+			"Weight":1
+		},
+		{
+			"ParentName":"Below the line",
+			"ComponentName":"620112",
+			"Weight":1
+		},
+		{
+			"ParentName":"Below the line",
+			"ComponentName":"750101",
+			"Weight":1
+		},
+		{
+			"ParentName":"Below the line",
+			"ComponentName":"750102",
+			"Weight":1
+		},
+		{
+			"ParentName":"Below the line",
+			"ComponentName":"750103",
+			"Weight":1
+		},
+		{
+			"ParentName":"Below the line",
+			"ComponentName":"750104",
+			"Weight":1
+		},
+		{
+			"ParentName":"Below the line",
+			"ComponentName":"750105",
+			"Weight":1
+		},
+		{
+			"ParentName":"Below the line",
+			"ComponentName":"750106",
+			"Weight":1
+		},
+		{
+			"ParentName":"Below the line",
+			"ComponentName":"750107",
+			"Weight":1
+		},
+		{
+			"ParentName":"Below the line",
+			"ComponentName":"750108",
+			"Weight":1
+		},
+		{
+			"ParentName":"Below the line",
+			"ComponentName":"750109",
+			"Weight":1
+		},
+		{
+			"ParentName":"Below the line",
+			"ComponentName":"750110",
+			"Weight":1
+		},
+		{
+			"ParentName":"Below the line",
+			"ComponentName":"750111",
+			"Weight":1
+		},
+		{
+			"ParentName":"Below the line",
+			"ComponentName":"750112",
+			"Weight":1
+		},
+		{
+			"ParentName":"EBIT",
+			"ComponentName":"Depreciation & amortisation expense",
+			"Weight":1
+		},
+		{
+			"ParentName":"EBIT",
+			"ComponentName":"EBITDA",
+			"Weight":1
+		},
+		{
+			"ParentName":"Depreciation & amortisation expense",
+			"ComponentName":"Amortisation",
+			"Weight":1
+		},
+		{
+			"ParentName":"Depreciation & amortisation expense",
+			"ComponentName":"Depreciation",
+			"Weight":1
+		},
+		{
+			"ParentName":"Amortisation",
+			"ComponentName":"710201",
+			"Weight":1
+		},
+		{
+			"ParentName":"Amortisation",
+			"ComponentName":"710202",
+			"Weight":1
+		},
+		{
+			"ParentName":"Amortisation",
+			"ComponentName":"710203",
+			"Weight":1
+		},
+		{
+			"ParentName":"Amortisation",
+			"ComponentName":"710204",
+			"Weight":1
+		},
+		{
+			"ParentName":"Amortisation",
+			"ComponentName":"710205",
+			"Weight":1
+		},
+		{
+			"ParentName":"Amortisation",
+			"ComponentName":"710206",
+			"Weight":1
+		},
+		{
+			"ParentName":"Amortisation",
+			"ComponentName":"710207",
+			"Weight":1
+		},
+		{
+			"ParentName":"Amortisation",
+			"ComponentName":"710208",
+			"Weight":1
+		},
+		{
+			"ParentName":"Depreciation",
+			"ComponentName":"Depreciation - Leasing",
+			"Weight":1
+		},
+		{
+			"ParentName":"Depreciation",
+			"ComponentName":"Depreciation - PP&E",
+			"Weight":1
+		},
+		{
+			"ParentName":"Depreciation - Leasing",
+			"ComponentName":"710150",
+			"Weight":1
+		},
+		{
+			"ParentName":"Depreciation - PP&E",
+			"ComponentName":"710101",
+			"Weight":1
+		},
+		{
+			"ParentName":"Depreciation - PP&E",
+			"ComponentName":"710102",
+			"Weight":1
+		},
+		{
+			"ParentName":"Depreciation - PP&E",
+			"ComponentName":"710103",
+			"Weight":1
+		},
+		{
+			"ParentName":"Depreciation - PP&E",
+			"ComponentName":"710104",
+			"Weight":1
+		},
+		{
+			"ParentName":"Depreciation - PP&E",
+			"ComponentName":"710105",
+			"Weight":1
+		},
+		{
+			"ParentName":"Depreciation - PP&E",
+			"ComponentName":"710106",
+			"Weight":1
+		},
+		{
+			"ParentName":"Depreciation - PP&E",
+			"ComponentName":"710107",
+			"Weight":1
+		},
+		{
+			"ParentName":"Depreciation - PP&E",
+			"ComponentName":"710108",
+			"Weight":1
+		},
+		{
+			"ParentName":"Depreciation - PP&E",
+			"ComponentName":"710109",
+			"Weight":1
+		},
+		{
+			"ParentName":"Depreciation - PP&E",
+			"ComponentName":"710110",
+			"Weight":1
+		},
+		{
+			"ParentName":"Depreciation - PP&E",
+			"ComponentName":"710112",
+			"Weight":1
+		},
+		{
+			"ParentName":"EBITDA",
+			"ComponentName":"Contribution Margin",
+			"Weight":1
+		},
+		{
+			"ParentName":"EBITDA",
+			"ComponentName":"Marketing expenses",
+			"Weight":1
+		},
+		{
+			"ParentName":"EBITDA",
+			"ComponentName":"Other Income",
+			"Weight":1
+		},
+		{
+			"ParentName":"EBITDA",
+			"ComponentName":"Overhead and other expenses",
+			"Weight":1
+		},
+		{
+			"ParentName":"Contribution Margin",
+			"ComponentName":"Freight",
+			"Weight":1
+		},
+		{
+			"ParentName":"Contribution Margin",
+			"ComponentName":"Gross Margin",
+			"Weight":1
+		},
+		{
+			"ParentName":"Contribution Margin",
+			"ComponentName":"Warranty",
+			"Weight":1
+		},
+		{
+			"ParentName":"Freight",
+			"ComponentName":"550101",
+			"Weight":1
+		},
+		{
+			"ParentName":"Freight",
+			"ComponentName":"550102",
+			"Weight":1
+		},
+		{
+			"ParentName":"Freight",
+			"ComponentName":"550103",
+			"Weight":1
+		},
+		{
+			"ParentName":"Freight",
+			"ComponentName":"550104",
+			"Weight":1
+		},
+		{
+			"ParentName":"Freight",
+			"ComponentName":"550105",
+			"Weight":1
+		},
+		{
+			"ParentName":"Freight",
+			"ComponentName":"550106",
+			"Weight":1
+		},
+		{
+			"ParentName":"Freight",
+			"ComponentName":"Freight CM",
+			"Weight":1
+		},
+		{
+			"ParentName":"Gross Margin",
+			"ComponentName":"COGS",
+			"Weight":1
+		},
+		{
+			"ParentName":"Gross Margin",
+			"ComponentName":"COGS FX Variance",
+			"Weight":1
+		},
+		{
+			"ParentName":"Gross Margin",
+			"ComponentName":"Net Sales",
+			"Weight":1
+		},
+		{
+			"ParentName":"COGS",
+			"ComponentName":"500102",
+			"Weight":1
+		},
+		{
+			"ParentName":"COGS",
+			"ComponentName":"500103",
+			"Weight":1
+		},
+		{
+			"ParentName":"COGS",
+			"ComponentName":"500104",
+			"Weight":1
+		},
+		{
+			"ParentName":"COGS",
+			"ComponentName":"500105",
+			"Weight":1
+		},
+		{
+			"ParentName":"COGS",
+			"ComponentName":"500106",
+			"Weight":1
+		},
+		{
+			"ParentName":"COGS",
+			"ComponentName":"500107",
+			"Weight":1
+		},
+		{
+			"ParentName":"COGS",
+			"ComponentName":"500108",
+			"Weight":1
+		},
+		{
+			"ParentName":"COGS",
+			"ComponentName":"500109",
+			"Weight":1
+		},
+		{
+			"ParentName":"COGS",
+			"ComponentName":"500110",
+			"Weight":1
+		},
+		{
+			"ParentName":"COGS",
+			"ComponentName":"501001",
+			"Weight":1
+		},
+		{
+			"ParentName":"COGS",
+			"ComponentName":"501002",
+			"Weight":1
+		},
+		{
+			"ParentName":"COGS",
+			"ComponentName":"501003",
+			"Weight":1
+		},
+		{
+			"ParentName":"COGS",
+			"ComponentName":"501004",
+			"Weight":1
+		},
+		{
+			"ParentName":"COGS",
+			"ComponentName":"501005",
+			"Weight":1
+		},
+		{
+			"ParentName":"COGS",
+			"ComponentName":"501006",
+			"Weight":1
+		},
+		{
+			"ParentName":"COGS",
+			"ComponentName":"501007",
+			"Weight":1
+		},
+		{
+			"ParentName":"COGS",
+			"ComponentName":"501008",
+			"Weight":1
+		},
+		{
+			"ParentName":"COGS",
+			"ComponentName":"501009",
+			"Weight":1
+		},
+		{
+			"ParentName":"COGS",
+			"ComponentName":"501010",
+			"Weight":1
+		},
+		{
+			"ParentName":"COGS",
+			"ComponentName":"501011",
+			"Weight":1
+		},
+		{
+			"ParentName":"COGS",
+			"ComponentName":"501101",
+			"Weight":1
+		},
+		{
+			"ParentName":"COGS",
+			"ComponentName":"501102",
+			"Weight":1
+		},
+		{
+			"ParentName":"COGS",
+			"ComponentName":"501103",
+			"Weight":1
+		},
+		{
+			"ParentName":"COGS",
+			"ComponentName":"501110",
+			"Weight":1
+		},
+		{
+			"ParentName":"COGS",
+			"ComponentName":"501111",
+			"Weight":1
+		},
+		{
+			"ParentName":"COGS",
+			"ComponentName":"501201",
+			"Weight":1
+		},
+		{
+			"ParentName":"COGS",
+			"ComponentName":"501202",
+			"Weight":1
+		},
+		{
+			"ParentName":"COGS",
+			"ComponentName":"501203",
+			"Weight":1
+		},
+		{
+			"ParentName":"COGS",
+			"ComponentName":"501204",
+			"Weight":1
+		},
+		{
+			"ParentName":"COGS",
+			"ComponentName":"501205",
+			"Weight":1
+		},
+		{
+			"ParentName":"COGS",
+			"ComponentName":"501206",
+			"Weight":1
+		},
+		{
+			"ParentName":"COGS",
+			"ComponentName":"501207",
+			"Weight":1
+		},
+		{
+			"ParentName":"COGS",
+			"ComponentName":"501208",
+			"Weight":1
+		},
+		{
+			"ParentName":"COGS",
+			"ComponentName":"501301",
+			"Weight":1
+		},
+		{
+			"ParentName":"COGS",
+			"ComponentName":"501302",
+			"Weight":1
+		},
+		{
+			"ParentName":"COGS",
+			"ComponentName":"501303",
+			"Weight":1
+		},
+		{
+			"ParentName":"COGS",
+			"ComponentName":"Cost of Goods Sold CM",
+			"Weight":1
+		},
+		{
+			"ParentName":"COGS FX Variance",
+			"ComponentName":"COGS FX Variance CM",
+			"Weight":1
+		},
+		{
+			"ParentName":"Net Sales",
+			"ComponentName":"Gross Sales",
+			"Weight":1
+		},
+		{
+			"ParentName":"Net Sales",
+			"ComponentName":"Promotions",
+			"Weight":1
+		},
+		{
+			"ParentName":"Net Sales",
+			"ComponentName":"Settlement discounts and rebates",
+			"Weight":1
+		},
+		{
+			"ParentName":"Gross Sales",
+			"ComponentName":"400101",
+			"Weight":1
+		},
+		{
+			"ParentName":"Gross Sales",
+			"ComponentName":"400102",
+			"Weight":1
+		},
+		{
+			"ParentName":"Gross Sales",
+			"ComponentName":"400103",
+			"Weight":1
+		},
+		{
+			"ParentName":"Gross Sales",
+			"ComponentName":"400104",
+			"Weight":1
+		},
+		{
+			"ParentName":"Gross Sales",
+			"ComponentName":"400105",
+			"Weight":1
+		},
+		{
+			"ParentName":"Gross Sales",
+			"ComponentName":"400106",
+			"Weight":1
+		},
+		{
+			"ParentName":"Gross Sales",
+			"ComponentName":"401001",
+			"Weight":1
+		},
+		{
+			"ParentName":"Gross Sales",
+			"ComponentName":"401002",
+			"Weight":1
+		},
+		{
+			"ParentName":"Gross Sales",
+			"ComponentName":"401003",
+			"Weight":1
+		},
+		{
+			"ParentName":"Gross Sales",
+			"ComponentName":"401004",
+			"Weight":1
+		},
+		{
+			"ParentName":"Gross Sales",
+			"ComponentName":"401005",
+			"Weight":1
+		},
+		{
+			"ParentName":"Gross Sales",
+			"ComponentName":"401006",
+			"Weight":1
+		},
+		{
+			"ParentName":"Gross Sales",
+			"ComponentName":"401007",
+			"Weight":1
+		},
+		{
+			"ParentName":"Gross Sales",
+			"ComponentName":"450101",
+			"Weight":1
+		},
+		{
+			"ParentName":"Gross Sales",
+			"ComponentName":"450110",
+			"Weight":1
+		},
+		{
+			"ParentName":"Gross Sales",
+			"ComponentName":"460001",
+			"Weight":1
+		},
+		{
+			"ParentName":"Gross Sales",
+			"ComponentName":"460002",
+			"Weight":1
+		},
+		{
+			"ParentName":"Gross Sales",
+			"ComponentName":"460003",
+			"Weight":1
+		},
+		{
+			"ParentName":"Gross Sales",
+			"ComponentName":"Gross Sales CM",
+			"Weight":1
+		},
+		{
+			"ParentName":"Promotions",
+			"ComponentName":"410102",
+			"Weight":1
+		},
+		{
+			"ParentName":"Promotions",
+			"ComponentName":"SKU Promo Costs CM",
+			"Weight":1
+		},
+		{
+			"ParentName":"Settlement discounts and rebates",
+			"ComponentName":"410101",
+			"Weight":1
+		},
+		{
+			"ParentName":"Settlement discounts and rebates",
+			"ComponentName":"410103",
+			"Weight":1
+		},
+		{
+			"ParentName":"Settlement discounts and rebates",
+			"ComponentName":"410104",
+			"Weight":1
+		},
+		{
+			"ParentName":"Settlement discounts and rebates",
+			"ComponentName":"410105",
+			"Weight":1
+		},
+		{
+			"ParentName":"Settlement discounts and rebates",
+			"ComponentName":"410106",
+			"Weight":1
+		},
+		{
+			"ParentName":"Settlement discounts and rebates",
+			"ComponentName":"410107",
+			"Weight":1
+		},
+		{
+			"ParentName":"Settlement discounts and rebates",
+			"ComponentName":"410108",
+			"Weight":1
+		},
+		{
+			"ParentName":"Settlement discounts and rebates",
+			"ComponentName":"Rebates CM",
+			"Weight":1
+		},
+		{
+			"ParentName":"Warranty",
+			"ComponentName":"550200",
+			"Weight":1
+		},
+		{
+			"ParentName":"Warranty",
+			"ComponentName":"550201",
+			"Weight":1
+		},
+		{
+			"ParentName":"Warranty",
+			"ComponentName":"550202",
+			"Weight":1
+		},
+		{
+			"ParentName":"Warranty",
+			"ComponentName":"550203",
+			"Weight":1
+		},
+		{
+			"ParentName":"Warranty",
+			"ComponentName":"550204",
+			"Weight":1
+		},
+		{
+			"ParentName":"Warranty",
+			"ComponentName":"550205",
+			"Weight":1
+		},
+		{
+			"ParentName":"Warranty",
+			"ComponentName":"550206",
+			"Weight":1
+		},
+		{
+			"ParentName":"Warranty",
+			"ComponentName":"550207",
+			"Weight":1
+		},
+		{
+			"ParentName":"Warranty",
+			"ComponentName":"550208",
+			"Weight":1
+		},
+		{
+			"ParentName":"Warranty",
+			"ComponentName":"550209",
+			"Weight":1
+		},
+		{
+			"ParentName":"Warranty",
+			"ComponentName":"550210",
+			"Weight":1
+		},
+		{
+			"ParentName":"Warranty",
+			"ComponentName":"550211",
+			"Weight":1
+		},
+		{
+			"ParentName":"Warranty",
+			"ComponentName":"550212",
+			"Weight":1
+		},
+		{
+			"ParentName":"Warranty",
+			"ComponentName":"550213",
+			"Weight":1
+		},
+		{
+			"ParentName":"Warranty",
+			"ComponentName":"550214",
+			"Weight":1
+		},
+		{
+			"ParentName":"Warranty",
+			"ComponentName":"550215",
+			"Weight":1
+		},
+		{
+			"ParentName":"Warranty",
+			"ComponentName":"550216",
+			"Weight":1
+		},
+		{
+			"ParentName":"Warranty",
+			"ComponentName":"550217",
+			"Weight":1
+		},
+		{
+			"ParentName":"Warranty",
+			"ComponentName":"550218",
+			"Weight":1
+		},
+		{
+			"ParentName":"Warranty",
+			"ComponentName":"550219",
+			"Weight":1
+		},
+		{
+			"ParentName":"Warranty",
+			"ComponentName":"Warranty CM",
+			"Weight":1
+		},
+		{
+			"ParentName":"Marketing expenses",
+			"ComponentName":"Corporate Marketing - GTM",
+			"Weight":1
+		},
+		{
+			"ParentName":"Marketing expenses",
+			"ComponentName":"Corporate Marketing - Specialty",
+			"Weight":1
+		},
+		{
+			"ParentName":"Marketing expenses",
+			"ComponentName":"Regional Marketing",
+			"Weight":1
+		},
+		{
+			"ParentName":"Marketing expenses",
+			"ComponentName":"Regional Marketing - APAC DTC",
+			"Weight":1
+		},
+		{
+			"ParentName":"Corporate Marketing - GTM",
+			"ComponentName":"Marketing Corporate ATL",
+			"Weight":1
+		},
+		{
+			"ParentName":"Corporate Marketing - GTM",
+			"ComponentName":"Marketing Corporate BTL",
+			"Weight":1
+		},
+		{
+			"ParentName":"Corporate Marketing - GTM",
+			"ComponentName":"Marketing Corporate Committed",
+			"Weight":1
+		},
+		{
+			"ParentName":"Corporate Marketing - GTM",
+			"ComponentName":"Marketing Corporate Uncommitted",
+			"Weight":1
+		},
+		{
+			"ParentName":"Marketing Corporate ATL",
+			"ComponentName":"600501",
+			"Weight":1
+		},
+		{
+			"ParentName":"Marketing Corporate ATL",
+			"ComponentName":"600502",
+			"Weight":1
+		},
+		{
+			"ParentName":"Marketing Corporate ATL",
+			"ComponentName":"600503",
+			"Weight":1
+		},
+		{
+			"ParentName":"Marketing Corporate ATL",
+			"ComponentName":"600504",
+			"Weight":1
+		},
+		{
+			"ParentName":"Marketing Corporate ATL",
+			"ComponentName":"600505",
+			"Weight":1
+		},
+		{
+			"ParentName":"Marketing Corporate ATL",
+			"ComponentName":"600506",
+			"Weight":1
+		},
+		{
+			"ParentName":"Marketing Corporate ATL",
+			"ComponentName":"600507",
+			"Weight":1
+		},
+		{
+			"ParentName":"Marketing Corporate ATL",
+			"ComponentName":"600508",
+			"Weight":1
+		},
+		{
+			"ParentName":"Marketing Corporate ATL",
+			"ComponentName":"600509",
+			"Weight":1
+		},
+		{
+			"ParentName":"Marketing Corporate ATL",
+			"ComponentName":"600510",
+			"Weight":1
+		},
+		{
+			"ParentName":"Marketing Corporate ATL",
+			"ComponentName":"600511",
+			"Weight":1
+		},
+		{
+			"ParentName":"Marketing Corporate ATL",
+			"ComponentName":"600512",
+			"Weight":1
+		},
+		{
+			"ParentName":"Marketing Corporate ATL",
+			"ComponentName":"600513",
+			"Weight":1
+		},
+		{
+			"ParentName":"Marketing Corporate ATL",
+			"ComponentName":"600514",
+			"Weight":1
+		},
+		{
+			"ParentName":"Marketing Corporate ATL",
+			"ComponentName":"600515",
+			"Weight":1
+		},
+		{
+			"ParentName":"Marketing Corporate ATL",
+			"ComponentName":"600516",
+			"Weight":1
+		},
+		{
+			"ParentName":"Marketing Corporate ATL",
+			"ComponentName":"600517",
+			"Weight":1
+		},
+		{
+			"ParentName":"Marketing Corporate ATL",
+			"ComponentName":"600518",
+			"Weight":1
+		},
+		{
+			"ParentName":"Marketing Corporate ATL",
+			"ComponentName":"600519",
+			"Weight":1
+		},
+		{
+			"ParentName":"Marketing Corporate ATL",
+			"ComponentName":"600520",
+			"Weight":1
+		},
+		{
+			"ParentName":"Marketing Corporate ATL",
+			"ComponentName":"600521",
+			"Weight":1
+		},
+		{
+			"ParentName":"Marketing Corporate BTL",
+			"ComponentName":"600601",
+			"Weight":1
+		},
+		{
+			"ParentName":"Marketing Corporate BTL",
+			"ComponentName":"600602",
+			"Weight":1
+		},
+		{
+			"ParentName":"Marketing Corporate BTL",
+			"ComponentName":"600603",
+			"Weight":1
+		},
+		{
+			"ParentName":"Marketing Corporate BTL",
+			"ComponentName":"600604",
+			"Weight":1
+		},
+		{
+			"ParentName":"Marketing Corporate BTL",
+			"ComponentName":"600605",
+			"Weight":1
+		},
+		{
+			"ParentName":"Marketing Corporate BTL",
+			"ComponentName":"600606",
+			"Weight":1
+		},
+		{
+			"ParentName":"Marketing Corporate BTL",
+			"ComponentName":"600607",
+			"Weight":1
+		},
+		{
+			"ParentName":"Marketing Corporate BTL",
+			"ComponentName":"600608",
+			"Weight":1
+		},
+		{
+			"ParentName":"Marketing Corporate BTL",
+			"ComponentName":"600619",
+			"Weight":1
+		},
+		{
+			"ParentName":"Marketing Corporate BTL",
+			"ComponentName":"600620",
+			"Weight":1
+		},
+		{
+			"ParentName":"Marketing Corporate BTL",
+			"ComponentName":"600650",
+			"Weight":1
+		},
+		{
+			"ParentName":"Marketing Corporate BTL",
+			"ComponentName":"600651",
+			"Weight":1
+		},
+		{
+			"ParentName":"Marketing Corporate Committed",
+			"ComponentName":"600701",
+			"Weight":1
+		},
+		{
+			"ParentName":"Marketing Corporate Uncommitted",
+			"ComponentName":"600660",
+			"Weight":1
+		},
+		{
+			"ParentName":"Corporate Marketing - Specialty",
+			"ComponentName":"Marketing Specialty ATL",
+			"Weight":1
+		},
+		{
+			"ParentName":"Corporate Marketing - Specialty",
+			"ComponentName":"Marketing Specialty BTL",
+			"Weight":1
+		},
+		{
+			"ParentName":"Marketing Specialty ATL",
+			"ComponentName":"600522",
+			"Weight":1
+		},
+		{
+			"ParentName":"Marketing Specialty ATL",
+			"ComponentName":"600523",
+			"Weight":1
+		},
+		{
+			"ParentName":"Marketing Specialty ATL",
+			"ComponentName":"600524",
+			"Weight":1
+		},
+		{
+			"ParentName":"Marketing Specialty ATL",
+			"ComponentName":"600525",
+			"Weight":1
+		},
+		{
+			"ParentName":"Marketing Specialty ATL",
+			"ComponentName":"600526",
+			"Weight":1
+		},
+		{
+			"ParentName":"Marketing Specialty ATL",
+			"ComponentName":"600527",
+			"Weight":1
+		},
+		{
+			"ParentName":"Marketing Specialty ATL",
+			"ComponentName":"600528",
+			"Weight":1
+		},
+		{
+			"ParentName":"Marketing Specialty ATL",
+			"ComponentName":"600529",
+			"Weight":1
+		},
+		{
+			"ParentName":"Marketing Specialty ATL",
+			"ComponentName":"600530",
+			"Weight":1
+		},
+		{
+			"ParentName":"Marketing Specialty ATL",
+			"ComponentName":"600531",
+			"Weight":1
+		},
+		{
+			"ParentName":"Marketing Specialty ATL",
+			"ComponentName":"600532",
+			"Weight":1
+		},
+		{
+			"ParentName":"Marketing Specialty ATL",
+			"ComponentName":"600533",
+			"Weight":1
+		},
+		{
+			"ParentName":"Marketing Specialty ATL",
+			"ComponentName":"600534",
+			"Weight":1
+		},
+		{
+			"ParentName":"Marketing Specialty ATL",
+			"ComponentName":"600535",
+			"Weight":1
+		},
+		{
+			"ParentName":"Marketing Specialty ATL",
+			"ComponentName":"600536",
+			"Weight":1
+		},
+		{
+			"ParentName":"Marketing Specialty ATL",
+			"ComponentName":"600537",
+			"Weight":1
+		},
+		{
+			"ParentName":"Marketing Specialty ATL",
+			"ComponentName":"600538",
+			"Weight":1
+		},
+		{
+			"ParentName":"Marketing Specialty ATL",
+			"ComponentName":"600539",
+			"Weight":1
+		},
+		{
+			"ParentName":"Marketing Specialty ATL",
+			"ComponentName":"600540",
+			"Weight":1
+		},
+		{
+			"ParentName":"Marketing Specialty ATL",
+			"ComponentName":"600541",
+			"Weight":1
+		},
+		{
+			"ParentName":"Marketing Specialty ATL",
+			"ComponentName":"600542",
+			"Weight":1
+		},
+		{
+			"ParentName":"Marketing Specialty ATL",
+			"ComponentName":"600652",
+			"Weight":1
+		},
+		{
+			"ParentName":"Marketing Specialty BTL",
+			"ComponentName":"600609",
+			"Weight":1
+		},
+		{
+			"ParentName":"Marketing Specialty BTL",
+			"ComponentName":"600610",
+			"Weight":1
+		},
+		{
+			"ParentName":"Marketing Specialty BTL",
+			"ComponentName":"600611",
+			"Weight":1
+		},
+		{
+			"ParentName":"Marketing Specialty BTL",
+			"ComponentName":"600612",
+			"Weight":1
+		},
+		{
+			"ParentName":"Marketing Specialty BTL",
+			"ComponentName":"600613",
+			"Weight":1
+		},
+		{
+			"ParentName":"Marketing Specialty BTL",
+			"ComponentName":"600614",
+			"Weight":1
+		},
+		{
+			"ParentName":"Marketing Specialty BTL",
+			"ComponentName":"600615",
+			"Weight":1
+		},
+		{
+			"ParentName":"Marketing Specialty BTL",
+			"ComponentName":"600616",
+			"Weight":1
+		},
+		{
+			"ParentName":"Marketing Specialty BTL",
+			"ComponentName":"600617",
+			"Weight":1
+		},
+		{
+			"ParentName":"Marketing Specialty BTL",
+			"ComponentName":"600618",
+			"Weight":1
+		},
+		{
+			"ParentName":"Regional Marketing",
+			"ComponentName":"Marketing Region ATL",
+			"Weight":1
+		},
+		{
+			"ParentName":"Regional Marketing",
+			"ComponentName":"Marketing Region BTL",
+			"Weight":1
+		},
+		{
+			"ParentName":"Regional Marketing",
+			"ComponentName":"Marketing Region Committed",
+			"Weight":1
+		},
+		{
+			"ParentName":"Marketing Region ATL",
+			"ComponentName":"600101",
+			"Weight":1
+		},
+		{
+			"ParentName":"Marketing Region ATL",
+			"ComponentName":"600102",
+			"Weight":1
+		},
+		{
+			"ParentName":"Marketing Region ATL",
+			"ComponentName":"600103",
+			"Weight":1
+		},
+		{
+			"ParentName":"Marketing Region ATL",
+			"ComponentName":"600104",
+			"Weight":1
+		},
+		{
+			"ParentName":"Marketing Region ATL",
+			"ComponentName":"600105",
+			"Weight":1
+		},
+		{
+			"ParentName":"Marketing Region ATL",
+			"ComponentName":"600106",
+			"Weight":1
+		},
+		{
+			"ParentName":"Marketing Region ATL",
+			"ComponentName":"600107",
+			"Weight":1
+		},
+		{
+			"ParentName":"Marketing Region ATL",
+			"ComponentName":"600108",
+			"Weight":1
+		},
+		{
+			"ParentName":"Marketing Region ATL",
+			"ComponentName":"600109",
+			"Weight":1
+		},
+		{
+			"ParentName":"Marketing Region ATL",
+			"ComponentName":"600110",
+			"Weight":1
+		},
+		{
+			"ParentName":"Marketing Region ATL",
+			"ComponentName":"600111",
+			"Weight":1
+		},
+		{
+			"ParentName":"Marketing Region ATL",
+			"ComponentName":"600112",
+			"Weight":1
+		},
+		{
+			"ParentName":"Marketing Region ATL",
+			"ComponentName":"600113",
+			"Weight":1
+		},
+		{
+			"ParentName":"Marketing Region ATL",
+			"ComponentName":"600114",
+			"Weight":1
+		},
+		{
+			"ParentName":"Marketing Region ATL",
+			"ComponentName":"600115",
+			"Weight":1
+		},
+		{
+			"ParentName":"Marketing Region ATL",
+			"ComponentName":"600116",
+			"Weight":1
+		},
+		{
+			"ParentName":"Marketing Region ATL",
+			"ComponentName":"600117",
+			"Weight":1
+		},
+		{
+			"ParentName":"Marketing Region ATL",
+			"ComponentName":"600118",
+			"Weight":1
+		},
+		{
+			"ParentName":"Marketing Region ATL",
+			"ComponentName":"600119",
+			"Weight":1
+		},
+		{
+			"ParentName":"Marketing Region ATL",
+			"ComponentName":"600120",
+			"Weight":1
+		},
+		{
+			"ParentName":"Marketing Region ATL",
+			"ComponentName":"600121",
+			"Weight":1
+		},
+		{
+			"ParentName":"Marketing Region ATL",
+			"ComponentName":"600201",
+			"Weight":1
+		},
+		{
+			"ParentName":"Marketing Region BTL",
+			"ComponentName":"600301",
+			"Weight":1
+		},
+		{
+			"ParentName":"Marketing Region BTL",
+			"ComponentName":"600302",
+			"Weight":1
+		},
+		{
+			"ParentName":"Marketing Region BTL",
+			"ComponentName":"600303",
+			"Weight":1
+		},
+		{
+			"ParentName":"Marketing Region BTL",
+			"ComponentName":"600304",
+			"Weight":1
+		},
+		{
+			"ParentName":"Marketing Region BTL",
+			"ComponentName":"600305",
+			"Weight":1
+		},
+		{
+			"ParentName":"Marketing Region BTL",
+			"ComponentName":"600306",
+			"Weight":1
+		},
+		{
+			"ParentName":"Marketing Region BTL",
+			"ComponentName":"600307",
+			"Weight":1
+		},
+		{
+			"ParentName":"Marketing Region Committed",
+			"ComponentName":"600401",
+			"Weight":1
+		},
+		{
+			"ParentName":"Marketing Region Committed",
+			"ComponentName":"600402",
+			"Weight":1
+		},
+		{
+			"ParentName":"Marketing Region Committed",
+			"ComponentName":"600403",
+			"Weight":1
+		},
+		{
+			"ParentName":"Marketing Region Committed",
+			"ComponentName":"600404",
+			"Weight":1
+		},
+		{
+			"ParentName":"Regional Marketing - APAC DTC",
+			"ComponentName":"600410",
+			"Weight":1
+		},
+		{
+			"ParentName":"Other Income",
+			"ComponentName":"610101",
+			"Weight":1
+		},
+		{
+			"ParentName":"Other Income",
+			"ComponentName":"610102",
+			"Weight":1
+		},
+		{
+			"ParentName":"Overhead and other expenses",
+			"ComponentName":"Corporate expenses",
+			"Weight":1
+		},
+		{
+			"ParentName":"Overhead and other expenses",
+			"ComponentName":"Customer related expenses",
+			"Weight":1
+		},
+		{
+			"ParentName":"Overhead and other expenses",
+			"ComponentName":"Employee benefits expenses",
+			"Weight":1
+		},
+		{
+			"ParentName":"Overhead and other expenses",
+			"ComponentName":"IT expenses",
+			"Weight":1
+		},
+		{
+			"ParentName":"Overhead and other expenses",
+			"ComponentName":"Net FX gain/(loss)",
+			"Weight":1
+		},
+		{
+			"ParentName":"Overhead and other expenses",
+			"ComponentName":"Other general administrative",
+			"Weight":1
+		},
+		{
+			"ParentName":"Overhead and other expenses",
+			"ComponentName":"Premises, lease & utilities",
+			"Weight":1
+		},
+		{
+			"ParentName":"Overhead and other expenses",
+			"ComponentName":"Product development expenses",
+			"Weight":1
+		},
+		{
+			"ParentName":"Overhead and other expenses",
+			"ComponentName":"Professional fees",
+			"Weight":1
+		},
+		{
+			"ParentName":"Overhead and other expenses",
+			"ComponentName":"Telecommunications",
+			"Weight":1
+		},
+		{
+			"ParentName":"Corporate expenses",
+			"ComponentName":"642001",
+			"Weight":1
+		},
+		{
+			"ParentName":"Corporate expenses",
+			"ComponentName":"642002",
+			"Weight":1
+		},
+		{
+			"ParentName":"Corporate expenses",
+			"ComponentName":"642003",
+			"Weight":1
+		},
+		{
+			"ParentName":"Corporate expenses",
+			"ComponentName":"642004",
+			"Weight":1
+		},
+		{
+			"ParentName":"Corporate expenses",
+			"ComponentName":"642005",
+			"Weight":1
+		},
+		{
+			"ParentName":"Corporate expenses",
+			"ComponentName":"642006",
+			"Weight":1
+		},
+		{
+			"ParentName":"Corporate expenses",
+			"ComponentName":"642007",
+			"Weight":1
+		},
+		{
+			"ParentName":"Corporate expenses",
+			"ComponentName":"642008",
+			"Weight":1
+		},
+		{
+			"ParentName":"Corporate expenses",
+			"ComponentName":"642009",
+			"Weight":1
+		},
+		{
+			"ParentName":"Corporate expenses",
+			"ComponentName":"642010",
+			"Weight":1
+		},
+		{
+			"ParentName":"Customer related expenses",
+			"ComponentName":"Other customer expenses",
+			"Weight":1
+		},
+		{
+			"ParentName":"Customer related expenses",
+			"ComponentName":"PDD",
+			"Weight":1
+		},
+		{
+			"ParentName":"Other customer expenses",
+			"ComponentName":"634055",
+			"Weight":1
+		},
+		{
+			"ParentName":"Other customer expenses",
+			"ComponentName":"634056",
+			"Weight":1
+		},
+		{
+			"ParentName":"Other customer expenses",
+			"ComponentName":"634057",
+			"Weight":1
+		},
+		{
+			"ParentName":"Other customer expenses",
+			"ComponentName":"634058",
+			"Weight":1
+		},
+		{
+			"ParentName":"PDD",
+			"ComponentName":"634051",
+			"Weight":1
+		},
+		{
+			"ParentName":"PDD",
+			"ComponentName":"634052",
+			"Weight":1
+		},
+		{
+			"ParentName":"PDD",
+			"ComponentName":"634053",
+			"Weight":1
+		},
+		{
+			"ParentName":"PDD",
+			"ComponentName":"634054",
+			"Weight":1
+		},
+		{
+			"ParentName":"Employee benefits expenses",
+			"ComponentName":"Capitalised S&W",
+			"Weight":1
+		},
+		{
+			"ParentName":"Employee benefits expenses",
+			"ComponentName":"Capitalised T&E",
+			"Weight":1
+		},
+		{
+			"ParentName":"Employee benefits expenses",
+			"ComponentName":"Demonstrators",
+			"Weight":1
+		},
+		{
+			"ParentName":"Employee benefits expenses",
+			"ComponentName":"LTI and deferred remuneration",
+			"Weight":1
+		},
+		{
+			"ParentName":"Employee benefits expenses",
+			"ComponentName":"Other employee expenses",
+			"Weight":1
+		},
+		{
+			"ParentName":"Employee benefits expenses",
+			"ComponentName":"Salary & Wages",
+			"Weight":1
+		},
+		{
+			"ParentName":"Employee benefits expenses",
+			"ComponentName":"Share based payments - NED",
+			"Weight":1
+		},
+		{
+			"ParentName":"Employee benefits expenses",
+			"ComponentName":"STI",
+			"Weight":1
+		},
+		{
+			"ParentName":"Employee benefits expenses",
+			"ComponentName":"Third-party labour",
+			"Weight":1
+		},
+		{
+			"ParentName":"Employee benefits expenses",
+			"ComponentName":"Travel & Entertainment",
+			"Weight":1
+		},
+		{
+			"ParentName":"Capitalised S&W",
+			"ComponentName":"630125",
+			"Weight":1
+		},
+		{
+			"ParentName":"Capitalised S&W",
+			"ComponentName":"630126",
+			"Weight":1
+		},
+		{
+			"ParentName":"Capitalised S&W",
+			"ComponentName":"630127",
+			"Weight":1
+		},
+		{
+			"ParentName":"Capitalised S&W",
+			"ComponentName":"630128",
+			"Weight":1
+		},
+		{
+			"ParentName":"Capitalised T&E",
+			"ComponentName":"630304",
+			"Weight":1
+		},
+		{
+			"ParentName":"Capitalised T&E",
+			"ComponentName":"630413",
+			"Weight":1
+		},
+		{
+			"ParentName":"Capitalised T&E",
+			"ComponentName":"630415",
+			"Weight":1
+		},
+		{
+			"ParentName":"Demonstrators",
+			"ComponentName":"630204",
+			"Weight":1
+		},
+		{
+			"ParentName":"LTI and deferred remuneration",
+			"ComponentName":"630115",
+			"Weight":1
+		},
+		{
+			"ParentName":"LTI and deferred remuneration",
+			"ComponentName":"630130",
+			"Weight":1
+		},
+		{
+			"ParentName":"Other employee expenses",
+			"ComponentName":"630124",
+			"Weight":1
+		},
+		{
+			"ParentName":"Other employee expenses",
+			"ComponentName":"630201",
+			"Weight":1
+		},
+		{
+			"ParentName":"Other employee expenses",
+			"ComponentName":"630202",
+			"Weight":1
+		},
+		{
+			"ParentName":"Other employee expenses",
+			"ComponentName":"630203",
+			"Weight":1
+		},
+		{
+			"ParentName":"Other employee expenses",
+			"ComponentName":"630205",
+			"Weight":1
+		},
+		{
+			"ParentName":"Other employee expenses",
+			"ComponentName":"630206",
+			"Weight":1
+		},
+		{
+			"ParentName":"Other employee expenses",
+			"ComponentName":"630207",
+			"Weight":1
+		},
+		{
+			"ParentName":"Other employee expenses",
+			"ComponentName":"630208",
+			"Weight":1
+		},
+		{
+			"ParentName":"Other employee expenses",
+			"ComponentName":"630209",
+			"Weight":1
+		},
+		{
+			"ParentName":"Other employee expenses",
+			"ComponentName":"630210",
+			"Weight":1
+		},
+		{
+			"ParentName":"Salary & Wages",
+			"ComponentName":"630101",
+			"Weight":1
+		},
+		{
+			"ParentName":"Salary & Wages",
+			"ComponentName":"630102",
+			"Weight":1
+		},
+		{
+			"ParentName":"Salary & Wages",
+			"ComponentName":"630103",
+			"Weight":1
+		},
+		{
+			"ParentName":"Salary & Wages",
+			"ComponentName":"630104",
+			"Weight":1
+		},
+		{
+			"ParentName":"Salary & Wages",
+			"ComponentName":"630105",
+			"Weight":1
+		},
+		{
+			"ParentName":"Salary & Wages",
+			"ComponentName":"630106",
+			"Weight":1
+		},
+		{
+			"ParentName":"Salary & Wages",
+			"ComponentName":"630109",
+			"Weight":1
+		},
+		{
+			"ParentName":"Salary & Wages",
+			"ComponentName":"630110",
+			"Weight":1
+		},
+		{
+			"ParentName":"Salary & Wages",
+			"ComponentName":"630111",
+			"Weight":1
+		},
+		{
+			"ParentName":"Salary & Wages",
+			"ComponentName":"630112",
+			"Weight":1
+		},
+		{
+			"ParentName":"Salary & Wages",
+			"ComponentName":"630113",
+			"Weight":1
+		},
+		{
+			"ParentName":"Salary & Wages",
+			"ComponentName":"630116",
+			"Weight":1
+		},
+		{
+			"ParentName":"Salary & Wages",
+			"ComponentName":"630119",
+			"Weight":1
+		},
+		{
+			"ParentName":"Salary & Wages",
+			"ComponentName":"630120",
+			"Weight":1
+		},
+		{
+			"ParentName":"Salary & Wages",
+			"ComponentName":"630121",
+			"Weight":1
+		},
+		{
+			"ParentName":"Salary & Wages",
+			"ComponentName":"630122",
+			"Weight":1
+		},
+		{
+			"ParentName":"Salary & Wages",
+			"ComponentName":"630123",
+			"Weight":1
+		},
+		{
+			"ParentName":"Salary & Wages",
+			"ComponentName":"632051",
+			"Weight":1
+		},
+		{
+			"ParentName":"Share based payments - NED",
+			"ComponentName":"630129",
+			"Weight":1
+		},
+		{
+			"ParentName":"STI",
+			"ComponentName":"630114",
+			"Weight":1
+		},
+		{
+			"ParentName":"Third-party labour",
+			"ComponentName":"630107",
+			"Weight":1
+		},
+		{
+			"ParentName":"Third-party labour",
+			"ComponentName":"630108",
+			"Weight":1
+		},
+		{
+			"ParentName":"Travel & Entertainment",
+			"ComponentName":"630301",
+			"Weight":1
+		},
+		{
+			"ParentName":"Travel & Entertainment",
+			"ComponentName":"630302",
+			"Weight":1
+		},
+		{
+			"ParentName":"Travel & Entertainment",
+			"ComponentName":"630303",
+			"Weight":1
+		},
+		{
+			"ParentName":"Travel & Entertainment",
+			"ComponentName":"630401",
+			"Weight":1
+		},
+		{
+			"ParentName":"Travel & Entertainment",
+			"ComponentName":"630402",
+			"Weight":1
+		},
+		{
+			"ParentName":"Travel & Entertainment",
+			"ComponentName":"630403",
+			"Weight":1
+		},
+		{
+			"ParentName":"Travel & Entertainment",
+			"ComponentName":"630404",
+			"Weight":1
+		},
+		{
+			"ParentName":"Travel & Entertainment",
+			"ComponentName":"630405",
+			"Weight":1
+		},
+		{
+			"ParentName":"Travel & Entertainment",
+			"ComponentName":"630406",
+			"Weight":1
+		},
+		{
+			"ParentName":"Travel & Entertainment",
+			"ComponentName":"630407",
+			"Weight":1
+		},
+		{
+			"ParentName":"Travel & Entertainment",
+			"ComponentName":"630408",
+			"Weight":1
+		},
+		{
+			"ParentName":"Travel & Entertainment",
+			"ComponentName":"630409",
+			"Weight":1
+		},
+		{
+			"ParentName":"Travel & Entertainment",
+			"ComponentName":"630410",
+			"Weight":1
+		},
+		{
+			"ParentName":"Travel & Entertainment",
+			"ComponentName":"630411",
+			"Weight":1
+		},
+		{
+			"ParentName":"Travel & Entertainment",
+			"ComponentName":"630412",
+			"Weight":1
+		},
+		{
+			"ParentName":"Travel & Entertainment",
+			"ComponentName":"630414",
+			"Weight":1
+		},
+		{
+			"ParentName":"Travel & Entertainment",
+			"ComponentName":"630501",
+			"Weight":1
+		},
+		{
+			"ParentName":"IT expenses",
+			"ComponentName":"Capitalised IT expenses",
+			"Weight":1
+		},
+		{
+			"ParentName":"IT expenses",
+			"ComponentName":"IT consulting",
+			"Weight":1
+		},
+		{
+			"ParentName":"IT expenses",
+			"ComponentName":"Other IT expenses",
+			"Weight":1
+		},
+		{
+			"ParentName":"IT expenses",
+			"ComponentName":"Software & hardware maintenance",
+			"Weight":1
+		},
+		{
+			"ParentName":"Capitalised IT expenses",
+			"ComponentName":"637019",
+			"Weight":1
+		},
+		{
+			"ParentName":"IT consulting",
+			"ComponentName":"637007",
+			"Weight":1
+		},
+		{
+			"ParentName":"Other IT expenses",
+			"ComponentName":"637002",
+			"Weight":1
+		},
+		{
+			"ParentName":"Other IT expenses",
+			"ComponentName":"637006",
+			"Weight":1
+		},
+		{
+			"ParentName":"Other IT expenses",
+			"ComponentName":"637008",
+			"Weight":1
+		},
+		{
+			"ParentName":"Other IT expenses",
+			"ComponentName":"637009",
+			"Weight":1
+		},
+		{
+			"ParentName":"Other IT expenses",
+			"ComponentName":"637010",
+			"Weight":1
+		},
+		{
+			"ParentName":"Other IT expenses",
+			"ComponentName":"637011",
+			"Weight":1
+		},
+		{
+			"ParentName":"Other IT expenses",
+			"ComponentName":"637012",
+			"Weight":1
+		},
+		{
+			"ParentName":"Software & hardware maintenance",
+			"ComponentName":"637003",
+			"Weight":1
+		},
+		{
+			"ParentName":"Software & hardware maintenance",
+			"ComponentName":"637004",
+			"Weight":1
+		},
+		{
+			"ParentName":"Software & hardware maintenance",
+			"ComponentName":"637005",
+			"Weight":1
+		},
+		{
+			"ParentName":"Net FX gain/(loss)",
+			"ComponentName":"639001",
+			"Weight":1
+		},
+		{
+			"ParentName":"Net FX gain/(loss)",
+			"ComponentName":"639002",
+			"Weight":1
+		},
+		{
+			"ParentName":"Net FX gain/(loss)",
+			"ComponentName":"639003",
+			"Weight":1
+		},
+		{
+			"ParentName":"Net FX gain/(loss)",
+			"ComponentName":"639004",
+			"Weight":1
+		},
+		{
+			"ParentName":"Net FX gain/(loss)",
+			"ComponentName":"639101",
+			"Weight":1
+		},
+		{
+			"ParentName":"Net FX gain/(loss)",
+			"ComponentName":"639102",
+			"Weight":1
+		},
+		{
+			"ParentName":"Other general administrative",
+			"ComponentName":"Capitalised admin expenses",
+			"Weight":1
+		},
+		{
+			"ParentName":"Other general administrative",
+			"ComponentName":"Insurance",
+			"Weight":1
+		},
+		{
+			"ParentName":"Other general administrative",
+			"ComponentName":"Other admin expenses",
+			"Weight":1
+		},
+		{
+			"ParentName":"Other general administrative",
+			"ComponentName":"Shipping & pallets",
+			"Weight":1
+		},
+		{
+			"ParentName":"Capitalised admin expenses",
+			"ComponentName":"638028",
+			"Weight":1
+		},
+		{
+			"ParentName":"Insurance",
+			"ComponentName":"638030",
+			"Weight":1
+		},
+		{
+			"ParentName":"Insurance",
+			"ComponentName":"638031",
+			"Weight":1
+		},
+		{
+			"ParentName":"Insurance",
+			"ComponentName":"638032",
+			"Weight":1
+		},
+		{
+			"ParentName":"Insurance",
+			"ComponentName":"638033",
+			"Weight":1
+		},
+		{
+			"ParentName":"Other admin expenses",
+			"ComponentName":"601114",
+			"Weight":1
+		},
+		{
+			"ParentName":"Other admin expenses",
+			"ComponentName":"601117",
+			"Weight":1
+		},
+		{
+			"ParentName":"Other admin expenses",
+			"ComponentName":"630117",
+			"Weight":1
+		},
+		{
+			"ParentName":"Other admin expenses",
+			"ComponentName":"630118",
+			"Weight":1
+		},
+		{
+			"ParentName":"Other admin expenses",
+			"ComponentName":"632052",
+			"Weight":1
+		},
+		{
+			"ParentName":"Other admin expenses",
+			"ComponentName":"638011",
+			"Weight":1
+		},
+		{
+			"ParentName":"Other admin expenses",
+			"ComponentName":"638012",
+			"Weight":1
+		},
+		{
+			"ParentName":"Other admin expenses",
+			"ComponentName":"638013",
+			"Weight":1
+		},
+		{
+			"ParentName":"Other admin expenses",
+			"ComponentName":"638014",
+			"Weight":1
+		},
+		{
+			"ParentName":"Other admin expenses",
+			"ComponentName":"638015",
+			"Weight":1
+		},
+		{
+			"ParentName":"Other admin expenses",
+			"ComponentName":"638016",
+			"Weight":1
+		},
+		{
+			"ParentName":"Other admin expenses",
+			"ComponentName":"638018",
+			"Weight":1
+		},
+		{
+			"ParentName":"Other admin expenses",
+			"ComponentName":"638019",
+			"Weight":1
+		},
+		{
+			"ParentName":"Other admin expenses",
+			"ComponentName":"638020",
+			"Weight":1
+		},
+		{
+			"ParentName":"Other admin expenses",
+			"ComponentName":"638021",
+			"Weight":1
+		},
+		{
+			"ParentName":"Other admin expenses",
+			"ComponentName":"638022",
+			"Weight":1
+		},
+		{
+			"ParentName":"Other admin expenses",
+			"ComponentName":"638023",
+			"Weight":1
+		},
+		{
+			"ParentName":"Other admin expenses",
+			"ComponentName":"638026",
+			"Weight":1
+		},
+		{
+			"ParentName":"Other admin expenses",
+			"ComponentName":"638027",
+			"Weight":1
+		},
+		{
+			"ParentName":"Other admin expenses",
+			"ComponentName":"638029",
+			"Weight":1
+		},
+		{
+			"ParentName":"Other admin expenses",
+			"ComponentName":"638034",
+			"Weight":1
+		},
+		{
+			"ParentName":"Other admin expenses",
+			"ComponentName":"638035",
+			"Weight":1
+		},
+		{
+			"ParentName":"Other admin expenses",
+			"ComponentName":"638036",
+			"Weight":1
+		},
+		{
+			"ParentName":"Other admin expenses",
+			"ComponentName":"638037",
+			"Weight":1
+		},
+		{
+			"ParentName":"Other admin expenses",
+			"ComponentName":"639201",
+			"Weight":1
+		},
+		{
+			"ParentName":"Other admin expenses",
+			"ComponentName":"639202",
+			"Weight":1
+		},
+		{
+			"ParentName":"Other admin expenses",
+			"ComponentName":"640101",
+			"Weight":1
+		},
+		{
+			"ParentName":"Other admin expenses",
+			"ComponentName":"640102",
+			"Weight":1
+		},
+		{
+			"ParentName":"Other admin expenses",
+			"ComponentName":"640103",
+			"Weight":1
+		},
+		{
+			"ParentName":"Other admin expenses",
+			"ComponentName":"640104",
+			"Weight":1
+		},
+		{
+			"ParentName":"Other admin expenses",
+			"ComponentName":"640105",
+			"Weight":1
+		},
+		{
+			"ParentName":"Other admin expenses",
+			"ComponentName":"641001",
+			"Weight":1
+		},
+		{
+			"ParentName":"Shipping & pallets",
+			"ComponentName":"638024",
+			"Weight":1
+		},
+		{
+			"ParentName":"Shipping & pallets",
+			"ComponentName":"638025",
+			"Weight":1
+		},
+		{
+			"ParentName":"Premises, lease & utilities",
+			"ComponentName":"Capitalised occupancy costs",
+			"Weight":1
+		},
+		{
+			"ParentName":"Premises, lease & utilities",
+			"ComponentName":"Occupancy costs",
+			"Weight":1
+		},
+		{
+			"ParentName":"Capitalised occupancy costs",
+			"ComponentName":"633116",
+			"Weight":1
+		},
+		{
+			"ParentName":"Occupancy costs",
+			"ComponentName":"633001",
+			"Weight":1
+		},
+		{
+			"ParentName":"Occupancy costs",
+			"ComponentName":"633002",
+			"Weight":1
+		},
+		{
+			"ParentName":"Occupancy costs",
+			"ComponentName":"633003",
+			"Weight":1
+		},
+		{
+			"ParentName":"Occupancy costs",
+			"ComponentName":"633004",
+			"Weight":1
+		},
+		{
+			"ParentName":"Occupancy costs",
+			"ComponentName":"633101",
+			"Weight":1
+		},
+		{
+			"ParentName":"Occupancy costs",
+			"ComponentName":"633102",
+			"Weight":1
+		},
+		{
+			"ParentName":"Occupancy costs",
+			"ComponentName":"633103",
+			"Weight":1
+		},
+		{
+			"ParentName":"Occupancy costs",
+			"ComponentName":"633104",
+			"Weight":1
+		},
+		{
+			"ParentName":"Occupancy costs",
+			"ComponentName":"633105",
+			"Weight":1
+		},
+		{
+			"ParentName":"Occupancy costs",
+			"ComponentName":"633106",
+			"Weight":1
+		},
+		{
+			"ParentName":"Occupancy costs",
+			"ComponentName":"633107",
+			"Weight":1
+		},
+		{
+			"ParentName":"Occupancy costs",
+			"ComponentName":"633108",
+			"Weight":1
+		},
+		{
+			"ParentName":"Occupancy costs",
+			"ComponentName":"633109",
+			"Weight":1
+		},
+		{
+			"ParentName":"Occupancy costs",
+			"ComponentName":"633110",
+			"Weight":1
+		},
+		{
+			"ParentName":"Occupancy costs",
+			"ComponentName":"633111",
+			"Weight":1
+		},
+		{
+			"ParentName":"Occupancy costs",
+			"ComponentName":"633112",
+			"Weight":1
+		},
+		{
+			"ParentName":"Occupancy costs",
+			"ComponentName":"633113",
+			"Weight":1
+		},
+		{
+			"ParentName":"Occupancy costs",
+			"ComponentName":"633114",
+			"Weight":1
+		},
+		{
+			"ParentName":"Occupancy costs",
+			"ComponentName":"633115",
+			"Weight":1
+		},
+		{
+			"ParentName":"Occupancy costs",
+			"ComponentName":"633201",
+			"Weight":1
+		},
+		{
+			"ParentName":"Product development expenses",
+			"ComponentName":"Capitalised product development",
+			"Weight":1
+		},
+		{
+			"ParentName":"Product development expenses",
+			"ComponentName":"Product development",
+			"Weight":1
+		},
+		{
+			"ParentName":"Capitalised product development",
+			"ComponentName":"600662",
+			"Weight":1
+		},
+		{
+			"ParentName":"Capitalised product development",
+			"ComponentName":"601124",
+			"Weight":1
+		},
+		{
+			"ParentName":"Product development",
+			"ComponentName":"600661",
+			"Weight":1
+		},
+		{
+			"ParentName":"Product development",
+			"ComponentName":"601111",
+			"Weight":1
+		},
+		{
+			"ParentName":"Product development",
+			"ComponentName":"601112",
+			"Weight":1
+		},
+		{
+			"ParentName":"Product development",
+			"ComponentName":"601113",
+			"Weight":1
+		},
+		{
+			"ParentName":"Product development",
+			"ComponentName":"601115",
+			"Weight":1
+		},
+		{
+			"ParentName":"Product development",
+			"ComponentName":"601116",
+			"Weight":1
+		},
+		{
+			"ParentName":"Product development",
+			"ComponentName":"601118",
+			"Weight":1
+		},
+		{
+			"ParentName":"Product development",
+			"ComponentName":"601119",
+			"Weight":1
+		},
+		{
+			"ParentName":"Product development",
+			"ComponentName":"601120",
+			"Weight":1
+		},
+		{
+			"ParentName":"Product development",
+			"ComponentName":"601121",
+			"Weight":1
+		},
+		{
+			"ParentName":"Product development",
+			"ComponentName":"601122",
+			"Weight":1
+		},
+		{
+			"ParentName":"Product development",
+			"ComponentName":"601123",
+			"Weight":1
+		},
+		{
+			"ParentName":"Product development",
+			"ComponentName":"601125",
+			"Weight":1
+		},
+		{
+			"ParentName":"Product development",
+			"ComponentName":"601126",
+			"Weight":1
+		},
+		{
+			"ParentName":"Professional fees",
+			"ComponentName":"Accounting, audit & tax fees",
+			"Weight":1
+		},
+		{
+			"ParentName":"Professional fees",
+			"ComponentName":"Capitalised consulting fees",
+			"Weight":1
+		},
+		{
+			"ParentName":"Professional fees",
+			"ComponentName":"Consulting fees",
+			"Weight":1
+		},
+		{
+			"ParentName":"Professional fees",
+			"ComponentName":"Legal fees",
+			"Weight":1
+		},
+		{
+			"ParentName":"Accounting, audit & tax fees",
+			"ComponentName":"635001",
+			"Weight":1
+		},
+		{
+			"ParentName":"Accounting, audit & tax fees",
+			"ComponentName":"635002",
+			"Weight":1
+		},
+		{
+			"ParentName":"Accounting, audit & tax fees",
+			"ComponentName":"635003",
+			"Weight":1
+		},
+		{
+			"ParentName":"Accounting, audit & tax fees",
+			"ComponentName":"635004",
+			"Weight":1
+		},
+		{
+			"ParentName":"Accounting, audit & tax fees",
+			"ComponentName":"635005",
+			"Weight":1
+		},
+		{
+			"ParentName":"Accounting, audit & tax fees",
+			"ComponentName":"635006",
+			"Weight":1
+		},
+		{
+			"ParentName":"Accounting, audit & tax fees",
+			"ComponentName":"635007",
+			"Weight":1
+		},
+		{
+			"ParentName":"Accounting, audit & tax fees",
+			"ComponentName":"635023",
+			"Weight":1
+		},
+		{
+			"ParentName":"Accounting, audit & tax fees",
+			"ComponentName":"635025",
+			"Weight":1
+		},
+		{
+			"ParentName":"Accounting, audit & tax fees",
+			"ComponentName":"635026",
+			"Weight":1
+		},
+		{
+			"ParentName":"Accounting, audit & tax fees",
+			"ComponentName":"635027",
+			"Weight":1
+		},
+		{
+			"ParentName":"Accounting, audit & tax fees",
+			"ComponentName":"635028",
+			"Weight":1
+		},
+		{
+			"ParentName":"Accounting, audit & tax fees",
+			"ComponentName":"635030",
+			"Weight":1
+		},
+		{
+			"ParentName":"Accounting, audit & tax fees",
+			"ComponentName":"635031",
+			"Weight":1
+		},
+		{
+			"ParentName":"Accounting, audit & tax fees",
+			"ComponentName":"635035",
+			"Weight":1
+		},
+		{
+			"ParentName":"Capitalised consulting fees",
+			"ComponentName":"635153",
+			"Weight":1
+		},
+		{
+			"ParentName":"Consulting fees",
+			"ComponentName":"635151",
+			"Weight":1
+		},
+		{
+			"ParentName":"Consulting fees",
+			"ComponentName":"635152",
+			"Weight":1
+		},
+		{
+			"ParentName":"Legal fees",
+			"ComponentName":"635008",
+			"Weight":1
+		},
+		{
+			"ParentName":"Legal fees",
+			"ComponentName":"635009",
+			"Weight":1
+		},
+		{
+			"ParentName":"Legal fees",
+			"ComponentName":"635010",
+			"Weight":1
+		},
+		{
+			"ParentName":"Legal fees",
+			"ComponentName":"635011",
+			"Weight":1
+		},
+		{
+			"ParentName":"Legal fees",
+			"ComponentName":"635012",
+			"Weight":1
+		},
+		{
+			"ParentName":"Legal fees",
+			"ComponentName":"635013",
+			"Weight":1
+		},
+		{
+			"ParentName":"Legal fees",
+			"ComponentName":"635014",
+			"Weight":1
+		},
+		{
+			"ParentName":"Legal fees",
+			"ComponentName":"635015",
+			"Weight":1
+		},
+		{
+			"ParentName":"Legal fees",
+			"ComponentName":"635016",
+			"Weight":1
+		},
+		{
+			"ParentName":"Legal fees",
+			"ComponentName":"635017",
+			"Weight":1
+		},
+		{
+			"ParentName":"Legal fees",
+			"ComponentName":"635018",
+			"Weight":1
+		},
+		{
+			"ParentName":"Legal fees",
+			"ComponentName":"635019",
+			"Weight":1
+		},
+		{
+			"ParentName":"Legal fees",
+			"ComponentName":"635020",
+			"Weight":1
+		},
+		{
+			"ParentName":"Legal fees",
+			"ComponentName":"635021",
+			"Weight":1
+		},
+		{
+			"ParentName":"Legal fees",
+			"ComponentName":"635022",
+			"Weight":1
+		},
+		{
+			"ParentName":"Telecommunications",
+			"ComponentName":"636001",
+			"Weight":1
+		},
+		{
+			"ParentName":"Telecommunications",
+			"ComponentName":"636002",
+			"Weight":1
+		},
+		{
+			"ParentName":"Telecommunications",
+			"ComponentName":"636003",
+			"Weight":1
+		},
+		{
+			"ParentName":"Telecommunications",
+			"ComponentName":"636004",
+			"Weight":1
+		},
+		{
+			"ParentName":"Net interest income/(expense)",
+			"ComponentName":"720101",
+			"Weight":1
+		},
+		{
+			"ParentName":"Net interest income/(expense)",
+			"ComponentName":"720102",
+			"Weight":1
+		},
+		{
+			"ParentName":"Net interest income/(expense)",
+			"ComponentName":"720103",
+			"Weight":1
+		},
+		{
+			"ParentName":"Net interest income/(expense)",
+			"ComponentName":"720104",
+			"Weight":1
+		},
+		{
+			"ParentName":"Net interest income/(expense)",
+			"ComponentName":"720105",
+			"Weight":1
+		},
+		{
+			"ParentName":"Net interest income/(expense)",
+			"ComponentName":"720106",
+			"Weight":1
+		},
+		{
+			"ParentName":"Net interest income/(expense)",
+			"ComponentName":"720110",
+			"Weight":1
+		},
+		{
+			"ParentName":"Net interest income/(expense)",
+			"ComponentName":"740101",
+			"Weight":1
+		},
+		{
+			"ParentName":"Net interest income/(expense)",
+			"ComponentName":"740102",
+			"Weight":1
+		},
+		{
+			"ParentName":"Other finance expenses",
+			"ComponentName":"730101",
+			"Weight":1
+		},
+		{
+			"ParentName":"Other finance expenses",
+			"ComponentName":"730102",
+			"Weight":1
+		},
+		{
+			"ParentName":"Other finance expenses",
+			"ComponentName":"730103",
+			"Weight":1
+		},
+		{
+			"ParentName":"Tax expense",
+			"ComponentName":"760101",
+			"Weight":1
+		},
+		{
+			"ParentName":"Tax expense",
+			"ComponentName":"760102",
+			"Weight":1
+		},
+		{
+			"ParentName":"Tax expense",
+			"ComponentName":"760103",
+			"Weight":1
+		}
+	],
+	"Subsets@Code.links":
+	[
+		"Management Reporting.subsets/All Overheads.json",
+		"Management Reporting.subsets/App.MarketingCorporate.json",
+		"Management Reporting.subsets/App.MarketingRegional.json",
+		"Management Reporting.subsets/App.MgmtReporting.json",
+		"Management Reporting.subsets/App.PlanningAccounts.json",
+		"Management Reporting.subsets/App.PlanningRegions.json",
+		"Management Reporting.subsets/Default.json"
+	]
+}

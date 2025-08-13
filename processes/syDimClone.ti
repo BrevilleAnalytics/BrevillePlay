@@ -1,0 +1,124 @@
+#region Prolog
+#****Begin: Generated Statements***
+#****End: Generated Statements****
+
+#~~~~~~~~~ Process Description ~~~~~~~~~~~~~~~~
+# Description: Clone the hierarchy of source dimesnion to a target
+# Modification History
+
+# parameters
+
+# constant
+sDimName_Src = psDimName_Src;
+sDimName_Tgt = psDimName_Tgt;
+sHierName_Src = psHierName_Src;
+sHierName_Tgt = psHierName_Tgt;
+
+# General
+# General Constants
+sProcess = GetProcessName();
+sTimestamp = TimSt( Now, '\Y\m\d\h\i\s' );
+sRandomInt = NumberToString( INT( RAND( ) * 1000 ));
+s_UniqueName  =  sProcess |'.'| sTimestamp | '.' | sRandomInt;
+sSub_Src = '}System.Src.' | s_UniqueName ;
+sSub_Tgt= '}System.Tgt.' | s_UniqueName ;
+
+# Process Variables
+nDataCount = 0;
+
+If(psSubset_Src @= '');
+	sMDX = '{TM1SUBSETALL( [' | sDimName_Src | '].[' | sHierName_Src | ']  )}' ;
+Else;
+	sMDX = psSubset_Src;
+Endif;
+HierarchySubsetCreate(sDimName_Src, sHierName_Src, sSub_Src, 1);
+#HierarchySubsetMDXSet(sDimName_Src, sHierName_Src, sSub_Src, sMDX);
+
+DataSourceType = 'SUBSET';
+DataSourceNameForServer = sDimName_Src |':'|sHierName_Src;
+DatasourceDimensionSubset = sSub_Src;
+
+#-- Create a target dimesnion
+If(DimensionExists( sDimName_Tgt) = 0);
+	DimensionCreate(sDimName_Tgt);
+Endif;
+
+#-- Create a target dimesnion hieararchy
+If(HierarchyExists(sDimName_Tgt, sHierName_Tgt) = 0);
+	   HierarchyCreate(sDimName_Tgt, sHierName_Tgt);
+Else;
+  # Unwind the existing hierarchy
+  vni =1;
+  vnDimCount = DIMSIZ(sDimName_Tgt | ':' | sHierName_Tgt);
+  While(vni<=vnDimCount);
+
+    If( ( ElementComponentCount( sDimName_Tgt, sHierName_Tgt, DIMNM( sDimName_Tgt | ':' | sHierName_Tgt, vni)) > 0) );
+      vsElementName =DIMNM( sDimName_Tgt | ':' | sHierName_Tgt, vni);
+      vnChildCount = ElementComponentCount( sDimName_Tgt, sHierName_Tgt, vsElementName);
+
+      While( vnChildCount > 0);
+        vsChildElement = ElementComponent( sDimName_Tgt, sHierName_Tgt, vsElementName, vnChildCount);
+        HierarchyElementComponentDelete( sDimName_Tgt, sHierName_Tgt, vsElementName, vsChildElement);
+        vnChildCount = vnChildCount - 1;
+      End;
+
+    Else;
+      vni = vni+1;
+
+    EndIf;
+  End;
+
+Endif;
+
+#-- tmp Add Caption Alias!
+#-- could be moved to a parameter?
+If(psAlias @<> '');
+	ElementAttrInsert(sDimName_Tgt, sHierName_Tgt, '', psAlias, 'A');
+Endif;
+#endregion
+#region Metadata
+#****Begin: Generated Statements***
+#****End: Generated Statements****
+
+sElName = DimensionElementPrincipalName( sDimName_Src|':'|sHierName_Src, vElName );
+
+nNumOfElComponents = ElementComponentCount(sDimName_Src, sHierName_Src, sElName);
+
+#-- Insert a parent element
+If(ElementIndex(sDimName_Tgt, sHierName_Tgt, sElName) = 0);
+	HierarchyElementInsert ( sDimName_Tgt, sHierName_Tgt, '', sElName, 'N');
+Endif;
+
+#-- Loop through all children
+WHILE (nNumOfElComponents>0);
+
+  sChildElName = ElementComponent( sDimName_Src, sHierName_Src, sElName, nNumOfElComponents );
+  
+#-- Add a child element  
+ 	If(ElementIndex(sDimName_Tgt, sHierName_Tgt, sChildElName)= 0);
+		HierarchyElementInsert ( sDimName_Tgt, sHierName_Tgt,  '', sChildElName, 'N');
+	Endif;
+#-- Add a dependency 
+	nChildElNameWeight =  ElementWeight(sDimName_Src, sHierName_Src, sElName, sChildElName);
+	
+     
+    HierarchyElementComponentAdd ( sDimName_Tgt, sHierName_Tgt, sElName, sChildElName, nChildElNameWeight );
+
+	nNumOfElComponents = nNumOfElComponents - 1;
+  
+END;
+#endregion
+#region Data
+#****Begin: Generated Statements***
+#****End: Generated Statements****
+
+#-- Update Caption attribute
+If(psAlias @<> '');
+  sCaption = ElementATTRSL(sDimName_Src, sHierName_Src, vElName, psAlias);
+  ElementAttrPutS(sCaption, sDimName_Tgt, sHierName_Tgt, vElName, psAlias);
+Endif;
+#endregion
+#region Epilog
+#****Begin: Generated Statements***
+#****End: Generated Statements****
+#endregion

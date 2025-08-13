@@ -1,0 +1,24 @@
+{
+	"@type":"Hierarchy",
+	"Name":"EmployeeType",
+	"Elements":
+	[
+		{
+			"Name":"3rd Party Contractor",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"FT Employee",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"PT Employee",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"Payroll Contractor",
+			"Type":"Numeric"
+		}
+	],
+	"Subsets@Code.links":[]
+}

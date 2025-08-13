@@ -1,0 +1,52 @@
+{
+	"@type":"Process",
+	"Name":"CPM Dim Business Unit Update from DL inc Clone",
+	"HasSecurityAccess":false,
+	"Code@Code.link":"CPM Dim Business Unit Update from DL inc Clone.ti",
+	"UIData":"_ParameterConstraints=e30=€",
+	"VariablesUIData":
+	[
+		"VarType=32€ColType=827€"
+	],
+	"DataSource":
+	{
+		"Type":"ODBC",
+		"dataSourceNameForClient":"prd-aea-asyn-abi-fpa-ibm",
+		"dataSourceNameForServer":"prd-aea-asyn-abi-fpa-ibm",
+		"password":"m^yL:^`7gBPX9nE1WaRfOX@i6aiSokjYI0gZXOx]5ATc9WRIgAX5;LQsI6iHo=s0h=@F4E3olH>8]m1vL4k^bRw1nYsWn<Wi8;vM?4TXOi]Bp]/4AhTChs5bk607Yp2msY_gDtIjKdOWE=>F@3O8:RJ[MDco4]1aRo;0nA1:f^r4A02uq>brXZ8o2p[nj!SZpbus``Ci",
+		"query":"SET NOCOUNT ON; \r\n  SELECT distinct businessUnit\r\n  FROM [dbo].[Actual_Expenses]\r\n  UNION\r\n  SELECT \r\n      distinct [BusinessUnit]\r\n  FROM [dbo].[ActualCM]",
+		"userName":"sql_fpa_ibm_prd_readonly",
+		"usesUnicode":true
+	},
+	"Parameters":
+	[
+		{
+			"Name":"psProcessReference",
+			"Prompt":"",
+			"Value":"",
+			"Type":"String"
+		},
+		{
+			"Name":"pssyProcessLog",
+			"Prompt":"To enable or disable Process Log - Y/N",
+			"Value":"",
+			"Type":"String"
+		},
+		{
+			"Name":"psTITracker",
+			"Prompt":"To enable or disable syTI Tracker - Y/N",
+			"Value":"",
+			"Type":"String"
+		}
+	],
+	"Variables":
+	[
+		{
+			"Name":"vBU",
+			"Type":"String",
+			"Position":1,
+			"StartByte":0,
+			"EndByte":0
+		}
+	]
+}

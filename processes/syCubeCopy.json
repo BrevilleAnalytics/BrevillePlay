@@ -1,0 +1,39 @@
+{
+	"@type":"Process",
+	"Name":"syCubeCopy",
+	"HasSecurityAccess":false,
+	"Code@Code.link":"syCubeCopy.ti",
+	"UIData":"_ParameterConstraints=e30=€",
+	"DataSource":
+	{
+		"Type":"None"
+	},
+	"Parameters":
+	[
+		{
+			"Name":"psTemplate",
+			"Prompt":"What parameter template to use?",
+			"Value":"Manual Snapshot",
+			"Type":"String"
+		},
+		{
+			"Name":"psProcessNameForLogging",
+			"Prompt":"Append to log file for this process",
+			"Value":"",
+			"Type":"String"
+		},
+		{
+			"Name":"psServer",
+			"Prompt":"ServerName for control parameters",
+			"Value":"Breville",
+			"Type":"String"
+		},
+		{
+			"Name":"psRemoveCopyFlag",
+			"Prompt":"Remove copy flag",
+			"Value":"No",
+			"Type":"String"
+		}
+	],
+	"Variables":[]
+}

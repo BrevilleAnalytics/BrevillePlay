@@ -1,0 +1,19 @@
+{
+	"@type":"Subset",
+	"Name":"TempPnLLocalCurrency",
+	"Elements":
+	[
+		{
+			"@id":"Dimensions('OPXComponent')/Hierarchies('OPXComponent')/Elements('CM')"
+		},
+		{
+			"@id":"Dimensions('OPXComponent')/Hierarchies('OPXComponent')/Elements('OPEX')"
+		},
+		{
+			"@id":"Dimensions('OPXComponent')/Hierarchies('OPXComponent')/Elements('WFP')"
+		},
+		{
+			"@id":"Dimensions('OPXComponent')/Hierarchies('OPXComponent')/Elements('OPEX ADJ')"
+		}
+	]
+}

@@ -1,0 +1,14 @@
+{
+	"@type":"Cube",
+	"Name":"CF Mapping",
+	"Dimensions":
+	[
+		{
+			"@id":"Dimensions('CFCashFlowMeasure')"
+		},
+		{
+			"@id":"Dimensions('CF Mapping Measure')"
+		}
+	],
+	"Views@Code.links":[]
+}

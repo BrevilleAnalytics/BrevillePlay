@@ -1,0 +1,34 @@
+{
+	"@type":"Cube",
+	"Name":"BRExchangeRate",
+	"Rules@Code.link":"BRExchangeRate.rules",
+	"Dimensions":
+	[
+		{
+			"@id":"Dimensions('BusinessUnit')"
+		},
+		{
+			"@id":"Dimensions('FiscalMonth')"
+		},
+		{
+			"@id":"Dimensions('Currency')"
+		},
+		{
+			"@id":"Dimensions('Version')"
+		},
+		{
+			"@id":"Dimensions('BRExchangeRateMeasure')"
+		}
+	],
+	"Views@Code.links":
+	[
+		"BRExchangeRate.views/TempCrossFXData.json",
+		"BRExchangeRate.views/TempCrossFXDataOut.json",
+		"BRExchangeRate.views/TempExchangeRates.json",
+		"BRExchangeRate.views/TempFXRate.json",
+		"BRExchangeRate.views/App.OutlookDataEntry.json",
+		"BRExchangeRate.views/Cross Rate Test.json",
+		"BRExchangeRate.views/DECurrencyFY23NewBud.json",
+		"BRExchangeRate.views/Default.json"
+	]
+}

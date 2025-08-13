@@ -1,0 +1,1529 @@
+{
+	"@type":"Hierarchy",
+	"Name":"BSBalanceSheetMeasure",
+	"Elements":
+	[
+		{
+			"Name":"Current assets",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"Cash and cash equivalents",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"Trade & other receivables",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"Inventories",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"Other financial assets",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"Current tax assets",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"Other assets",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"Total current assets",
+			"Type":"Consolidated"
+		},
+		{
+			"Name":"Non current assets",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"Plant & equipment",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"Right-of-use asset",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"Deferred tax assets",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"Investments in controlled entities",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"Intangible assets - other",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"Intangible assets - good will",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"Total non-current assets",
+			"Type":"Consolidated"
+		},
+		{
+			"Name":"Total assets",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"Current Liabilities",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"Trade & other payables",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"Borrowings",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"Lease liabilities",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"Current tax liabilities",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"Provisions",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"Other financial liabilities",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"Total current liabilities",
+			"Type":"Consolidated"
+		},
+		{
+			"Name":"Non current liabilities",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"Other payables",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"Deferred  tax liability",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"Total non current liabilities",
+			"Type":"Consolidated"
+		},
+		{
+			"Name":"Intercompany accounts",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"Net assets",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"Equity",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"Issued capital",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"Reserves",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"Retained earnings",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"Total equity",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"Balance Sheet Reporting Categories",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"Cash on hand",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"Petty cash",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"Cash on hand not in bank",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"Cash at bank",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"Cash at bank - AUD 1",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"Cash at bank - AUD 2",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"Cash at bank - AUD 3",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"Cash at bank - AUD 4",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"Cash at bank - AUD 5",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"ANZ  Bank Ltd - USD a/c (Breville)",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"Cash at bank - USD 2",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"Cash at bank - USD 3",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"Cash at bank - USD 4",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"Cash at bank - USD 5",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"Cash at bank – USD 6",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"Cash at bank – USD 7",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"Cash at bank - EUR",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"Cash at bank - PLN",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"Cash at bank - GBP",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"Cash at bank - CHF",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"Cash at bank - CAD",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"Cash at bank - NZD",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"Cash at bank - HKD 1",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"Cash at bank - HKD 2",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"Cash at bank - DKK",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"Cash at bank - SEK",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"Cash at bank - NOK",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"Cash at bank - CNY",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"Cash at bank – CZK",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"Cash at bank – MXN",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"Cash at bank – KRW 1",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"Cash at bank - Dividend (AUD)",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"Cash at bank - KRW 2",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"Term/cash deposit",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"Term/cash deposit - global facility",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"Term/cash deposit - local bank",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"Trade receivables",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"Trade receivables - local currency",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"Trade receivables - foreign currency",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"Draft for collection",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"Goods picked not invoiced",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"Allowance for customer settlement discounts",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"Allowance for uncollectible receivables",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"Other receivables",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"Sundry receivables",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"Royalty receivables",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"GST/VAT/QST receivable",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"GST/VAT/HST/QST receivable",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"VAT receivable - Germany",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"Finished goods (at lower cost)",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"Inventory - finished goods",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"Inventory - spare parts",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"Inventory - refurbished/remanufactured",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"Inventory - Marketing Items",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"Inventory - raw materials",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"Inventory adjustment - To be refurbished",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"Inventory adjustment - hedging",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"Inventory adjustmship cost agent fee - variance",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"Inventory transfers between sites",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"Sea Freight-variance",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"local freight - variance",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"Destuffing variance",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"Inventory adjustment - foreign exchange unrealised",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"inventory adjustment - foreign exchange realised",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"Inventory adjustment - elimination of profit in stock",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"Inventory adjustment - consolidation warehouse",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"Inventory adjustment - local cartage",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"Inventory picked not invoiced",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"Allowance for net realisable value",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"Allowance for net realisable value - finished goods",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"Allowance for net realisable value - spare parts",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"Allowance for net realisable value - refurbished/remanuf",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"Allowance for net realisable value - unprocessed returns",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"Goods in transit (at cost)",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"Goods in transit - finished goods",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"Goods in transit - spare parts",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"Goods in transit - refurbished/remanufactured",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"Goods in transit - Marketing Items",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"Goods in transit - accrual",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"Forward exchange contracts",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"Forward exchange contracts (derivative asset)",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"Forward exchange contracts (derivative liability)",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"Promissory Note Current",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"Promissory Note",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"Withholding tax receivable",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"Other prepayments",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"Prepayments",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"Advances/prepayments to suppliers",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"Advances/prepayments to employees",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"Security deposits",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"Plant and equipment, at cost",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"Plant & equipment - cost",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"Leasehold improvements - cost",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"Office, furniture & fittings - cost",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"Computers, IT & telecommunications - cost",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"Motor vehicles - cost",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"Warehouse equipment & racking - cost",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"Engineering equipment - cost",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"Trade show equipment - cost",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"Tooling - cost",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"Land & buildings - cost",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"Production machinery & equipment - cost",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"Plant & equipment (work in progress)",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"Fixed assets clearing account",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"Tooling clearing account (Non-Cap Projects)",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"Accumulated depreciation & impairment",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"Leasehold improvements - AccDepn",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"Office, furniture & fittings - AccDepn",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"Computers, IT & telecommunications - AccDepn",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"Motor vehicles - AccDepn",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"Warehouse equipment & racking - AccDepn",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"Engineering equipment - AccDepn",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"Trade show equipment - AccDepn",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"Tooling - AccDepn",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"Land & buildings - AccDepn",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"Production machinery & equipment - AccDepn",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"Development costs (gross carrying amount)",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"Development costs (FAR)",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"Development costs (WIP - projects module)",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"Content development costs",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"IOT development costs",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"Project WIP clearing",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"Development costs (accum amort & impairment)",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"Content development costs -AccAmort",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"IOT development costs - AccAmort",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"Development costs (net carrying amount)",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"Computer software (gross carrying amount)",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"Capitalised other computer software - cost",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"Capitalised ERP project - cost",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"Capitalised e-commerce/website - cost",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"Computer network software - cost",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"ERP software cost",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"ERP software WIP",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"Computer software (accum amort & impairment)",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"Capitalised other computer software - AccAmort",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"Capitalised ERP project - AccAmort",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"Capitalised e-commerce/website - AccAmort",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"Computer network software - AccAmort",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"ERPsoftware cost-AccAmort",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"Computer software (net carrying amount)",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"Brand names (gross carrying amount)",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"Brand names (accum amort & impairment)",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"Brand names (net carrying amount)",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"Other intangible assets (gross carrying amount)",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"Other intangible assets (accum amort & impairment)",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"Other intangible assets (net carrying amount)",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"Goodwill (gross carrying amount)",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"Goodwill (accum amort and impairment)",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"Investment in controlled entities",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"Investments - other",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"Promissory Note Non Current",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"Long term foward exchange contracts",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"Trade payables",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"Trade payables - local currency",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"Trade payables - foreign currency",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"Trade payables - unprocessed invoice",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"Trade payables - recharges to third party brands",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"Trade payables - GRNI",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"Trade payables GRNI - vendor purchase",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"Trade payables GRNI - container / shipoing costs / agent",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"Trade payables GRNI - duty",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"Trade payables GRNI - overseas charges",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"Trade payables GRNI - local charges",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"Trade payables GRNI - destuffing/receiving",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"Trade payables GRNI - consolidation warehouse",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"Trade payables GRNI - local cartage",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"Purchase expenditure, un-invoiced stock",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"Purchase expenditure, un-invoiced non-stock",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"Purchase expenditure for product",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"Other accruals",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"Accruals - general",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"Accrued professional fees - accounting, tax & advisory",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"Accrued professional fees - legal",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"Accrued third party logistics (invoices not received)",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"Accrued third party refurb/remanuf (invoices not received)",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"Accrued freight (outbound shipments - invoices not received)",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"Accrued commissions (including external sales reps)",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"Accrued payroll",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"Employee taxes withheld - payable to tax authorities",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"FBT payable",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"Workers compensation payable",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"Other payroll related taxes",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"Clearing account - company credit cards",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"Credit note accrual",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"Overseas tooling creditors account",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"Extended warranty payable",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"AX system rounding, clearing & error account",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"Temporary receipts",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"Accrued customer rebates & co-op",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"Accrued customer rebates & allowances",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"Accrued consumer cash back and other promotions",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"Accrued customer co-op advertising",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"Accrued customer rebates - Coffee",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"Accrued marketing",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"Accrued marketing - general /accrued advertising",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"Accrued marketing - affiliate fees payable",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"Accrued marketing - ambassadorial fees payable",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"Accrued interest liability",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"Accrued short-term incentives (bonuses)",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"Deferred rent liability (current)",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"Deferred subscription revenue",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"Payroll clearing accounts (child support, union dues)",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"Clearing account - child support",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"Clearing account - garnishments",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"Clearing account - union dues",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"Clearing account - other",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"G.S.T. / V.A.T. payables",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"GST/VAT/HST payables",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"Provincial tax - PEI - CAN",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"Provincial tax - Manitoba - CAN",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"Provincial tax - Saskatchewan - CAN",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"Provincial tax - British Columbia - CAN",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"Sales tax payable",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"GST/VAT/HST/QST Settlement",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"Other taxes",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"VAT Settlement - PT",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"VAT Settlement - FR",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"VAT Settlement - IE",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"VAT Settlement - AT",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"VAT Settlement - CHE",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"VAT Settlement - BE",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"VAT Settlement - LU",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"VAT Settlement - ES",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"VAT Settlement - IT",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"VAT Settlement - NL",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"VAT Settlement - DK",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"VAT Payable - DE",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"VAT Payable - PT",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"VAT Payable - FR",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"VAT Settlement - DE",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"VAT Settlement - CZ",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"VAT Payable - ES",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"VAT Payable - CZ",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"VAT Payable - AT",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"VAT Payable - CH",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"VAT Payable - BE",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"VAT Payable - IT",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"VAT Payable - NL",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"VAT Payable - LU",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"VAT Payable - SE",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"VAT Payable - FI",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"Q.S.T. payable – CAN",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"VAT Payable - IE",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"Employee benefits",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"Employee benefits - annual leave",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"Post-employ benefits - defined contribution plan",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"Bank overdraft",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"Bank Overdraft - AUD",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"Bank Overdraft - USD",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"Bank Overdraft - EUR",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"Bank Overdraft - GBP",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"Bank Overdraft - CHF",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"Bank Overdraft - CAD",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"Bank Overdraft - NZD",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"Bank Overdraft - HKD",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"Bank Overdraft - CYN",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"Bank overdrafts - Dividend (AUD)",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"Cash advance facilities (current)",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"Other bank loans (current)",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"Term loan (current)",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"Lease liabilities (current)",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"Withholding tax payable",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"Provision for warranty",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"Employee benefits - long service (current)",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"Onerous lease contracts (current)",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"Provision for make-good (current)",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"Provision for restructuring (current)",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"Total other payables (non-current)",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"Other payables (non-current)",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"Total deferred rent liability (non-current)",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"Deferred rent liability (non-current)",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"Cash advance facilities (non-current)",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"Other bank loans (non-current)",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"Term loan (non-current)",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"Lease liabilities (non-current)",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"Deferred tax liabilities",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"Employee benefits - long service (non-current)",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"Onerous lease contracts (non-current)",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"Provision for make-good (non-current)",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"Provision for restructuring (non-current)",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"Employees leaving entitlement (non current)",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"Inter-company receivables (current)",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"Inter-company loans receivable (long-term)",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"Inter-company payables",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"Inter-company payables (current)",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"Inter-company procurement fee payable (GIT clearing)",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"Inter-company baseline license payable (GIT clearing)",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"Intercompany wms handling payable",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"Intercompany Balancing",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"Intercompany centralised payments",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"Inter-company loans payable (long-term)",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"Intercompany",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"BRG ordinary shares - issued",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"BRG ordinary shares - BRG Performance Shares Plan Trust",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"Subsidiary - ordinary shares",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"Subsidiary - preference shares",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"Partnership - contributions from partner",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"Contribution from parent",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"Foreign currency translation reserve",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"Foreign exchange difference - consolidation",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"Foreign currency translation reserve (inter-company)",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"Employee equity benefits reserve",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"Performance rights equity",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"Cash flow hedge reserve",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"Other reserves",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"Asset revaluation reserve",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"Capital profit reserve",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"Other reserves - Contribution reserve",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"Retained earnings at beginning of year",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"Current year earnings",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"Dividends paid",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"Dividends paid (inter-company)",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"Dividend paid - Current Year",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"Other retained earnings movements",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"Total liabilities",
+			"Type":"Numeric"
+		}
+	],
+	"Edges":
+	[
+		{
+			"ParentName":"Total current assets",
+			"ComponentName":"Cash and cash equivalents",
+			"Weight":1
+		},
+		{
+			"ParentName":"Total current assets",
+			"ComponentName":"Trade & other receivables",
+			"Weight":1
+		},
+		{
+			"ParentName":"Total current assets",
+			"ComponentName":"Inventories",
+			"Weight":1
+		},
+		{
+			"ParentName":"Total current assets",
+			"ComponentName":"Other financial assets",
+			"Weight":1
+		},
+		{
+			"ParentName":"Total current assets",
+			"ComponentName":"Current tax assets",
+			"Weight":1
+		},
+		{
+			"ParentName":"Total current assets",
+			"ComponentName":"Other assets",
+			"Weight":1
+		},
+		{
+			"ParentName":"Total non-current assets",
+			"ComponentName":"Plant & equipment",
+			"Weight":1
+		},
+		{
+			"ParentName":"Total non-current assets",
+			"ComponentName":"Right-of-use asset",
+			"Weight":1
+		},
+		{
+			"ParentName":"Total non-current assets",
+			"ComponentName":"Deferred tax assets",
+			"Weight":1
+		},
+		{
+			"ParentName":"Total non-current assets",
+			"ComponentName":"Investments in controlled entities",
+			"Weight":1
+		},
+		{
+			"ParentName":"Total non-current assets",
+			"ComponentName":"Intangible assets - other",
+			"Weight":1
+		},
+		{
+			"ParentName":"Total non-current assets",
+			"ComponentName":"Intangible assets - good will",
+			"Weight":1
+		},
+		{
+			"ParentName":"Total current liabilities",
+			"ComponentName":"Trade & other payables",
+			"Weight":1
+		},
+		{
+			"ParentName":"Total current liabilities",
+			"ComponentName":"Borrowings",
+			"Weight":1
+		},
+		{
+			"ParentName":"Total current liabilities",
+			"ComponentName":"Lease liabilities",
+			"Weight":1
+		},
+		{
+			"ParentName":"Total current liabilities",
+			"ComponentName":"Current tax liabilities",
+			"Weight":1
+		},
+		{
+			"ParentName":"Total current liabilities",
+			"ComponentName":"Provisions",
+			"Weight":1
+		},
+		{
+			"ParentName":"Total current liabilities",
+			"ComponentName":"Other financial liabilities",
+			"Weight":1
+		},
+		{
+			"ParentName":"Total current liabilities",
+			"ComponentName":"Total non current liabilities",
+			"Weight":1
+		},
+		{
+			"ParentName":"Total current liabilities",
+			"ComponentName":"Total liabilities",
+			"Weight":1
+		},
+		{
+			"ParentName":"Total non current liabilities",
+			"ComponentName":"Other payables",
+			"Weight":1
+		},
+		{
+			"ParentName":"Total non current liabilities",
+			"ComponentName":"Deferred  tax liability",
+			"Weight":1
+		}
+	],
+	"Subsets@Code.links":[]
+}

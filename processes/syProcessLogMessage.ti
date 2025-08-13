@@ -1,0 +1,48 @@
+#region Prolog
+#****Begin: Generated Statements***
+#****End: Generated Statements****
+
+
+### Record log message on processName
+logCubeName = 'syProcessLog';
+DimName = 'syProcessLog';
+logsUserName = 'syProcessLog';
+
+
+# Need to detect next message by looping through the existing ones
+i = 1;
+messagenumber = 1;
+
+while ( i < dimSiz('syProcessLogLineItem'));
+	IF (CELLGETS(logCubeName,logsUserName,psProcessname,NumberToString(i),'DateTime') @= '');
+		messagenumber = i;
+		i = dimSiz('syProcessLogLineItem');
+	ENDIF;
+	i = i + 1;
+end;
+
+nLocalDateFormatter = NewDateFormatter(CellGetS('syEnvironment',psServer,'Server locale'), CellGetS('syEnvironment',psServer,'default user timezone'), 'serial', 'full', 'datetime');
+sDateFormat = 'yyyy-MM-dd HH:mm:ss';
+sTimeStamp = FormatDate(Now, sDateFormat, nLocalDateFormatter);
+
+# Update the Client Log
+#messagenumber = ATTRN(DimName, processname, 'NumberOfLogMessages') + 1;
+IF (DIMIX('}Clients', TM1User()) <> 0);
+	CELLPUTS(psLogLevel,logCubeName,TM1User(),psProcessname,NumberToString(messagenumber),'LogLevel'); 
+    	CELLPUTS(TimSt( Now, sTimeStamp ),logCubeName,TM1User(),psProcessname,NumberToString(messagenumber),'DateTime'); 
+	CELLPUTS(TimSt( Now, '\Y-\m-\d \h:\i:\s' ),logCubeName,TM1User(),psProcessname,NumberToString(messagenumber),'DateTime UTC'); 
+	CELLPUTS(psMessage,logCubeName,TM1User(),psProcessname,NumberToString(messagenumber),'Message');
+	CELLPUTS(psProcessErrorReference,logCubeName,TM1User(),psProcessname,NumberToString(messagenumber),'Error Reference'); 
+ENDIF;
+# And same for 'dummy user' to enable overall reporting level
+CELLPUTS(psLogLevel,logCubeName,logsUserName,psProcessname,NumberToString(messagenumber),'LogLevel'); 
+CELLPUTS(TimSt( Now, sTimeStamp ),logCubeName,logsUserName ,psProcessname,NumberToString(messagenumber),'DateTime'); 
+CELLPUTS(TimSt( Now, '\Y-\m-\d \h:\i:\s' ),logCubeName,logsUserName ,psProcessname,NumberToString(messagenumber),'DateTime UTC'); 
+CELLPUTS(psMessage,logCubeName,logsUserName,psProcessname,NumberToString(messagenumber),'Message');
+CELLPUTS(psProcessErrorReference,logCubeName,logsUserName,psProcessname,NumberToString(messagenumber),'Error Reference'); 
+
+#endregion
+#region Epilog
+#****Begin: Generated Statements***
+#****End: Generated Statements****
+#endregion

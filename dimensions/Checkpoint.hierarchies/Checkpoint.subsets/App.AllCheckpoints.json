@@ -1,0 +1,5 @@
+{
+	"@type":"Subset",
+	"Name":"App.AllCheckpoints",
+	"Expression":"{EXCEPT(DRILLDOWNMEMBER({[Checkpoint].[Checkpoint].[All Checkpoints]} , {[Checkpoint].[Checkpoint].[All Checkpoints]} , RECURSIVE) , {[Checkpoint].[Checkpoint].[All Checkpoints]})}"
+}

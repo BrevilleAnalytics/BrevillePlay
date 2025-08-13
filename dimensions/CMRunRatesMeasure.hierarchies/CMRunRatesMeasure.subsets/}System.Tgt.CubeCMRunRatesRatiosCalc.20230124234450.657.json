@@ -1,0 +1,10 @@
+{
+	"@type":"Subset",
+	"Name":"}System.Tgt.CubeCMRunRatesRatiosCalc.20230124234450.657",
+	"Elements":
+	[
+		{
+			"@id":"Dimensions('CMRunRatesMeasure')/Hierarchies('CMRunRatesMeasure')/Elements('1Month')"
+		}
+	]
+}

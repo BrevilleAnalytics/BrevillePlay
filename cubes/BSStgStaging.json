@@ -1,0 +1,50 @@
+{
+	"@type":"Cube",
+	"Name":"BSStgStaging",
+	"Rules@Code.link":"BSStgStaging.rules",
+	"Dimensions":
+	[
+		{
+			"@id":"Dimensions('BusinessUnit')"
+		},
+		{
+			"@id":"Dimensions('Currency')"
+		},
+		{
+			"@id":"Dimensions('FiscalMonth')"
+		},
+		{
+			"@id":"Dimensions('Version')"
+		},
+		{
+			"@id":"Dimensions('BSComponent')"
+		},
+		{
+			"@id":"Dimensions('BSStgStagingMeasure')"
+		}
+	],
+	"Views@Code.links":
+	[
+		"BSStgStaging.views/#Jef_BSStg Consol.json",
+		"BSStgStaging.views/#Jef_BSStg Leaf.json",
+		"BSStgStaging.views/#stg.json",
+		"BSStgStaging.views/#Test Thari.json",
+		"BSStgStaging.views/App.BSAccruedMarketing.json",
+		"BSStgStaging.views/App.BSCustomerRebates.json",
+		"BSStgStaging.views/App.BSDividendPayment.json",
+		"BSStgStaging.views/App.BSGST.json",
+		"BSStgStaging.views/App.BSInterCo.json",
+		"BSStgStaging.views/App.BSInventory.json",
+		"BSStgStaging.views/App.BSPPE.json",
+		"BSStgStaging.views/App.BSProcurement.json",
+		"BSStgStaging.views/App.BSStockTransfer.json",
+		"BSStgStaging.views/App.BSTax.json",
+		"BSStgStaging.views/App.BSTradePayables.json",
+		"BSStgStaging.views/App.BSTradeReceivables.json",
+		"BSStgStaging.views/App.BSWarranty.json",
+		"BSStgStaging.views/BSStgStaging values view.json",
+		"BSStgStaging.views/Default.json",
+		"BSStgStaging.views/JJ_QA.json",
+		"BSStgStaging.views/Tax.json"
+	]
+}

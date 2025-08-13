@@ -1,0 +1,10 @@
+{
+	"@type":"Subset",
+	"Name":"TempWFPStgToPosition",
+	"Elements":
+	[
+		{
+			"@id":"Dimensions('Year')/Hierarchies('Year')/Elements('2024')"
+		}
+	]
+}

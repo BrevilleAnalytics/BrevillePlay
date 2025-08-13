@@ -1,0 +1,132 @@
+{
+	"@type":"Hierarchy",
+	"Name":"syTM1LoginTime",
+	"Elements":
+	[
+		{
+			"Name":"All Time",
+			"Type":"Consolidated"
+		},
+		{
+			"Name":"2022",
+			"Type":"Consolidated"
+		},
+		{
+			"Name":"2022-08",
+			"Type":"Consolidated"
+		},
+		{
+			"Name":"2022-08-12",
+			"Type":"Consolidated"
+		},
+		{
+			"Name":"2022-08-12 13",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"2022-08-12 14",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"2022-08-12 15",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"2022-08-12 16",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"2022-08-12 17",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"2022-08-13",
+			"Type":"Consolidated"
+		},
+		{
+			"Name":"2022-08-13 14",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"2022-08-15",
+			"Type":"Consolidated"
+		},
+		{
+			"Name":"2022-08-15 09",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"2022-08-15 10",
+			"Type":"Numeric"
+		}
+	],
+	"Edges":
+	[
+		{
+			"ParentName":"All Time",
+			"ComponentName":"2022",
+			"Weight":1
+		},
+		{
+			"ParentName":"2022",
+			"ComponentName":"2022-08",
+			"Weight":1
+		},
+		{
+			"ParentName":"2022-08",
+			"ComponentName":"2022-08-12",
+			"Weight":1
+		},
+		{
+			"ParentName":"2022-08",
+			"ComponentName":"2022-08-13",
+			"Weight":1
+		},
+		{
+			"ParentName":"2022-08",
+			"ComponentName":"2022-08-15",
+			"Weight":1
+		},
+		{
+			"ParentName":"2022-08-12",
+			"ComponentName":"2022-08-12 13",
+			"Weight":1
+		},
+		{
+			"ParentName":"2022-08-12",
+			"ComponentName":"2022-08-12 14",
+			"Weight":1
+		},
+		{
+			"ParentName":"2022-08-12",
+			"ComponentName":"2022-08-12 15",
+			"Weight":1
+		},
+		{
+			"ParentName":"2022-08-12",
+			"ComponentName":"2022-08-12 16",
+			"Weight":1
+		},
+		{
+			"ParentName":"2022-08-12",
+			"ComponentName":"2022-08-12 17",
+			"Weight":1
+		},
+		{
+			"ParentName":"2022-08-13",
+			"ComponentName":"2022-08-13 14",
+			"Weight":1
+		},
+		{
+			"ParentName":"2022-08-15",
+			"ComponentName":"2022-08-15 09",
+			"Weight":1
+		},
+		{
+			"ParentName":"2022-08-15",
+			"ComponentName":"2022-08-15 10",
+			"Weight":1
+		}
+	],
+	"Subsets@Code.links":[]
+}

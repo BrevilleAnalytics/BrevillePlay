@@ -1,0 +1,13 @@
+{
+	"@type":"Dimension",
+	"Name":"CF Mapping Measure",
+	"AllLeavesHierarchyName":"",
+	"DefaultHierarchy":
+	{
+		"@id":"Dimensions('CF Mapping Measure')/Hierarchies('CF Mapping Measure')"
+	},
+	"Hierarchies@Code.links":
+	[
+		"CF Mapping Measure.hierarchies/CF Mapping Measure.json"
+	]
+}

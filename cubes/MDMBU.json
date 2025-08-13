@@ -1,0 +1,18 @@
+{
+	"@type":"Cube",
+	"Name":"MDMBU",
+	"Dimensions":
+	[
+		{
+			"@id":"Dimensions('BusinessUnit')"
+		},
+		{
+			"@id":"Dimensions('MDMBUMeasure')"
+		}
+	],
+	"Views@Code.links":
+	[
+		"MDMBU.views/App.BusinessUnitRegionMapping.json",
+		"MDMBU.views/Default.json"
+	]
+}

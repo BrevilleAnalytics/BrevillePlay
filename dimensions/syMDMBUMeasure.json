@@ -1,0 +1,13 @@
+{
+	"@type":"Dimension",
+	"Name":"syMDMBUMeasure",
+	"AllLeavesHierarchyName":"",
+	"DefaultHierarchy":
+	{
+		"@id":"Dimensions('syMDMBUMeasure')/Hierarchies('syMDMBUMeasure')"
+	},
+	"Hierarchies@Code.links":
+	[
+		"syMDMBUMeasure.hierarchies/syMDMBUMeasure.json"
+	]
+}

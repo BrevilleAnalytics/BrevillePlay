@@ -1,0 +1,213 @@
+#region Prolog
+#****Begin: Generated Statements***
+#****End: Generated Statements****
+
+# This process will generate a simple 2 dimensional cube for analysing user logins
+# Cube name syTM1Login:
+#   * syTM1Client -- client name dimension with "All Clients' consolidation
+#   * syTM1LoginTime -- datetime dimension with 'All Time' consolidation and Year / Month / Day / Hour hieararchy. Hours would be the lowest leves of the dimension
+# This process will CellPutN 1s in the hours where client logged in to make it possible to run it over the same imput multiple times
+# Counting logins and having more granularity is not interesting from teh license tracking point of view (even hours are superficial), especially since Tm1Web websheets in PaW generate a separate login session, so counts would be way off
+
+# We will have time in UTC, but want to display logins in 'server time', so need to convert it
+nUTCDateFormatter = NewDateFormatter('', 'Etc/UTC', 'serial', 'full', 'datetime');
+sLoginFileTimestampFormat = 'yyyy-MM-dd HH:mm:ss.S';
+
+nLocalDateFormatter = NewDateFormatter(CellGetS('syEnvironment',psServer,'Server locale'), CellGetS('syEnvironment',psServer,'default user timezone'), 'serial', 'full', 'datetime');
+sLocalDateFormat = 'yyyy-MM-dd HH:mm:ss';
+
+sLogFieldDelimiter='  ';
+# Check whether dimensions / cube exist and create if not
+if (DimensionExists('syTM1LoginClient') = 0);
+    DimensionCreate('syTM1LoginClient');
+    DimensionSortOrder('syTM1LoginClient', 'ByName', 'Ascending','ByHierarchy', 'Ascending');
+endif;
+if (Dimix('syTM1LoginClient', 'All Clients') = 0);
+    DimensionElementInsert('syTM1LoginClient', '', 'All Clients', 'C');
+endif;
+if (DimensionExists('syTM1LoginTime') = 0);
+    DimensionCreate('syTM1LoginTime');
+    DimensionSortOrder('syTM1LoginTime', 'ByName', 'Ascending','ByHierarchy', 'Ascending');
+endif;
+if (Dimix('syTM1LoginTime', 'All Time') = 0);
+    DimensionElementInsert('syTM1LoginTime', '', 'All Time', 'C');
+endif;
+if (CubeExists('syTM1Login') = 0);
+    CubeCreate('syTM1Login', 'syTM1LoginClient', 'syTM1LoginTime');
+    CubeRuleDestroy('syTM1Login');
+    CubeRuleAppend('syTM1Login', 'SkipCheck;',1);
+    CubeRuleAppend('syTM1Login', '[] = C: ConsolidatedCountUnique (2, ''syTM1LoginClient'', ''syTM1Login'', !syTM1LoginClient, !syTM1LoginTime);',1);
+endif;
+
+CellPutS('NO','}CubeProperties','syTM1Login', 'LOGGING');
+
+# Datasource is the tm1login.log file in the log folder by default
+if (pLogFile @<>'');
+    sLogFile = pLogFile;
+else;
+    sLogFile = GetProcessErrorFileDirectory | 'tm1login.log';
+endif;
+
+if (FileExists(sLogFile) = 1);
+    DataSourceType = 'CHARACTERDELIMITED';
+    DatasourceNameForServer = sLogFile;
+    DatasourceNameForClient = sLogFile;
+    DatasourceASCIIDelimiter=Char(9);
+    DatasourceASCIIQuoteCharacter=Char(39);
+    DatasourceASCIIHeaderRecords=0;
+else;
+    logoutput('error', 'Connot open the log file: ' | sLogFile);  
+    DataSourceType = 'NULL';
+endif;
+
+
+nLogLines = 0;
+nLogInLines = 0;
+#endregion
+#region Metadata
+#****Begin: Generated Statements***
+#****End: Generated Statements****
+
+#we're only interested in login sucessfull lines
+if (Scan('Login Success:', vLogLine) <> 0);
+    # Parse logLine
+    sLogStr = vLogLine;
+    i = 1;
+    while (Scan(sLogFieldDelimiter, sLogStr) <> 0);
+        sSubstr = Subst(sLogStr, 1, Scan(sLogFieldDelimiter, sLogStr) );
+        sLogStr = Subst(sLogStr, Scan(sLogFieldDelimiter, sLogStr) + Long(sLogFieldDelimiter), Long(sLogStr));
+        # here we can parse what we need
+        if (i = 1);
+            sId = sSubstr;
+        elseif ( i = 2 );
+            sThreadId = sSubstr;
+        elseif ( i = 3 );
+            sLevel = sSubstr;
+        elseif ( i = 4 );
+            sTimestamp = sSubstr;
+        elseif ( i = 5 );
+            sModule = sSubstr;
+        else;
+            sCouldnotparse = sSubstr;
+        endif;
+        i = i + 1;
+    end;
+    sMessage = sLogStr;
+    sUser = Subst(sMessage, Scan('User',sMessage) + Long('User'), Long(sMessage));
+   
+    sUpdateCube = 'Yes';
+    if (dimix('}Clients', sUser) = 0);
+        # must be a chore
+        sUpdateCube = 'No';
+    # check the CAMID and use the display name 
+    elseif (DimensionExists('}ElementAttributes_}Clients') <> 0);
+         if (Dimix('}ElementAttributes_}Clients', '}TM1_DefaultDisplayValue') <> 0);
+            sUserDisplayName = AttrS('}Clients', sUser, '}TM1_DefaultDisplayValue');
+            if (sUserDisplayName @<> '');
+                sUser = sUserDisplayName;
+            endif;
+        endif;
+    endif;
+    
+    # parse time stamp
+    nParsedTimeStamp = ParseDate(sTimestamp, sLoginFileTimestampFormat);   
+    # check if parsing is sucessful ISUND 
+    if (isUnd(nParsedTimeStamp) = 1);
+    	sMessage = 'Cannot parse the date of ' | sTimestamp;
+    	logoutput('error', sMessage);
+        ItemReject(sMessage);
+    else;
+    	# let's start building the future timestamp
+    	sLocaltTimeStamp = FormatDate(nParsedTimeStamp, sLocalDateFormat, nLocalDateFormatter);
+		sYear = Subst(sLocaltTimeStamp, 1, 4);
+        sMonth = Subst(sLocaltTimeStamp, 6, 2);
+        sDay = Subst(sLocaltTimeStamp, 9, 2);
+        sHour = Subst(sLocaltTimeStamp, 12, 2);
+        sTimeELement = sYear |'-'|sMonth | '-' | sDay | ' ' |sHour;
+		sDayConso =  sYear |'-'|sMonth | '-' | sDay;
+        sMonthConso = sYear |'-'|sMonth;
+        sYearConso = sYear;
+        if (sUpdateCube @= 'Yes');
+            # 
+            DimensionElementInsert('syTM1LoginTime', '', sYearConso, 'C');
+            DimensionElementInsert('syTM1LoginTime', '', sMonthConso, 'C');
+            DimensionElementInsert('syTM1LoginTime', '', sDayConso, 'C');
+            DimensionElementInsert('syTM1LoginTime', '', sTimeELement, 'N');
+            DimensionElementComponentAdd('syTM1LoginTime', sDayConso, sTimeELement, 1);
+            DimensionElementComponentAdd('syTM1LoginTime', sMonthConso, sDayConso, 1);
+            DimensionElementComponentAdd('syTM1LoginTime', sYearConso, sMonthConso, 1);
+            DimensionElementComponentAdd('syTM1LoginTime', 'All Time', sYearConso, 1);
+            #
+            DimensionElementInsert('syTM1LoginClient', '', sUser, 'N');
+            DimensionElementComponentAdd('syTM1LoginClient', 'All Clients', sUser, 1);
+        endif;
+    endif;
+   
+    nLogInLines = nLogInLines + 1;
+endif;
+#endregion
+#region Data
+#****Begin: Generated Statements***
+#****End: Generated Statements****
+
+
+if (Scan('Login Success:', vLogLine) <> 0);
+    # Parse logLine
+    sLogStr = vLogLine;
+    i = 1;
+    while (Scan(sLogFieldDelimiter, sLogStr) <> 0);
+        sSubstr = Subst(sLogStr, 1, Scan(sLogFieldDelimiter, sLogStr) );
+        sLogStr = Subst(sLogStr, Scan(sLogFieldDelimiter, sLogStr) + Long(sLogFieldDelimiter), Long(sLogStr));
+        # here we can parse what we need
+        if (i = 1);
+            sId = sSubstr;
+        elseif ( i = 2 );
+            sThreadId = sSubstr;
+        elseif ( i = 3 );
+            sLevel = sSubstr;
+        elseif ( i = 4 );
+            sTimestamp = sSubstr;
+        elseif ( i = 5 );
+            sModule = sSubstr;
+        else;
+            sCouldnotparse = sSubstr;
+        endif;
+        i = i + 1;
+    end;
+    sMessage = sLogStr;
+    sUser = Subst(sMessage, Scan('User',sMessage) + Long('User'), Long(sMessage));
+    if (dimix('}Clients', sUser) = 0);
+	    # check the CAMID and use the display name 
+    elseif (DimensionExists('}ElementAttributes_}Clients') <> 0);
+		if (Dimix('}ElementAttributes_}Clients', '}TM1_DefaultDisplayValue') <> 0);
+        	sUserDisplayName = AttrS('}Clients', sUser, '}TM1_DefaultDisplayValue');
+        	if (sUserDisplayName @<> '');
+            	sUser = sUserDisplayName;
+        	endif;
+    	endif;
+    	# parse time stamp
+	    nParsedTimeStamp = ParseDate(sTimestamp, sLoginFileTimestampFormat);   
+    	# check if parsing is sucessful ISUND 
+	    if (isUnd(nParsedTimeStamp) = 0);
+    	    # parse time stamp
+			# let's start building the future timestamp
+    		sLocaltTimeStamp = FormatDate(nParsedTimeStamp, sLocalDateFormat, nLocalDateFormatter);
+			sYear = Subst(sLocaltTimeStamp, 1, 4);
+	        sMonth = Subst(sLocaltTimeStamp, 6, 2);
+    	    sDay = Subst(sLocaltTimeStamp, 9, 2);
+        	sHour = Subst(sLocaltTimeStamp, 12, 2);
+        	sTimeELement = sYear |'-'|sMonth | '-' | sDay | ' ' |sHour;
+	        CellPutN(1, 'syTM1Login' , sUser, sTimeElement);
+        endif;
+    endif;
+    nLogInLines = nLogInLines + 1;
+endif;
+
+nLogLines = nLogLines + 1;
+#endregion
+#region Epilog
+#****Begin: Generated Statements***
+#****End: Generated Statements****
+
+logoutput('info', 'Read ' | NumberToString(nLogInLines) | ':' | NumberToString(nLogLines) | ' login:total lines from file ' | sLogFile);
+#endregion

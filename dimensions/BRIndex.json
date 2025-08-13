@@ -1,0 +1,13 @@
+{
+	"@type":"Dimension",
+	"Name":"BRIndex",
+	"AllLeavesHierarchyName":"",
+	"DefaultHierarchy":
+	{
+		"@id":"Dimensions('BRIndex')/Hierarchies('BRIndex')"
+	},
+	"Hierarchies@Code.links":
+	[
+		"BRIndex.hierarchies/BRIndex.json"
+	]
+}

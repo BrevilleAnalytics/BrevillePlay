@@ -1,0 +1,13 @@
+{
+	"@type":"Dimension",
+	"Name":"CMRunRatesMeasure",
+	"AllLeavesHierarchyName":"",
+	"DefaultHierarchy":
+	{
+		"@id":"Dimensions('CMRunRatesMeasure')/Hierarchies('CMRunRatesMeasure')"
+	},
+	"Hierarchies@Code.links":
+	[
+		"CMRunRatesMeasure.hierarchies/CMRunRatesMeasure.json"
+	]
+}

@@ -1,0 +1,571 @@
+FEEDSTRINGS;
+SKIPCHECK;
+
+# Cube name: BSLease
+# Description: Staging cube for lease calculations. Has lease repayment schedule and is a summary reporting cube for lease calculations
+
+#Region Override Capability
+['Reported Value'] = N:If (DB('BSLease' ,!BusinessUnit, !Currency, 'Override',!BSLeaseLocation,!FiscalMonth, !Version, !BSLeaseMeasure) <> 0,
+       DB('BSLease' ,!BusinessUnit, !Currency, 'Override',!BSLeaseLocation,!FiscalMonth, !Version, !BSLeaseMeasure),
+       DB('BSLease' ,!BusinessUnit, !Currency, 'Total',!BSLeaseLocation,!FiscalMonth, !Version, !BSLeaseMeasure) ); 
+#EndRegion
+
+#================================================ BS Lease Repayment Calculation 
+
+#Region B/Fwd Liability
+      # B/Fwd Liability (C Level)
+      #['B/Fwd Liability'] = C:
+      #IF (ELLEV( 'FiscalMonth', !FiscalMonth ) > 0,
+      #  DB('BSLease', !BusinessUnit, !Currency, !BSComponent, !BSLeaseLocation, Attrs('FiscalMonth', !FiscalMonth, 'FirstPeriod'), !Version, !BSLeaseMeasure),
+      #  CONTINUE ) ;
+
+      # at start period
+      ['B/Fwd Liability',{'Outlook','Working Budget'}, 'Calculated'] = N:
+      IF ( NUMBR ( !FiscalMonth )
+        = NUMBR ( SUBST ( DIMNM( 'FiscalMonth' , DIMIX( 'FiscalMonth' , DB( 'BSLeaseStart', !BSLeaseLocation, 'Start Month for B/Fwd Liability' ) ) ) , 1 , 4 )
+           |
+           SUBST ( DIMNM( 'FiscalMonth' , DIMIX( 'FiscalMonth' , DB( 'BSLeaseStart', !BSLeaseLocation, 'Start Month for B/Fwd Liability' ) ) ) , 5 , 3 ) ),
+      # 18/05/2023 change to manual input as user comment
+          If(
+            (DB('BSLeaseStart', !BSLeaseLocation, 'B/Fwd Liability') = 0) % (!BusinessUnit @<> DB('BSLeaseStart', !BSLeaseLocation, 'Business Unit ')),
+            ['PV Monthly Lease Payment Cumsum'],
+            DB('BSLeaseStart', !BSLeaseLocation, 'B/Fwd Liability')/
+            DB('BRExchangeRate',!BusinessUnit,SUBST(TODAY(1),1,4)|'0'|SUBST(TODAY(1),6,2),!Currency,'Currency','FXRate')
+            ),
+      #        STET,
+              CONTINUE ) ;
+
+      # Opening Balance
+      ['B/Fwd Liability',{'Outlook','Working Budget'}, 'Calculated'] = N:
+      IF ( NUMBR ( !FiscalMonth )
+        > NUMBR ( SUBST ( DIMNM( 'FiscalMonth' , DIMIX( 'FiscalMonth' , DB( 'BSLeaseStart', !BSLeaseLocation, 'Start Month for B/Fwd Liability' ) ) ) , 1 , 4 )
+           |
+           SUBST ( DIMNM( 'FiscalMonth' , DIMIX( 'FiscalMonth' , DB( 'BSLeaseStart', !BSLeaseLocation, 'Start Month for B/Fwd Liability' ) ) ) , 5 , 3 ) ),
+              DB('BSLease', !BusinessUnit, !Currency,!BSComponent, !BSLeaseLocation, Attrs('FiscalMonth', !FiscalMonth, 'PrevPeriod'), !Version, 'C/Fwd Liability'),
+              CONTINUE ) ;
+
+      ['Period',{'Outlook','Working Budget'}, 'Calculated'] = N:
+      IF ( NUMBR ( !FiscalMonth )
+        >= NUMBR ( SUBST ( DIMNM( 'FiscalMonth' , DIMIX( 'FiscalMonth' , DB( 'BSLeaseStart', !BSLeaseLocation, 'Start Month for B/Fwd Liability' ) ) ) , 1 , 4 )
+           |
+           SUBST ( DIMNM( 'FiscalMonth' , DIMIX( 'FiscalMonth' , DB( 'BSLeaseStart', !BSLeaseLocation, 'Start Month for B/Fwd Liability' ) ) ) , 5 , 3 ) ),
+              DB('BSLease', !BusinessUnit, !Currency, !BSComponent, !BSLeaseLocation, Attrs('FiscalMonth', !FiscalMonth, 'PrevPeriod'), !Version, 'Period') + 1,
+              0) ;
+
+
+      ['PV Monthly Lease Payment Cumsum',{'Outlook','Working Budget'}, 'Calculated'] = N:
+      IF ( NUMBR ( !FiscalMonth )
+        >= NUMBR ( SUBST ( DIMNM( 'FiscalMonth' , DIMIX( 'FiscalMonth' , DB( 'BSLeaseStart', !BSLeaseLocation, 'Start Month for B/Fwd Liability' ) ) ) , 1 , 4 )
+           |
+           SUBST ( DIMNM( 'FiscalMonth' , DIMIX( 'FiscalMonth' , DB( 'BSLeaseStart', !BSLeaseLocation, 'Start Month for B/Fwd Liability' ) ) ) , 5 , 3) ),
+              DB('BSLease', !BusinessUnit, !Currency, !BSComponent, !BSLeaseLocation, Attrs('FiscalMonth', !FiscalMonth, 'NextPeriod'), !Version, 'PV Monthly Lease Payment Cumsum') +
+              ['PV Monthly Lease Payment'],
+              0) ;
+#EndRegion
+
+#Region= Interest Expense
+['Interest Expense',{'Outlook','Working Budget'}, 'Calculated'] = N: 
+IF ( NUMBR ( !FiscalMonth )
+  >= NUMBR ( SUBST ( DIMNM( 'FiscalMonth' , DIMIX( 'FiscalMonth' , DB( 'BSLeaseStart', !BSLeaseLocation, 'Start Month for B/Fwd Liability' ) ) ) , 1 , 4 )
+     |
+     SUBST ( DIMNM( 'FiscalMonth' , DIMIX( 'FiscalMonth' , DB( 'BSLeaseStart', !BSLeaseLocation, 'Start Month for B/Fwd Liability' ) ) ) , 5 , 3 ) ),
+        (DB('BSLease', !BusinessUnit, !Currency, !BSComponent, !BSLeaseLocation, !FiscalMonth, !Version, 'B/Fwd Liability')
+#      * DB('BSLeaseAssump', !BusinessUnit, !Currency, !BSLeaseLocation, SUBST ( DIMNM( 'FiscalMonth' , DIMIX('FiscalMonth' , !FiscalMonth) ), 1 , 4 ), !Version, 'Discount'))\12
+          * DB('BSLeaseStart',!BSLeaseLocation, 'Australia Incremental Borrowing Rate / Discount Rate'))\12,
+        CONTINUE ) ;
+#EndRegion
+
+['PV Monthly Lease Payment',{'Outlook','Working Budget'}, 'Calculated'] = N: 
+  ['Lease Repayment'] / (1 + DB('BSLeaseStart',!BSLeaseLocation, 'Australia Incremental Borrowing Rate / Discount Rate')/12)^['Period'];
+
+#Region= Principal
+['Principal',{'Outlook','Working Budget'}, 'Calculated'] = N: 
+IF ( NUMBR ( !FiscalMonth )
+  >= NUMBR ( SUBST ( DIMNM( 'FiscalMonth' , DIMIX( 'FiscalMonth' , DB( 'BSLeaseStart', !BSLeaseLocation, 'Start Month for B/Fwd Liability' ) ) ) , 1 , 4 )
+     |
+     SUBST ( DIMNM( 'FiscalMonth' , DIMIX( 'FiscalMonth' , DB( 'BSLeaseStart', !BSLeaseLocation, 'Start Month for B/Fwd Liability' ) ) ) , 5 , 3 ) ),
+        DB('BSLease', !BusinessUnit, !Currency, !BSComponent, !BSLeaseLocation, !FiscalMonth, !Version, 'Lease Repayment')
+          - DB('BSLease', !BusinessUnit, !Currency, !BSComponent, !BSLeaseLocation, !FiscalMonth, !Version, 'Interest Expense'),
+        CONTINUE ) ;
+#EndRegion
+
+#Region C/Fwd Liability
+# C/Fwd Liability (C Level)
+['C/Fwd Liability',{'Outlook','Working Budget'}] = C:
+IF (ELLEV( 'FiscalMonth', !FiscalMonth ) > 0,
+  DB('BSLease', !BusinessUnit, !Currency, !BSComponent, !BSLeaseLocation, Attrs('FiscalMonth', !FiscalMonth, 'LastPeriod'), !Version, !BSLeaseMeasure),
+  CONTINUE ) ;
+
+# Closing balance
+['C/Fwd Liability',{'Outlook','Working Budget'}, 'Calculated'] = N:
+IF ( NUMBR ( !FiscalMonth )
+  >= NUMBR ( SUBST ( DIMNM( 'FiscalMonth' , DIMIX( 'FiscalMonth' , DB( 'BSLeaseStart', !BSLeaseLocation, 'Start Month for B/Fwd Liability' ) ) ) , 1 , 4 )
+     |
+     SUBST ( DIMNM( 'FiscalMonth' , DIMIX( 'FiscalMonth' , DB( 'BSLeaseStart', !BSLeaseLocation, 'Start Month for B/Fwd Liability' ) ) ) , 5 , 3 ) ),
+        DB('BSLease', !BusinessUnit, !Currency, !BSComponent, !BSLeaseLocation, !FiscalMonth, !Version, 'B/Fwd Liability')
+          - DB('BSLease', !BusinessUnit, !Currency, !BSComponent, !BSLeaseLocation, !FiscalMonth, !Version, 'Principal'),
+        CONTINUE ) ;
+#EndRegion
+
+#Region============================= Right-of-Use Asset calculation
+
+  #Region= B/Fwd RoU Asset
+        # B/Fwd RoU Asset (C Level)
+        ['B/Fwd RoU Asset',{'Outlook','Working Budget'}] = C:
+        IF (ELLEV( 'FiscalMonth', !FiscalMonth ) > 0,
+          DB('BSLease', !BusinessUnit, !Currency, !BSComponent, !BSLeaseLocation, Attrs('FiscalMonth', !FiscalMonth, 'FirstPeriod'), !Version, !BSLeaseMeasure),
+          CONTINUE ) ;
+
+        # at start period
+        ['B/Fwd RoU Asset',{'Outlook','Working Budget'}, 'Calculated'] = N: 
+        IF ( NUMBR ( !FiscalMonth )
+          = NUMBR ( SUBST ( DIMNM( 'FiscalMonth' , DIMIX( 'FiscalMonth' , DB( 'BSLeaseStart', !BSLeaseLocation, 'Start Month for B/Fwd Liability' ) ) ) , 1 , 4 )
+             |
+             SUBST ( DIMNM( 'FiscalMonth' , DIMIX( 'FiscalMonth' , DB( 'BSLeaseStart', !BSLeaseLocation, 'Start Month for B/Fwd Liability' ) ) ) , 5 , 3 ) ),
+                If(
+                  (DB('BSLeaseStart', !BSLeaseLocation, 'B/Fwd RoU Asset') = 0) % (!BusinessUnit @<> DB('BSLeaseStart', !BSLeaseLocation, 'Business Unit ')),
+                  DB('BSLease', !BusinessUnit, !Currency, !BSComponent, !BSLeaseLocation, !FiscalMonth, !Version, 'B/Fwd Liability'),
+                  DB('BSLeaseStart', !BSLeaseLocation, 'B/Fwd RoU Asset')/
+                  DB('BRExchangeRate',!BusinessUnit,SUBST(TODAY(1),1,4)|'0'|SUBST(TODAY(1),6,2),!Currency,'Currency','FXRate')
+                ),
+
+                CONTINUE ) ;
+
+        # Opening Balance
+        ['B/Fwd RoU Asset',{'Outlook','Working Budget'}, 'Calculated'] = N:
+        IF ( NUMBR ( !FiscalMonth )
+          > NUMBR ( SUBST ( DIMNM( 'FiscalMonth' , DIMIX( 'FiscalMonth' , DB( 'BSLeaseStart', !BSLeaseLocation, 'Start Month for B/Fwd Liability' ) ) ) , 1 , 4 )
+             |
+             SUBST ( DIMNM( 'FiscalMonth' , DIMIX( 'FiscalMonth' , DB( 'BSLeaseStart', !BSLeaseLocation, 'Start Month for B/Fwd Liability' ) ) ) , 5 , 3 ) ),
+                DB('BSLease', !BusinessUnit, !Currency, !BSComponent, !BSLeaseLocation, Attrs('FiscalMonth', !FiscalMonth, 'PrevPeriod'), !Version, 'C/Fwd RoU Asset'),
+                CONTINUE ) ;
+  #EndRegion
+
+  #Region= Depn Charge
+  ['Dep''n Charge',{'Outlook','Working Budget'}, 'Calculated'] = N: 
+  IF ( NUMBR ( !FiscalMonth )
+    >= NUMBR ( SUBST ( DIMNM( 'FiscalMonth' , DIMIX( 'FiscalMonth' , DB( 'BSLeaseStart', !BSLeaseLocation, 'Start Month for B/Fwd Liability' ) ) ) , 1 , 4 )
+       |
+       SUBST ( DIMNM( 'FiscalMonth' , DIMIX( 'FiscalMonth' , DB( 'BSLeaseStart', !BSLeaseLocation, 'Start Month for B/Fwd Liability' ) ) ) , 5 , 3 ) ), 
+       If( ['Period'] > 0 & ['Period'] <= DB('BSLeaseStart', !BSLeaseLocation,'No. of Period'),
+          DB('BSLease', !BusinessUnit, !Currency, !BSComponent, !BSLeaseLocation, DB( 'BSLeaseStart', !BSLeaseLocation, 'Start Month for B/Fwd Liability' ), !Version, 'B/Fwd RoU Asset')
+            \ DB('BSLeaseStart', !BSLeaseLocation,'No. of Period'),
+          0 ),
+          CONTINUE ) ;
+  #EndRegion
+
+  #Region RoU Opening balance
+      # RoU Opening balance (C Level)
+      ['RoU Opening balance',{'Outlook','Working Budget'}] = C:
+      IF (ELLEV( 'FiscalMonth', !FiscalMonth ) > 0,
+        DB('BSLease', !BusinessUnit, !Currency, !BSComponent, !BSLeaseLocation, Attrs('FiscalMonth', !FiscalMonth, 'FirstPeriod'), !Version, !BSLeaseMeasure),
+        CONTINUE ) ;
+
+      #= RoU Opening balance
+      ['RoU Opening balance', {'Outlook','Working Budget'}, 'Calculated' ] = N:
+      DB('BSLease', !BusinessUnit, !Currency, !BSComponent, !BSLeaseLocation, Attrs('FiscalMonth', !FiscalMonth, 'PrevPeriod'), !Version, 'RoU Closing balance');
+  #EndRegion
+
+  #Region= RoU Closing balance
+        # RoU Closing balance (C Level)
+        ['RoU Closing balance',{'Outlook','Working Budget'}] = C:
+        IF (ELLEV( 'FiscalMonth', !FiscalMonth ) > 0,
+          DB('BSLease', !BusinessUnit, !Currency,  'Reported Value', !BSLeaseLocation, Attrs('FiscalMonth', !FiscalMonth, 'LastPeriod'), !Version, !BSLeaseMeasure),
+          CONTINUE ) ;
+
+        # Actual period (Link from Actual)
+        ['RoU Closing balance', 'Minto', {'Outlook','Working Budget'}, 'Calculated' ]  = N:
+        IF ( DB( 'BRAsFiscalMonth' , 'Actual' , 'Corporate', !FiscalMonth , 'Actual Flag' ) = 1 ,
+          DB('BSStgActuals' ,'Right-of-use asset - BS', !BusinessUnit, !Currency, !FiscalMonth, 'BSComponent':'Total', 'Balance'),
+          CONTINUE ) ;
+
+        # Forecast period calculation
+        ['RoU Closing balance', {'Outlook','Working Budget'}, 'Calculated' ]  = N:
+        IF ( DB( 'BRAsFiscalMonth' , 'Actual' , 'Corporate', !FiscalMonth , 'Actual Flag' ) <> 1 ,
+          DB('BSLease', !BusinessUnit, !Currency, !BSComponent, !BSLeaseLocation, !FiscalMonth, !Version, 'RoU Opening balance')
+            + DB('BSLease', !BusinessUnit, !Currency, !BSComponent, !BSLeaseLocation, !FiscalMonth, !Version, 'Depreciation'),
+          CONTINUE ) ;
+  #EndRegion
+
+  #Region= C/Fwd RoU Asset
+        # C/Fwd RoU Asset (C Level)
+        ['C/Fwd RoU Asset',{'Outlook','Working Budget'}] = C:
+        IF (ELLEV( 'FiscalMonth', !FiscalMonth ) > 0,
+          DB('BSLease', !BusinessUnit, !Currency, !BSComponent, !BSLeaseLocation, Attrs('FiscalMonth', !FiscalMonth, 'LastPeriod'), !Version, !BSLeaseMeasure),
+          CONTINUE ) ;
+
+        # Closing balance
+        ['C/Fwd RoU Asset',{'Outlook','Working Budget'}, 'Calculated'] = N:
+        IF (NUMBR ( !FiscalMonth )
+          >= NUMBR ( SUBST ( DIMNM( 'FiscalMonth' , DIMIX( 'FiscalMonth' , DB( 'BSLeaseStart', !BSLeaseLocation, 'Start Month for B/Fwd Liability' ) ) ) , 1 , 4 )
+             |
+             SUBST ( DIMNM( 'FiscalMonth' , DIMIX( 'FiscalMonth' , DB( 'BSLeaseStart', !BSLeaseLocation, 'Start Month for B/Fwd Liability' ) ) ) , 5 , 3 ) ),  
+                DB('BSLease', !BusinessUnit, !Currency, !BSComponent, !BSLeaseLocation, !FiscalMonth, !Version, 'B/Fwd RoU Asset')
+                  - DB('BSLease', !BusinessUnit, !Currency, !BSComponent, !BSLeaseLocation, !FiscalMonth, !Version, 'Dep''n Charge'),
+                CONTINUE ) ;
+  #EndRegion
+
+#EndRegion
+
+#Region============================= Lease Liability calculation
+
+  #Region= Current Lease Liability
+  ['Current Lease Liability',{'Outlook','Working Budget'}, 'Calculated'] = N:
+  IF (NUMBR ( !FiscalMonth )
+    >= NUMBR ( 
+      SUBST ( DIMNM( 'FiscalMonth' , DIMIX( 'FiscalMonth' , DB( 'BSLeaseStart', !BSLeaseLocation, 'Start Month for B/Fwd Liability' ) ) ) , 1 , 4 )
+      |
+      SUBST ( DIMNM( 'FiscalMonth' , DIMIX( 'FiscalMonth' , DB( 'BSLeaseStart', !BSLeaseLocation, 'Start Month for B/Fwd Liability' ) ) ) , 5 , 3 ) ),  
+          DB('BSLease', !BusinessUnit, !Currency, !BSComponent, !BSLeaseLocation, !FiscalMonth, !Version, 'C/Fwd Liability') -
+          DB('BSLease', !BusinessUnit, !Currency, !BSComponent, !BSLeaseLocation, Attrs('FiscalMonth', !FiscalMonth, 'NYPeriod'), !Version, 'C/Fwd Liability'),
+          CONTINUE ) ;
+  #EndRegion
+
+  #Region= Lease Liability - Current Opening balance
+      # Lease Liability - Current Opening balance (C Level)
+      ['Lease Liability - Current Opening balance',{'Outlook','Working Budget'}] = C:
+      IF (ELLEV( 'FiscalMonth', !FiscalMonth ) > 0,
+        DB('BSLease', !BusinessUnit, !Currency, !BSComponent, !BSLeaseLocation, Attrs('FiscalMonth', !FiscalMonth, 'FirstPeriod'), !Version, !BSLeaseMeasure),
+        CONTINUE ) ;
+
+      # Opening balance
+      ['Lease Liability - Current Opening balance', {'Outlook','Working Budget'}, 'Calculated' ] = N:
+      DB('BSLease', !BusinessUnit, !Currency, !BSComponent, !BSLeaseLocation, Attrs('FiscalMonth', !FiscalMonth, 'PrevPeriod'), !Version, 'Lease Liability - Current Closing balance');
+  #EndRegion
+
+  #Region= Lease Liability - Current Closing balance
+          # Lease Liability - Current Closing balance (C Level)
+          ['Lease Liability - Current Closing balance',{'Outlook','Working Budget'}] = C:
+          IF (ELLEV( 'FiscalMonth', !FiscalMonth ) > 0,
+            DB('BSLease', !BusinessUnit, !Currency, !BSComponent, !BSLeaseLocation, Attrs('FiscalMonth', !FiscalMonth, 'LastPeriod'), !Version, !BSLeaseMeasure),
+            CONTINUE ) ;
+
+          # Actual period (Link from Actual)
+          ['Lease Liability - Current Closing balance', 'Minto', {'Outlook','Working Budget'}, 'Calculated' ]  = N:
+          IF ( DB( 'BRAsFiscalMonth' , 'Actual' , 'Corporate', !FiscalMonth , 'Actual Flag' ) = 1 ,
+            DB('BSStgActuals' ,'Lease liabilities (current) - BS', !BusinessUnit, !Currency, !FiscalMonth, 'BSComponent':'Total', 'Balance') * (-1),
+            CONTINUE ) ;
+
+          # Forecast period calculation
+          ['Lease Liability - Current Closing balance', {'Outlook','Working Budget'}, 'Calculated' ]  = N:
+          IF ( DB( 'BRAsFiscalMonth' , 'Actual' , 'Corporate', !FiscalMonth , 'Actual Flag' ) <> 1 ,
+            DB('BSLease', !BusinessUnit, !Currency,!BSComponent, !BSLeaseLocation, !FiscalMonth, !Version, 'Lease Liability - Current Opening balance')
+              + DB('BSLease', !BusinessUnit, !Currency, !BSComponent, !BSLeaseLocation, !FiscalMonth, !Version, 'Interest Expense')
+              + DB('BSLease', !BusinessUnit, !Currency, !BSComponent, !BSLeaseLocation, !FiscalMonth, !Version, 'Lease Repayment (-)')
+              + DB('BSLease', !BusinessUnit, !Currency, !BSComponent, !BSLeaseLocation, !FiscalMonth, !Version, 'Reclass non-current portion'),
+            CONTINUE ) ;
+  #EndRegion
+
+  #Region= Non-current Lease Liability
+  ['Non-current Lease Liability',{'Outlook','Working Budget'}, 'Calculated'] = N:
+  IF (NUMBR ( !FiscalMonth )
+    >= NUMBR ( 
+      SUBST ( DIMNM( 'FiscalMonth' , DIMIX( 'FiscalMonth' , DB( 'BSLeaseStart', !BSLeaseLocation, 'Start Month for B/Fwd Liability' ) ) ) , 1 , 4 )
+      |
+      SUBST ( DIMNM( 'FiscalMonth' , DIMIX( 'FiscalMonth' , DB( 'BSLeaseStart', !BSLeaseLocation, 'Start Month for B/Fwd Liability' ) ) ) , 5 , 3 ) ), 
+          DB('BSLease', !BusinessUnit, !Currency, !BSComponent, !BSLeaseLocation, !FiscalMonth, !Version, 'C/Fwd Liability') - 
+          DB('BSLease', !BusinessUnit, !Currency, !BSComponent, !BSLeaseLocation, !FiscalMonth, !Version, 'Current Lease Liability'),
+          CONTINUE ) ;
+  #EndRegion
+
+  #Region= Lease Liability - Non-current Opening balance
+          # Lease Liability - Non-current Opening balancee (C Level)
+          ['Lease Liability - Non-current Opening balance',{'Outlook','Working Budget'}] = C:
+          IF (ELLEV( 'FiscalMonth', !FiscalMonth ) > 0,
+            DB('BSLease', !BusinessUnit, !Currency, !BSComponent, !BSLeaseLocation, Attrs('FiscalMonth', !FiscalMonth, 'FirstPeriod'), !Version, !BSLeaseMeasure),
+            CONTINUE ) ;
+
+          ['Lease Liability - Non-current Opening balance', {'Outlook','Working Budget'}, 'Calculated' ] = N:
+          DB('BSLease', !BusinessUnit, !Currency, !BSComponent, !BSLeaseLocation, Attrs('FiscalMonth', !FiscalMonth, 'PrevPeriod'), !Version, 'Lease Liability - Non-current Closing balance');
+  #EndRegion
+
+  #Region= Lease Liability - Non-current Closing balance
+          # Lease Liability - Non-current Closing balance (C Level)
+          ['Lease Liability - Non-current Closing balance',{'Outlook','Working Budget'}] = C:
+          IF (ELLEV( 'FiscalMonth', !FiscalMonth ) > 0,
+            DB('BSLease', !BusinessUnit, !Currency, !BSComponent, !BSLeaseLocation, Attrs('FiscalMonth', !FiscalMonth, 'LastPeriod'), !Version, !BSLeaseMeasure),
+            CONTINUE ) ;
+
+          # Actual period (Link from Actual)
+          ['Lease Liability - Non-current Closing balance', 'Minto', {'Outlook','Working Budget'}, 'Calculated' ]  = N:
+          IF ( DB( 'BRAsFiscalMonth' , 'Actual' , 'Corporate', !FiscalMonth , 'Actual Flag' ) = 1 ,
+            DB('BSStgActuals' ,'Lease liabilities (non-current) - BS', !BusinessUnit, !Currency, !FiscalMonth, 'BSComponent':'Total', 'Balance') * (-1),
+            CONTINUE ) ;
+
+          # Forecast period calculation
+          ['Lease Liability - Non-current Closing balance', {'Outlook','Working Budget'}, 'Calculated' ]  = N:
+          IF ( DB( 'BRAsFiscalMonth' , 'Actual' , 'Corporate', !FiscalMonth , 'Actual Flag' ) <> 1 ,
+            DB('BSLease', !BusinessUnit, !Currency, !BSComponent, !BSLeaseLocation, !FiscalMonth, !Version, 'Lease Liability - Non-current Opening balance')
+              + DB('BSLease', !BusinessUnit, !Currency, !BSComponent, !BSLeaseLocation, !FiscalMonth, !Version, 'Reclass non-current portion (-)'),
+            CONTINUE ) ;
+  #EndRegion
+
+  #Region= Reclass non-current portion
+  # Forecast period calculation
+  ['Reclass non-current portion', {'Outlook','Working Budget'}, 'Calculated' ]  = N: 
+  IF ( DB( 'BRAsFiscalMonth' , 'Actual' , 'Corporate', !FiscalMonth , 'Actual Flag' ) <> 1 ,
+    DB('BSLease', !BusinessUnit, !Currency, !BSComponent, !BSLeaseLocation, !FiscalMonth, !Version, 'Current Lease Liability')
+      - (DB('BSLease', !BusinessUnit, !Currency, !BSComponent, !BSLeaseLocation, !FiscalMonth, !Version, 'Lease Liability - Current Opening balance')
+      - DB('BSLease', !BusinessUnit, !Currency, !BSComponent, !BSLeaseLocation, !FiscalMonth, !Version, 'Interest Expense')
+      - DB('BSLease', !BusinessUnit, !Currency, !BSComponent, !BSLeaseLocation, !FiscalMonth, !Version, 'Lease Repayment (-)')),
+    CONTINUE ) ;
+
+  #= Reclass non-current portion (-)
+  # Forecast period calculation
+  ['Reclass non-current portion (-)', {'Outlook','Working Budget'}, 'Calculated' ]  = N: 
+  IF ( DB( 'BRAsFiscalMonth' , 'Actual' , 'Corporate', !FiscalMonth , 'Actual Flag' ) <> 1 ,
+    DB('BSLease', !BusinessUnit, !Currency, !BSComponent, !BSLeaseLocation, !FiscalMonth, !Version, 'Reclass non-current portion')
+      * (-1),
+    CONTINUE ) ;
+  #EndRegion
+
+  #Region= Depreciation
+  ['Depreciation','Minto', {'Outlook','Working Budget'}, 'Calculated']  = N: 
+  DB('BSStgStaging' ,!BusinessUnit, !Currency, !FiscalMonth, !Version, !BSComponent, 'Right of use asset');
+  #EndRegion
+
+  #Region= Lease Repayments
+  # Forecast period calculation
+  ['Lease Repayment (-)', {'Outlook','Working Budget'}, 'Calculated' ]  = N: 
+  IF ( DB( 'BRAsFiscalMonth' , 'Actual' , 'Corporate', !FiscalMonth , 'Actual Flag' ) <> 1 ,
+    DB('BSLease', !BusinessUnit, !Currency, !BSComponent, !BSLeaseLocation, !FiscalMonth, !Version, 'Lease Repayment') * (-1),
+    CONTINUE ) ;
+
+  #Push Lease Repayment from Actual to Versions
+  ['Lease Repayment', {'Outlook','Working Budget'}, 'Calculated', 'Local' ] = N:
+  ['Actual', 'Override'];
+
+  ['Lease Repayment',{'EUR-Constant','AUD-MonthEnd','Constant','AUD-Budget','USD-Constant','AUD-Constant','AUD-Outlook','EUR-Budget','USD-Budget'}, 'Calculated'] = N:
+    ['Local']/DB('BRExchangeRate',!BusinessUnit,SUBST(TODAY(1),1,4)|'0'|SUBST(TODAY(1),6,2),!Currency,'Currency','FXRate');
+  #EndRegion
+
+#EndRegion
+
+#= Total Lease Liability calculation
+['Total lease liability', {'Outlook','Working Budget'}, 'Calculated' ]  = N: 
+DB('BSLease', !BusinessUnit, !Currency, !BSComponent, !BSLeaseLocation, !FiscalMonth, !Version, 'Lease Liability - Current Closing balance')
+    + DB('BSLease', !BusinessUnit, !Currency, !BSComponent, !BSLeaseLocation, !FiscalMonth, !Version, 'Lease Liability - Non-current Closing balance') ;
+
+#= Check to leases summary calculation
+['Check to leases summary', {'Outlook','Working Budget'}, 'Calculated' ]  = N: 
+DB('BSLease', !BusinessUnit, !Currency, !BSComponent, !BSLeaseLocation, !FiscalMonth, !Version, 'Total lease liability')
+    - DB('BSLease', !BusinessUnit, !Currency, !BSComponent, !BSLeaseLocation, !FiscalMonth, !Version, 'C/Fwd Liability') ;
+
+#Region OLD Dep''n Charge 
+# ['Dep''n Charge'] = N: 
+# IF ( NUMBR ( !FiscalMonth )
+#   >= NUMBR ( SUBST ( DIMNM( 'FiscalMonth' , DIMIX( 'FiscalMonth' , DB( 'BSLeaseStart', !BSLeaseLocation, 'Start Month for B/Fwd Liability' ) ) ) , 1 , 4 )
+#      |
+#      SUBST ( DIMNM( 'FiscalMonth' , DIMIX( 'FiscalMonth' , DB( 'BSLeaseStart', !BSLeaseLocation, 'Start Month for B/Fwd Liability' ) ) ) , 5 , 3 ) ), 
+#         DB('BSLease', !BusinessUnit, !Currency, 'Reported Value', !BSLeaseLocation, DB( 'BSLeaseStart', !BSLeaseLocation, 'Start Month for B/Fwd Liability' ), !Version, 'B/Fwd RoU Asset')
+#           \ DB('BSLeaseStart', !BSLeaseLocation,'No. of Period'),
+#         CONTINUE ) ;
+#EndRegion
+
+#Region OLD Lease Repayment
+# ['Lease Repayment'] = N:
+# IF ( NUMBR ( !FiscalMonth )
+#   >= NUMBR ( SUBST ( DIMNM( 'FiscalMonth' , DIMIX( 'FiscalMonth' , DB( 'BSLeaseStart', !BSLeaseLocation, 'Start Month for B/Fwd Liability' ) ) ) , 1 , 4 )
+#      |
+#      SUBST ( DIMNM( 'FiscalMonth' , DIMIX( 'FiscalMonth' , DB( 'BSLeaseStart', !BSLeaseLocation, 'Start Month for B/Fwd Liability' ) ) ) , 5 , 3 ) ) 
+#    , (DB('BSLeaseAssump', !BusinessUnit, !Currency, !BSLeaseLocation, SUBST ( DIMNM( 'FiscalMonth' , DIMIX('FiscalMonth' , !FiscalMonth) ), 1 , 4 ), !Version, 'Annual')
+#      * DB('BSLeaseAssump', !BusinessUnit, !Currency, !BSLeaseLocation, SUBST ( DIMNM( 'FiscalMonth' , DIMIX('FiscalMonth' , !FiscalMonth) ), 1 , 4 ), !Version, 'Discount'))\12
+#    , CONTINUE ) ;
+#EndRegion
+
+#Region OLD Currency Conversion
+# ['AUD-MonthEnd'] = N:['Local'] / DB('BRExchangeRate',!BusinessUnit,!FiscalMonth,!Currency,'Currency','FXRate');
+# ['AUD-Budget'] = N:['Local'] / DB('BRExchangeRate',!BusinessUnit,!FiscalMonth,!Currency,'Currency','FXRate');
+# ['AUD-Constant'] = N:['Local'] / DB('BRExchangeRate',!BusinessUnit,!FiscalMonth,!Currency,'Currency','FXRate');
+# ['AUD-Outlook'] = N:['Local'] / DB('BRExchangeRate',!BusinessUnit,!FiscalMonth,!Currency,'Currency','FXRate');
+# ['USD-Constant'] = N:['Local'] / DB('BRExchangeRate',!BusinessUnit,!FiscalMonth,!Currency,'Currency','FXRate');
+# ['EUR-Budget'] = N:['Local'] / DB('BRExchangeRate',!BusinessUnit,!FiscalMonth,!Currency,'Currency','FXRate');
+# ['USD-Budget'] = N:['Local'] / DB('BRExchangeRate',!BusinessUnit,!FiscalMonth,!Currency,'Currency','FXRate');
+# ['Constant'] = N:['Local'] / DB('BRExchangeRate',!BusinessUnit,!FiscalMonth,!Currency,'Currency','FXRate');
+
+#EndRegion
+
+FEEDERS ;
+
+#Region Currency Conversion
+ ['Local'] => ['EUR-Constant'];
+ ['Local'] => ['EUR-Budget'];
+ ['Local'] => ['AUD-MonthEnd'];
+ ['Local'] => ['AUD-Budget'];
+ ['Local'] => ['Constant'];
+ ['Local'] => ['AUD-Constant'];
+ ['Local'] => ['AUD-Outlook'];
+ ['Local'] => ['USD-Constant'];
+ ['Local'] => ['USD-Budget'];
+
+
+#EndRegion
+
+#Region Internal Feeders
+['BSComponent':{'Override','Total'}] => 
+  ['BSComponent':'Reported Value'];
+  
+['BSComponent':'Calculated'] => 
+  ['BSComponent':'Total'];  
+  
+['Actual', 'Lease Repayment','Override', 'Local']=>
+  ['B/Fwd Liability', 'Calculated', 'Outlook'],
+  ['C/Fwd Liability', 'Calculated', 'Outlook'],
+  ['B/Fwd RoU Asset', 'Calculated', 'Outlook'],  
+  ['C/Fwd RoU Asset', 'Calculated', 'Outlook'],
+  ['Interest Expense', 'Calculated', 'Outlook'],
+  ['Lease Repayment', 'Calculated', 'Outlook'],  
+
+  ['B/Fwd Liability', 'Calculated', 'Working Budget'],
+  ['C/Fwd Liability', 'Calculated', 'Working Budget'],
+  ['B/Fwd RoU Asset', 'Calculated', 'Working Budget'],  
+  ['C/Fwd RoU Asset', 'Calculated', 'Working Budget'],
+  ['Interest Expense', 'Calculated', 'Working Budget'],
+  ['Lease Repayment', 'Calculated', 'Working Budget'];
+
+['Actual', 'Override', 'Lease Repayment','Local']=>
+  ['Working Budget', 'Calculated','Lease Repayment', 'Local'];
+  
+[{'Working Budget','Outlook'}, 'C/Fwd Liability', 'Calculated']=>
+  ['Calculated','Current Lease Liability','Calculated'];
+
+#== BS Lease Repayment
+[{'Working Budget','Outlook'},'Lease Repayment'] => 
+  ['PV Monthly Lease Payment'];
+
+['B/Fwd RoU Asset'] => 
+  ['Dep''n Charge'];
+
+['PV Monthly Lease Payment'] => 
+  ['PV Monthly Lease Payment Cumsum'];
+  
+['PV Monthly Lease Payment Cumsum'] => 
+  ['B/Fwd Liability'];
+
+['PV Monthly Lease Payment Cumsum'] => 
+  DB('BSLease', !BusinessUnit, !Currency, !BSComponent, !BSLeaseLocation, 
+  Attrs('FiscalMonth', !FiscalMonth, 'NextPeriod'), !Version, 'PV Monthly Lease Payment Cumsum');
+
+['C/Fwd Liability' ] =>
+  DB('BSLease', !BusinessUnit, !Currency, !BSComponent, !BSLeaseLocation, Attrs('FiscalMonth', !FiscalMonth, 'NextPeriod'), !Version, 'B/Fwd Liability');
+
+['B/Fwd Liability'] => ['Interest Expense'];
+
+[{'Lease Repayment','Interest Expense'}] => ['Principal'];
+
+[{'B/Fwd Liability','Principal'}] => ['C/Fwd Liability'];
+
+['B/Fwd Liability'] => ['B/Fwd RoU Asset'];
+['C/Fwd RoU Asset' ] =>
+DB('BSLease', !BusinessUnit, !Currency, !BSComponent, !BSLeaseLocation, Attrs('FiscalMonth', !FiscalMonth, 'NextPeriod'), !Version, 'B/Fwd RoU Asset');
+
+['B/Fwd RoU Asset' ] =>
+DB('BSLease', !BusinessUnit, !Currency, !BSComponent, !BSLeaseLocation, DB( 'BSLeaseStart', !BSLeaseLocation, 'Start Month for B/Fwd Liability' ), !Version, 'Dep''n Charge');
+
+[{'B/Fwd RoU Asset','Dep''n Charge'}] => ['C/Fwd RoU Asset'];
+
+#== BS Lease
+['RoU Closing balance'] =>
+DB('BSLease', !BusinessUnit, !Currency, !BSComponent, !BSLeaseLocation, Attrs('FiscalMonth', !FiscalMonth, 'NextPeriod'), !Version, 'RoU Opening balance');
+
+[{'RoU Opening balance','Depreciation'}] => ['RoU Closing balance'];
+
+['Lease Liability - Current Closing balance'] => 
+DB('BSLease', !BusinessUnit, !Currency, !BSComponent, !BSLeaseLocation, Attrs('FiscalMonth', !FiscalMonth, 'NextPeriod'), !Version, 'Lease Liability - Current Opening balance');
+
+['Lease Repayment'] => ['Lease Repayment (-)'];
+
+[{'Current Lease Liability','Lease Liability - Current Opening balance','Interest Expense','Lease Repayment (-)'}] => ['Reclass non-current portion'];
+
+[{'Lease Liability - Current Opening balance','Interest Expense','Lease Repayment (-)','Reclass non-current portion'}] => ['Lease Liability - Current Closing balance'];
+
+['Lease Liability - Non-current Closing balance'] => 
+DB('BSLease', !BusinessUnit, !Currency, !BSComponent, !BSLeaseLocation, Attrs('FiscalMonth', !FiscalMonth, 'NextPeriod'), !Version, 'Lease Liability - Non-current Opening balance');
+
+['Reclass non-current portion'] => ['Reclass non-current portion (-)'];
+
+[{'Lease Liability - Non-current Opening balance','Reclass non-current portion (-)'}] => ['Lease Liability - Non-current Closing balance'];
+
+[{'Lease Liability - Current Closing balance','Lease Liability - Non-current Closing balance'}] => ['Total lease liability'];
+
+[{'Total lease liability','C/Fwd Liability'}] => ['Check to leases summary'];
+#EndRegion
+
+#Region External Feeders
+#== BS Capex
+['BSLeaseMeasure':'Depreciation'] => 
+DB('BSStgCapex', !BusinessUnit, !Currency,  'BSComponent':'Reported Value', !BSLeaseLocation, !FiscalMonth, !Version, 'BSStgCapexMeasure':'Depreciation');
+
+#== BS PPE
+['BSLeaseMeasure':'Dep''n Charge','Reported Value'] =>
+DB('BSStgStaging' ,!BusinessUnit, !Currency, !FiscalMonth, !Version,  'BSComponent':'Calculated', 'BSStgStagingMeasure':'Right of use asset'),
+DB('BS Reporting', !Version, !FiscalMonth, !Currency, !BusinessUnit, '110600', !BSComponent, 'Movement' );
+
+#== BS Lease (B/Fwd Liability)
+['BSLeaseMeasure':'B/Fwd Liability','Reported Value'] =>
+DB('BSStgStaging' ,!BusinessUnit, !Currency, !FiscalMonth, 'Outlook',  'BSComponent':'Calculated', 'BSStgStagingMeasure':'B/Fwd Liability');
+
+['BSLeaseMeasure':'B/Fwd Liability','Reported Value'] =>
+DB('BSStgStaging' ,!BusinessUnit, !Currency, !FiscalMonth, 'Working Budget',  'BSComponent':'Calculated', 'BSStgStagingMeasure':'B/Fwd Liability');
+
+#== BS Lease (Interest Expense)
+['BSLeaseMeasure':'Interest Expense','Reported Value'] =>
+DB('BSStgStaging' ,!BusinessUnit, !Currency, !FiscalMonth, 'Outlook',  'BSComponent':'Calculated', 'BSStgStagingMeasure':'Interest Expense');
+
+['BSLeaseMeasure':'Interest Expense','Reported Value'] =>
+DB('BSStgStaging' ,!BusinessUnit, !Currency, !FiscalMonth, 'Working Budget',  'BSComponent':'Calculated', 'BSStgStagingMeasure':'Interest Expense');
+
+#== BS Lease (Lease Repayment)
+['BSLeaseMeasure':'Lease Repayment','Reported Value'] =>
+DB('BSStgStaging' ,!BusinessUnit, !Currency, !FiscalMonth, 'Outlook',  'BSComponent':'Calculated', 'BSStgStagingMeasure':'Lease Repayment');
+
+['BSLeaseMeasure':'Lease Repayment','Reported Value'] =>
+DB('BSStgStaging' ,!BusinessUnit, !Currency, !FiscalMonth, 'Working Budget',  'BSComponent':'Calculated', 'BSStgStagingMeasure':'Lease Repayment');
+
+#== BS Lease (Principal)
+['BSLeaseMeasure':'Principal','Reported Value'] =>
+DB('BSStgStaging' ,!BusinessUnit, !Currency, !FiscalMonth, 'Outlook',  'BSComponent':'Calculated', 'BSStgStagingMeasure':'Principal');
+
+['BSLeaseMeasure':'Principal','Reported Value'] =>
+DB('BSStgStaging' ,!BusinessUnit, !Currency, !FiscalMonth, 'Working Budget',  'BSComponent':'Calculated', 'BSStgStagingMeasure':'Principal');
+
+#== BS Lease (C/Fwd Liability)
+['BSLeaseMeasure':'C/Fwd Liability','Reported Value'] =>
+DB('BSStgStaging' ,!BusinessUnit, !Currency, !FiscalMonth, 'Outlook',  'BSComponent':'Calculated', 'BSStgStagingMeasure':'C/Fwd Liability');
+
+['BSLeaseMeasure':'C/Fwd Liability','Reported Value'] =>
+DB('BSStgStaging' ,!BusinessUnit, !Currency, !FiscalMonth, 'Working Budget',  'BSComponent':'Calculated', 'BSStgStagingMeasure':'C/Fwd Liability');
+
+#== BS Lease (B/Fwd RoU Asset)
+['BSLeaseMeasure':'B/Fwd RoU Asset','Reported Value'] =>
+DB('BSStgStaging' ,!BusinessUnit, !Currency, !FiscalMonth, 'Outlook',  'BSComponent':'Calculated', 'BSStgStagingMeasure':'B/Fwd RoU Asset');
+
+['BSLeaseMeasure':'B/Fwd RoU Asset','Reported Value'] =>
+DB('BSStgStaging' ,!BusinessUnit, !Currency, !FiscalMonth, 'Working Budget',  'BSComponent':'Calculated', 'BSStgStagingMeasure':'B/Fwd RoU Asset');
+
+#== BS Lease (Dep'n Charge)
+['BSLeaseMeasure':'Dep''n Charge','Reported Value'] =>
+DB('BSStgStaging' ,!BusinessUnit, !Currency, !FiscalMonth, 'Outlook',  'BSComponent':'Calculated', 'BSStgStagingMeasure':'Dep''n Charge');
+
+['BSLeaseMeasure':'Dep''n Charge','Reported Value'] =>
+DB('BSStgStaging' ,!BusinessUnit, !Currency, !FiscalMonth, 'Working Budget',  'BSComponent':'Calculated', 'BSStgStagingMeasure':'Dep''n Charge');
+
+#== BS Lease (C/Fwd RoU Asset)
+['BSLeaseMeasure':'C/Fwd RoU Asset','Reported Value'] =>
+DB('BSStgStaging' ,!BusinessUnit, !Currency, !FiscalMonth, 'Outlook',  'BSComponent':'Calculated', 'BSStgStagingMeasure':'C/Fwd RoU Asset');
+
+['BSLeaseMeasure':'C/Fwd RoU Asset','Reported Value'] =>
+DB('BSStgStaging' ,!BusinessUnit, !Currency, !FiscalMonth, 'Working Budget',  'BSComponent':'Calculated', 'BSStgStagingMeasure':'C/Fwd RoU Asset');
+
+#== BS Lease (Lease Calculation)
+
+['Reported Value','BSLeaseLocation':'Total','Actual', 'Dep''n Charge'] => DB('BSStgStaging' ,!BusinessUnit, !Currency, !FiscalMonth, 'Outlook', 'Calculated', 'Depreciation');
+['Reported Value','BSLeaseLocation':'Total','Actual', 'Dep''n Charge'] => DB('BSStgStaging' ,!BusinessUnit, !Currency, !FiscalMonth, 'Working Budget', 'Calculated', 'Depreciation');
+
+['Reported Value','BSLeaseLocation':'Total','Actual', {'C/Fwd Liability','Interest Expense','Lease Repayment'}] => DB('BSStgStaging' ,!BusinessUnit, !Currency, !FiscalMonth, 'Outlook', 'Calculated', 'Reclass non-current portion');
+['Reported Value','BSLeaseLocation':'Total','Actual', {'C/Fwd Liability','Interest Expense','Lease Repayment'}] => DB('BSStgStaging' ,!BusinessUnit, !Currency, !FiscalMonth, 'Working Budget', 'Calculated', 'Reclass non-current portion');
+['Reported Value','BSLeaseLocation':'Total','Actual', 'C/Fwd Liability'] => DB('BSStgStaging' ,!BusinessUnit, !Currency, Attrs('FiscalMonth', !FiscalMonth, 'PYPeriod'), 'Outlook', 'Calculated', 'Reclass non-current portion');
+['Reported Value','BSLeaseLocation':'Total','Actual', 'C/Fwd Liability'] => DB('BSStgStaging' ,!BusinessUnit, !Currency, Attrs('FiscalMonth', !FiscalMonth, 'PYPeriod'), 'Working Budget', 'Calculated', 'Reclass non-current portion');
+#EndRegion
+
+#['Override','BSLeaseLocation':'Total','Actual', 'C/Fwd Liability'] => DB('BSStgStaging' ,!BusinessUnit, !Currency, !FiscalMonth, 'Outlook', 'Reported Value', 'Check to leases summary');

@@ -1,0 +1,22 @@
+#Region System
+FEEDSTRINGS;
+SKIPCHECK;
+#EndRegion
+
+# Cube name: CMForecast
+
+
+#===== Calculation
+# copy actual data to outlook version
+[ 'Outlook' ]  = N: If ( DB( 'BRAsFiscalMonth' , 'Actual' , !Theatre, !FiscalMonth , 'Actual Flag' ) = 1 , 
+                   DB ('CMForecast', !Product, !Segment, !BusinessUnit, !Theatre, 'Actual' , !FiscalMonth, !Currency, !Component, !CMForecastMeasure ) , continue ) ;
+
+#['CMForecastMeasure':'Shipped Units','Currency':'AUD-Budget'] = N:['CMForecastMeasure':'Shipped Units','Currency':'Local'];
+#['CMForecastMeasure':'Returned Units','Currency':'AUD-Budget'] = N:['CMForecastMeasure':'Returned Units','Currency':'Local'];
+
+FEEDERS ; 
+
+['Actual'] => ['Outlook'] ;  
+#['Local'] => ['AUD-Budget'];
+#['CMForecastMeasure':'Shipped Units','Currency':'Local'] => ['CMForecastMeasure':'Shipped Units','Currency':'AUD-Budget'];
+#['CMForecastMeasure':'Returned Units','Currency':'Local'] => ['CMForecastMeasure':'Returned Units','Currency':'AUD-Budget'];

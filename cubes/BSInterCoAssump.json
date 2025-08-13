@@ -1,0 +1,24 @@
+{
+	"@type":"Cube",
+	"Name":"BSInterCoAssump",
+	"Rules@Code.link":"BSInterCoAssump.rules",
+	"Dimensions":
+	[
+		{
+			"@id":"Dimensions('BusinessUnit')"
+		},
+		{
+			"@id":"Dimensions('Year')"
+		},
+		{
+			"@id":"Dimensions('Version')"
+		},
+		{
+			"@id":"Dimensions('BSInterCoAssumpMeasure')"
+		}
+	],
+	"Views@Code.links":
+	[
+		"BSInterCoAssump.views/App.BSInterCoAssump.json"
+	]
+}

@@ -1,0 +1,13 @@
+{
+	"@type":"Dimension",
+	"Name":"BUAssumptionsMeasure",
+	"AllLeavesHierarchyName":"",
+	"DefaultHierarchy":
+	{
+		"@id":"Dimensions('BUAssumptionsMeasure')/Hierarchies('BUAssumptionsMeasure')"
+	},
+	"Hierarchies@Code.links":
+	[
+		"BUAssumptionsMeasure.hierarchies/BUAssumptionsMeasure.json"
+	]
+}

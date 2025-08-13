@@ -1,0 +1,25 @@
+{
+	"@type":"Subset",
+	"Name":"Warranty",
+	"Elements":
+	[
+		{
+			"@id":"Dimensions('BSStgStagingMeasure')/Hierarchies('BSStgStagingMeasure')/Elements('Opening Provision')"
+		},
+		{
+			"@id":"Dimensions('BSStgStagingMeasure')/Hierarchies('BSStgStagingMeasure')/Elements('Warranty expense')"
+		},
+		{
+			"@id":"Dimensions('BSStgStagingMeasure')/Hierarchies('BSStgStagingMeasure')/Elements('Warranty claims')"
+		},
+		{
+			"@id":"Dimensions('BSStgStagingMeasure')/Hierarchies('BSStgStagingMeasure')/Elements('Closing Provision')"
+		},
+		{
+			"@id":"Dimensions('BSStgStagingMeasure')/Hierarchies('BSStgStagingMeasure')/Elements('Warranty claims as a % of OB')"
+		},
+		{
+			"@id":"Dimensions('BSStgStagingMeasure')/Hierarchies('BSStgStagingMeasure')/Elements('Freight')"
+		}
+	]
+}

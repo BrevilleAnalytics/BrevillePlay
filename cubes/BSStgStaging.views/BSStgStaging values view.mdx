@@ -1,0 +1,1 @@
+SELECT {[BSStgStagingMeasure].[BSStgStagingMeasure].MEMBERS} ON 0, {DRILLDOWNMEMBER({TM1SubsetToSet([FiscalMonth].[FiscalMonth],"Default","public")}, {[FiscalMonth].[FiscalMonth].[FY24]})} ON 1 FROM [BSStgStaging] WHERE ([BusinessUnit].[BusinessUnit].[Australia], [Currency].[Currency].[Local Currency], [BSComponent].[BSComponent].[Reported Value], [Version].[Version].[Outlook])

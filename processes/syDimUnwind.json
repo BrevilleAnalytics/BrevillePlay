@@ -1,0 +1,21 @@
+{
+	"@type":"Process",
+	"Name":"syDimUnwind",
+	"HasSecurityAccess":false,
+	"Code@Code.link":"syDimUnwind.ti",
+	"UIData":"_ParameterConstraints=e30=€",
+	"DataSource":
+	{
+		"Type":"None"
+	},
+	"Parameters":
+	[
+		{
+			"Name":"pDimensionName",
+			"Prompt":"",
+			"Value":"",
+			"Type":"String"
+		}
+	],
+	"Variables":[]
+}

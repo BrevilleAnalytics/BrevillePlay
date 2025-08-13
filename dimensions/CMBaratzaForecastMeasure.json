@@ -1,0 +1,13 @@
+{
+	"@type":"Dimension",
+	"Name":"CMBaratzaForecastMeasure",
+	"AllLeavesHierarchyName":"",
+	"DefaultHierarchy":
+	{
+		"@id":"Dimensions('CMBaratzaForecastMeasure')/Hierarchies('CMBaratzaForecastMeasure')"
+	},
+	"Hierarchies@Code.links":
+	[
+		"CMBaratzaForecastMeasure.hierarchies/CMBaratzaForecastMeasure.json"
+	]
+}

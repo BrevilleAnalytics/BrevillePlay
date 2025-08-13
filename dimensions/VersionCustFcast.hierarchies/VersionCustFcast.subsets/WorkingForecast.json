@@ -1,0 +1,5 @@
+{
+	"@type":"Subset",
+	"Name":"WorkingForecast",
+	"Expression":"{DRILLDOWNMEMBER({[VersionCustFcast].[VersionCustFcast].[Working Outlook]} , {[VersionCustFcast].[VersionCustFcast].[Working Outlook]} , RECURSIVE)}"
+}

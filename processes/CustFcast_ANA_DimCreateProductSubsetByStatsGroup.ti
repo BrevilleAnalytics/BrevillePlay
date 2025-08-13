@@ -1,0 +1,131 @@
+#region Prolog
+#****Begin: Generated Statements***
+#****End: Generated Statements****
+
+#Path and file name for ASCIIOutput
+sTestFile = CellGetS( 'syEnvironment', 'Breville', 'Temp Folder') | '\' | 'CustFcastProdFlag.txt';
+
+vCub_Tgt = 'CustomerForecast' ;
+vView_Tgt = 'FlagProductsByCustomerTemp' ;
+vSub_Tgt = 'FlagProductsByCustomerTemp' ;
+pTemp = 0; 
+
+
+# DimensionSortOrder ('ProductCustFcast', 'ByName', 'descending','ByName', 'descending');
+DimensionSortOrder ('ProductCustFcast', 'ByInput', 'ascending','ByLevel', 'ascending');
+
+
+#Create View to Assign as Datasource
+IF( ViewExists( vCub_Tgt , vView_Tgt ) = 1 ) ; 
+ ViewDestroy ( vCub_Tgt, vView_Tgt ) ;
+ENDIF;
+ViewCreate( vCub_Tgt, vView_Tgt , pTemp ) ;
+
+i_TabDim = 1 ;
+While ( TabDim ( vCub_Tgt , i_TabDim ) @<> '' ) ;
+   sDim = TabDim ( vCub_Tgt , i_TabDim ) ;
+
+  If( sDim @= 'ProductCustFcast' ) ;
+      sMDX = '{TM1FILTERBYLEVEL ( {TM1SUBSETALL ( ['|sDim|'] ) } , 0 ) }' ;
+  # sMDX =   '{ORDER(DISTINCT(DESCENDANTS([ProductCustFcast].[ProductCustFcast].[BCA - BusinessUnit])) , [ProductCustFcast].[ProductCustFcast].CURRENTMEMBER.PROPERTIES("MEMBER_CAPTION") , BASC)}';
+  #   sMDX = '{ DRILLDOWNMEMBER({[ProductCustFcast].[ProductCustFcast].[All ProductCustFcast]} , {[ProductCustFcast].[ProductCustFcast].[All ProductCustFcast]} , RECURSIVE)}';
+ ElseIf( sDim @= 'CustomerCustFcast' ) ;
+      sMDX = '{ [' | sDim | '].[' | sDim | '].['|vCustomerCustFcast|'] }' ;     
+  ElseIf( sDim @= 'BusinessUnit' ) ;
+      sMDX = '{ [' | sDim | '].[' | sDim | '].['|vBusinessUnit|']}' ;
+  ElseIf( sDim @= 'Theatre' ) ;
+      sMDX = '{ [' | sDim | '].[' | sDim | '].['|vTheatre|']}' ;
+  ElseIf( sDim @= 'VersionCustFcast' ) ;
+      sMDX = '{ [' | sDim | '].[' | sDim | '].[Report Flag],
+                [' | sDim | '].[' | sDim | '].[History],
+                [' | sDim | '].[' | sDim | '].[Sellout],
+                [' | sDim | '].[' | sDim | '].[Working Outlook]}' ;
+  ElseIf( sDim @= 'MonthCustFcast' ) ;
+       #sMDX = '{TM1FILTERBYLEVEL( {DISTINCT({DESCENDANTS([' | sDim | '].[' | sDim | '].[Financial Year])})}, 0)}' ;
+       sMDX = '{ [' | sDim | '].[' | sDim | '].[Report Flag],
+                 [' | sDim | '].[' | sDim | '].[Financial Year]}' ; 
+  ElseIf( sDim @= 'Currency' ) ;
+       sMDX = '{ [' | sDim | '].[' | sDim | '].[Local Currency] }' ; 
+  ElseIF( sDim @= 'MeasureCustFcast' ) ;
+        sMDX = '{ [' | sDim | '].[' | sDim | '].[Report Flag],
+                  [' | sDim | '].[' | sDim | '].[Shipped Units]}' ;   
+#   Else ;
+#        sMDX = '{TM1FILTERBYLEVEL ( {TM1SUBSETALL ( ['|sDim|'] ) } , 0 ) }' ;
+  EndIf ;
+
+  If (SubsetExists ( sDim, vSub_Tgt ) <> 0 );
+      SubsetDestroy( sDim, vSub_Tgt );
+  endif;
+      
+   SubsetCreateByMDX ( vSub_Tgt , sMDX ,sDim, pTemp ) ;
+   SubsetMDXSet (sDim , vSub_Tgt , '' ) ;
+   ViewSubsetAssign (vCub_Tgt , vView_Tgt , sDim , vSub_Tgt ) ;
+
+i_TabDim = i_TabDim + 1 ;
+End ;
+
+ViewExtractSkipCalcsSet ( vCub_Tgt , vView_Tgt , 0 ) ;  
+# 0 = take data at consolidation
+ViewExtractSkipRuleValuesSet ( vCub_Tgt , vView_Tgt , 1 ) ;
+#0 = take rule result as data (if )
+ViewExtractSkipZeroesSet ( vCub_Tgt , vView_Tgt ,1 ) ;
+#SkipZeros to get only flagged products
+
+# Assign View to Datasource
+DataSourceType = 'VIEW' ;
+DataSourceNameForServer = vCub_Tgt ;
+DataSourceCubeview = vView_Tgt ;
+
+#Create Subset to load flagged products to
+sDim_Tar = 'ProductCustFcast' ;
+sProductSub = 'App.'|vBusinessUnit|'.'|vCustomerCustFcast ;
+If ( SubsetExists ( sDim_Tar, sProductSub ) = 0 ) ;
+     SubsetCreate ( sDim_Tar, sProductSub,0 ) ;
+EndIf ;
+#Delete All Elements before reloading
+If ( SubsetExists ( sDim_Tar, sProductSub ) <> 0 ) ;
+     SubsetDeleteAllElements ( sDim_Tar, sProductSub ) ;
+EndIf ;
+
+# SubsetElementInsert( sDim_Tar, sProductSub, 'BCA - Business Unit', 1 );
+
+#Add Total Root to subset
+SubsetElementInsert( sDim_Tar, sProductSub, 'All ProductCustFcast',1);
+
+DimensionSortOrder ('ProductCustFcast', 'ByName', 'ascending','ByName', 'ascending');
+
+
+#endregion
+#region Metadata
+#****Begin: Generated Statements***
+#****End: Generated Statements****
+ 
+#endregion
+#region Data
+#****Begin: Generated Statements***
+#****End: Generated Statements****
+ASCIIOutput(sTestFile,  vCub_Tgt, vProductCustFcast, CustomerCustFcast, BusinessUnit,Theatre, VersionCustFcast,MonthCustFcast, Currency,  MeasureCustFcast, NUMBERTOSTRING(Value));		   
+#i=1 ;
+#Add flagged products to Subset
+if( SubsetElementExists(sDim_Tar, sProductSub, vProductCustFcast ) = 0 ) ;
+SubsetElementInsert(sDim_Tar, sProductSub, vProductCustFcast, 0 );
+endif ;
+
+#Insert 1 into Report Flag Intersection (Zero suppressed view = products with data) 
+if(ELLEV(CustomerCustFcast,vCustomerCustFcast)=0);
+CellPutN(1, vCub_Tgt, vProductCustFcast, CustomerCustFcast, BusinessUnit, Theatre, 'Report Flag', 'Report Flag', Currency, 'Report Flag');
+
+#ItemSkip;
+endif;
+
+
+
+# ASCIIOutput( sTestFile, NUMBERTOSTRING(vValue) , sCub_Tgt , vProduct , sSegment , vBusinessUnit , 'Actual' , sPeriod , 'Local Currency', 'Shipped Units'  );
+
+#ASCIIOutput( sTestFile, vProductCustFcast, CustomerCustFcast, BusinessUnit,Theatre, VersionCustFcast,MonthCustFcast, Currency,  CustFcastMeasure, 'Report Flag' , NumbertoString(Value));
+#i = i+1 ;
+#endregion
+#region Epilog
+#****Begin: Generated Statements***
+#****End: Generated Statements****
+#endregion

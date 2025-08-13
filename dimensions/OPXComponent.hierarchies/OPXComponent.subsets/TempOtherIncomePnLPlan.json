@@ -1,0 +1,10 @@
+{
+	"@type":"Subset",
+	"Name":"TempOtherIncomePnLPlan",
+	"Elements":
+	[
+		{
+			"@id":"Dimensions('OPXComponent')/Hierarchies('OPXComponent')/Elements('OPEX')"
+		}
+	]
+}

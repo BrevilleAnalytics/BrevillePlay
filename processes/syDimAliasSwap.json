@@ -1,0 +1,27 @@
+{
+	"@type":"Process",
+	"Name":"syDimAliasSwap",
+	"HasSecurityAccess":false,
+	"Code@Code.link":"syDimAliasSwap.ti",
+	"UIData":"CubeAction=1511€DataAction=1503€CubeLogChanges=0€",
+	"DataSource":
+	{
+		"Type":"None"
+	},
+	"Parameters":
+	[
+		{
+			"Name":"pDim",
+			"Prompt":"Dimension Name ?",
+			"Value":"",
+			"Type":"String"
+		},
+		{
+			"Name":"pAlias",
+			"Prompt":"Alais Name ?",
+			"Value":"",
+			"Type":"String"
+		}
+	],
+	"Variables":[]
+}

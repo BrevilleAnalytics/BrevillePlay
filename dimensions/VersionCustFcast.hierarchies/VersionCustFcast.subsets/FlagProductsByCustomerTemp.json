@@ -1,0 +1,19 @@
+{
+	"@type":"Subset",
+	"Name":"FlagProductsByCustomerTemp",
+	"Elements":
+	[
+		{
+			"@id":"Dimensions('VersionCustFcast')/Hierarchies('VersionCustFcast')/Elements('Report Flag')"
+		},
+		{
+			"@id":"Dimensions('VersionCustFcast')/Hierarchies('VersionCustFcast')/Elements('History')"
+		},
+		{
+			"@id":"Dimensions('VersionCustFcast')/Hierarchies('VersionCustFcast')/Elements('Sellout')"
+		},
+		{
+			"@id":"Dimensions('VersionCustFcast')/Hierarchies('VersionCustFcast')/Elements('Working Outlook')"
+		}
+	]
+}

@@ -1,0 +1,16 @@
+{
+	"@type":"Subset",
+	"Name":"}System.Tgt.CubeCMRunRatesRatiosCalc.20220829072307.42",
+	"Elements":
+	[
+		{
+			"@id":"Dimensions('Segment')/Hierarchies('Segment')/Elements('Global')"
+		},
+		{
+			"@id":"Dimensions('Segment')/Hierarchies('Segment')/Elements('Distribution')"
+		},
+		{
+			"@id":"Dimensions('Segment')/Hierarchies('Segment')/Elements('No Segment')"
+		}
+	]
+}

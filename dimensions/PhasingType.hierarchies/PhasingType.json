@@ -1,0 +1,16 @@
+{
+	"@type":"Hierarchy",
+	"Name":"PhasingType",
+	"Elements":
+	[
+		{
+			"Name":"CAPEX",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"Depreciation",
+			"Type":"Numeric"
+		}
+	],
+	"Subsets@Code.links":[]
+}

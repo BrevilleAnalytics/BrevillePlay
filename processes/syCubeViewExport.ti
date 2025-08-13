@@ -1,0 +1,131 @@
+#region Prolog
+#****Begin: Generated Statements***
+#****End: Generated Statements****
+
+#=====================
+# Purpose of this process
+#=====================
+
+# Export view data to a file
+# Written by ykud@cornerstone.com.au
+# Inspired by bedrock export TI
+# Initial code: 19/07/2017
+# 2020-04-13 Added define character set in data tab
+
+#=====================
+# Declare control variables
+#=====================
+csProcessName = GetProcessName;
+csTimeStamp = TIMST ( NOW , '\Y\m\d\h\i\s' );
+
+csPath = GetProcessErrorFileDirectory;
+csDebugFile = csPath | csProcessName | '-' | csTimeStamp | '.txt';
+
+# File name from parameter
+sExportFile = pFileName;
+
+DatasourceASCIIDelimiter=Char(9);
+DatasourceASCIIQuoteCharacter = '';
+
+#=====================
+# Validate parameters
+#=====================
+
+# Validate if cube exists at all
+IF(CubeExists(pCube) = 0);
+    ItemReject('Cube ' | pCube | ' does not exist'); 
+ENDIF;
+
+# Validate if view exists at all
+IF(ViewExists(pCube, pView) = 0);
+    ItemReject('View ' | pView | ' does not exist'); 
+ENDIF;
+
+#=====================
+# Set source
+#=====================
+
+DataSourceType =  'VIEW';
+DatasourceNameForServer =   pCube;
+DatasourceNameForClient =   pCube;
+DatasourceCubeView = pView;
+
+#endregion
+#region Metadata
+#****Begin: Generated Statements***
+#****End: Generated Statements****
+#endregion
+#region Data
+#****Begin: Generated Statements***
+#****End: Generated Statements****
+
+
+
+#=====================
+# Write Data
+#=====================
+
+#Define character set for output file
+SetOutputCharacterSet( sExportFile ,'TM1CS_UTF8' );
+
+#Remove Char(10) from input field
+
+s_String = 
+V1 |  DatasourceASCIIDelimiter  | 
+V2 |  DatasourceASCIIDelimiter  | 
+V3 |  DatasourceASCIIDelimiter  | 
+V4 |  DatasourceASCIIDelimiter  | 
+V5 |  DatasourceASCIIDelimiter  | 
+V6 |  DatasourceASCIIDelimiter  | 
+V7 |  DatasourceASCIIDelimiter  | 
+V8 |  DatasourceASCIIDelimiter  | 
+V9 |  DatasourceASCIIDelimiter  | 
+V10 |  DatasourceASCIIDelimiter  | 
+V11 |  DatasourceASCIIDelimiter  | 
+V12 |  DatasourceASCIIDelimiter  | 
+V13 |  DatasourceASCIIDelimiter  | 
+V14 |  DatasourceASCIIDelimiter  | 
+V15 |  DatasourceASCIIDelimiter  | 
+V16 |  DatasourceASCIIDelimiter  | 
+V17 |  DatasourceASCIIDelimiter  | 
+V18 |  DatasourceASCIIDelimiter  | 
+V19 |  DatasourceASCIIDelimiter  | 
+V20 |  DatasourceASCIIDelimiter  | 
+V21 |  DatasourceASCIIDelimiter  | 
+V22 |  DatasourceASCIIDelimiter  | 
+V23 |  DatasourceASCIIDelimiter  | 
+V24 |  DatasourceASCIIDelimiter  | 
+V25 |  DatasourceASCIIDelimiter  | 
+V26 |  DatasourceASCIIDelimiter  | 
+V27 |  DatasourceASCIIDelimiter  | 
+V28 |  DatasourceASCIIDelimiter  | 
+V29 |  DatasourceASCIIDelimiter  | 
+V30 |  DatasourceASCIIDelimiter  | 
+V31 |  DatasourceASCIIDelimiter  | 
+V32 |  DatasourceASCIIDelimiter  | 
+V33 |  DatasourceASCIIDelimiter  | 
+V34 |  DatasourceASCIIDelimiter  |  
+V35 |  DatasourceASCIIDelimiter  | 
+V36 |  DatasourceASCIIDelimiter  | 
+V37 |  DatasourceASCIIDelimiter  | 
+V38 |  DatasourceASCIIDelimiter  | 
+V39 |  DatasourceASCIIDelimiter  | 
+V40 |  DatasourceASCIIDelimiter  | 
+NumberToString(NVALUE) |  DatasourceASCIIDelimiter  | 
+SVALUE |  DatasourceASCIIDelimiter  | 
+IF(VALUE_IS_STRING = 1, '1', '0');
+# strip out newlines in comments to avoid breaking up future imports
+l_LocNext = Scan ( Char(10),  s_String  );
+
+While ( l_LocNext > 0 );
+    s_String = Subst ( s_String , 1, l_LocNext - 1) | ' ' | Subst (  s_String , l_LocNext+1, Long ( s_String ) - l_LocNext );
+     l_LocNext = Scan ( Char(10), s_String );
+End;
+
+textoutput(sExportFile, s_String);
+
+#endregion
+#region Epilog
+#****Begin: Generated Statements***
+#****End: Generated Statements****
+#endregion

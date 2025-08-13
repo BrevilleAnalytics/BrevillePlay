@@ -1,0 +1,5 @@
+{
+	"@type":"Subset",
+	"Name":"All PnL Accounts",
+	"Expression":"{TM1DRILLDOWNMEMBER(DRILLUPMEMBER({[GLAccount].[GLAccount].[Profit After Tax]} , {[GLAccount].[GLAccount].[Profit After Tax]}), {[GLAccount].[GLAccount].[Profit After Tax]}, RECURSIVE)}"
+}

@@ -1,0 +1,10 @@
+{
+	"@type":"Subset",
+	"Name":"}System.Src.CubeCMRunRatesRatiosCalc.20221011023139.787",
+	"Elements":
+	[
+		{
+			"@id":"Dimensions('CMRunRatesMeasure')/Hierarchies('CMRunRatesMeasure')/Elements('1Month')"
+		}
+	]
+}

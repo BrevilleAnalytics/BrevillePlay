@@ -1,0 +1,13 @@
+{
+	"@type":"Dimension",
+	"Name":"GLtoBSMappingMeasure",
+	"AllLeavesHierarchyName":"",
+	"DefaultHierarchy":
+	{
+		"@id":"Dimensions('GLtoBSMappingMeasure')/Hierarchies('GLtoBSMappingMeasure')"
+	},
+	"Hierarchies@Code.links":
+	[
+		"GLtoBSMappingMeasure.hierarchies/GLtoBSMappingMeasure.json"
+	]
+}

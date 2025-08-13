@@ -1,0 +1,13 @@
+{
+	"@type":"Dimension",
+	"Name":"Theatre",
+	"AllLeavesHierarchyName":"",
+	"DefaultHierarchy":
+	{
+		"@id":"Dimensions('Theatre')/Hierarchies('Theatre')"
+	},
+	"Hierarchies@Code.links":
+	[
+		"Theatre.hierarchies/Theatre.json"
+	]
+}

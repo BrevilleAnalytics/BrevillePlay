@@ -1,0 +1,35 @@
+{
+	"@type":"Cube",
+	"Name":"BSLease",
+	"Rules@Code.link":"BSLease.rules",
+	"Dimensions":
+	[
+		{
+			"@id":"Dimensions('BusinessUnit')"
+		},
+		{
+			"@id":"Dimensions('Currency')"
+		},
+		{
+			"@id":"Dimensions('BSComponent')"
+		},
+		{
+			"@id":"Dimensions('BSLeaseLocation')"
+		},
+		{
+			"@id":"Dimensions('FiscalMonth')"
+		},
+		{
+			"@id":"Dimensions('Version')"
+		},
+		{
+			"@id":"Dimensions('BSLeaseMeasure')"
+		}
+	],
+	"Views@Code.links":
+	[
+		"BSLease.views/#lease.json",
+		"BSLease.views/App.BSLeaseRepayment.json",
+		"BSLease.views/App.BSStgLease.json"
+	]
+}

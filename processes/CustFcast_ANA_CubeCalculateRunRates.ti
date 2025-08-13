@@ -1,0 +1,274 @@
+#region Prolog
+#****Begin: Generated Statements***
+#****End: Generated Statements****
+
+#This process should be run after loading Actuals - it clears runs rates and recalculates then calculates ratios and spreads to Forecast months
+
+sTestFile = CellGetS( 'syEnvironment', 'Breville', 'Temp Folder') | '\' | 'CustFcastRunRates.txt';
+
+# Clear data from target cube
+# Create temp cubeview for clearing existing run rates before recalculating
+sCub_Tgt = 'CustomerForecast' ;
+sView_Tgt = 'CustClearRunRatesTemp' ;
+sSub_Tgt = 'CustClearRunRatesTemp' ;
+pTemp = 1; 
+
+IF( ViewExists( sCub_Tgt , sView_Tgt ) = 1 ) ; 
+ ViewDestroy ( sCub_Tgt, sView_Tgt ) ;
+ENDIF;
+ViewCreate( sCub_Tgt, sView_Tgt , pTemp ) ;
+
+i_TabDim = 1 ;
+While ( TabDim ( sCub_Tgt , i_TabDim ) @<> '' ) ;
+   sDim = TabDim ( sCub_Tgt , i_TabDim ) ;
+
+  If( sDim @= 'ProductCustFcast' ) ;
+      sMDX = '{TM1FILTERBYLEVEL ( {TM1SUBSETALL ( ['|sDim|'] ) } , 0 ) }' ;
+  ElseIf( sDim @= 'CustomerCustFcast' ) ;
+      sMDX = '{TM1FILTERBYLEVEL ( {TM1SUBSETALL ( ['|sDim|'] ) } , 0 ) }' ;    
+  ElseIf( sDim @= 'BusinessUnit' ) ;
+      sMDX = '{TM1FILTERBYLEVEL ( {TM1SUBSETALL ( ['|sDim|'] ) } , 0 ) }' ;
+  ElseIf( sDim @= 'Theatre' ) ;
+      sMDX = '{TM1FILTERBYLEVEL ( {TM1SUBSETALL ( ['|sDim|'] ) } , 0 ) }' ;
+  ElseIf( sDim @= 'VersionCustFcast' ) ;
+     sMDX = '{ [' | sDim | '].[' | sDim | '].[Actual] }' ;
+  ElseIf( sDim @= 'MonthCustFcast' ) ;
+     sMDX = '{ [' | sDim | '].[' | sDim | '].[Last 3 Months],
+               [' | sDim | '].[' | sDim | '].[Last 6 Months]}' ; 
+  ElseIf( sDim @= 'Currency' ) ;
+      sMDX = '{ [' | sDim | '].[' | sDim | '].[Local Currency] }' ; 
+  ElseIf( sDim @= 'MeasureCustFcast' ) ;
+      sMDX = '{ [' | sDim | '].[' | sDim | '].[Contribution Margin],
+                [' | sDim | '].[' | sDim | '].[Shipped Units],
+                [' | sDim | '].[' | sDim | '].[Returned Units],
+                [' | sDim | '].[' | sDim | '].[Net Sales],
+                [' | sDim | '].[' | sDim | '].[Net Sales per Unit]}';
+#  Else ;
+    #  sMDX = '{TM1FILTERBYLEVEL ( {TM1SUBSETALL ( ['|sDim|'] ) } , 0 ) }' ;
+  EndIf ;
+
+If (SubsetExists ( sDim, sSub_Tgt ) <> 0 );
+      SubsetDestroy( sDim, sSub_Tgt );
+  endif;
+  
+   SubsetCreateByMDX ( sSub_Tgt , sMDX ,sDim, pTemp ) ;
+   SubsetMDXSet (sDim , sSub_Tgt , '' ) ;
+   ViewSubsetAssign (sCub_Tgt , sView_Tgt , sDim , sSub_Tgt ) ;
+
+i_TabDim = i_TabDim + 1 ;
+End ;
+
+ ViewZeroOut(sCub_Tgt, sView_Tgt);
+
+
+# Create temp cubeview for Source of this processes
+sCube = 'CustomerForecast';
+sSub = 'Cust3MthRRTemp' ;
+sView = 'Cust3MthRRTemp' ;
+pTemp = 0 ; 
+
+If ( ViewExists ( sCube , sView ) <> 0 ) ;
+   ViewDestroy ( sCube , sView ) ;
+EndIf ;
+ViewCreate ( sCube , sView , pTemp ) ;
+
+i_TabDim = 1 ;
+While ( TabDim ( sCub_Tgt , i_TabDim ) @<> '' ) ;
+   sDim = TabDim ( sCub_Tgt , i_TabDim ) ;
+
+  If( sDim @= 'ProductCustFcast' ) ;
+     sMDX = '{TM1FILTERBYLEVEL ( {TM1SUBSETALL ( ['|sDim|'] ) } , 0 ) }' ;
+#          sMDX = '{ [' | sDim | '].[' | sDim | '].[BBL002SIL0NUC1] ,
+#          [' | sDim | '].[' | sDim | '].[BBL605BSS1BCA1] }' ;
+  ElseIf( sDim @= 'CustomerCustFcast' ) ;
+     # sMDX = '{TM1FILTERBYLEVEL ( {TM1SUBSETALL ( ['|sDim|'] ) } , 0 ) }' ;
+    sMDX = '{ DRILLDOWNMEMBER(TM1FILTERBYLEVEL(TM1SUBSETALL([CustomerCustFcast]) , 1) , {[CustomerCustFcast].[CustomerCustFcast].[All CustomerCustFcast]} , RECURSIVE) }' ;  
+     ElseIf( sDim @= 'BusinessUnit' ) ;
+      sMDX = '{TM1FILTERBYLEVEL ( {TM1SUBSETALL ( ['|sDim|'] ) } , 0 ) }' ;
+  ElseIf( sDim @= 'Theatre' ) ;
+      sMDX = '{TM1FILTERBYLEVEL ( {TM1SUBSETALL ( ['|sDim|'] ) } , 0 ) }' ;
+  ElseIf( sDim @= 'VersionCustFcast' ) ;
+      sMDX = '{ [' | sDim | '].[' | sDim | '].[Actual] ,
+                [' | sDim | '].[' | sDim | '].[Prior Year] ,
+                [' | sDim | '].[' | sDim | '].[Forecast] }' ;
+  ElseIf( sDim @= 'MonthCustFcast' ) ;
+      sMDX = '{DISTINCT({[MonthCustFcast].[MonthCustFcast].[Financial Year], DESCENDANTS([MonthCustFcast].[MonthCustFcast].[Financial Year], 99 , LEAVES)})}';
+#       sMDX = '{ [' | sDim | '].[' | sDim | '].[Jul],
+#                 [' | sDim | '].[' | sDim | '].[Aug],
+#                 [' | sDim | '].[' | sDim | '].[Sep]}';
+  ElseIf( sDim @= 'Currency' ) ;
+      sMDX = '{ [' | sDim | '].[' | sDim | '].[Local Currency] }' ; 
+  ElseIf( sDim @= 'MeasureCustFcast' ) ;
+       sMDX = '{ [' | sDim | '].[' | sDim | '].[Contribution Margin],
+                 [' | sDim | '].[' | sDim | '].[Shipped Units],
+                 [' | sDim | '].[' | sDim | '].[Returned Units],
+                 [' | sDim | '].[' | sDim | '].[Net Sales] }';
+  Else ;
+      sMDX = '{TM1FILTERBYLEVEL ( {TM1SUBSETALL ( ['|sDim|'] ) } , 0 ) }' ;
+  EndIf ;
+
+ If (SubsetExists ( sDim, sSub) <> 0 );
+      SubsetDestroy( sDim, sSub );
+  endif;
+SubsetCreatebyMDX ( sSub , sMDX , pTemp ) ;
+SubsetMDXSet ( sDim , sSub , '' ) ;
+ViewSubsetAssign ( sCube , sView , sDim , sSub ) ;
+
+i_TabDim = i_TabDim + 1 ;
+End ;
+
+ViewExtractSkipCalcsSet ( sCube , sView , 1 ) ;  
+# 0 = take data at consolidation
+ViewExtractSkipRuleValuesSet ( sCube , sView , 0 ) ;
+#0 = take rule result as data
+ViewExtractSkipZeroesSet ( sCube , sView , 1  ) ;
+#1 = skip zeros
+
+# Assign Datasource
+DataSourceType = 'VIEW' ;
+DataSourceNameForServer = sCube ;
+DataSourceCubeview = sView ;
+
+
+# sDim = 'FiscalMonth' ;
+# If ( SubsetExists ( sDim , sSub ) = 1 ) ;
+#    SubsetDeleteAllElements ( sDim , sSub ) ;
+# Else ;
+#    SubsetCreate ( sDim , sSub ) ;
+# EndIf ;
+# While (nsSub_Period_All_Size >= 1);
+# #get element name 
+# 	sPeriod_Current = SubsetGetElementName( 'FiscalMonth', sSub_Period_All, nsSub_Period_All_Size);
+# 	sPeriodIndex_Current = ATTRS('FiscalMonth', sPeriod_Current, 'PeriodIndex');
+#     nPeriodIndex_Current = StringToNumber(sPeriodIndex_Current);
+
+# 	If(nPeriodIndex_Start < nPeriodIndex_Current & nPeriodIndex_End >= nPeriodIndex_Current);  
+#     	i=1;
+
+#         SubsetElementInsert( sDim ,  sSub , sPeriod_Current,i);
+#         i=i+1;
+# 	Endif;
+
+# 	nsSub_Period_All_Size = nsSub_Period_All_Size - 1;
+# End;
+# ViewSubsetAssign ( sCube , sView , sDim , sSub ) ;
+
+
+
+# Create temp subsets and assign it to the view
+# sCub_Tgt = 'CMRunRates' ;
+# sStringMonth = 'Month' ;
+# sRatioDriver = NumberToString ( pnPeriods ) | sStringMonth ;
+
+#endregion
+#region Metadata
+#****Begin: Generated Statements***
+#****End: Generated Statements****
+
+#endregion
+#region Data
+#****Begin: Generated Statements***
+#****End: Generated Statements****
+
+sDimName = 'MonthCustFcast';
+sDimNameAttr = 'Last3Months';
+
+#Put the 3,6 month run rates in db
+
+#vCurrentMonth = Month(Today(1));  
+vCurrentMonth = 3; 
+
+#ASCIIOutput( sTestFile,NumberToString(  vCurrentMonth ));
+
+# If Version is Actual and Last 3 months Flagged on MonthCustFcast and Current Month is greater than MonthNumber then increment the value for last 3 months:
+if (vVersionCustFcast @= 'Actual' &  ATTRN('MonthCustFcast', vMonthCustFcast, 'Last3Months') = 1  & vCurrentMonth > ATTRN('MonthCustFcast', vMonthCustFcast, 'MonthNumber'));
+CellIncrementN(Value, sCub_Tgt, ProductCustFcast, CustomerCustFcast, BusinessUnit, Theatre, 'Actual', 'Last 3 Months', 'Local', MeasureCustFcast);
+#Else if Version is Prior Year and Last 3 months Flagged on MonthCustFcast and Current Month is less than MonthNumber then increment the value:
+elseif (vVersionCustFcast @= 'Prior Year' &  ATTRN('MonthCustFcast', vMonthCustFcast, 'Last3Months') = 1  & vCurrentMonth < ATTRN('MonthCustFcast', vMonthCustFcast, 'MonthNumber')); 
+CellIncrementN(Value, sCub_Tgt, ProductCustFcast, CustomerCustFcast, BusinessUnit, Theatre, 'Actual', 'Last 3 Months', 'Local', MeasureCustFcast);
+endif;
+ 
+
+# If Version is Actual and Last 6 months Flagged on MonthCustFcast and Current Month is greater than MonthNumber then increment the value for last 6 months from Actual Scenario:
+if (vVersionCustFcast @= 'Actual' &  ATTRN('MonthCustFcast', vMonthCustFcast, 'Last6Months') = 1  & vCurrentMonth > ATTRN('MonthCustFcast', vMonthCustFcast, 'MonthNumber'));
+CellIncrementN(Value, sCub_Tgt, ProductCustFcast, CustomerCustFcast, BusinessUnit, Theatre, 'Actual', 'Last 6 Months', 'Local', MeasureCustFcast);
+#Else if Version is Prior Year and Last 6 months Flagged on MonthCustFcast and Current Month is less than MonthNumber then increment the value for last 6 months from Prior Year Scenario:
+elseif (vVersionCustFcast @= 'Prior Year' &  ATTRN('MonthCustFcast', vMonthCustFcast, 'Last6Months') = 1  & vCurrentMonth < ATTRN('MonthCustFcast', vMonthCustFcast, 'MonthNumber'));  
+CellIncrementN(Value, sCub_Tgt, ProductCustFcast, CustomerCustFcast, BusinessUnit, Theatre, 'Actual', 'Last 6 Months', 'Local', MeasureCustFcast);
+endif;
+
+
+
+
+
+# Get Values for calculating Ratios
+#  sNetSales3 	  = CellGetN( sCub_Tgt, ProductCustFcast, CustomerCustFcast, BusinessUnit , Theatre , 'Actual', 'Last 3 Months' , 'Local' , 'Net Sales' );
+#  sCM3	      = CellGetN( sCub_Tgt, ProductCustFcast, CustomerCustFcast, BusinessUnit , Theatre , 'Actual', 'Last 3 Months' , 'Local' , 'Contribution Margin' );
+#  sShippedUnits3 = CellGetN( sCub_Tgt, ProductCustFcast, CustomerCustFcast,  BusinessUnit , Theatre , 'Actual', 'Last 3 Months' , 'Local' , 'Shipped Units' );
+
+#  sNetSales6      = CellGetN( sCub_Tgt, ProductCustFcast, CustomerCustFcast, BusinessUnit , Theatre , 'Actual', 'Last 6 Months' , 'Local' , 'Net Sales' );
+#  sCM6	      = CellGetN( sCub_Tgt, ProductCustFcast, CustomerCustFcast, BusinessUnit , Theatre , 'Actual', 'Last 6 Months' , 'Local' , 'Contribution Margin' );
+#  sShippedUnits6 = CellGetN( sCub_Tgt, ProductCustFcast, CustomerCustFcast,  BusinessUnit , Theatre , 'Actual', 'Last 6 Months' , 'Local' , 'Shipped Units' );
+
+
+# # Calculate Ratios
+#  sNetSalesPerUnit3 = ABS ( sNetSales3 \ sShippedUnits3 ) ;
+#  sNetSalesPerUnit6 = ABS ( sNetSales6 \ sShippedUnits6 ) ;
+
+# #Put the calculated value in the cell
+# CellPutN ( sNetSalesPerUnit3 , sCub_Tgt, ProductCustFcast, CustomerCustFcast , BusinessUnit , Theatre , 'Actual','Last 3 Months' , 'Local' , 'Net Sales per Unit'  );  
+# CellPutN ( sNetSalesPerUnit6 , sCub_Tgt, ProductCustFcast, CustomerCustFcast , BusinessUnit , Theatre , 'Actual','Last 6 Months' , 'Local' , 'Net Sales per Unit'  );  
+
+# #Get the Value from the All Customer Total
+# sNetSalesPerUnitAllCustomers3 = CellGetN( sCub_Tgt, ProductCustFcast, 'All CustomerCustFcast',  BusinessUnit , Theatre , 'Actual', 'Last 3 Months' , 'Local' , 'Net Sales per Unit' );
+# sNetSalesPerUnitAllCustomers6 = CellGetN( sCub_Tgt, ProductCustFcast, 'All CustomerCustFcast',  BusinessUnit , Theatre , 'Actual', 'Last 6 Months' , 'Local' , 'Net Sales per Unit' );
+#Compare which to use
+#  if( sNetSalesPerUnit = 0);
+#  sNetSalesPerUnitToUse = sNetSalesPerUnitAllCustomers;
+#  else;
+#  sNetSalesPerUnitToUse = sNetSalesPerUnit;
+#  endif;
+
+
+#ASCIIOutput( sTestFile, ProductCustFcast, CustomerCustFcast , BusinessUnit , Theatre, vVersionCustFcast ,vMonthCustFcast , Currency ,  CustFcastMeasure ,NumberToString( Value ));
+#  ASCIIOutput( sTestFile,ProductCustFcast,NumberToString(  sNetSalesPerUnitAllCustomers ));
+
+
+
+# Spread Ratio to all Forecast Months
+#  sSub_OM = 'FcastMonths';
+#  nSubMthSize = SubsetGetSize( 'MonthCustFcast', sSub_OM );
+
+   #IF(1=0);
+
+#    i = 1 ;
+#        While ( i <= nSubMthSize ) ;
+#           sMonths = SubsetGetElementName ( 'MonthCustFcast' , sSub_OM , i ) ; 
+# # Put Values into cube (if no history; use value at All Stats Group Level)
+#            if( sNetSalesPerUnit3 = 0)  ;
+#            CellPutN ( sNetSalesPerUnitAllCustomers3 , sCub_Tgt, ProductCustFcast, CustomerCustFcast , BusinessUnit , Theatre , 'Forecast', sMonths , 'Local' , 'Net Sales per Unit'  );
+#            else;
+#            CellPutN ( sNetSalesPerUnit3 , sCub_Tgt, ProductCustFcast, CustomerCustFcast , BusinessUnit , Theatre , 'Forecast', sMonths , 'Local' , 'Net Sales per Unit'  );
+#            endif;
+# #          ASCIIOutput( sTestFile, ProductCustFcast, CustomerCustFcast , BusinessUnit , Theatre, VersionCustFcast , MonthCustFcast , Currency , CustFcastMeasure , NumberToString( sNetSalesPerUnitToUse ) );
+# #          ASCIIOutput( sTestFile,NumberToString(  sNetSalesPerUnitAllCustomers3 ));
+#    i = i + 1 ;
+#       End ;
+
+# Put Ratio to Run rate Total in Forecast Scenario
+#  if( sNetSalesPerUnit3 = 0)  ;
+#            CellPutN ( sNetSalesPerUnitAllCustomers3 , sCub_Tgt, ProductCustFcast, CustomerCustFcast , BusinessUnit , Theatre , 'Forecast', 'Last 3 Months'  , 'Local' , 'Net Sales per Unit'  );
+#            else;
+#            CellPutN ( sNetSalesPerUnit3 , sCub_Tgt, ProductCustFcast, CustomerCustFcast , BusinessUnit , Theatre , 'Forecast', 'Last 3 Months'  , 'Local' , 'Net Sales per Unit'  );
+#            endif;
+
+#  if( sNetSalesPerUnit6 = 0)  ;
+#            CellPutN ( sNetSalesPerUnitAllCustomers6 , sCub_Tgt, ProductCustFcast, CustomerCustFcast , BusinessUnit , Theatre , 'Forecast', 'Last 6 Months'  , 'Local' , 'Net Sales per Unit'  );
+#            else;
+#            CellPutN ( sNetSalesPerUnit6 , sCub_Tgt, ProductCustFcast, CustomerCustFcast , BusinessUnit , Theatre , 'Forecast', 'Last 6 Months'  , 'Local' , 'Net Sales per Unit'  );
+#            endif;
+#endregion
+#region Epilog
+#****Begin: Generated Statements***
+#****End: Generated Statements****
+#endregion

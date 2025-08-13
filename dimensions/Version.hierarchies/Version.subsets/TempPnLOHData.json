@@ -1,0 +1,10 @@
+{
+	"@type":"Subset",
+	"Name":"TempPnLOHData",
+	"Elements":
+	[
+		{
+			"@id":"Dimensions('Version')/Hierarchies('Version')/Elements('Actual')"
+		}
+	]
+}

@@ -1,0 +1,5 @@
+{
+	"@type":"Subset",
+	"Name":"Default",
+	"Expression":"{ORDER(EXCEPT({[FiscalMonth].[FiscalMonth].[FY16],[FiscalMonth].[FiscalMonth].[FY17],[FiscalMonth].[FiscalMonth].[FY18],[FiscalMonth].[FiscalMonth].[FY19],[FiscalMonth].[FiscalMonth].[FY20],[FiscalMonth].[FiscalMonth].[FY21],[FiscalMonth].[FiscalMonth].[FY22],[FiscalMonth].[FiscalMonth].[FY23],[FiscalMonth].[FiscalMonth].[FY24]} , {[FiscalMonth].[FiscalMonth].[FY16]}) , IIF([FiscalMonth].[FiscalMonth].CURRENTMEMBER.PROPERTIES(\"Caption\") = \"\" , [FiscalMonth].[FiscalMonth].CURRENTMEMBER.PROPERTIES(\"MEMBER_CAPTION\") , [FiscalMonth].[FiscalMonth].CURRENTMEMBER.PROPERTIES(\"Caption\")) , BDESC)}"
+}

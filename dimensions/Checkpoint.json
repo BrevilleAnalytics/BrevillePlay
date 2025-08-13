@@ -1,0 +1,13 @@
+{
+	"@type":"Dimension",
+	"Name":"Checkpoint",
+	"AllLeavesHierarchyName":"",
+	"DefaultHierarchy":
+	{
+		"@id":"Dimensions('Checkpoint')/Hierarchies('Checkpoint')"
+	},
+	"Hierarchies@Code.links":
+	[
+		"Checkpoint.hierarchies/Checkpoint.json"
+	]
+}

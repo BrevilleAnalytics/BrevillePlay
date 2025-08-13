@@ -1,0 +1,5 @@
+{
+	"@type":"Subset",
+	"Name":"App.RegionalList",
+	"Expression":"{EXCEPT([syCubeCopyCubeList].[syCubeCopyCubeList].MEMBERS , {[syCubeCopyCubeList].[syCubeCopyCubeList].[BRExchangeRate],[syCubeCopyCubeList].[syCubeCopyCubeList].[CMRatiosSeedDefault]})}"
+}

@@ -1,0 +1,58 @@
+#region Prolog
+#****Begin: Generated Statements***
+#****End: Generated Statements****
+
+#~~~~~~~~~ Build dimension ~~~~~~~~~~~~~~~~
+#-- Create a target dimesnion
+
+# constant
+sDimName_Tgt = 'CustomerCustFcast';
+sHierName_Tgt = 'CustomerCustFcast';
+
+ If(DimensionExists( sDimName_Tgt  ) = 0 ) ;
+    DimensionCreate( sDimName_Tgt  ) ;
+ Endif;
+
+ #-- Create a target dimension hieararchy
+ If(HierarchyExists(sDimName_Tgt, sHierName_Tgt) = 0);
+    HierarchyCreate(sDimName_Tgt, sHierName_Tgt);
+ Else;
+    HierarchyDeleteAllElements(sDimName_Tgt, sHierName_Tgt);
+ Endif;
+ 
+#DimensionDeleteAllElements(sDimName_Tgt);
+
+# Create Top Parent in Hierarchy
+sElTopParent = 'All ' | sHierName_Tgt  ;
+HierarchyElementInsert ( sDimName_Tgt, sHierName_Tgt,'',sElTopParent, 'C');
+HierarchySortOrder( sDimName_Tgt,  sHierName_Tgt,  'ByName', 'Ascending','ByHierarchy', 'Ascending'); 
+ 
+#endregion
+#region Metadata
+#****Begin: Generated Statements***
+#****End: Generated Statements****
+
+sDimName_Src = 'Customer';
+sDimNameAttr_Src = 'StatsGroup';
+
+
+# Set Attribute for StatsGroup with catch all bucket for elements with null attribute value
+If (ATTRS(sDimName_Src, vCustomer, sDimNameAttr_Src ) @= '');
+vSG = 'No Stats Group';
+Else;
+vSG = ATTRS(sDimName_Src, vCustomer, sDimNameAttr_Src );
+endIf;
+
+#Add Chidren to hierarchy
+DimensionElementComponentAdd( sDimName_Tgt, sElTopParent, vSG, 1 );
+
+
+#endregion
+#region Data
+#****Begin: Generated Statements***
+#****End: Generated Statements****
+#endregion
+#region Epilog
+#****Begin: Generated Statements***
+#****End: Generated Statements****
+#endregion

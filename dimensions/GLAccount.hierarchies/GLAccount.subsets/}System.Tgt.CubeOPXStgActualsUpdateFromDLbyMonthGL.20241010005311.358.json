@@ -1,0 +1,16 @@
+{
+	"@type":"Subset",
+	"Name":"}System.Tgt.CubeOPXStgActualsUpdateFromDLbyMonthGL.20241010005311.358",
+	"Elements":
+	[
+		{
+			"@id":"Dimensions('GLAccount')/Hierarchies('GLAccount')/Elements('730101')"
+		},
+		{
+			"@id":"Dimensions('GLAccount')/Hierarchies('GLAccount')/Elements('730102')"
+		},
+		{
+			"@id":"Dimensions('GLAccount')/Hierarchies('GLAccount')/Elements('730103')"
+		}
+	]
+}

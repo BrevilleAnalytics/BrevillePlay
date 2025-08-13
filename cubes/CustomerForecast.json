@@ -1,0 +1,39 @@
+{
+	"@type":"Cube",
+	"Name":"CustomerForecast",
+	"Rules@Code.link":"CustomerForecast.rules",
+	"Dimensions":
+	[
+		{
+			"@id":"Dimensions('ProductCustFcast')"
+		},
+		{
+			"@id":"Dimensions('CustomerCustFcast')"
+		},
+		{
+			"@id":"Dimensions('BusinessUnit')"
+		},
+		{
+			"@id":"Dimensions('Theatre')"
+		},
+		{
+			"@id":"Dimensions('VersionCustFcast')"
+		},
+		{
+			"@id":"Dimensions('MonthCustFcast')"
+		},
+		{
+			"@id":"Dimensions('Currency')"
+		},
+		{
+			"@id":"Dimensions('MeasureCustFcast')"
+		}
+	],
+	"Views@Code.links":
+	[
+		"CustomerForecast.views/Cust3MthRRTemp.json",
+		"CustomerForecast.views/FlagProductsByCustomerTemp.json",
+		"CustomerForecast.views/Brand Summary.json",
+		"CustomerForecast.views/Default.json"
+	]
+}

@@ -1,0 +1,18 @@
+{
+	"@type":"Process",
+	"Name":"TestConnection",
+	"HasSecurityAccess":false,
+	"UIData":"_ParameterConstraints=e30=€",
+	"DataSource":
+	{
+		"Type":"ODBC",
+		"dataSourceNameForClient":"prd-aea-asyn-abi-fpa-ibm",
+		"dataSourceNameForServer":"prd-aea-asyn-abi-fpa-ibm",
+		"password":"dxIZozp=PBL9q:]X[eu9QyY<h\\mFdoyT[2cnQ:3NmSYhO^Rop=@D`7u=p21uaKO`LQ62pH^s?h=yYgcDcWhVqA[B7ut@6qV2G>\\Zt7Hwe9qJn0J4P9[dySdxPd1[3fu2W5cuWpa>zEQ<;w:qfEEOYSKkOAGO_<^hgleD2@>9krRn-c;nHU`Ji28Jy9qso(TT@YnUi_Ij",
+		"query":"SET NOCOUNT ON; \r\nSELECT  [CHARTOFACCOUNTS]\r\n      ,[MAINACCOUNTID]\r\n      ,[NAME]\r\n      ,[MAINACCOUNTCATEGORY]\r\n      ,[ACCOUNTCATEGORYDESCRIPTION]\r\n  FROM [dbo].[MainAccount]",
+		"userName":"sql_fpa_ibm_prd_readonly",
+		"usesUnicode":true
+	},
+	"Parameters":[],
+	"Variables":[]
+}

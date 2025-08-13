@@ -1,0 +1,366 @@
+{
+	"@type":"Hierarchy",
+	"Name":"BSLeaseLocation",
+	"Elements":
+	[
+		{
+			"Name":"TOTAL",
+			"Type":"Consolidated"
+		},
+		{
+			"Name":"Minto",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"SCP Ground-Lvl1 65% AUO",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"SCP Ground-Lvl1 35% AUD",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"SCP Level 2a",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"SCP Level 2b (new)",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"SCP Design Studio Renew",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"Test Kitchen (car sapce inc.)",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"Prague Warehouse 60% (revised)",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"Coworking Chapultepec",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"Toronto Office",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"Montreal Office",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"Broadway Newmarket",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"Prague Warehouse 40% (revised)",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"MV for Sandra Duncan",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"MV for Luke Powell",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"New Madora Lease Suite 600",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"Torrance (Updated)",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"Winchester Lease (Updated)",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"SuiteA 108-109",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"Lotte Car Lease (revised)",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"New Office Lease",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"Melbourne Office",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"SuiteB 106",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"Brescia",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"SER Car 1",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"LIT Car 1",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"LIT Car 2",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"LIT Car 3",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"LIT Car 4",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"LIT Car 5",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"LIT Car 6",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"LIT Car 7",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"LIT Car 8",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"LIT Car 9",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"LIT Car 10",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"LIT Car 11",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"LIT Car 12",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"LIT Car 13",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"Hong Kong Lease",
+			"Type":"Numeric"
+		}
+	],
+	"Edges":
+	[
+		{
+			"ParentName":"TOTAL",
+			"ComponentName":"Minto",
+			"Weight":1
+		},
+		{
+			"ParentName":"TOTAL",
+			"ComponentName":"SCP Ground-Lvl1 65% AUO",
+			"Weight":1
+		},
+		{
+			"ParentName":"TOTAL",
+			"ComponentName":"SCP Ground-Lvl1 35% AUD",
+			"Weight":1
+		},
+		{
+			"ParentName":"TOTAL",
+			"ComponentName":"SCP Level 2a",
+			"Weight":1
+		},
+		{
+			"ParentName":"TOTAL",
+			"ComponentName":"SCP Level 2b (new)",
+			"Weight":1
+		},
+		{
+			"ParentName":"TOTAL",
+			"ComponentName":"SCP Design Studio Renew",
+			"Weight":1
+		},
+		{
+			"ParentName":"TOTAL",
+			"ComponentName":"Test Kitchen (car sapce inc.)",
+			"Weight":1
+		},
+		{
+			"ParentName":"TOTAL",
+			"ComponentName":"Prague Warehouse 60% (revised)",
+			"Weight":1
+		},
+		{
+			"ParentName":"TOTAL",
+			"ComponentName":"Coworking Chapultepec",
+			"Weight":1
+		},
+		{
+			"ParentName":"TOTAL",
+			"ComponentName":"Toronto Office",
+			"Weight":1
+		},
+		{
+			"ParentName":"TOTAL",
+			"ComponentName":"Montreal Office",
+			"Weight":1
+		},
+		{
+			"ParentName":"TOTAL",
+			"ComponentName":"Broadway Newmarket",
+			"Weight":1
+		},
+		{
+			"ParentName":"TOTAL",
+			"ComponentName":"Prague Warehouse 40% (revised)",
+			"Weight":1
+		},
+		{
+			"ParentName":"TOTAL",
+			"ComponentName":"MV for Sandra Duncan",
+			"Weight":1
+		},
+		{
+			"ParentName":"TOTAL",
+			"ComponentName":"MV for Luke Powell",
+			"Weight":1
+		},
+		{
+			"ParentName":"TOTAL",
+			"ComponentName":"New Madora Lease Suite 600",
+			"Weight":1
+		},
+		{
+			"ParentName":"TOTAL",
+			"ComponentName":"Torrance (Updated)",
+			"Weight":1
+		},
+		{
+			"ParentName":"TOTAL",
+			"ComponentName":"Winchester Lease (Updated)",
+			"Weight":1
+		},
+		{
+			"ParentName":"TOTAL",
+			"ComponentName":"SuiteA 108-109",
+			"Weight":1
+		},
+		{
+			"ParentName":"TOTAL",
+			"ComponentName":"Lotte Car Lease (revised)",
+			"Weight":1
+		},
+		{
+			"ParentName":"TOTAL",
+			"ComponentName":"New Office Lease",
+			"Weight":1
+		},
+		{
+			"ParentName":"TOTAL",
+			"ComponentName":"Melbourne Office",
+			"Weight":1
+		},
+		{
+			"ParentName":"TOTAL",
+			"ComponentName":"SuiteB 106",
+			"Weight":1
+		},
+		{
+			"ParentName":"TOTAL",
+			"ComponentName":"Brescia",
+			"Weight":1
+		},
+		{
+			"ParentName":"TOTAL",
+			"ComponentName":"SER Car 1",
+			"Weight":1
+		},
+		{
+			"ParentName":"TOTAL",
+			"ComponentName":"LIT Car 1",
+			"Weight":1
+		},
+		{
+			"ParentName":"TOTAL",
+			"ComponentName":"LIT Car 2",
+			"Weight":1
+		},
+		{
+			"ParentName":"TOTAL",
+			"ComponentName":"LIT Car 3",
+			"Weight":1
+		},
+		{
+			"ParentName":"TOTAL",
+			"ComponentName":"LIT Car 4",
+			"Weight":1
+		},
+		{
+			"ParentName":"TOTAL",
+			"ComponentName":"LIT Car 5",
+			"Weight":1
+		},
+		{
+			"ParentName":"TOTAL",
+			"ComponentName":"LIT Car 6",
+			"Weight":1
+		},
+		{
+			"ParentName":"TOTAL",
+			"ComponentName":"LIT Car 7",
+			"Weight":1
+		},
+		{
+			"ParentName":"TOTAL",
+			"ComponentName":"LIT Car 8",
+			"Weight":1
+		},
+		{
+			"ParentName":"TOTAL",
+			"ComponentName":"LIT Car 9",
+			"Weight":1
+		},
+		{
+			"ParentName":"TOTAL",
+			"ComponentName":"LIT Car 10",
+			"Weight":1
+		},
+		{
+			"ParentName":"TOTAL",
+			"ComponentName":"LIT Car 11",
+			"Weight":1
+		},
+		{
+			"ParentName":"TOTAL",
+			"ComponentName":"LIT Car 12",
+			"Weight":1
+		},
+		{
+			"ParentName":"TOTAL",
+			"ComponentName":"LIT Car 13",
+			"Weight":1
+		},
+		{
+			"ParentName":"TOTAL",
+			"ComponentName":"Hong Kong Lease",
+			"Weight":1
+		}
+	],
+	"Subsets@Code.links":[]
+}

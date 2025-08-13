@@ -1,0 +1,10 @@
+{
+	"@type":"Subset",
+	"Name":"}System.Tgt.CubeCMRunRatesRatiosCalc.20221207000142.343",
+	"Elements":
+	[
+		{
+			"@id":"Dimensions('Currency')/Hierarchies('Currency')/Elements('Local Currency')"
+		}
+	]
+}

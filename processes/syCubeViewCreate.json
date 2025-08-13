@@ -1,0 +1,87 @@
+{
+	"@type":"Process",
+	"Name":"syCubeViewCreate",
+	"HasSecurityAccess":false,
+	"Code@Code.link":"syCubeViewCreate.ti",
+	"UIData":"_ParameterConstraints=e30=€",
+	"DataSource":
+	{
+		"Type":"None"
+	},
+	"Parameters":
+	[
+		{
+			"Name":"pCube",
+			"Prompt":"Cube Name",
+			"Value":"",
+			"Type":"String"
+		},
+		{
+			"Name":"pView",
+			"Prompt":"Name of the View",
+			"Value":"",
+			"Type":"String"
+		},
+		{
+			"Name":"pSuppressConsol",
+			"Prompt":"Suppress Consolidations (Skip = 1)",
+			"Value":1,
+			"Type":"Numeric"
+		},
+		{
+			"Name":"pSuppressRules",
+			"Prompt":"Suppress Rules (Skip = 1)",
+			"Value":0,
+			"Type":"Numeric"
+		},
+		{
+			"Name":"pSuppressZero",
+			"Prompt":"Suppress Zero Data (Skip = 1)",
+			"Value":1,
+			"Type":"Numeric"
+		},
+		{
+			"Name":"pFilter",
+			"Prompt":"Filter: Year: 2006 + 2007 & Scenario: Actual + Budget & Organization: North America Operations",
+			"Value":"",
+			"Type":"String"
+		},
+		{
+			"Name":"pDimensionDelim",
+			"Prompt":"Delimiter for start of Dimension/Element set",
+			"Value":"&",
+			"Type":"String"
+		},
+		{
+			"Name":"pElementStartDelim",
+			"Prompt":"Delimiter for start of element list",
+			"Value":":",
+			"Type":"String"
+		},
+		{
+			"Name":"pElementDelim",
+			"Prompt":"Delimiter between elements",
+			"Value":"+",
+			"Type":"String"
+		},
+		{
+			"Name":"pTemporary",
+			"Prompt":"Create as temporary",
+			"Value":1,
+			"Type":"Numeric"
+		},
+		{
+			"Name":"pIncludeDescendants",
+			"Prompt":"Include all descendants for consolidated elements",
+			"Value":0,
+			"Type":"Numeric"
+		},
+		{
+			"Name":"pDebug",
+			"Prompt":"Debug: 0",
+			"Value":0,
+			"Type":"Numeric"
+		}
+	],
+	"Variables":[]
+}

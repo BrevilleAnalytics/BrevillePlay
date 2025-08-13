@@ -1,0 +1,23 @@
+{
+	"@type":"Hierarchy",
+	"Name":"GlobalEBITMeasure",
+	"Elements":
+	[
+		{
+			"Name":"Amount",
+			"Type":"Numeric"
+		}
+	],
+	"Subsets@Code.links":
+	[
+		"GlobalEBITMeasure.subsets/TempPnLCMData.json",
+		"GlobalEBITMeasure.subsets/TempPnLCorporateMktgData.json",
+		"GlobalEBITMeasure.subsets/TempPnLCorporateMktgDataOutlook.json",
+		"GlobalEBITMeasure.subsets/TempPnLEBITCalc.json",
+		"GlobalEBITMeasure.subsets/TempPnLEBITCalcv2.json",
+		"GlobalEBITMeasure.subsets/TempPnLOHData.json",
+		"GlobalEBITMeasure.subsets/TempPnLOtherIncomeData.json",
+		"GlobalEBITMeasure.subsets/TempPnLOtherIncomeDataOutlook.json",
+		"GlobalEBITMeasure.subsets/TempPnLRegMktgData.json"
+	]
+}

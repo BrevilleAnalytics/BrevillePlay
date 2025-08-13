@@ -1,0 +1,10 @@
+{
+	"@type":"Subset",
+	"Name":"TempFXRate",
+	"Elements":
+	[
+		{
+			"@id":"Dimensions('BRExchangeRateMeasure')/Hierarchies('BRExchangeRateMeasure')/Elements('FXRate')"
+		}
+	]
+}

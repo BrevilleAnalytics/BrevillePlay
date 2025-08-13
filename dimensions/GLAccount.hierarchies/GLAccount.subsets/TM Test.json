@@ -1,0 +1,5 @@
+{
+	"@type":"Subset",
+	"Name":"TM Test",
+	"Expression":"{TM1SubsetToSet([GLAccount].[GLAccount] , \"App.MgmtReporting\" , \"public\")}"
+}

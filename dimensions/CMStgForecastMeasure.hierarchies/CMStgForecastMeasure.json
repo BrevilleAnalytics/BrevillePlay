@@ -1,0 +1,58 @@
+{
+	"@type":"Hierarchy",
+	"Name":"CMStgForecastMeasure",
+	"Elements":
+	[
+		{
+			"Name":"Shipped Units",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"Vanguard Purchase Measures",
+			"Type":"Consolidated"
+		},
+		{
+			"Name":"Purchased Units",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"COGS per Unit",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"Purchase Value",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"COGS per Unit Override",
+			"Type":"Numeric"
+		}
+	],
+	"Edges":
+	[
+		{
+			"ParentName":"Vanguard Purchase Measures",
+			"ComponentName":"Purchased Units",
+			"Weight":0
+		},
+		{
+			"ParentName":"Vanguard Purchase Measures",
+			"ComponentName":"COGS per Unit",
+			"Weight":0
+		},
+		{
+			"ParentName":"Vanguard Purchase Measures",
+			"ComponentName":"COGS per Unit Override",
+			"Weight":0
+		},
+		{
+			"ParentName":"Vanguard Purchase Measures",
+			"ComponentName":"Purchase Value",
+			"Weight":0
+		}
+	],
+	"Subsets@Code.links":
+	[
+		"CMStgForecastMeasure.subsets/TempCMStgForecast.json"
+	]
+}

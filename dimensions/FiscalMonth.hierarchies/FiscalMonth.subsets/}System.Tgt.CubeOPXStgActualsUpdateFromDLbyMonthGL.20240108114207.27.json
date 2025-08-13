@@ -1,0 +1,10 @@
+{
+	"@type":"Subset",
+	"Name":"}System.Tgt.CubeOPXStgActualsUpdateFromDLbyMonthGL.20240108114207.27",
+	"Elements":
+	[
+		{
+			"@id":"Dimensions('FiscalMonth')/Hierarchies('FiscalMonth')/Elements('2020001')"
+		}
+	]
+}

@@ -1,0 +1,17 @@
+{
+	"@type":"Cube",
+	"Name":"syEnvironment",
+	"Dimensions":
+	[
+		{
+			"@id":"Dimensions('syEnvironment')"
+		},
+		{
+			"@id":"Dimensions('syEnvironmentMeasure')"
+		}
+	],
+	"Views@Code.links":
+	[
+		"syEnvironment.views/Default.json"
+	]
+}

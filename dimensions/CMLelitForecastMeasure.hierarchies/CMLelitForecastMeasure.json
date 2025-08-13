@@ -1,0 +1,127 @@
+{
+	"@type":"Hierarchy",
+	"Name":"CMLelitForecastMeasure",
+	"Elements":
+	[
+		{
+			"Name":"Contribution Margin",
+			"Type":"Consolidated"
+		},
+		{
+			"Name":"Net Shipments",
+			"Type":"Consolidated"
+		},
+		{
+			"Name":"Shipped Units",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"Returned Units",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"Warranty",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"Freight",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"Gross Margin",
+			"Type":"Consolidated"
+		},
+		{
+			"Name":"Cost of Goods Sold",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"COGS FX Variance",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"Net Sales",
+			"Type":"Consolidated"
+		},
+		{
+			"Name":"Rebates",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"Gross Sales (incl. Promo Costs",
+			"Type":"Consolidated"
+		},
+		{
+			"Name":"SKU Promo Costs",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"Gross Sales",
+			"Type":"Numeric"
+		}
+	],
+	"Edges":
+	[
+		{
+			"ParentName":"Contribution Margin",
+			"ComponentName":"Warranty",
+			"Weight":-1
+		},
+		{
+			"ParentName":"Contribution Margin",
+			"ComponentName":"Freight",
+			"Weight":-1
+		},
+		{
+			"ParentName":"Contribution Margin",
+			"ComponentName":"Gross Margin",
+			"Weight":1
+		},
+		{
+			"ParentName":"Net Shipments",
+			"ComponentName":"Shipped Units",
+			"Weight":1
+		},
+		{
+			"ParentName":"Net Shipments",
+			"ComponentName":"Returned Units",
+			"Weight":1
+		},
+		{
+			"ParentName":"Gross Margin",
+			"ComponentName":"Cost of Goods Sold",
+			"Weight":-1
+		},
+		{
+			"ParentName":"Gross Margin",
+			"ComponentName":"COGS FX Variance",
+			"Weight":-1
+		},
+		{
+			"ParentName":"Gross Margin",
+			"ComponentName":"Net Sales",
+			"Weight":1
+		},
+		{
+			"ParentName":"Net Sales",
+			"ComponentName":"Rebates",
+			"Weight":-1
+		},
+		{
+			"ParentName":"Net Sales",
+			"ComponentName":"Gross Sales (incl. Promo Costs",
+			"Weight":1
+		},
+		{
+			"ParentName":"Gross Sales (incl. Promo Costs",
+			"ComponentName":"SKU Promo Costs",
+			"Weight":-1
+		},
+		{
+			"ParentName":"Gross Sales (incl. Promo Costs",
+			"ComponentName":"Gross Sales",
+			"Weight":1
+		}
+	],
+	"Subsets@Code.links":[]
+}

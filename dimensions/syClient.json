@@ -1,0 +1,13 @@
+{
+	"@type":"Dimension",
+	"Name":"syClient",
+	"AllLeavesHierarchyName":"",
+	"DefaultHierarchy":
+	{
+		"@id":"Dimensions('syClient')/Hierarchies('syClient')"
+	},
+	"Hierarchies@Code.links":
+	[
+		"syClient.hierarchies/syClient.json"
+	]
+}

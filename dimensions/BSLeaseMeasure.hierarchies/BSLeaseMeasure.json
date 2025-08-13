@@ -1,0 +1,136 @@
+{
+	"@type":"Hierarchy",
+	"Name":"BSLeaseMeasure",
+	"Elements":
+	[
+		{
+			"Name":"Lease Liability - Australian Dollars",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"B/Fwd Liability",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"Interest Expense",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"Lease Repayment",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"Lease Repayment (-)",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"Principal",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"C/Fwd Liability",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"Right-of-Use Asset - Australian Dollars",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"B/Fwd RoU Asset",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"Dep'n Charge",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"C/Fwd RoU Asset",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"Calculation Item",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"Current Lease Liability",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"Non-current Lease Liability",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"RoU Opening balance",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"Depreciation",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"RoU Closing balance",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"--Lease Liability--",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"Lease Liability - Current",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"Lease Liability - Current Opening balance",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"Reclass non-current portion",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"Lease Liability - Current Closing balance",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"Lease Liability - Non-current",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"Lease Liability - Non-current Opening balance",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"Reclass non-current portion (-)",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"Lease Liability - Non-current Closing balance",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"Total lease liability",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"Check to leases summary",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"PV Monthly Lease Payment",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"Period",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"PV Monthly Lease Payment Cumsum",
+			"Type":"Numeric"
+		}
+	],
+	"Subsets@Code.links":
+	[
+		"BSLeaseMeasure.subsets/Lease.json",
+		"BSLeaseMeasure.subsets/Lease Repayment.json"
+	]
+}

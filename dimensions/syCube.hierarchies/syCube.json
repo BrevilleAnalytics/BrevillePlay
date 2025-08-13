@@ -1,0 +1,33 @@
+{
+	"@type":"Hierarchy",
+	"Name":"syCube",
+	"Elements":
+	[
+		{
+			"Name":"All Cube",
+			"Type":"Consolidated"
+		},
+		{
+			"Name":"syTITracker",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"syTM1Login",
+			"Type":"Numeric"
+		}
+	],
+	"Edges":
+	[
+		{
+			"ParentName":"All Cube",
+			"ComponentName":"syTITracker",
+			"Weight":1
+		},
+		{
+			"ParentName":"All Cube",
+			"ComponentName":"syTM1Login",
+			"Weight":1
+		}
+	],
+	"Subsets@Code.links":[]
+}

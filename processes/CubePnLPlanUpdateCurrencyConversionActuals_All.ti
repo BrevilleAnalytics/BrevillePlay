@@ -1,0 +1,518 @@
+#region Prolog
+#****Begin: Generated Statements***
+#****End: Generated Statements****
+
+#----------------------------------------------------------------------------------------------------------------------------
+#Region # Process Summary
+#----------------------------------------------------------------------------------------------------------------------------
+
+#<Process Description>
+# This process updates PnLPlan cube with Currency Conversion for different Rate types for Actuals Data
+#<Changes Log>
+# V1 - 27/09/2022 - Jithu Varghese - CPM Group - First draft
+# V2 - 5/10/ 2022 - Jithu Varghese - CPM Group - Update currency cube to include currency version
+
+#<Maintenance Log\>
+
+#<Execute Method>
+# Daily Schedule
+#<Execute Method\>
+
+#<Processes Executed>
+# syProcessLogInitialise
+# syProcessLogMessage
+# syTITracker
+#<Processes Executed\>
+
+#<Execute Schedule>
+# Scheduled daily
+#<Execute Schedule\>
+
+#<Estimated Run Time>
+#  secs
+#<Estimated Run Time\>
+
+#EndRegion # Process Summary
+
+#----------------------------------------------------------------------------------------------------------------------------
+# ~~~~~~~~~~Debugging ~~~~~~~~~~~~~~~#
+#----------------------------------------------------------------------------------------------------------------------------
+# Debug Flie Reference
+  sDebugFile = CellGetS( 'syEnvironment', 'Breville', 'Temp Folder') | '\' | GetProcessName() | '.txt';
+  sTestFile = CellGetS( 'syEnvironment', 'Breville', 'Temp Folder') | '\' | 'CurrencyLCdata.txt';
+
+
+#----------------------------------------------------------------------------------------------------------------------------
+# ~~~~~~~~~~System Variables ~~~~~~~~~~~~~~~#
+#----------------------------------------------------------------------------------------------------------------------------
+ IF ( psTITracker @= '' ) ;
+  psTITracker =  CellGetS ( 'syEnvironment', 'Breville', 'psyProcessLog' ) ;
+
+ ENDIF ;
+ 
+  sServer = 'Breville' ;
+  sUser = TM1User();
+  nStartTime = NOW;
+  sSystemMessage = '';
+  nRecordCountData = 0;
+  nRecordCountMetadata = 0;
+  NumericGlobalVariable( 'PrologMinorErrorCount' );
+  NumericGlobalVariable( 'MetaDataMinorErrorCount' );
+  NumericGlobalVariable( 'DataMinorErrorCount' );
+  nErrors = 0 ;
+
+IF ( DIMIX ( '}Clients', sUser ) > 0 );
+	sUserName = NUMBERTOSTRING ( DIMIX ( '}Clients', sUser ) );
+ELSEIF ( DIMIX ( '}Chores', TRIM ( SUBST ( sUser, 3, 255 ) ) ) > 0 );
+	sUserName= TRIM ( SUBST ( sUser, 3, 255 ) );
+ELSE;
+	sUserName = 'Unknown';
+ENDIF;
+
+
+#----------------------------------------------------------------------------------------------------------------------------
+# ~~~~~~~~~~Logging ~~~~~~~~~~~~~~~#
+#----------------------------------------------------------------------------------------------------------------------------
+
+## Process Logging - 1
+csProcess = GetProcessName( ) ;
+If( psProcessReference @<> '' ) ;
+   csProcessReference = psProcessReference ;
+Else ; 
+   csProcessReference = csProcess ;
+   ExecuteProcess('syProcessLogInitialise' , 'psProcessName' , csProcessReference);
+EndIf ;
+ExecuteProcess('syProcessLogMessage' , 'psProcessName' , csProcessReference , 'psLogLevel' , 'INFO' , 'psMessage' , 'Starting Process ' | csProcess  ) ;
+
+## TI Tracker Process Logging - 2
+IF( psTITracker @= 'Y' );
+	ExecuteProcess('syTITracker',
+	  'pProcessName', GetProcessName,
+	  'pTime', nStartTime ,
+	  'pStatus', 1,
+	  'pTM1User', sUserName,
+	  'pSystemMessage', sSystemMessage,
+	  'pRecordCount', nRecordCountData + nRecordCountMetadata,
+	  'pPrologMinorErrorCount', PrologMinorErrorCount,
+	  'pMetaDataMinorErrorCount', MetaDataMinorErrorCount,
+	  'pDataMinorErrorCount', DataMinorErrorCount,
+	  'pDebug', 1 );
+ENDIF;
+
+
+
+#End Region # Logging
+#------------------------------------------------------------------------------------------
+
+
+
+#----------------------------------------------------------------------------------------------------------------------------
+# ~~~~~~~~~~Process Constants and Variables ~~~~~~~~~~~~~~~#
+#----------------------------------------------------------------------------------------------------------------------------
+# Region: General
+
+
+sProcess = GetProcessName();
+sTimestamp = TimSt( Now, '\Y\m\d\h\i\s' );
+sRandomInt = NumberToString( INT( RAND( ) * 1000 ));
+sUniqueName  =  sProcess |'.'| sTimestamp | '.' | sRandomInt;
+
+sSub_Tgt= '}System.Tgt.' | sUniqueName ;
+
+
+
+sMonth = TIMST ( nStartTime, '\m' );
+sDay = TIMST ( nStartTime, '\d' );
+sHour = TIMST ( nStartTime, '\h' );
+
+
+#End Region # Process control
+
+
+
+# Process Variables
+
+# General
+sTimestamp = TimSt( Now, '\Y\m\d\h\i\s' );
+sRandomInt = NumberToString( INT( RAND( ) * 1000 ));
+sUniqueName  =  csProcess |'.'| sTimestamp | '.' | sRandomInt;
+
+
+
+
+# Create temp subsets and assign it to the view
+sCube = 'PnLPlan' ;
+sSub = 'TempPnLLocalCurrency' ;
+sView = sSub ;
+pTemp = 0 ; 
+
+# Create Target View
+If ( ViewExists ( sCube , sView ) <> 0 ) ;
+   ViewDestroy ( sCube , sView ) ;
+EndIf ;
+ViewCreate ( sCube , sView , pTemp ) ;
+
+sDim = 'GLAccount' ;
+sMDX = '{TM1FILTERBYLEVEL ( {TM1SUBSETALL ( ['|sDim|'] ) } , 0 ) }' ;
+If ( SubsetExists ( sDim , sSub ) = 1 ) ;
+   SubsetDestroy ( sDim , sSub ) ;
+EndIf ;
+SubsetCreatebyMDX ( sSub , sMDX , pTemp ) ;
+SubsetMDXSet ( sDim , sSub , '' ) ;
+ViewSubsetAssign ( sCube , sView , sDim , sSub ) ;
+
+
+sDim = 'CostCentre' ;
+sMDX = '{TM1FILTERBYLEVEL ( {TM1SUBSETALL ( ['|sDim|'] ) } , 0 ) }' ;
+If ( SubsetExists ( sDim , sSub ) = 1 ) ;
+   SubsetDestroy ( sDim , sSub ) ;
+EndIf ;
+SubsetCreatebyMDX ( sSub , sMDX , pTemp ) ;
+SubsetMDXSet ( sDim , sSub , '' ) ;
+ViewSubsetAssign ( sCube , sView , sDim , sSub ) ;
+
+sDim = 'BusinessUnit' ;
+if( pBU @<> '' & pBU @<> 'All Business Unit' ) ;
+sMDX = '{ [' | sDim | '].[' | sDim | '].[' | pBU | '] }' ;
+else ;
+sMDX = '{TM1FILTERBYLEVEL ( {TM1SUBSETALL ( ['|sDim|'] ) } , 0 ) }' ;
+endif;
+If ( SubsetExists ( sDim , sSub ) = 1 ) ;
+   SubsetDestroy ( sDim , sSub ) ;
+EndIf ;
+SubsetCreatebyMDX ( sSub , sMDX , pTemp  ) ;
+SubsetMDXSet ( sDim , sSub , '' ) ;
+ViewSubsetAssign ( sCube , sView , sDim , sSub ) ;
+
+sDim = 'Segment' ;
+sMDX = '{TM1FILTERBYLEVEL ( {TM1SUBSETALL ( ['|sDim|'] ) } , 0 ) }' ;
+If ( SubsetExists ( sDim , sSub ) = 1 ) ;
+   SubsetDestroy ( sDim , sSub ) ;
+EndIf ;
+SubsetCreatebyMDX ( sSub , sMDX , pTemp ) ;
+SubsetMDXSet ( sDim , sSub , '' ) ;
+ViewSubsetAssign ( sCube , sView , sDim , sSub ) ;
+
+sDim = 'OPXComponent' ;
+sMDX = '{TM1FILTERBYLEVEL ( {TM1SUBSETALL ( ['|sDim|'] ) } , 0 ) }' ;
+If ( SubsetExists ( sDim , sSub ) = 1 ) ;
+   SubsetDestroy ( sDim , sSub ) ;
+EndIf ;
+SubsetCreatebyMDX ( sSub , sMDX , pTemp ) ;
+SubsetMDXSet ( sDim , sSub , '' ) ;
+ViewSubsetAssign ( sCube , sView , sDim , sSub ) ;
+
+sDim = 'Currency' ;
+sEle = 'Local Currency' ;
+If ( SubsetExists ( sDim , sSub ) = 1 ) ;
+   SubsetDeleteAllElements ( sDim , sSub ) ;
+Else ;
+   SubsetCreate ( sDim , sSub ) ;
+EndIf ;
+SubsetElementInsert ( sDim , sSub , sEle , 1 ) ;
+ViewSubsetAssign ( sCube , sView , sDim , sSub ) ;
+
+
+sDim = 'FiscalMonth' ;
+sMDX = '{TM1FILTERBYLEVEL( {DISTINCT({DESCENDANTS([' | sDim | '].[' | sDim | '].[All FY])})}, 0)}' ;
+If ( SubsetExists ( sDim , sSub ) = 1 ) ;
+   SubsetDestroy ( sDim , sSub ) ;
+EndIf ;
+SubsetCreatebyMDX ( sSub , sMDX , pTemp ) ;
+SubsetMDXSet ( sDim , sSub , '' ) ;
+ViewSubsetAssign ( sCube , sView , sDim , sSub ) ;
+
+sDim = 'Version' ;
+sEle = 'Actual' ;
+If ( SubsetExists ( sDim , sSub ) = 1 ) ;
+   SubsetDeleteAllElements ( sDim , sSub ) ;
+Else ;
+   SubsetCreate ( sDim , sSub  ) ;
+EndIf ;
+SubsetElementInsert ( sDim , sSub , sEle , 1 ) ;
+ViewSubsetAssign ( sCube , sView , sDim , sSub ) ;
+
+sDim = 'GlobalTheatre' ;
+sMDX = '{TM1FILTERBYLEVEL ( {TM1SUBSETALL ( ['|sDim|'] ) } , 0 ) }' ;
+If ( SubsetExists ( sDim , sSub ) = 1 ) ;
+   SubsetDestroy ( sDim , sSub ) ;
+EndIf ;
+SubsetCreatebyMDX ( sSub , sMDX , pTemp ) ;
+SubsetMDXSet ( sDim , sSub , '' ) ;
+ViewSubsetAssign ( sCube , sView , sDim , sSub ) ;
+
+sDim = 'PnLPlanMeasure' ;
+sEle = 'Amount' ;
+If ( SubsetExists ( sDim , sSub ) = 1 ) ;
+   SubsetDeleteAllElements ( sDim , sSub ) ;
+Else ;
+   SubsetCreate ( sDim , sSub  ) ;
+EndIf ;
+SubsetElementInsert ( sDim , sSub , sEle , 1 ) ;
+ViewSubsetAssign ( sCube , sView , sDim , sSub ) ;
+
+
+ViewExtractSkipCalcsSet ( sCube , sView , 1 ) ;
+ViewExtractSkipRuleValuesSet ( sCube , sView , 1 ) ;
+ViewExtractSkipZeroesSet ( sCube , sView , 1 ) ;
+
+
+# Assign Datasource
+DataSourceType = 'VIEW' ;
+DataSourceNameForServer = sCube ;
+DataSourceCubeview = sView ;
+
+
+# Create temp subsets and assign it to the view
+sCub_Tgt = 'PnLPlan' ;
+sSub_Tgt = 'TempPnLCurrencyConversion' ;
+sView_Tgt = sSub_Tgt ;
+pTemp = 1 ; 
+
+# Create Target View
+If ( ViewExists ( sCub_Tgt , sView_Tgt ) <> 0 ) ;
+   ViewDestroy ( sCub_Tgt , sView_Tgt ) ;
+EndIf ;
+ViewCreate ( sCub_Tgt , sView_Tgt , pTemp ) ;
+
+ sDim = 'GLAccount' ;
+sMDX = '{TM1FILTERBYLEVEL ( {TM1SUBSETALL ( ['|sDim|'] ) } , 0 ) }' ;
+If ( SubsetExists ( sDim , sSub_Tgt ) = 1 ) ;
+   SubsetDestroy ( sDim , sSub_Tgt ) ;
+EndIf ;
+SubsetCreatebyMDX ( sSub_Tgt , sMDX , pTemp ) ;
+SubsetMDXSet ( sDim , sSub_Tgt , '' ) ;
+ViewSubsetAssign ( sCub_Tgt , sView_Tgt , sDim , sSub_Tgt ) ;
+
+
+sDim = 'CostCentre' ;
+sMDX = '{TM1FILTERBYLEVEL ( {TM1SUBSETALL ( ['|sDim|'] ) } , 0 ) }' ;
+If ( SubsetExists ( sDim , sSub_Tgt ) = 1 ) ;
+   SubsetDestroy ( sDim , sSub_Tgt ) ;
+EndIf ;
+SubsetCreatebyMDX ( sSub_Tgt , sMDX , pTemp ) ;
+SubsetMDXSet ( sDim , sSub_Tgt , '' ) ;
+ViewSubsetAssign ( sCub_Tgt , sView_Tgt , sDim , sSub_Tgt ) ;
+
+sDim = 'BusinessUnit' ;
+if( pBU @<> '' & pBU @<> 'All Business Unit' ) ;
+sMDX = '{ [' | sDim | '].[' | sDim | '].[' | pBU | '] }' ;
+else ;
+sMDX = '{TM1FILTERBYLEVEL ( {TM1SUBSETALL ( ['|sDim|'] ) } , 0 ) }' ;
+endif;
+If ( SubsetExists ( sDim , sSub_Tgt ) = 1 ) ;
+   SubsetDestroy ( sDim , sSub_Tgt ) ;
+EndIf ;
+SubsetCreatebyMDX ( sSub_Tgt , sMDX , pTemp  ) ;
+SubsetMDXSet ( sDim , sSub_Tgt , '' ) ;
+ViewSubsetAssign ( sCub_Tgt , sView_Tgt , sDim , sSub_Tgt ) ;
+
+sDim = 'Segment' ;
+sMDX = '{TM1FILTERBYLEVEL ( {TM1SUBSETALL ( ['|sDim|'] ) } , 0 ) }' ;
+If ( SubsetExists ( sDim , sSub_Tgt ) = 1 ) ;
+   SubsetDestroy ( sDim , sSub_Tgt ) ;
+EndIf ;
+SubsetCreatebyMDX ( sSub_Tgt , sMDX , pTemp ) ;
+SubsetMDXSet ( sDim , sSub_Tgt , '' ) ;
+ViewSubsetAssign ( sCub_Tgt , sView_Tgt , sDim , sSub_Tgt ) ;
+
+sDim = 'OPXComponent' ;
+sMDX = '{TM1FILTERBYLEVEL ( {TM1SUBSETALL ( ['|sDim|'] ) } , 0 ) }' ;
+If ( SubsetExists ( sDim , sSub_Tgt ) = 1 ) ;
+   SubsetDestroy ( sDim , sSub_Tgt ) ;
+EndIf ;
+SubsetCreatebyMDX ( sSub_Tgt , sMDX , pTemp ) ;
+SubsetMDXSet ( sDim , sSub_Tgt , '' ) ;
+ViewSubsetAssign ( sCub_Tgt , sView_Tgt , sDim , sSub_Tgt ) ;
+
+sDim = 'Currency' ;
+sMDX = '{EXCEPT([' | sDim | '].[' | sDim | '].MEMBERS , {[' | sDim | '].[' | sDim | '].[Local Currency]})}' ;
+If ( SubsetExists ( sDim , sSub_Tgt ) = 1 ) ;
+   SubsetDestroy ( sDim , sSub_Tgt ) ;
+EndIf ;
+SubsetCreatebyMDX ( sSub_Tgt , sMDX , pTemp ) ;
+SubsetMDXSet ( sDim , sSub_Tgt , '' ) ;
+ViewSubsetAssign ( sCub_Tgt , sView_Tgt , sDim , sSub_Tgt ) ;
+
+
+sDim = 'FiscalMonth' ;
+sMDX = '{TM1FILTERBYLEVEL( {DISTINCT({DESCENDANTS([' | sDim | '].[' | sDim | '].[All FY])})}, 0)}' ;
+If ( SubsetExists ( sDim , sSub_Tgt ) = 1 ) ;
+   SubsetDestroy ( sDim , sSub_Tgt ) ;
+EndIf ;
+SubsetCreatebyMDX ( sSub_Tgt , sMDX , pTemp ) ;
+SubsetMDXSet ( sDim , sSub_Tgt , '' ) ;
+ViewSubsetAssign ( sCub_Tgt , sView_Tgt , sDim , sSub_Tgt ) ;
+
+sDim = 'Version' ;
+sEle = 'Actual' ;
+If ( SubsetExists ( sDim , sSub_Tgt ) = 1 ) ;
+   SubsetDeleteAllElements ( sDim , sSub_Tgt ) ;
+Else ;
+   SubsetCreate ( sDim , sSub_Tgt  ) ;
+EndIf ;
+SubsetElementInsert ( sDim , sSub_Tgt , sEle , 1 ) ;
+ViewSubsetAssign ( sCub_Tgt , sView_Tgt , sDim , sSub_Tgt ) ;
+
+sDim = 'GlobalTheatre' ;
+sMDX = '{TM1FILTERBYLEVEL ( {TM1SUBSETALL ( ['|sDim|'] ) } , 0 ) }' ;
+If ( SubsetExists ( sDim , sSub_Tgt ) = 1 ) ;
+   SubsetDestroy ( sDim , sSub_Tgt ) ;
+EndIf ;
+SubsetCreatebyMDX ( sSub_Tgt , sMDX , pTemp ) ;
+SubsetMDXSet ( sDim , sSub_Tgt , '' ) ;
+ViewSubsetAssign ( sCub_Tgt , sView_Tgt , sDim , sSub_Tgt ) ;
+
+sDim = 'PnLPlanMeasure' ;
+sEle = 'Amount' ;
+If ( SubsetExists ( sDim , sSub_Tgt ) = 1 ) ;
+   SubsetDeleteAllElements ( sDim , sSub_Tgt ) ;
+Else ;
+   SubsetCreate ( sDim , sSub_Tgt  ) ;
+EndIf ;
+SubsetElementInsert ( sDim , sSub_Tgt , sEle , 1 ) ;
+ViewSubsetAssign ( sCub_Tgt , sView_Tgt , sDim , sSub_Tgt ) ;
+
+
+
+#------ View zero out
+ ViewZeroOut(sCub_Tgt, sView_Tgt);
+
+
+
+#endregion
+#region Metadata
+#****Begin: Generated Statements***
+#****End: Generated Statements****
+
+#endregion
+#region Data
+#****Begin: Generated Statements***
+#****End: Generated Statements****
+
+##Counter
+
+nRecordCountData = nRecordCountData  + 1 ;
+
+
+# Get Values for calculating Currency Conversions
+#~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+sDataAUDBudget = CellGetN ( 'PnLPlan', vGLAccount , vCostCentre , vBusinessUnit , vSegment , vOPXComponent , 'Local Currency' , vFiscalMonth , 'Actual' , vTheatre , 'Amount' ) ;
+sMultiplyAUDBudget = CellGetN (  'BRExchangeRate', vBusinessUnit , vFiscalMonth , 'AUD-Budget' ,'Currency' ,  'FXRate') ;
+
+
+ sDataAUDConstant = CellGetN ( 'PnLPlan', vGLAccount , vCostCentre , vBusinessUnit , vSegment , vOPXComponent , 'Local Currency' , vFiscalMonth , 'Actual' , vTheatre , 'Amount' ) ;
+ sMultiplyAUDConstant = CellGetN (  'BRExchangeRate', vBusinessUnit , vFiscalMonth , 'AUD-Constant' , 'Currency' , 'FXRate') ;
+
+
+ sDataAUDMonthEnd = CellGetN ( 'PnLPlan', vGLAccount , vCostCentre , vBusinessUnit , vSegment , vOPXComponent , 'Local Currency' , vFiscalMonth , 'Actual' , vTheatre , 'Amount' ) ;
+ sMultiplyAUDMonthEnd = CellGetN (  'BRExchangeRate', vBusinessUnit , vFiscalMonth , 'AUD-MonthEnd' , 'Currency' , 'FXRate') ;
+
+
+ sDataEURConstant = CellGetN ( 'PnLPlan', vGLAccount , vCostCentre , vBusinessUnit , vSegment , vOPXComponent , 'Local Currency' , vFiscalMonth , 'Actual' , vTheatre , 'Amount' ) ;
+ sMultiplyEURConstant = CellGetN (  'BRExchangeRate', vBusinessUnit , vFiscalMonth , 'EUR-Constant' , 'Currency' , 'FXRate') ;
+
+ sDataUSDConstant = CellGetN ( 'PnLPlan', vGLAccount , vCostCentre , vBusinessUnit , vSegment , vOPXComponent , 'Local Currency' , vFiscalMonth , 'Actual' , vTheatre , 'Amount' ) ;
+ sMultiplyUSDConstant = CellGetN (  'BRExchangeRate', vBusinessUnit , vFiscalMonth , 'USD-Constant' , 'Currency' , 'FXRate') ;
+
+
+ sDataAUDOutlook = CellGetN ( 'PnLPlan', vGLAccount , vCostCentre , vBusinessUnit , vSegment , vOPXComponent , 'Local Currency' , vFiscalMonth , 'Actual' , vTheatre , 'Amount' ) ;
+ sMultiplyAUDOutlook = CellGetN (  'BRExchangeRate', vBusinessUnit , vFiscalMonth , 'AUD-Outlook' ,'Currency' , 'FXRate') ;
+
+
+
+# Calculate Currency
+#~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+nAUDBudget =  sDataAUDBudget \ sMultiplyAUDBudget ;
+nAUDConstant =  sDataAUDConstant \ sMultiplyAUDConstant ;
+nAUDMonthEnd =  sDataAUDMonthEnd \ sMultiplyAUDMonthEnd ;
+nEURConstant =  sDataEURConstant \ sMultiplyEURConstant ;
+nUSDConstant =  sDataUSDConstant \ sMultiplyUSDConstant ;
+nAUDOutlook =  sDataAUDOutlook \ sMultiplyAUDOutlook ;
+
+
+## Update Values
+#~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+# ASCIIOutput( sTestFile, Numbertostring (nAUDConstant) , Numbertostring (sDataAUDConstant) , Numbertostring (sMultiplyAUDConstant) , 'PnLPlan', vGLAccount , vCostCentre , vBusinessUnit , vSegment , vOPXComponent , 'AUD-Constant' , vFiscalMonth , 'Actual' , vTheatre , 'Amount'  );
+
+
+ CellPutN( nAUDBudget , 'PnLPlan', vGLAccount , vCostCentre , vBusinessUnit , vSegment , vOPXComponent , 'AUD-Budget' , vFiscalMonth , 'Actual' , vTheatre , 'Amount' ) ;
+
+ CellPutN( nAUDConstant , 'PnLPlan', vGLAccount , vCostCentre , vBusinessUnit , vSegment , vOPXComponent , 'AUD-Constant' , vFiscalMonth , 'Actual' , vTheatre , 'Amount' ) ;
+
+ CellPutN( nAUDMonthEnd , 'PnLPlan', vGLAccount , vCostCentre , vBusinessUnit , vSegment , vOPXComponent , 'AUD-MonthEnd' , vFiscalMonth , 'Actual' , vTheatre , 'Amount' ) ;
+ CellPutN( nEURConstant , 'PnLPlan', vGLAccount , vCostCentre , vBusinessUnit , vSegment , vOPXComponent , 'EUR-Constant' , vFiscalMonth , 'Actual' , vTheatre , 'Amount' ) ;
+ CellPutN( nUSDConstant , 'PnLPlan', vGLAccount , vCostCentre , vBusinessUnit , vSegment , vOPXComponent , 'USD-Constant' , vFiscalMonth , 'Actual' , vTheatre , 'Amount' ) ;
+
+ CellPutN( nAUDOutlook , 'PnLPlan', vGLAccount , vCostCentre , vBusinessUnit , vSegment , vOPXComponent , 'AUD-Outlook' , vFiscalMonth , 'Actual' , vTheatre , 'Amount'  ) ;
+
+#endregion
+#region Epilog
+#****Begin: Generated Statements***
+#****End: Generated Statements****
+
+
+            
+#----------------------------------------------------------------------------------------------------------------------------
+# ~~~~~~~~~~Logging ~~~~~~~~~~~~~~~#
+#----------------------------------------------------------------------------------------------------------------------------
+# Finish Process log 1
+nErrors = MetaDataMinorErrorCount + DataMinorErrorCount ;
+If( GetProcessErrorFilename() @<> '' % nErrors > 0 );
+  sLogLevel = 'ERROR';
+  sLogReference = GetProcessErrorFilename();
+  sMessage = 'Process completed with ' | NumberToString( nErrors ) | ' minor errors';
+Else;
+  sLogLevel = 'INFO';
+  sLogReference = '';
+  sMessage = 'Process completed successfully. Total records: ' | NumberToString (nRecordCountMetadata  )   ;
+EndIf;
+
+#logoutput( 'INFO', sMessage );
+ExecuteProcess('syProcessLogMessage', 'psProcessName', csProcessReference , 'psLogLevel', sLogLevel, 'psMessage', sMessage , 'psProcessErrorReference' , sLogReference );
+
+## Finish TI Tracker Process Logging - 2
+IF( psTITracker @= 'Y' );
+ # Check for minor errors
+ IF ( sSystemMessage @= '' );
+   IF ( DataMinorErrorCount = 0 & PrologMinorErrorCount = 0 & MetaDataMinorErrorCount = 0 );
+     sSystemMessage = 'Successful';
+   ELSE;
+     IF ( DataMinorErrorCount <> 0 );
+       sSystemMessage = NumberToString ( DataMinorErrorCount ) | ' data error/s; ';
+     ENDIF;
+     IF ( PrologMinorErrorCount <> 0 );
+       sSystemMessage =NumberToString ( PrologMinorErrorCount ) | ' prolog error/s; ';
+     ENDIF;
+     IF ( MetaDataMinorErrorCount <> 0 );
+       sSystemMessage = NumberToString ( MetaDataMinorErrorCount ) | ' metadata error/s';
+     ENDIF;
+         sSystemMessage= sSystemMessage ;
+    ENDIF;
+ ENDIF;
+
+if ( pBU @= '' ) ;
+sBU = 'All BUs';
+else ;
+sBU = pBU ;
+endif ;
+
+  ExecuteProcess('syTITracker',
+   'pProcessName', GetProcessName,
+   'pParameter01' , 'Version: ' | 'Actual' ,
+   'pParameter02' , 'BU: ' | sBU ,
+   'pTime', nStartTime ,
+   'pStatus', 0,
+   'pTM1User', sUserName,
+   'pSystemMessage', sSystemMessage,
+   'pRecordCount', nRecordCountData + nRecordCountMetadata,
+   'pPrologMinorErrorCount', PrologMinorErrorCount,
+   'pMetaDataMinorErrorCount', MetaDataMinorErrorCount,
+   'pDataMinorErrorCount', DataMinorErrorCount,
+   'pDebug', 1 );
+ENDIF;
+#End Region # TI Tracker
+#endregion

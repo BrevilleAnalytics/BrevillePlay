@@ -1,0 +1,138 @@
+#region Prolog
+
+#****Begin: Generated Statements***
+#****End: Generated Statements****
+
+
+######################################################################
+# Process to Zero out a view
+# create and destroys the view and subsets
+# turns logs off and on
+# Dimstring provides dimension pre canned subsets or elements (both consolidated and leaf)
+# IF dim not in dimestring then ignored
+######################################################################
+#  Last Updated By; 
+# V01 Dev ggood@woolworths.com.au 9/04/2021 -  create draft
+# V02 Dev gsoo@woolworths.com.au 25/06/2021 -  remove subset create for consolidations
+######################################################################
+
+
+
+###############################################
+## Do not log the clear..
+###############################################
+vCLog = CUBEGETLOGCHANGES(pCube);
+CUBESETLOGCHANGES(pCube, 0);
+
+vSubName = pViewName;
+sDelimDim = '|';
+sDelimElem = ':';
+
+###############################################
+## Delete view if it already exists
+###############################################
+IF(ViewExists(pCube, pViewName)=1);
+   ViewDestroy(pCube, pViewName);
+ENDIF;
+
+###############################################
+## Create view
+###############################################
+ViewCreate(pCube, pViewName, 1);
+
+
+IF(pDimString@<>'');
+
+###############################################
+## Deconstruct filter, create relevant subsets and assign to view
+###############################################
+###############################################
+## Step 1: Split filter into dimension:elements components
+###############################################
+
+sDimString = pDimString;
+nDelimDimIndex = 1;
+
+While(nDelimDimIndex <> 0);
+
+  nDelimDimIndex = Scan(sDelimDim, sDimString);
+
+  If(nDelimDimIndex <> 0);
+    sArgument = SubSt(sDimString, 1, nDelimDimIndex - 1);
+    sDimString = SubSt(sDimString, nDelimDimIndex + 1, Long(sDimString));
+  Else;
+    sArgument = sDimString;
+  EndIf;
+
+
+###############################################
+## Step 2: Split argument into dimension and elements
+###############################################
+
+  nDelimElemIndex = Scan(sDelimElem, sArgument);
+
+  vDimName = SubSt(sArgument, 1, nDelimElemIndex - 1);
+  sElements = SubSt(sArgument, nDelimElemIndex + 1, Long(sArgument));
+
+###############################################
+## Step 3: Create subset and assign to view
+###############################################
+
+#############################
+### CHECK IF ELEMENT IS A SUBSET ALREADY
+#############################
+  IF(SubsetExists(vDimName, sElements)=1 & DIMIX(vDimName,sElements)=0);
+      ViewSubsetAssign(pCube, pViewName, vDimName, sElements);
+  ELSE;
+#############################
+### ELSE CREATE THE SUBSET
+#############################
+    IF(ELLEV(vDimName, sElements)=0);
+    # leaf
+     SubsetCreate(vDimName, vSubName, 1);
+     SubsetElementInsert(vDimName, vSubName, sElements, 1);
+    ELSE;
+    # Consolidated
+     SubsetCreatebyMDX(vSubName, '{TM1FILTERBYLEVEL( {TM1DRILLDOWNMEMBER( {[' | vDimName | '].[' | sElements | ']}, ALL, RECURSIVE )}, 0)}');
+    ENDIF;
+    ViewSubsetAssign(pCube, pViewName, vDimName, vSubName);
+  ENDIF;
+
+End;
+
+ENDIF;
+
+###############################################
+## Zero out data in cube
+###############################################
+ViewZeroOut(pCube, pViewName);
+
+
+###############################################
+## Clean up views and subsets
+# no need as Subsets and views create using the optional AsTemporary argument is set to 1 
+###############################################
+
+
+###############################################
+## Turn logging back on..
+###############################################
+CUBESETLOGCHANGES(pCube, vCLog);
+
+
+#endregion
+#region Metadata
+
+#****Begin: Generated Statements***
+#****End: Generated Statements****
+#endregion
+#region Data
+
+#****Begin: Generated Statements***
+#****End: Generated Statements****
+#endregion
+#region Epilog
+
+#****Begin: Generated Statements***
+#****End: Generated Statements****
+#endregion

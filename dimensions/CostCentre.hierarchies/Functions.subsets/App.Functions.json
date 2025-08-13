@@ -1,0 +1,5 @@
+{
+	"@type":"Subset",
+	"Name":"App.Functions",
+	"Expression":"{DRILLDOWNMEMBER([CostCentre].[Functions].LEVELS(0).MEMBERS , {[CostCentre].[Functions].[All Functions],[CostCentre].[Functions].[Committed],[CostCentre].[Functions].[Global]} , RECURSIVE)}"
+}

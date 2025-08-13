@@ -1,0 +1,5 @@
+{
+	"@type":"Subset",
+	"Name":"TempAllTheatre",
+	"Expression":"{DRILLDOWNMEMBER({[Theatre].[Theatre].[All Theatre]} , {[Theatre].[Theatre].[All Theatre]} , RECURSIVE)}"
+}

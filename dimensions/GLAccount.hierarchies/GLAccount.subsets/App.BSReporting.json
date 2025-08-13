@@ -1,0 +1,5 @@
+{
+	"@type":"Subset",
+	"Name":"App.BSReporting",
+	"Expression":"{EXCEPT(DRILLDOWNMEMBER({[GLAccount].[GLAccount].[All BalanceSheet GLAccounts]} , {[GLAccount].[GLAccount].[All BalanceSheet GLAccounts],[GLAccount].[GLAccount].[- BS]} , RECURSIVE) , {[GLAccount].[GLAccount].[- BS],[GLAccount].[GLAccount].[All BalanceSheet GLAccounts]})}"
+}

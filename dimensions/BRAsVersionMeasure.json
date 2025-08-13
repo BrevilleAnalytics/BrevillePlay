@@ -1,0 +1,13 @@
+{
+	"@type":"Dimension",
+	"Name":"BRAsVersionMeasure",
+	"AllLeavesHierarchyName":"",
+	"DefaultHierarchy":
+	{
+		"@id":"Dimensions('BRAsVersionMeasure')/Hierarchies('BRAsVersionMeasure')"
+	},
+	"Hierarchies@Code.links":
+	[
+		"BRAsVersionMeasure.hierarchies/BRAsVersionMeasure.json"
+	]
+}

@@ -1,0 +1,42 @@
+{
+	"@type":"Cube",
+	"Name":"syTITracker",
+	"Dimensions":
+	[
+		{
+			"@id":"Dimensions('syClient')"
+		},
+		{
+			"@id":"Dimensions('}Processes')"
+		},
+		{
+			"@id":"Dimensions('syYear')"
+		},
+		{
+			"@id":"Dimensions('syMonth')"
+		},
+		{
+			"@id":"Dimensions('syDay')"
+		},
+		{
+			"@id":"Dimensions('syHour')"
+		},
+		{
+			"@id":"Dimensions('syMinute')"
+		},
+		{
+			"@id":"Dimensions('sySecond')"
+		},
+		{
+			"@id":"Dimensions('syIndex')"
+		},
+		{
+			"@id":"Dimensions('syTITrackerMeasure')"
+		}
+	],
+	"Views@Code.links":
+	[
+		"syTITracker.views/Default - Local.json",
+		"syTITracker.views/Default.json"
+	]
+}

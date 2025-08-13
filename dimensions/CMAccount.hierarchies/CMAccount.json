@@ -1,0 +1,843 @@
+{
+	"@type":"Hierarchy",
+	"Name":"CMAccount",
+	"Elements":
+	[
+		{
+			"Name":"All CMAccount",
+			"Type":"Consolidated"
+		},
+		{
+			"Name":"Financial",
+			"Type":"Consolidated"
+		},
+		{
+			"Name":"Marketing Contribution",
+			"Type":"Consolidated"
+		},
+		{
+			"Name":"Marketing Expenses",
+			"Type":"Consolidated"
+		},
+		{
+			"Name":"Marketing Regional Committed",
+			"Type":"Consolidated"
+		},
+		{
+			"Name":"Marketing Regional Committed - Heston Royalty",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"Marketing Regional Committed - Nespresso Creatista",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"Marketing Regional Committed - Nespresso Distribution",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"Contribution Margin",
+			"Type":"Consolidated"
+		},
+		{
+			"Name":"Warranty",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"Freight",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"Gross Margin",
+			"Type":"Consolidated"
+		},
+		{
+			"Name":"Cost of Goods Sold",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"COGS FX Variance",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"Net Sales",
+			"Type":"Consolidated"
+		},
+		{
+			"Name":"Rebates",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"Faulty Goods Returns",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"Gross Sales (incl. Promo Costs)",
+			"Type":"Consolidated"
+		},
+		{
+			"Name":"SKU Promo Costs",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"Gross Sales",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"Override Ratios",
+			"Type":"Consolidated"
+		},
+		{
+			"Name":"Override Indicator",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"Override Baseline Return %",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"Override Average selling Price",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"Override Rebate%",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"Override COGS Unit Cost",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"Override Warranty Unit Cost",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"Override Freight Unit Cost",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"SKU Promo Cost Input",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"Override Customer Split",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"H1 Override COGS Unit Cost",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"H1 Override Rebate%",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"H1 Override Warranty Unit Cost",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"H1 Override Freight Unit Cost",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"H1 Override Baseline Return %",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"H1 Override Average selling Price",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"H2 Override COGS Unit Cost",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"H2 Override Rebate%",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"H2 Override Warranty Unit Cost",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"H2 Override Freight Unit Cost",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"H2 Override Baseline Return %",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"H2 Override Average selling Price",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"Statistical",
+			"Type":"Consolidated"
+		},
+		{
+			"Name":"Net Shipments",
+			"Type":"Consolidated"
+		},
+		{
+			"Name":"Shipped Units",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"Returned Units",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"Stock on Hand",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"Stock on Hand Value",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"Goods In Transit",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"Weeks On Hand",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"Sellout Units",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"Calculations",
+			"Type":"Consolidated"
+		},
+		{
+			"Name":"Average Selling Price",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"COGS Unit Cost",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"Rebate%",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"Warranty Unit Cost",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"Freight Unit Cost",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"Baseline Return %",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"CM %",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"Net Sales %",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"Customer Forcecast Accuracy %",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"Customer Forcecast Accuracy",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"Net Sales per Shipped Unit",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"Admin Formulas",
+			"Type":"Consolidated"
+		},
+		{
+			"Name":"Customer Vol %",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"Customer Units",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"Customer ASP",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"Returns Adjustment %",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"Customer % of SKU",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"Forecast Indicator",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"Customer Total Shipped Units",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"Customer Total Returned Units",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"Customer Total Warranty",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"Customer Total Freight",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"Customer Total Cost of Goods Sold",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"Customer Total Rebates",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"Customer Total Gross Sales",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"Customer % Shipped Units",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"Customer % Returned Units",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"Customer % Warranty",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"Customer % Freight",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"Customer % Cost of Goods Sold",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"Customer % Rebates",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"Customer % Gross Sales",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"Total Customer Split %",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"Customer Monthly Returns % of FY",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"Customer returned Units",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"Actual Shipped Units",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"Actual Net Sales",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"Returns phasing",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"Exchange Rates",
+			"Type":"Consolidated"
+		},
+		{
+			"Name":"AUD Conversion Rate",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"EUR Conversion Rate",
+			"Type":"Numeric"
+		}
+	],
+	"Edges":
+	[
+		{
+			"ParentName":"All CMAccount",
+			"ComponentName":"Financial",
+			"Weight":0
+		},
+		{
+			"ParentName":"All CMAccount",
+			"ComponentName":"Override Ratios",
+			"Weight":0
+		},
+		{
+			"ParentName":"All CMAccount",
+			"ComponentName":"Statistical",
+			"Weight":0
+		},
+		{
+			"ParentName":"All CMAccount",
+			"ComponentName":"Calculations",
+			"Weight":0
+		},
+		{
+			"ParentName":"All CMAccount",
+			"ComponentName":"Admin Formulas",
+			"Weight":0
+		},
+		{
+			"ParentName":"All CMAccount",
+			"ComponentName":"Exchange Rates",
+			"Weight":0
+		},
+		{
+			"ParentName":"Financial",
+			"ComponentName":"Marketing Contribution",
+			"Weight":1
+		},
+		{
+			"ParentName":"Marketing Contribution",
+			"ComponentName":"Marketing Expenses",
+			"Weight":-1
+		},
+		{
+			"ParentName":"Marketing Contribution",
+			"ComponentName":"Contribution Margin",
+			"Weight":1
+		},
+		{
+			"ParentName":"Marketing Expenses",
+			"ComponentName":"Marketing Regional Committed",
+			"Weight":1
+		},
+		{
+			"ParentName":"Marketing Regional Committed",
+			"ComponentName":"Marketing Regional Committed - Heston Royalty",
+			"Weight":1
+		},
+		{
+			"ParentName":"Marketing Regional Committed",
+			"ComponentName":"Marketing Regional Committed - Nespresso Creatista",
+			"Weight":1
+		},
+		{
+			"ParentName":"Marketing Regional Committed",
+			"ComponentName":"Marketing Regional Committed - Nespresso Distribution",
+			"Weight":1
+		},
+		{
+			"ParentName":"Contribution Margin",
+			"ComponentName":"Warranty",
+			"Weight":-1
+		},
+		{
+			"ParentName":"Contribution Margin",
+			"ComponentName":"Freight",
+			"Weight":-1
+		},
+		{
+			"ParentName":"Contribution Margin",
+			"ComponentName":"Gross Margin",
+			"Weight":1
+		},
+		{
+			"ParentName":"Gross Margin",
+			"ComponentName":"Cost of Goods Sold",
+			"Weight":-1
+		},
+		{
+			"ParentName":"Gross Margin",
+			"ComponentName":"COGS FX Variance",
+			"Weight":-1
+		},
+		{
+			"ParentName":"Gross Margin",
+			"ComponentName":"Net Sales",
+			"Weight":1
+		},
+		{
+			"ParentName":"Net Sales",
+			"ComponentName":"Rebates",
+			"Weight":-1
+		},
+		{
+			"ParentName":"Net Sales",
+			"ComponentName":"Faulty Goods Returns",
+			"Weight":-1
+		},
+		{
+			"ParentName":"Net Sales",
+			"ComponentName":"Gross Sales (incl. Promo Costs)",
+			"Weight":1
+		},
+		{
+			"ParentName":"Gross Sales (incl. Promo Costs)",
+			"ComponentName":"SKU Promo Costs",
+			"Weight":-1
+		},
+		{
+			"ParentName":"Gross Sales (incl. Promo Costs)",
+			"ComponentName":"Gross Sales",
+			"Weight":1
+		},
+		{
+			"ParentName":"Override Ratios",
+			"ComponentName":"Override Indicator",
+			"Weight":1
+		},
+		{
+			"ParentName":"Override Ratios",
+			"ComponentName":"Override Baseline Return %",
+			"Weight":1
+		},
+		{
+			"ParentName":"Override Ratios",
+			"ComponentName":"Override Average selling Price",
+			"Weight":1
+		},
+		{
+			"ParentName":"Override Ratios",
+			"ComponentName":"Override Rebate%",
+			"Weight":1
+		},
+		{
+			"ParentName":"Override Ratios",
+			"ComponentName":"Override COGS Unit Cost",
+			"Weight":1
+		},
+		{
+			"ParentName":"Override Ratios",
+			"ComponentName":"Override Warranty Unit Cost",
+			"Weight":1
+		},
+		{
+			"ParentName":"Override Ratios",
+			"ComponentName":"Override Freight Unit Cost",
+			"Weight":1
+		},
+		{
+			"ParentName":"Override Ratios",
+			"ComponentName":"SKU Promo Cost Input",
+			"Weight":1
+		},
+		{
+			"ParentName":"Override Ratios",
+			"ComponentName":"Override Customer Split",
+			"Weight":1
+		},
+		{
+			"ParentName":"Override Ratios",
+			"ComponentName":"H1 Override COGS Unit Cost",
+			"Weight":1
+		},
+		{
+			"ParentName":"Override Ratios",
+			"ComponentName":"H1 Override Rebate%",
+			"Weight":1
+		},
+		{
+			"ParentName":"Override Ratios",
+			"ComponentName":"H1 Override Warranty Unit Cost",
+			"Weight":1
+		},
+		{
+			"ParentName":"Override Ratios",
+			"ComponentName":"H1 Override Freight Unit Cost",
+			"Weight":1
+		},
+		{
+			"ParentName":"Override Ratios",
+			"ComponentName":"H1 Override Baseline Return %",
+			"Weight":1
+		},
+		{
+			"ParentName":"Override Ratios",
+			"ComponentName":"H1 Override Average selling Price",
+			"Weight":1
+		},
+		{
+			"ParentName":"Override Ratios",
+			"ComponentName":"H2 Override COGS Unit Cost",
+			"Weight":1
+		},
+		{
+			"ParentName":"Override Ratios",
+			"ComponentName":"H2 Override Rebate%",
+			"Weight":1
+		},
+		{
+			"ParentName":"Override Ratios",
+			"ComponentName":"H2 Override Warranty Unit Cost",
+			"Weight":1
+		},
+		{
+			"ParentName":"Override Ratios",
+			"ComponentName":"H2 Override Freight Unit Cost",
+			"Weight":1
+		},
+		{
+			"ParentName":"Override Ratios",
+			"ComponentName":"H2 Override Baseline Return %",
+			"Weight":1
+		},
+		{
+			"ParentName":"Override Ratios",
+			"ComponentName":"H2 Override Average selling Price",
+			"Weight":1
+		},
+		{
+			"ParentName":"Statistical",
+			"ComponentName":"Net Shipments",
+			"Weight":1
+		},
+		{
+			"ParentName":"Statistical",
+			"ComponentName":"Stock on Hand",
+			"Weight":1
+		},
+		{
+			"ParentName":"Statistical",
+			"ComponentName":"Stock on Hand Value",
+			"Weight":1
+		},
+		{
+			"ParentName":"Statistical",
+			"ComponentName":"Goods In Transit",
+			"Weight":1
+		},
+		{
+			"ParentName":"Statistical",
+			"ComponentName":"Weeks On Hand",
+			"Weight":1
+		},
+		{
+			"ParentName":"Statistical",
+			"ComponentName":"Sellout Units",
+			"Weight":1
+		},
+		{
+			"ParentName":"Net Shipments",
+			"ComponentName":"Shipped Units",
+			"Weight":1
+		},
+		{
+			"ParentName":"Net Shipments",
+			"ComponentName":"Returned Units",
+			"Weight":1
+		},
+		{
+			"ParentName":"Calculations",
+			"ComponentName":"Average Selling Price",
+			"Weight":1
+		},
+		{
+			"ParentName":"Calculations",
+			"ComponentName":"COGS Unit Cost",
+			"Weight":1
+		},
+		{
+			"ParentName":"Calculations",
+			"ComponentName":"Rebate%",
+			"Weight":1
+		},
+		{
+			"ParentName":"Calculations",
+			"ComponentName":"Warranty Unit Cost",
+			"Weight":1
+		},
+		{
+			"ParentName":"Calculations",
+			"ComponentName":"Freight Unit Cost",
+			"Weight":1
+		},
+		{
+			"ParentName":"Calculations",
+			"ComponentName":"Baseline Return %",
+			"Weight":1
+		},
+		{
+			"ParentName":"Calculations",
+			"ComponentName":"CM %",
+			"Weight":1
+		},
+		{
+			"ParentName":"Calculations",
+			"ComponentName":"Net Sales %",
+			"Weight":1
+		},
+		{
+			"ParentName":"Calculations",
+			"ComponentName":"Customer Forcecast Accuracy %",
+			"Weight":1
+		},
+		{
+			"ParentName":"Calculations",
+			"ComponentName":"Customer Forcecast Accuracy",
+			"Weight":1
+		},
+		{
+			"ParentName":"Calculations",
+			"ComponentName":"Net Sales per Shipped Unit",
+			"Weight":1
+		},
+		{
+			"ParentName":"Admin Formulas",
+			"ComponentName":"Customer Vol %",
+			"Weight":1
+		},
+		{
+			"ParentName":"Admin Formulas",
+			"ComponentName":"Customer Units",
+			"Weight":1
+		},
+		{
+			"ParentName":"Admin Formulas",
+			"ComponentName":"Customer ASP",
+			"Weight":1
+		},
+		{
+			"ParentName":"Admin Formulas",
+			"ComponentName":"Returns Adjustment %",
+			"Weight":1
+		},
+		{
+			"ParentName":"Admin Formulas",
+			"ComponentName":"Customer % of SKU",
+			"Weight":1
+		},
+		{
+			"ParentName":"Admin Formulas",
+			"ComponentName":"Forecast Indicator",
+			"Weight":1
+		},
+		{
+			"ParentName":"Admin Formulas",
+			"ComponentName":"Customer Total Shipped Units",
+			"Weight":1
+		},
+		{
+			"ParentName":"Admin Formulas",
+			"ComponentName":"Customer Total Returned Units",
+			"Weight":1
+		},
+		{
+			"ParentName":"Admin Formulas",
+			"ComponentName":"Customer Total Warranty",
+			"Weight":1
+		},
+		{
+			"ParentName":"Admin Formulas",
+			"ComponentName":"Customer Total Freight",
+			"Weight":1
+		},
+		{
+			"ParentName":"Admin Formulas",
+			"ComponentName":"Customer Total Cost of Goods Sold",
+			"Weight":1
+		},
+		{
+			"ParentName":"Admin Formulas",
+			"ComponentName":"Customer Total Rebates",
+			"Weight":1
+		},
+		{
+			"ParentName":"Admin Formulas",
+			"ComponentName":"Customer Total Gross Sales",
+			"Weight":1
+		},
+		{
+			"ParentName":"Admin Formulas",
+			"ComponentName":"Customer % Shipped Units",
+			"Weight":1
+		},
+		{
+			"ParentName":"Admin Formulas",
+			"ComponentName":"Customer % Returned Units",
+			"Weight":1
+		},
+		{
+			"ParentName":"Admin Formulas",
+			"ComponentName":"Customer % Warranty",
+			"Weight":1
+		},
+		{
+			"ParentName":"Admin Formulas",
+			"ComponentName":"Customer % Freight",
+			"Weight":1
+		},
+		{
+			"ParentName":"Admin Formulas",
+			"ComponentName":"Customer % Cost of Goods Sold",
+			"Weight":1
+		},
+		{
+			"ParentName":"Admin Formulas",
+			"ComponentName":"Customer % Rebates",
+			"Weight":1
+		},
+		{
+			"ParentName":"Admin Formulas",
+			"ComponentName":"Customer % Gross Sales",
+			"Weight":1
+		},
+		{
+			"ParentName":"Admin Formulas",
+			"ComponentName":"Total Customer Split %",
+			"Weight":1
+		},
+		{
+			"ParentName":"Admin Formulas",
+			"ComponentName":"Customer Monthly Returns % of FY",
+			"Weight":1
+		},
+		{
+			"ParentName":"Admin Formulas",
+			"ComponentName":"Customer returned Units",
+			"Weight":1
+		},
+		{
+			"ParentName":"Admin Formulas",
+			"ComponentName":"Actual Shipped Units",
+			"Weight":1
+		},
+		{
+			"ParentName":"Admin Formulas",
+			"ComponentName":"Actual Net Sales",
+			"Weight":1
+		},
+		{
+			"ParentName":"Admin Formulas",
+			"ComponentName":"Returns phasing",
+			"Weight":1
+		},
+		{
+			"ParentName":"Exchange Rates",
+			"ComponentName":"AUD Conversion Rate",
+			"Weight":1
+		},
+		{
+			"ParentName":"Exchange Rates",
+			"ComponentName":"EUR Conversion Rate",
+			"Weight":1
+		}
+	],
+	"Subsets@Code.links":[]
+}

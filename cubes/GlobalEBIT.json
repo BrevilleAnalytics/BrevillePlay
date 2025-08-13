@@ -1,0 +1,40 @@
+{
+	"@type":"Cube",
+	"Name":"GlobalEBIT",
+	"Rules@Code.link":"GlobalEBIT.rules",
+	"Dimensions":
+	[
+		{
+			"@id":"Dimensions('EBITAccount')"
+		},
+		{
+			"@id":"Dimensions('BusinessUnit')"
+		},
+		{
+			"@id":"Dimensions('Segment')"
+		},
+		{
+			"@id":"Dimensions('Currency')"
+		},
+		{
+			"@id":"Dimensions('FiscalMonth')"
+		},
+		{
+			"@id":"Dimensions('Version')"
+		},
+		{
+			"@id":"Dimensions('GlobalTheatre')"
+		},
+		{
+			"@id":"Dimensions('GlobalEBITMeasure')"
+		}
+	],
+	"Views@Code.links":
+	[
+		"GlobalEBIT.views/TempPnLEBITCalc.json",
+		"GlobalEBIT.views/App.EBITReporting.json",
+		"GlobalEBIT.views/Default.json",
+		"GlobalEBIT.views/EBIT by Month.json",
+		"GlobalEBIT.views/Overheads - All Cost Centres.json"
+	]
+}

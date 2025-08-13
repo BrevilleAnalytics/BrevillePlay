@@ -1,0 +1,49 @@
+{
+	"@type":"Subset",
+	"Name":"App.CMMeasure",
+	"Elements":
+	[
+		{
+			"@id":"Dimensions('CMForecastMeasure')/Hierarchies('CMForecastMeasure')/Elements('Shipped Units')"
+		},
+		{
+			"@id":"Dimensions('CMForecastMeasure')/Hierarchies('CMForecastMeasure')/Elements('Returned Units')"
+		},
+		{
+			"@id":"Dimensions('CMForecastMeasure')/Hierarchies('CMForecastMeasure')/Elements('Net Shipments')"
+		},
+		{
+			"@id":"Dimensions('CMForecastMeasure')/Hierarchies('CMForecastMeasure')/Elements('Gross Sales')"
+		},
+		{
+			"@id":"Dimensions('CMForecastMeasure')/Hierarchies('CMForecastMeasure')/Elements('SKU Promo Costs')"
+		},
+		{
+			"@id":"Dimensions('CMForecastMeasure')/Hierarchies('CMForecastMeasure')/Elements('Gross Sales (incl. Promo Costs)')"
+		},
+		{
+			"@id":"Dimensions('CMForecastMeasure')/Hierarchies('CMForecastMeasure')/Elements('Rebates')"
+		},
+		{
+			"@id":"Dimensions('CMForecastMeasure')/Hierarchies('CMForecastMeasure')/Elements('Net Sales')"
+		},
+		{
+			"@id":"Dimensions('CMForecastMeasure')/Hierarchies('CMForecastMeasure')/Elements('Cost of Goods Sold')"
+		},
+		{
+			"@id":"Dimensions('CMForecastMeasure')/Hierarchies('CMForecastMeasure')/Elements('COGS FX Variance')"
+		},
+		{
+			"@id":"Dimensions('CMForecastMeasure')/Hierarchies('CMForecastMeasure')/Elements('Gross Margin')"
+		},
+		{
+			"@id":"Dimensions('CMForecastMeasure')/Hierarchies('CMForecastMeasure')/Elements('Warranty')"
+		},
+		{
+			"@id":"Dimensions('CMForecastMeasure')/Hierarchies('CMForecastMeasure')/Elements('Freight')"
+		},
+		{
+			"@id":"Dimensions('CMForecastMeasure')/Hierarchies('CMForecastMeasure')/Elements('Contribution Margin')"
+		}
+	]
+}

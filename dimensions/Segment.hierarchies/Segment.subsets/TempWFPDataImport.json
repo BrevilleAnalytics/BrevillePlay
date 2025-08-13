@@ -1,0 +1,10 @@
+{
+	"@type":"Subset",
+	"Name":"TempWFPDataImport",
+	"Elements":
+	[
+		{
+			"@id":"Dimensions('Segment')/Hierarchies('Segment')/Elements('No Segment')"
+		}
+	]
+}

@@ -1,0 +1,10 @@
+{
+	"@type":"Subset",
+	"Name":"}System.Src.SubsetCustomerUpdateFromsyManagement.20220908225655.949",
+	"Elements":
+	[
+		{
+			"@id":"Dimensions('syYear')/Hierarchies('syYear')/Elements('No Year')"
+		}
+	]
+}

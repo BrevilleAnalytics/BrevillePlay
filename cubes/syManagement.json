@@ -1,0 +1,29 @@
+{
+	"@type":"Cube",
+	"Name":"syManagement",
+	"Rules@Code.link":"syManagement.rules",
+	"Dimensions":
+	[
+		{
+			"@id":"Dimensions('syYear')"
+		},
+		{
+			"@id":"Dimensions('syManagementParameter')"
+		},
+		{
+			"@id":"Dimensions('BRIndex')"
+		},
+		{
+			"@id":"Dimensions('BRLineItem')"
+		},
+		{
+			"@id":"Dimensions('syManagementMeasure')"
+		}
+	],
+	"Views@Code.links":
+	[
+		"syManagement.views/App.BHKCustomers.json",
+		"syManagement.views/App.BHKProducts.json",
+		"syManagement.views/App.SequenceMaster.json"
+	]
+}

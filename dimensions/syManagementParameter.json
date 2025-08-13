@@ -1,0 +1,13 @@
+{
+	"@type":"Dimension",
+	"Name":"syManagementParameter",
+	"AllLeavesHierarchyName":"",
+	"DefaultHierarchy":
+	{
+		"@id":"Dimensions('syManagementParameter')/Hierarchies('syManagementParameter')"
+	},
+	"Hierarchies@Code.links":
+	[
+		"syManagementParameter.hierarchies/syManagementParameter.json"
+	]
+}

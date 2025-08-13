@@ -1,0 +1,43 @@
+{
+	"@type":"Subset",
+	"Name":"Inventory",
+	"Elements":
+	[
+		{
+			"@id":"Dimensions('BSStgStagingMeasure')/Hierarchies('BSStgStagingMeasure')/Elements('Inventory - Finished Goods and Goods in Transit')"
+		},
+		{
+			"@id":"Dimensions('BSStgStagingMeasure')/Hierarchies('BSStgStagingMeasure')/Elements('Opening Inventory')"
+		},
+		{
+			"@id":"Dimensions('BSStgStagingMeasure')/Hierarchies('BSStgStagingMeasure')/Elements('Add Purchases')"
+		},
+		{
+			"@id":"Dimensions('BSStgStagingMeasure')/Hierarchies('BSStgStagingMeasure')/Elements('COGS FX amortised to P&L')"
+		},
+		{
+			"@id":"Dimensions('BSStgStagingMeasure')/Hierarchies('BSStgStagingMeasure')/Elements('Less Cost of Sales (per Outlook)')"
+		},
+		{
+			"@id":"Dimensions('BSStgStagingMeasure')/Hierarchies('BSStgStagingMeasure')/Elements('Less Transfers to NZ (per VG)')"
+		},
+		{
+			"@id":"Dimensions('BSStgStagingMeasure')/Hierarchies('BSStgStagingMeasure')/Elements('Closing Inventory (ex provision)')"
+		},
+		{
+			"@id":"Dimensions('BSStgStagingMeasure')/Hierarchies('BSStgStagingMeasure')/Elements('Provision')"
+		},
+		{
+			"@id":"Dimensions('BSStgStagingMeasure')/Hierarchies('BSStgStagingMeasure')/Elements('Total Inventories')"
+		},
+		{
+			"@id":"Dimensions('BSStgStagingMeasure')/Hierarchies('BSStgStagingMeasure')/Elements('Increase in purchases per NM')"
+		},
+		{
+			"@id":"Dimensions('BSStgStagingMeasure')/Hierarchies('BSStgStagingMeasure')/Elements('Total')"
+		},
+		{
+			"@id":"Dimensions('BSStgStagingMeasure')/Hierarchies('BSStgStagingMeasure')/Elements('BAU (AUD)  VG Transfers')"
+		}
+	]
+}

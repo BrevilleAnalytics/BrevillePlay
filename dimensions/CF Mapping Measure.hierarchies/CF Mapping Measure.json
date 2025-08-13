@@ -1,0 +1,16 @@
+{
+	"@type":"Hierarchy",
+	"Name":"CF Mapping Measure",
+	"Elements":
+	[
+		{
+			"Name":"BS Staging Ref",
+			"Type":"String"
+		},
+		{
+			"Name":"PL Ref",
+			"Type":"String"
+		}
+	],
+	"Subsets@Code.links":[]
+}

@@ -1,0 +1,5 @@
+{
+	"@type":"Subset",
+	"Name":"App.BaratazaProducts",
+	"Expression":"{{TM1FILTERBYPATTERN(TM1SubsetAll([Product].[Product]),\"*NOPRODUCTBA*\")}}"
+}

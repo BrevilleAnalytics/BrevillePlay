@@ -1,0 +1,16 @@
+{
+	"@type":"Subset",
+	"Name":"App.MgmtReporting",
+	"Elements":
+	[
+		{
+			"@id":"Dimensions('GLAccount')/Hierarchies('GLAccount')/Elements('FREIGHT')"
+		},
+		{
+			"@id":"Dimensions('GLAccount')/Hierarchies('GLAccount')/Elements('WARRANTY')"
+		},
+		{
+			"@id":"Dimensions('GLAccount')/Hierarchies('GLAccount')/Elements('COGS')"
+		}
+	]
+}

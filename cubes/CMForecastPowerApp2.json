@@ -1,0 +1,33 @@
+{
+	"@type":"Cube",
+	"Name":"CMForecastPowerApp2",
+	"Rules@Code.link":"CMForecastPowerApp2.rules",
+	"Dimensions":
+	[
+		{
+			"@id":"Dimensions('Customer')"
+		},
+		{
+			"@id":"Dimensions('Segment')"
+		},
+		{
+			"@id":"Dimensions('BusinessUnit')"
+		},
+		{
+			"@id":"Dimensions('FiscalMonth')"
+		},
+		{
+			"@id":"Dimensions('Theatre')"
+		},
+		{
+			"@id":"Dimensions('Currency')"
+		},
+		{
+			"@id":"Dimensions('CMForecastPAMeasure')"
+		}
+	],
+	"Views@Code.links":
+	[
+		"CMForecastPowerApp2.views/Default.json"
+	]
+}

@@ -1,0 +1,9 @@
+['Actual'] = S: IF (
+ELLEV('GLAccount',!GLAccount)=0 & 
+#ELLEV('CostCentre',!CostCentre)=0 & 
+ELLEV('BusinessUnit',!BusinessUnit) =0 & 
+ELLEV('FiscalMonth',!FiscalMonth) = 0 
+,
+'PnLPlanTransactions' , 
+CONTINUE
+);

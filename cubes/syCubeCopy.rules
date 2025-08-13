@@ -1,0 +1,385 @@
+#Region System
+FEEDSTRINGS;
+SKIPCHECK;
+#EndRegion
+
+# Cube name: syCubeCopy
+
+['BRExchangeRate','Version From'] = S: 'Currency' ;
+
+['CMRatiosSeedDefault' ,'Business Unit'] = S : '' ;
+[{'BRExchangeRate' ,'CMRatiosSeedDefault'} ,'Theatre'] = S : '' ;
+
+[ {'Outlook Snapshot' , 'Outlook Snapshot with Filter' } , 
+   'Version To' ] = S: DIMNM( 'Version' , DIMIX( 'Version' , ATTRS( 'Version', DB( 'BRAsVersion' , 'NoVersion' , 'Actual Month MMM' ), 'Month' ) ) ) ;
+               
+               
+[ {'Outlook Snapshot' } , 
+  {'BRExchangeRate', 'CMBaratzaForecast','CMBHKForecast', 'CMForecast', 'CMRunRates', 'GlobalEBIT', 'PnLPlan'} ,
+  'Filter Result' ] = S : 'FiscalMonth:' | Str ( DB('BRAsVersion','Actual','Fiscal Year Numeric') ,4,0) | '\' | Str ( DB('BRAsVersion','NoVersion','Fiscal Year+1 Numeric') ,4,0) ;
+  
+  [ {'Outlook Snapshot' } , 
+  {'VangaurdPurchases'} ,
+  'Filter Result' ] = S : 'FiscalMonth:' | Str ( DB('BRAsVersion','NoVersion','Fiscal Year Numeric') ,4,0) | '\' | Str ( DB('BRAsVersion','NoVersion','Fiscal Year+1 Numeric') ,4,0) | '$Checkpoint:Base'  ;
+
+#cube :CMRatiosSeedDefault
+
+['CMRatiosSeedDefault' 
+  , 'Filter Result' ] = S : '' ;
+
+  ### Cubes except Global EBIT, PnLPlan , BRExchangeRate and CMRatiosSeedDefault 
+[ 'Outlook Snapshot with Filter' , 
+  { 'CMBaratzaForecast','CMBHKForecast', 'CMForecast', 'CMRunRates' } ,
+  'Filter Result' ] = S :
+  
+#Theatre
+If( 
+  DB( 'syCubeCopy', !syCubeCopyTemplate, !syCubeCopyCubeList, 'Theatre' ) @= '' &   DB( 'syCubeCopy', !syCubeCopyTemplate, !syCubeCopyCubeList, 'Business Unit' ) @= ''
+  , 'FiscalMonth:' | Str ( DB('BRAsVersion','Actual','Fiscal Year Numeric') ,4,0) | '\' | Str ( DB('BRAsVersion','NoVersion','Fiscal Year+1 Numeric') ,4,0)
+  , CONTINUE
+  );
+
+[ 'Outlook Snapshot with Filter' , 
+  { 'CMBaratzaForecast','CMBHKForecast', 'CMForecast', 'CMRunRates' } ,
+  'Filter Result' ] = S :
+  
+#Theatre
+If( 
+  DB( 'syCubeCopy', !syCubeCopyTemplate, !syCubeCopyCubeList, 'Theatre' ) @<> '' &   DB( 'syCubeCopy', !syCubeCopyTemplate, !syCubeCopyCubeList, 'Business Unit' ) @<> ''
+  , 'FiscalMonth:' | Str ( DB('BRAsVersion','Actual','Fiscal Year Numeric') ,4,0) | '\' | Str ( DB('BRAsVersion','NoVersion','Fiscal Year+1 Numeric') ,4,0)
+  | '$' | 'Theatre:' |  DB( 'syCubeCopy', !syCubeCopyTemplate, !syCubeCopyCubeList, 'Theatre' ) 
+  | '$' | 'BusinessUnit:' |  DB( 'syCubeCopy', !syCubeCopyTemplate, !syCubeCopyCubeList, 'Business Unit' )  
+  , CONTINUE
+  );
+
+[ 'Outlook Snapshot with Filter' , 
+  { 'CMBaratzaForecast','CMBHKForecast', 'CMForecast', 'CMRunRates' } ,
+  'Filter Result' ] = S :
+  
+#Theatre
+If( 
+  DB( 'syCubeCopy', !syCubeCopyTemplate, !syCubeCopyCubeList, 'Theatre' ) @<> '' &   DB( 'syCubeCopy', !syCubeCopyTemplate, !syCubeCopyCubeList, 'Business Unit' ) @= ''
+  , 'FiscalMonth:' | Str ( DB('BRAsVersion','Actual','Fiscal Year Numeric') ,4,0) | '\' | Str ( DB('BRAsVersion','NoVersion','Fiscal Year+1 Numeric') ,4,0)
+  | '$' | 'Theatre:' |  DB( 'syCubeCopy', !syCubeCopyTemplate, !syCubeCopyCubeList, 'Theatre' )
+  , CONTINUE
+  );
+
+[ 'Outlook Snapshot with Filter' , 
+  { 'CMBaratzaForecast','CMBHKForecast', 'CMForecast', 'CMRunRates' } ,
+  'Filter Result' ] = S :
+  
+#Theatre
+If( 
+  DB( 'syCubeCopy', !syCubeCopyTemplate, !syCubeCopyCubeList, 'Theatre' ) @= '' &   DB( 'syCubeCopy', !syCubeCopyTemplate, !syCubeCopyCubeList, 'Business Unit' ) @<> ''
+  , 'FiscalMonth:' | Str ( DB('BRAsVersion','Actual','Fiscal Year Numeric') ,4,0) | '\' | Str ( DB('BRAsVersion','NoVersion','Fiscal Year+1 Numeric') ,4,0)
+  | '$' | 'BusinessUnit:' |  DB( 'syCubeCopy', !syCubeCopyTemplate, !syCubeCopyCubeList, 'Business Unit' )
+  , CONTINUE
+  );
+  
+  ### Cube : BRExchangeRate
+[ 'Outlook Snapshot with Filter' , 
+  'BRExchangeRate' ,
+  'Filter Result' ] = S : 
+  if ( DB( 'syCubeCopy', !syCubeCopyTemplate, !syCubeCopyCubeList, 'Business Unit' ) @= '' 
+  , 'FiscalMonth:' | Str ( DB('BRAsVersion','Actual','Fiscal Year Numeric') ,4,0) | '\' | Str ( DB('BRAsVersion','NoVersion','Fiscal Year+1 Numeric') ,4,0 )
+  , 'FiscalMonth:' | Str ( DB('BRAsVersion','Actual','Fiscal Year Numeric') ,4,0) | '\' | Str ( DB('BRAsVersion','NoVersion','Fiscal Year+1 Numeric') ,4,0) 
+  | '$' | 'BusinessUnit:' |  DB( 'syCubeCopy', !syCubeCopyTemplate, !syCubeCopyCubeList, 'Business Unit' )
+     ) ;
+ 
+  ### Cubes : Global EBIT, PnLPlan  
+[ 'Outlook Snapshot with Filter' , 
+  { 'GlobalEBIT', 'PnLPlan' } ,
+  'Filter Result' ] = S :
+
+#Theatre
+If( 
+  DB( 'syCubeCopy', !syCubeCopyTemplate, !syCubeCopyCubeList, 'Theatre' ) @= '' & DB( 'syCubeCopy', !syCubeCopyTemplate, !syCubeCopyCubeList, 'Business Unit' ) @= ''
+  , 'FiscalMonth:' | Str ( DB('BRAsVersion','Actual','Fiscal Year Numeric') ,4,0) | '\' | Str ( DB('BRAsVersion','NoVersion','Fiscal Year+1 Numeric') ,4,0)
+  , CONTINUE
+);
+
+[ 'Outlook Snapshot with Filter' , 
+  { 'GlobalEBIT', 'PnLPlan' } ,
+  'Filter Result' ] = S :
+
+#Theatre
+If( 
+  DB( 'syCubeCopy', !syCubeCopyTemplate, !syCubeCopyCubeList, 'Theatre' ) @= '' & DB( 'syCubeCopy', !syCubeCopyTemplate, !syCubeCopyCubeList, 'Business Unit' ) @<> ''
+  , 'FiscalMonth:' | Str ( DB('BRAsVersion','Actual','Fiscal Year Numeric') ,4,0) | '\' | Str ( DB('BRAsVersion','NoVersion','Fiscal Year+1 Numeric') ,4,0)
+    | '$' | 'BusinessUnit:' |  DB( 'syCubeCopy', !syCubeCopyTemplate, !syCubeCopyCubeList, 'Business Unit' )
+  , CONTINUE
+);
+
+
+[ 'Outlook Snapshot with Filter' , 
+  { 'GlobalEBIT', 'PnLPlan' } ,
+  'Filter Result' ] = S :
+
+#Theatre
+If( 
+  DB( 'syCubeCopy', !syCubeCopyTemplate, !syCubeCopyCubeList, 'Theatre' ) @<> '' 
+  & DB( 'syCubeCopy', !syCubeCopyTemplate, !syCubeCopyCubeList, 'Business Unit' ) @= ''
+  , 'FiscalMonth:' | Str ( DB('BRAsVersion','Actual','Fiscal Year Numeric') ,4,0) | '\' | Str ( DB('BRAsVersion','NoVersion','Fiscal Year+1 Numeric') ,4,0)
+  | '$' | 'GlobalTheatre:' |  DB( 'syCubeCopy', !syCubeCopyTemplate, !syCubeCopyCubeList, 'Theatre' )
+  , CONTINUE
+);
+
+[ 'Outlook Snapshot with Filter' , 
+  { 'GlobalEBIT', 'PnLPlan' } ,
+  'Filter Result' ] = S :
+
+#Theatre
+If( 
+  DB( 'syCubeCopy', !syCubeCopyTemplate, !syCubeCopyCubeList, 'Theatre' ) @<> '' 
+  & DB( 'syCubeCopy', !syCubeCopyTemplate, !syCubeCopyCubeList, 'Business Unit' ) @<> ''
+  , 'FiscalMonth:' | Str ( DB('BRAsVersion','Actual','Fiscal Year Numeric') ,4,0) | '\' | Str ( DB('BRAsVersion','NoVersion','Fiscal Year+1 Numeric') ,4,0)
+  | '$' | 'GlobalTheatre:' |  DB( 'syCubeCopy', !syCubeCopyTemplate, !syCubeCopyCubeList, 'Theatre' )
+  | '$' | 'BusinessUnit:' |  DB( 'syCubeCopy', !syCubeCopyTemplate, !syCubeCopyCubeList, 'Business Unit' )  
+  , CONTINUE
+);
+
+
+# Budget Snapshot
+
+[ { 'Budget Snapshot' , 'Copy Budget To Outlook'}
+  , {'BRExchangeRate', 'CMBaratzaForecast','CMBHKForecast', 'CMForecast', 'CMRunRates', 'GlobalEBIT', 'PnLPlan'} ,
+  'Filter Result' ] = S : 'FiscalMonth:' | DB('BRAsVersion','NoVersion','Budget Year') ;
+
+# Budget Snapshot with filter
+
+  ### Cubes except Global EBIT, PnLPlan , BRExchangeRate and CMRatiosSeedDefault 
+[ { 'Budget Snapshot with Filter' , 'Copy Budget To Outlook with Filter'} , 
+  { 'CMBaratzaForecast','CMBHKForecast', 'CMForecast', 'CMRunRates' } ,
+  'Filter Result' ] = S :
+  
+#Theatre
+If( 
+  DB( 'syCubeCopy', !syCubeCopyTemplate, !syCubeCopyCubeList, 'Theatre' ) @= '' &   DB( 'syCubeCopy', !syCubeCopyTemplate, !syCubeCopyCubeList, 'Business Unit' ) @= ''
+  , 'FiscalMonth:' | DB('BRAsVersion','NoVersion','Budget Year')
+  , CONTINUE
+  );
+
+[ { 'Budget Snapshot with Filter' , 'Copy Budget To Outlook with Filter'} , 
+  { 'CMBaratzaForecast','CMBHKForecast', 'CMForecast', 'CMRunRates' } ,
+  'Filter Result' ] = S :
+  
+#Theatre
+If( 
+  DB( 'syCubeCopy', !syCubeCopyTemplate, !syCubeCopyCubeList, 'Theatre' ) @<> '' &   DB( 'syCubeCopy', !syCubeCopyTemplate, !syCubeCopyCubeList, 'Business Unit' ) @<> ''
+  , 'FiscalMonth:' | DB('BRAsVersion','NoVersion','Budget Year')
+  | '$' | 'Theatre:' |  DB( 'syCubeCopy', !syCubeCopyTemplate, !syCubeCopyCubeList, 'Theatre' ) 
+  | '$' | 'BusinessUnit:' |  DB( 'syCubeCopy', !syCubeCopyTemplate, !syCubeCopyCubeList, 'Business Unit' )  
+  , CONTINUE
+  );
+
+[ { 'Budget Snapshot with Filter' , 'Copy Budget To Outlook with Filter'} , 
+  { 'CMBaratzaForecast','CMBHKForecast', 'CMForecast', 'CMRunRates' } ,
+  'Filter Result' ] = S :
+  
+#Theatre
+If( 
+  DB( 'syCubeCopy', !syCubeCopyTemplate, !syCubeCopyCubeList, 'Theatre' ) @<> '' &   DB( 'syCubeCopy', !syCubeCopyTemplate, !syCubeCopyCubeList, 'Business Unit' ) @= ''
+  , 'FiscalMonth:' | DB('BRAsVersion','NoVersion','Budget Year')
+  | '$' | 'Theatre:' |  DB( 'syCubeCopy', !syCubeCopyTemplate, !syCubeCopyCubeList, 'Theatre' )
+  , CONTINUE
+  );
+
+[ { 'Budget Snapshot with Filter' , 'Copy Budget To Outlook with Filter'} , 
+  { 'CMBaratzaForecast','CMBHKForecast', 'CMForecast', 'CMRunRates' } ,
+  'Filter Result' ] = S :
+  
+#Theatre
+If( 
+  DB( 'syCubeCopy', !syCubeCopyTemplate, !syCubeCopyCubeList, 'Theatre' ) @= '' &   DB( 'syCubeCopy', !syCubeCopyTemplate, !syCubeCopyCubeList, 'Business Unit' ) @<> ''
+  , 'FiscalMonth:' | DB('BRAsVersion','NoVersion','Budget Year')
+  | '$' | 'BusinessUnit:' |  DB( 'syCubeCopy', !syCubeCopyTemplate, !syCubeCopyCubeList, 'Business Unit' )
+  , CONTINUE
+  );
+  
+  ### Cube : BRExchangeRate
+[ { 'Budget Snapshot with Filter' , 'Copy Budget To Outlook with Filter'} , 
+  'BRExchangeRate' ,
+  'Filter Result' ] = S : 
+  if ( DB( 'syCubeCopy', !syCubeCopyTemplate, !syCubeCopyCubeList, 'Business Unit' ) @= '' 
+  , 'FiscalMonth:' | DB('BRAsVersion','NoVersion','Budget Year')
+  , 'FiscalMonth:' | DB('BRAsVersion','NoVersion','Budget Year') 
+  | '$' | 'BusinessUnit:' |  DB( 'syCubeCopy', !syCubeCopyTemplate, !syCubeCopyCubeList, 'Business Unit' )
+     ) ;
+ 
+  ### Cubes : Global EBIT, PnLPlan  
+[ { 'Budget Snapshot with Filter' , 'Copy Budget To Outlook with Filter'} , 
+  { 'GlobalEBIT', 'PnLPlan' } ,
+  'Filter Result' ] = S :
+
+#Theatre
+If( 
+  DB( 'syCubeCopy', !syCubeCopyTemplate, !syCubeCopyCubeList, 'Theatre' ) @= '' & DB( 'syCubeCopy', !syCubeCopyTemplate, !syCubeCopyCubeList, 'Business Unit' ) @= ''
+  , 'FiscalMonth:' | DB('BRAsVersion','NoVersion','Budget Year')
+  , CONTINUE
+);
+
+[ { 'Budget Snapshot with Filter' , 'Copy Budget To Outlook with Filter'} , 
+  { 'GlobalEBIT', 'PnLPlan' } ,
+  'Filter Result' ] = S :
+
+#Theatre
+If( 
+  DB( 'syCubeCopy', !syCubeCopyTemplate, !syCubeCopyCubeList, 'Theatre' ) @= '' & DB( 'syCubeCopy', !syCubeCopyTemplate, !syCubeCopyCubeList, 'Business Unit' ) @<> ''
+  , 'FiscalMonth:' | DB('BRAsVersion','NoVersion','Budget Year')
+    | '$' | 'BusinessUnit:' |  DB( 'syCubeCopy', !syCubeCopyTemplate, !syCubeCopyCubeList, 'Business Unit' )
+  , CONTINUE
+);
+
+
+[ { 'Budget Snapshot with Filter' , 'Copy Budget To Outlook with Filter'} , 
+  { 'GlobalEBIT', 'PnLPlan' } ,
+  'Filter Result' ] = S :
+
+#Theatre
+If( 
+  DB( 'syCubeCopy', !syCubeCopyTemplate, !syCubeCopyCubeList, 'Theatre' ) @<> '' 
+  & DB( 'syCubeCopy', !syCubeCopyTemplate, !syCubeCopyCubeList, 'Business Unit' ) @= ''
+  , 'FiscalMonth:' | DB('BRAsVersion','NoVersion','Budget Year')
+  | '$' | 'GlobalTheatre:' |  DB( 'syCubeCopy', !syCubeCopyTemplate, !syCubeCopyCubeList, 'Theatre' )
+  , CONTINUE
+);
+
+[ { 'Budget Snapshot with Filter' , 'Copy Budget To Outlook with Filter'} , 
+  { 'GlobalEBIT', 'PnLPlan' } ,
+  'Filter Result' ] = S :
+
+#Theatre
+If( 
+  DB( 'syCubeCopy', !syCubeCopyTemplate, !syCubeCopyCubeList, 'Theatre' ) @<> '' 
+  & DB( 'syCubeCopy', !syCubeCopyTemplate, !syCubeCopyCubeList, 'Business Unit' ) @<> ''
+  , 'FiscalMonth:' | DB('BRAsVersion','NoVersion','Budget Year')
+  | '$' | 'GlobalTheatre:' |  DB( 'syCubeCopy', !syCubeCopyTemplate, !syCubeCopyCubeList, 'Theatre' )
+  | '$' | 'BusinessUnit:' |  DB( 'syCubeCopy', !syCubeCopyTemplate, !syCubeCopyCubeList, 'Business Unit' )  
+  , CONTINUE
+);
+
+
+
+
+# Manual Snapshot
+
+[ { 'Manual Snapshot' }
+  , {'BRExchangeRate', 'CMBaratzaForecast','CMBHKForecast', 'CMForecast', 'CMRunRates', 'GlobalEBIT', 'PnLPlan'} ,
+  'Filter Result' ] = S : 'FiscalMonth:' |  DB( 'syCubeCopy', !syCubeCopyTemplate, !syCubeCopyCubeList, 'Filter' );
+
+# Manual Snapshot with filter
+
+  ### Cubes except Global EBIT, PnLPlan , BRExchangeRate and CMRatiosSeedDefault 
+[ { 'Manual Snapshot' } , 
+  { 'CMBaratzaForecast','CMBHKForecast', 'CMForecast', 'CMRunRates' } ,
+  'Filter Result' ] = S :
+  
+#Theatre
+If( 
+  DB( 'syCubeCopy', !syCubeCopyTemplate, !syCubeCopyCubeList, 'Theatre' ) @= '' &   DB( 'syCubeCopy', !syCubeCopyTemplate, !syCubeCopyCubeList, 'Business Unit' ) @= ''
+  , 'FiscalMonth:' | DB( 'syCubeCopy', !syCubeCopyTemplate, !syCubeCopyCubeList, 'Filter' )
+  , CONTINUE
+  );
+
+[ { 'Manual Snapshot' } , 
+  { 'CMBaratzaForecast','CMBHKForecast', 'CMForecast', 'CMRunRates' } ,
+  'Filter Result' ] = S :
+  
+#Theatre
+If( 
+  DB( 'syCubeCopy', !syCubeCopyTemplate, !syCubeCopyCubeList, 'Theatre' ) @<> '' &   DB( 'syCubeCopy', !syCubeCopyTemplate, !syCubeCopyCubeList, 'Business Unit' ) @<> ''
+  , 'FiscalMonth:' |  DB( 'syCubeCopy', !syCubeCopyTemplate, !syCubeCopyCubeList, 'Filter' )
+  | '$' | 'Theatre:' |  DB( 'syCubeCopy', !syCubeCopyTemplate, !syCubeCopyCubeList, 'Theatre' ) 
+  | '$' | 'BusinessUnit:' |  DB( 'syCubeCopy', !syCubeCopyTemplate, !syCubeCopyCubeList, 'Business Unit' )  
+  , CONTINUE
+  );
+
+[ {  'Manual Snapshot' } , 
+  { 'CMBaratzaForecast','CMBHKForecast', 'CMForecast', 'CMRunRates' } ,
+  'Filter Result' ] = S :
+  
+#Theatre
+If( 
+  DB( 'syCubeCopy', !syCubeCopyTemplate, !syCubeCopyCubeList, 'Theatre' ) @<> '' &   DB( 'syCubeCopy', !syCubeCopyTemplate, !syCubeCopyCubeList, 'Business Unit' ) @= ''
+  , 'FiscalMonth:' | DB( 'syCubeCopy', !syCubeCopyTemplate, !syCubeCopyCubeList, 'Filter' )
+  | '$' | 'Theatre:' |  DB( 'syCubeCopy', !syCubeCopyTemplate, !syCubeCopyCubeList, 'Theatre' )
+  , CONTINUE
+  );
+
+[ { 'Manual Snapshot'} , 
+  { 'CMBaratzaForecast','CMBHKForecast', 'CMForecast', 'CMRunRates' } ,
+  'Filter Result' ] = S :
+  
+#Theatre
+If( 
+  DB( 'syCubeCopy', !syCubeCopyTemplate, !syCubeCopyCubeList, 'Theatre' ) @= '' &   DB( 'syCubeCopy', !syCubeCopyTemplate, !syCubeCopyCubeList, 'Business Unit' ) @<> ''
+  , 'FiscalMonth:' |DB( 'syCubeCopy', !syCubeCopyTemplate, !syCubeCopyCubeList, 'Filter' )
+  | '$' | 'BusinessUnit:' |  DB( 'syCubeCopy', !syCubeCopyTemplate, !syCubeCopyCubeList, 'Business Unit' )
+  , CONTINUE
+  );
+  
+  ### Cube : BRExchangeRate
+[ { 'Manual Snapshot'} , 
+  'BRExchangeRate' ,
+  'Filter Result' ] = S : 
+  if ( DB( 'syCubeCopy', !syCubeCopyTemplate, !syCubeCopyCubeList, 'Business Unit' ) @= '' 
+  , 'FiscalMonth:' | DB( 'syCubeCopy', !syCubeCopyTemplate, !syCubeCopyCubeList, 'Filter' )
+  , 'FiscalMonth:' | DB( 'syCubeCopy', !syCubeCopyTemplate, !syCubeCopyCubeList, 'Filter' )
+  | '$' | 'BusinessUnit:' |  DB( 'syCubeCopy', !syCubeCopyTemplate, !syCubeCopyCubeList, 'Business Unit' )
+     ) ;
+ 
+  ### Cubes : Global EBIT, PnLPlan  
+[ { 'Manual Snapshot'} , 
+  { 'GlobalEBIT', 'PnLPlan' } ,
+  'Filter Result' ] = S :
+
+#Theatre
+If( 
+  DB( 'syCubeCopy', !syCubeCopyTemplate, !syCubeCopyCubeList, 'Theatre' ) @= '' & DB( 'syCubeCopy', !syCubeCopyTemplate, !syCubeCopyCubeList, 'Business Unit' ) @= ''
+  , 'FiscalMonth:' |DB( 'syCubeCopy', !syCubeCopyTemplate, !syCubeCopyCubeList, 'Filter' )
+  , CONTINUE
+);
+
+[ { 'Manual Snapshot'} , 
+  { 'GlobalEBIT', 'PnLPlan' } ,
+  'Filter Result' ] = S :
+
+#Theatre
+If( 
+  DB( 'syCubeCopy', !syCubeCopyTemplate, !syCubeCopyCubeList, 'Theatre' ) @= '' & DB( 'syCubeCopy', !syCubeCopyTemplate, !syCubeCopyCubeList, 'Business Unit' ) @<> ''
+  , 'FiscalMonth:' |DB( 'syCubeCopy', !syCubeCopyTemplate, !syCubeCopyCubeList, 'Filter' )
+    | '$' | 'BusinessUnit:' |  DB( 'syCubeCopy', !syCubeCopyTemplate, !syCubeCopyCubeList, 'Business Unit' )
+  , CONTINUE
+);
+
+
+[ { 'Manual Snapshot'} , 
+  { 'GlobalEBIT', 'PnLPlan' } ,
+  'Filter Result' ] = S :
+
+#Theatre
+If( 
+  DB( 'syCubeCopy', !syCubeCopyTemplate, !syCubeCopyCubeList, 'Theatre' ) @<> '' 
+  & DB( 'syCubeCopy', !syCubeCopyTemplate, !syCubeCopyCubeList, 'Business Unit' ) @= ''
+  , 'FiscalMonth:' |DB( 'syCubeCopy', !syCubeCopyTemplate, !syCubeCopyCubeList, 'Filter' )
+  | '$' | 'GlobalTheatre:' |  DB( 'syCubeCopy', !syCubeCopyTemplate, !syCubeCopyCubeList, 'Theatre' )
+  , CONTINUE
+);
+
+[ { 'Manual Snapshot'} , 
+  { 'GlobalEBIT', 'PnLPlan' } ,
+  'Filter Result' ] = S :
+
+#Theatre
+If( 
+  DB( 'syCubeCopy', !syCubeCopyTemplate, !syCubeCopyCubeList, 'Theatre' ) @<> '' 
+  & DB( 'syCubeCopy', !syCubeCopyTemplate, !syCubeCopyCubeList, 'Business Unit' ) @<> ''
+  , 'FiscalMonth:' | DB( 'syCubeCopy', !syCubeCopyTemplate, !syCubeCopyCubeList, 'Filter' )
+  | '$' | 'GlobalTheatre:' |  DB( 'syCubeCopy', !syCubeCopyTemplate, !syCubeCopyCubeList, 'Theatre' )
+  | '$' | 'BusinessUnit:' |  DB( 'syCubeCopy', !syCubeCopyTemplate, !syCubeCopyCubeList, 'Business Unit' )  
+  , CONTINUE
+);
+
+
+
+

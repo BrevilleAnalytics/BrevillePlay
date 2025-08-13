@@ -1,0 +1,28 @@
+{
+	"@type":"Hierarchy",
+	"Name":"BRAsFiscalMonthMeasure",
+	"Elements":
+	[
+		{
+			"Name":"Actual Flag",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"Default Access",
+			"Type":"String"
+		},
+		{
+			"Name":"Override",
+			"Type":"String"
+		},
+		{
+			"Name":"Final Access",
+			"Type":"String"
+		},
+		{
+			"Name":"Days in Month",
+			"Type":"Numeric"
+		}
+	],
+	"Subsets@Code.links":[]
+}

@@ -1,0 +1,10 @@
+{
+	"@type":"Subset",
+	"Name":"App.BudgetYear",
+	"Elements":
+	[
+		{
+			"@id":"Dimensions('FiscalMonth')/Hierarchies('FiscalMonth')/Elements('2024')"
+		}
+	]
+}

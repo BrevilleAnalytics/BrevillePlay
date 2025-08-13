@@ -1,0 +1,5 @@
+{
+	"@type":"Subset",
+	"Name":"App.MarketingCorporate",
+	"Expression":"{TM1FILTERBYPATTERN(TM1SUBSETALL([GLAccount].[Management Reporting]) , \"*Marketing Expenses  Corporate*\" , \"CodeCaption\"),TM1FILTERBYPATTERN(TM1SUBSETALL([GLAccount].[Management Reporting]) , \"*Marketing Corporate*\" , \"CodeCaption\"),TM1FILTERBYPATTERN(TM1SUBSETALL([GLAccount].[Management Reporting]) , \"*Marketing Specialty*\" , \"CodeCaption\"),TM1FILTERBYPATTERN(TM1SUBSETALL([GLAccount].[Management Reporting]) , \"*Marketing Expenses Specialty*\" , \"CodeCaption\")}"
+}

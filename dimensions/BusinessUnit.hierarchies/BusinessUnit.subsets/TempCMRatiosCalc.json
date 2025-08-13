@@ -1,0 +1,10 @@
+{
+	"@type":"Subset",
+	"Name":"TempCMRatiosCalc",
+	"Elements":
+	[
+		{
+			"@id":"Dimensions('BusinessUnit')/Hierarchies('BusinessUnit')/Elements('BAU')"
+		}
+	]
+}

@@ -1,0 +1,13 @@
+{
+	"@type":"Dimension",
+	"Name":"FiscalWeek",
+	"AllLeavesHierarchyName":"",
+	"DefaultHierarchy":
+	{
+		"@id":"Dimensions('FiscalWeek')/Hierarchies('FiscalWeek')"
+	},
+	"Hierarchies@Code.links":
+	[
+		"FiscalWeek.hierarchies/FiscalWeek.json"
+	]
+}

@@ -1,0 +1,127 @@
+#region Prolog
+DataSourceType = 'ODBC';
+
+csProcess = GetProcessName( ) ;
+sTimestamp = TimSt( Now, '\Y\m\d\h\i\s' );
+sRandomInt = NumberToString( INT( RAND( ) * 1000 ));
+
+sUniqueName  =  csProcess |'.'| sTimestamp | '.' | sRandomInt;
+sSub_Tgt= '}System.Tgt.' | sUniqueName ;
+sCub_Tgt = 'CMForecastPowerApp2' ;
+sView_Tgt = 'TmpCMForecastPowerApp' ;
+
+
+
+# SQL query
+
+ sSQL = 'SET NOCOUNT ON;
+SELECT [CustomerKey]
+      ,[ItemCode]
+      ,[Segment]
+      ,[BusinessUnitKey]
+      ,[CalendarMonth]
+      ,[Region]
+      ,[UnInvoicedAmount]
+      ,[UnReleasedAmount]
+      ,[ReleasedAmount]
+      ,[UnInvoicedQty]
+      ,[UnReleasedQty]
+      ,[ReleasedQty]
+  FROM [stg].[CustomerForecastOpenOrders]
+#where[monthYear] = ''' |sCurrentMonth| ''' and [businessUnit] = ''' |pBU| '''
+';
+ 
+		
+DNS_Server = 'brev-dev-syn-fpa';
+#CellGetS( 'syEnvironment', 'Breville', 'ODBC DSN for DL SQL'  );
+
+
+# Data Source
+
+ DataSourceType = 'ODBC' ;
+ DatasourceNameForServer = DNS_Server ;
+ DatasourceQuery = sSQL;
+
+# Create temp cubeview
+IF( ViewExists( sCub_Tgt , sView_Tgt ) = 1 ) ; 
+ ViewDestroy ( sCub_Tgt, sView_Tgt ) ;
+ENDIF;
+ViewCreate( sCub_Tgt, sView_Tgt , 1 ) ;
+
+# Create temp subsets and assign it to the view
+
+i_TabDim = 1 ;
+While ( TabDim ( sCub_Tgt , i_TabDim ) @<> '' ) ;
+   sDim = TabDim ( sCub_Tgt , i_TabDim ) ;
+   sMDX = '{TM1FILTERBYLEVEL ( {TM1SUBSETALL ( ['|sDim|'] ) } , 0 ) }' ;
+   SubsetCreateByMDX ( sSub_Tgt , sMDX , 1 ) ;
+   SubsetMDXSet (sDim , sSub_Tgt , '' ) ;
+   ViewSubsetAssign ( sCub_Tgt , sView_Tgt , sDim , sSub_Tgt ) ;
+
+i_TabDim = i_TabDim + 1 ;
+End ;
+
+#------ View zero out
+ViewZeroOut(sCub_Tgt, sView_Tgt);
+
+sLogMessage ='';
+#endregion
+#region Data
+
+If (DIMIX( 'Customer', vCustomerKey  ) = 0  ) ;
+  sMessage = 'CustomerKey = ' |  vCustomerKey| ' does not exist' ;
+  If(SCAN(sMessage, sLogMessage) =0);
+         #ExecuteProcess('syProcessLogMessage','psProcessName',csProcess,'psLogLevel','INFO','psMessage',sMessage ) ;
+         sLogMessage = sLogMessage | sMessage;
+  Endif;
+   Itemskip;
+Endif;
+
+
+If (DIMIX( 'Product', vItemCode  ) = 0  ) ;
+  sMessage = 'Product = ' | vItemCode | ' does not exist' ;
+  If(SCAN(sMessage, sLogMessage) =0);
+         #ExecuteProcess('syProcessLogMessage','psProcessName',csProcess,'psLogLevel','INFO','psMessage',sMessage ) ;
+         sLogMessage = sLogMessage | sMessage;
+  Endif;
+   Itemskip;
+Endif;
+
+sPeriod = ATTRS( 'CalendarMonth', vCalendarMonth , 'FiscalMonth' );
+sBE = ATTRN('Customer',vCustomerKey,'DA_EU_BE');
+sFreight = ATTRN('Customer',vCustomerKey,'DA_EU_Freight');
+sWarranty = ATTRN('Customer',vCustomerKey,'DA_EU_Warranty');
+
+sUnitCOGS = CellGetN ( 'CMRunRates', vItemCode ,'All Segment' , vBusinessUnitKey , 'All Theatre' , 'Working Budget' ,
+               sPeriod , 'COGS Unit Cost','Local' , 'Data Entry' ) ;
+               
+netSalesReleased = vReleasedAmount - vReleasedAmount * sBE;
+netSalesUnReleased = vUnReleasedAmount - vUnReleasedAmount * sBE;
+
+
+
+               
+#sUnitCOGS = 1;
+
+CellIncrementN( vReleasedAmount , sCub_Tgt ,vCustomerKey ,vSegment ,vBusinessUnitKey, sPeriod,vRegion,'Local','GS Released');
+CellIncrementN( vUnReleasedAmount , sCub_Tgt ,vCustomerKey ,vSegment ,vBusinessUnitKey, sPeriod,vRegion,'Local','GS Not Released');
+
+CellIncrementN( vReleasedAmount * sBE, sCub_Tgt ,vCustomerKey ,vSegment ,vBusinessUnitKey, sPeriod,vRegion,'Local','Rebates Released');
+CellIncrementN( vUnReleasedAmount * sBE, sCub_Tgt ,vCustomerKey ,vSegment ,vBusinessUnitKey, sPeriod,vRegion,'Local','Rebates Not Released');
+
+CellIncrementN( sUnitCOGS * vReleasedQty, sCub_Tgt ,vCustomerKey ,vSegment ,vBusinessUnitKey, sPeriod,vRegion,'Local','COGS Released');
+CellIncrementN( sUnitCOGS * vUnReleasedQty, sCub_Tgt ,vCustomerKey ,vSegment ,vBusinessUnitKey, sPeriod,vRegion,'Local','COGS Not Released');
+
+CellIncrementN( netSalesReleased * sFreight ,sCub_Tgt,vCustomerKey ,vSegment ,vBusinessUnitKey, sPeriod,vRegion,'Local','Freight Released');
+CellIncrementN( netSalesUnReleased * sFreight ,sCub_Tgt,vCustomerKey ,vSegment ,vBusinessUnitKey, sPeriod,vRegion,'Local','Freight Not Released');
+
+CellIncrementN( netSalesReleased * sFreight ,sCub_Tgt,vCustomerKey ,vSegment ,vBusinessUnitKey, sPeriod,vRegion,'Local','Freight Released');
+CellIncrementN( netSalesUnReleased * sFreight ,sCub_Tgt,vCustomerKey ,vSegment ,vBusinessUnitKey, sPeriod,vRegion,'Local','Freight Not Released');
+
+CellIncrementN( netSalesReleased * sFreight ,sCub_Tgt,vCustomerKey ,vSegment ,vBusinessUnitKey, sPeriod,vRegion,'Local','Freight Released');
+CellIncrementN( netSalesUnReleased * sFreight ,sCub_Tgt,vCustomerKey ,vSegment ,vBusinessUnitKey, sPeriod,vRegion,'Local','Freight Not Released');
+
+CellIncrementN( netSalesReleased * sWarranty ,sCub_Tgt,vCustomerKey ,vSegment ,vBusinessUnitKey, sPeriod,vRegion,'Local','Warranty Released');
+CellIncrementN( netSalesUnReleased * sWarranty ,sCub_Tgt,vCustomerKey ,vSegment ,vBusinessUnitKey, sPeriod,vRegion,'Local','Warranty Not Released');
+
+#endregion

@@ -1,0 +1,19 @@
+{
+	"@type":"Cube",
+	"Name":"BRAsVersion",
+	"Rules@Code.link":"BRAsVersion.rules",
+	"Dimensions":
+	[
+		{
+			"@id":"Dimensions('Version')"
+		},
+		{
+			"@id":"Dimensions('BRAsVersionMeasure')"
+		}
+	],
+	"Views@Code.links":
+	[
+		"BRAsVersion.views/Default.json",
+		"BRAsVersion.views/Junk.json"
+	]
+}

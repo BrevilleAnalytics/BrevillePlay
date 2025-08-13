@@ -1,0 +1,10 @@
+{
+	"@type":"Subset",
+	"Name":"TempOHPnLPlanOutlook",
+	"Elements":
+	[
+		{
+			"@id":"Dimensions('OPXComponent')/Hierarchies('OPXComponent')/Elements('OPEX')"
+		}
+	]
+}

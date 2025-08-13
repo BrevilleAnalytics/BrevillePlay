@@ -1,0 +1,34 @@
+{
+	"@type":"Subset",
+	"Name":"App.NoProductsBHK",
+	"Elements":
+	[
+		{
+			"@id":"Dimensions('Product')/Hierarchies('Product')/Elements('NoProductBORK')"
+		},
+		{
+			"@id":"Dimensions('Product')/Hierarchies('Product')/Elements('NoProductTRAMONTINA')"
+		},
+		{
+			"@id":"Dimensions('Product')/Hierarchies('Product')/Elements('NoProductGASTROBACK')"
+		},
+		{
+			"@id":"Dimensions('Product')/Hierarchies('Product')/Elements('NoProductARB')"
+		},
+		{
+			"@id":"Dimensions('Product')/Hierarchies('Product')/Elements('NoProductSOLIS')"
+		},
+		{
+			"@id":"Dimensions('Product')/Hierarchies('Product')/Elements('NoProductSAGE')"
+		},
+		{
+			"@id":"Dimensions('Product')/Hierarchies('Product')/Elements('NoProductBreville')"
+		},
+		{
+			"@id":"Dimensions('Product')/Hierarchies('Product')/Elements('NoProductBaratzaEMEA')"
+		},
+		{
+			"@id":"Dimensions('Product')/Hierarchies('Product')/Elements('NoProductBaratzaAPAC')"
+		}
+	]
+}

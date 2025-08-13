@@ -1,0 +1,1 @@
+SELECT {[BRAsFiscalMonthMeasure].[BRAsFiscalMonthMeasure].MEMBERS} ON 0, {EXCEPT(DISTINCT({[FiscalMonth].[FiscalMonth].[All Years],DESCENDANTS([FiscalMonth].[FiscalMonth].[All Years] , 99 , LEAVES)}) , {[FiscalMonth].[FiscalMonth].[All Years]})} ON 1 FROM [BRAsFiscalMonth] WHERE ([Version].[Version].[Actual], [Theatre].[Theatre].[APAC])

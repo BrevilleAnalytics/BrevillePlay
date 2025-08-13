@@ -1,0 +1,10 @@
+{
+	"@type":"Subset",
+	"Name":"}System.Tgt.CubeCMRunRatesRatiosCalc.20221011023141.959",
+	"Elements":
+	[
+		{
+			"@id":"Dimensions('FiscalMonth')/Hierarchies('FiscalMonth')/Elements('No FiscalMonth')"
+		}
+	]
+}

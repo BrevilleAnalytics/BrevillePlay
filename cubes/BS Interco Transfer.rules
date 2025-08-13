@@ -1,0 +1,206 @@
+SKIPCHECK;
+
+#Region Flag
+['Transfer Currency']=N:
+  IF ( DB( 'BRAsFiscalMonth' , 'Actual' , ATTRS( 'BusinessUnit', !To Business Unit , 'OPXTheatre' ), !FiscalMonth , 'Actual Flag' ) = 1,
+  0,
+  CONTINUE) ;
+#EndRegion  
+  
+#Region Opening Balance from BSStgStaging 
+  # actual
+  ['Opening Balance',{'Outlook','Working Budget'}, 'Transfer Currency']=N:
+    IF ( DB( 'BRAsFiscalMonth' , 'Actual' , ATTRS( 'Business Unit', !From Business Unit, 'OPXTheatre' ), !FiscalMonth , 'Actual Flag' ) = 1 & !From Business Unit @= !To Business Unit,  
+      DB ('BSStgActuals', 'GLAccount':'Intercompany - BS', !From Business Unit, 'Local Currency', ATTRS('FiscalMonth',!FiscalMonth,'PrevPeriod'), 'Reported Value', 'Balance' ),CONTINUE);
+
+  # forecast
+  ['Opening Balance',{'Outlook','Working Budget'}, 'Transfer Currency']=N:
+    IF ( DB( 'BRAsFiscalMonth' , 'Actual' , ATTRS( 'Business Unit', !From Business Unit, 'OPXTheatre' ), !FiscalMonth , 'Actual Flag' ) <> 1 & !From Business Unit @= !To Business Unit,  
+      DB('BS Interco Transfer', !Version, ATTRS('FiscalMonth',!FiscalMonth,'PrevPeriod'), !Currency, 'All Region', !'To Business Unit', 'Closing Balance' ),
+      CONTINUE);  
+#EndRegion      
+  
+['Transfer Currency']=N:
+    IF ( DB('BS Interco Set Flag', !'From Business Unit', !'To Business Unit', 'Interco Flag' )=0,
+    0,
+    CONTINUE);  
+
+#Region Cash receipt (20% of PM VLF)
+  # Initial interco value
+  ['Cash receipt (20% of PM VLF)', {'Outlook','Working Budget'}, 'Transfer Currency']=N:
+    IF ( DB('BS Interco Set Flag', !'From Business Unit', !'To Business Unit', 'Interco Flag' ) = 1,
+#    IF ( DB('BS Interco Transfer', !Version, !FiscalMonth, !Currency, !'From Business Unit', !'To Business Unit', 'Interco Flag' ) = 1,
+      DB('BSStgStaging', !From Business Unit, 'Local Currency', AttrS('FiscalMonth',!FiscalMonth,'PrevPeriod'), !Version, 'Reported Value', 'Cash Payment' ),
+      CONTINUE);
+      
+  #contra
+  ['Cash receipt (20% of PM VLF)', {'Outlook','Working Budget'}, {'Transfer Currency','EUR-Constant','EUR-Budget','EUR-Budget','AUD-MonthEnd','AUD-Constant','AUD-Budget','AUD-Outlook','USD-Constant'}]=N:
+    IF ( DB('BS Interco Set Flag', !'From Business Unit', !'To Business Unit', 'Interco Flag' ) = 2,
+#    IF ( DB('BS Interco Transfer', !Version, !FiscalMonth, !Currency, !'From Business Unit', !'To Business Unit', 'Interco Flag' ) = 2,  
+      DB('BS Interco Transfer', !Version, !FiscalMonth, !Currency, !'To Business Unit', !'From Business Unit', !'BS Interco Transfer Measure' )*-1,  
+      CONTINUE);
+#EndRegion
+
+#Region Cash receipt (80% of CM VLF)
+
+  ['Cash receipt (80% of CM VLF)', {'Outlook','Working Budget'}, 'Transfer Currency']=N:
+    IF ( DB('BS Interco Set Flag', !'From Business Unit', !'To Business Unit', 'Interco Flag' ) = 1,  
+#    IF ( DB('BS Interco Transfer', !Version, !FiscalMonth, !Currency, !'From Business Unit', !'To Business Unit', 'Interco Flag' ) = 1,
+      DB('BSStgStaging', !From Business Unit, 'Local Currency', !FiscalMonth, !Version, 'Reported Value', 'Cash Payment' ) *-1,
+      CONTINUE);
+
+  #contra
+  ['Cash receipt (80% of CM VLF)', {'Outlook','Working Budget'}, {'Transfer Currency','EUR-Constant','EUR-Budget','EUR-Budget','AUD-MonthEnd','AUD-Constant','AUD-Budget','AUD-Outlook','USD-Constant'}]=N:
+    IF ( DB('BS Interco Set Flag', !'From Business Unit', !'To Business Unit', 'Interco Flag' ) = 2,  
+#    IF ( DB('BS Interco Transfer', !Version, !FiscalMonth, !Currency, !'From Business Unit', !'To Business Unit', 'Interco Flag' ) = 2,  
+      DB('BS Interco Transfer', !Version, !FiscalMonth, !Currency, !'To Business Unit', !'From Business Unit', !'BS Interco Transfer Measure' )*-1,  
+      CONTINUE);
+#EndRegion
+
+#Region VLF for CM Booked (excl WHT)
+  ['VLF for CM Booked (excl WHT)', {'Outlook','Working Budget'}, 'Transfer Currency']=N:
+    IF ( DB('BS Interco Set Flag', !'From Business Unit', !'To Business Unit', 'Interco Flag' ) = 1,  
+#    IF ( DB('BS Interco Transfer', !Version, !FiscalMonth, !Currency, !'From Business Unit', !'To Business Unit', 'Interco Flag' ) = 1,
+       DB('BSStgStaging', !From Business Unit, 'Local Currency', !FiscalMonth, !Version, 'Reported Value', 'VLF for the Month' ),
+       CONTINUE);
+
+  #contra
+  ['VLF for CM Booked (excl WHT)', {'Outlook','Working Budget'}, {'Transfer Currency','EUR-Constant','EUR-Budget','EUR-Budget','AUD-MonthEnd','AUD-Constant','AUD-Budget','AUD-Outlook','USD-Constant'}]=N:
+    IF ( DB('BS Interco Set Flag', !'From Business Unit', !'To Business Unit', 'Interco Flag' ) = 2,  
+#    IF ( DB('BS Interco Transfer', !Version, !FiscalMonth, !Currency, !'From Business Unit', !'To Business Unit', 'Interco Flag' ) = 2,  
+      DB('BS Interco Transfer', !Version, !FiscalMonth, !Currency, !'To Business Unit', !'From Business Unit', !'BS Interco Transfer Measure' )*-1,  
+      CONTINUE);
+
+#EndRegion
+
+#Region Procument Charge Booked - manual input only where IC flag set
+  ['Procument Charge Booked', {'Outlook','Working Budget'}, 'Transfer Currency']=N:
+    IF ( DB('BS Interco Set Flag', !'From Business Unit', !'To Business Unit', 'Interco Flag' ) = 1,      
+    #IF ( DB('BS Interco Transfer', !Version, !FiscalMonth, !Currency, !'From Business Unit', !'To Business Unit', 'Interco Flag' ) <= 0, 
+      STET,CONTINUE);
+
+    #contra
+    ['Procument Charge Booked', {'Outlook','Working Budget'}, {'Transfer Currency','EUR-Constant','EUR-Budget','EUR-Budget','AUD-MonthEnd','AUD-Constant','AUD-Budget','AUD-Outlook','USD-Constant'}]=N:
+      IF ( DB('BS Interco Set Flag', !'From Business Unit', !'To Business Unit', 'Interco Flag' ) = 2,    
+#      IF ( DB('BS Interco Transfer', !Version, !FiscalMonth, !Currency, !'From Business Unit', !'To Business Unit', 'Interco Flag' ) = 2, 
+        DB('BS Interco Transfer', !Version, !FiscalMonth, !Currency, !'To Business Unit', !'From Business Unit', !'BS Interco Transfer Measure' )*-1,  
+        CONTINUE);
+#EndRegion        
+
+#Region Procument Charge Paid (PM) - reverse of Procument Charge Booked
+    ['Procument Charge Paid (PM)', {'Outlook','Working Budget'}, {'Transfer Currency','EUR-Constant','EUR-Budget','EUR-Budget','AUD-MonthEnd','AUD-Constant','AUD-Budget','AUD-Outlook','USD-Constant'}]=N:
+      IF ( DB('BS Interco Set Flag', !'From Business Unit', !'To Business Unit', 'Interco Flag' ) = 1,    
+#      IF ( DB('BS Interco Transfer', !Version, !FiscalMonth, !Currency, !'From Business Unit', !'To Business Unit', 'Interco Flag' ) = 1,    
+      DB('BS Interco Transfer', !Version, AttrS('FiscalMonth',!FiscalMonth,'PrevPeriod'), !Currency, !'From Business Unit', !'To Business Unit', 'Procument Charge Booked' )*-1,CONTINUE);
+
+    #contra
+    ['Procument Charge Paid (PM)', {'Outlook','Working Budget'}, {'Transfer Currency','EUR-Constant','EUR-Budget','EUR-Budget','AUD-MonthEnd','AUD-Constant','AUD-Budget','AUD-Outlook','USD-Constant'}]=N:
+      IF ( DB('BS Interco Set Flag', !'From Business Unit', !'To Business Unit', 'Interco Flag' ) = 2,    
+#      IF ( DB('BS Interco Transfer', !Version, !FiscalMonth, !Currency, !'From Business Unit', !'To Business Unit', 'Interco Flag' ) = 2, 
+        DB('BS Interco Transfer', !Version, !FiscalMonth, !Currency, !'To Business Unit', !'From Business Unit', !'BS Interco Transfer Measure' )*-1,  
+        CONTINUE);
+#EndRegion
+
+#Region China Service Fee Booked - manual input only where IC flag set
+    ['China Service Fee Booked', {'Outlook','Working Budget'}, 'Transfer Currency']=N:
+    IF ( DB('BS Interco Set Flag', !'From Business Unit', !'To Business Unit', 'Interco Flag' ) = 1,          
+#      IF ( DB('BS Interco Transfer', !Version, !FiscalMonth, !Currency, !'From Business Unit', !'To Business Unit', 'Interco Flag' ) <= 0, 
+      STET,CONTINUE);
+
+    #contra
+    ['China Service Fee Booked', {'Outlook','Working Budget'}, {'Transfer Currency','EUR-Constant','EUR-Budget','EUR-Budget','AUD-MonthEnd','AUD-Constant','AUD-Budget','AUD-Outlook','USD-Constant'}]=N:
+      IF ( DB('BS Interco Set Flag', !'From Business Unit', !'To Business Unit', 'Interco Flag' ) = 2,    
+#      IF ( DB('BS Interco Transfer', !Version, !FiscalMonth, !Currency, !'From Business Unit', !'To Business Unit', 'Interco Flag' ) = 2, 
+        DB('BS Interco Transfer', !Version, !FiscalMonth, !Currency, !'To Business Unit', !'From Business Unit', !'BS Interco Transfer Measure' )*-1,  
+        CONTINUE);
+#EndRegion
+
+#Region China Service Fee Payment (PM) - reverse of China Service Fee Booked
+    ['China Service Fee Payment (PM)', {'Outlook','Working Budget'}, {'Transfer Currency','EUR-Constant','EUR-Budget','EUR-Budget','AUD-MonthEnd','AUD-Constant','AUD-Budget','AUD-Outlook','USD-Constant'}]=N:
+      IF ( DB('BS Interco Set Flag', !'From Business Unit', !'To Business Unit', 'Interco Flag' ) = 1,     
+#       IF ( DB('BS Interco Transfer', !Version, !FiscalMonth, !Currency, !'From Business Unit', !'To Business Unit', 'Interco Flag' ) = 1,         
+         DB('BS Interco Transfer', !Version, AttrS('FiscalMonth',!FiscalMonth,'PrevPeriod'), !Currency, !'From Business Unit', !'To Business Unit', 'China Service Fee Booked' )*-1,
+         CONTINUE); 
+         
+      #contra
+    ['China Service Fee Payment (PM)', {'Outlook','Working Budget'}, {'Transfer Currency','EUR-Constant','EUR-Budget','EUR-Budget','AUD-MonthEnd','AUD-Constant','AUD-Budget','AUD-Outlook','USD-Constant'}]=N:
+      IF ( DB('BS Interco Set Flag', !'From Business Unit', !'To Business Unit', 'Interco Flag' ) = 2,    
+#      IF ( DB('BS Interco Transfer', !Version, !FiscalMonth, !Currency, !'From Business Unit', !'To Business Unit', 'Interco Flag' ) = 2, 
+        DB('BS Interco Transfer', !Version, !FiscalMonth, !Currency, !'To Business Unit', !'From Business Unit', !'BS Interco Transfer Measure' )*-1,  
+        CONTINUE);              
+#EndRegion
+
+#Region Other - manual input only where IC flag set
+    ['BS Interco Transfer Measure':{'Interco with Thebe - recapitalisation','Letlit payment','BTL balancing adjustment', 'Remit DI sales to NZ from PM','DI Sales - Cash Receipted on behalf of NZ for CM'}, 
+    {'Outlook','Working Budget'}, 'Transfer Currency']=N:
+    IF ( DB('BS Interco Set Flag', !'From Business Unit', !'To Business Unit', 'Interco Flag' ) = 1,          
+#      IF ( DB('BS Interco Transfer', !Version, !FiscalMonth, !Currency, !'From Business Unit', !'To Business Unit', 'Interco Flag' ) <= 0, 
+      STET,CONTINUE);   
+
+    #contra
+    ['BS Interco Transfer Measure':{'Interco with Thebe - recapitalisation','Letlit payment','BTL balancing adjustment', 'Remit DI sales to NZ from PM','DI Sales - Cash Receipted on behalf of NZ for CM'}, 
+    {'Outlook','Working Budget'},{'Transfer Currency','EUR-Constant','EUR-Budget','EUR-Budget','AUD-MonthEnd','AUD-Constant','AUD-Budget','AUD-Outlook','USD-Constant'}]=N:
+      IF ( DB('BS Interco Set Flag', !'From Business Unit', !'To Business Unit', 'Interco Flag' ) = 2,    
+#      IF ( DB('BS Interco Transfer', !Version, !FiscalMonth, !Currency, !'From Business Unit', !'To Business Unit', 'Interco Flag' ) = 2, 
+        DB('BS Interco Transfer', !Version, !FiscalMonth, !Currency, !'To Business Unit', !'From Business Unit', !'BS Interco Transfer Measure' )*-1,  
+        CONTINUE);              
+
+
+#EndRegion
+
+['Local Currency']=N:STET;
+
+[]=N:
+IF ( !Currency @<> 'Transfer Currency', 
+#  & DB('BS Interco Transfer', !Version, !FiscalMonth, 'Transfer Currency', !'From Business Unit', !'To Business Unit', 'Interco Flag' ) = 1,
+  DB('BS Interco Transfer', !Version, !FiscalMonth, 'Transfer Currency', !'From Business Unit', !'To Business Unit', !'BS Interco Transfer Measure' ) \ 
+  DB ('BRExchangeRate', !From Business Unit, !FiscalMonth, !Currency, 'Currency', 'FXRate' ),STET);
+
+FEEDERS;
+
+['Interco Flag']=>
+['Cash receipt (20% of PM VLF)'],
+['Cash receipt (80% of CM VLF)'],
+['VLF for CM Booked (excl WHT)'],
+['Procument Charge Booked'],
+['Procument Charge Paid (PM)']
+;
+
+['Transfer Currency']=>
+  ['EUR-Constant'],
+  ['EUR-Budget'],
+  ['USD-Constant'],
+  ['USD-Budget'],
+  ['AUD-Outlook'],
+  ['AUD-Budget'],
+  ['Constant'],
+  ['AUD-MonthEnd']  
+  ;
+  
+['Procument Charge Booked']=>
+  DB('BS Interco Transfer', !Version, AttrS('FiscalMonth',!FiscalMonth,'NextPeriod'), !Currency, !'From Business Unit', !'To Business Unit', 'Procument Charge Paid (PM)' ),
+  DB('BS Interco Transfer', !Version, !FiscalMonth, !Currency, !'From Business Unit', !'To Business Unit', 'Procument Charge Paid (PM)' );
+  
+['China Service Fee Booked']=>
+  DB('BS Interco Transfer', !Version, AttrS('FiscalMonth',!FiscalMonth,'NextPeriod'), !Currency, !'From Business Unit', !'To Business Unit', 'China Service Fee Payment (PM)' ),
+  DB('BS Interco Transfer', !Version, !FiscalMonth, !Currency, !'From Business Unit', !'To Business Unit', 'China Service Fee Payment (PM)' );  
+
+['China Service Fee Booked', Currency:'Currency':'Transfer Currency']=>
+  DB('BSStgStaging', 'BAU', 'Local', !FiscalMonth, !Version, 'Calculated', 'Recharges from China' ),
+  DB('BSStgStaging', 'BCN', 'Local', !FiscalMonth, !Version, 'Calculated', 'Recharges from China' );
+
+['Procument Charge Booked', Currency:'Currency':'Transfer Currency']=>
+  DB('BSStgStaging', 'BAU', 'Local', !FiscalMonth, !Version, 'Calculated', 'HK Procurement Fee' ),
+  DB('BSStgStaging', 'BHK', 'Local', !FiscalMonth, !Version, 'Calculated', 'HK Procurement Fee' );
+
+['Letlit payment', Currency:'Currency':'Transfer Currency']=>
+  DB('BSStgStaging', 'BAU', 'Local', !FiscalMonth, !Version, 'Calculated', 'Lelit VLF - (Cash)' ),
+  DB('BSStgStaging', 'BIT', 'Local', !FiscalMonth, !Version, 'Calculated', 'Lelit VLF - (Cash)' );
+
+['China Service Fee Booked', Currency:'Currency':'Transfer Currency']=>
+  DB('BSStgStaging', 'BAU', 'Local', !FiscalMonth, !Version, 'Calculated', 'Other 1 - (Cash)' ),
+  DB('BSStgStaging', 'BCN', 'Local', !FiscalMonth, !Version, 'Calculated', 'Other 1 - (Cash)' );
+
+['Procument Charge Booked', Currency:'Currency':'Transfer Currency']=>
+  DB('BSStgStaging', 'BAU', 'Local', !FiscalMonth, !Version, 'Calculated', 'Other 2 - (Cash)' ),
+  DB('BSStgStaging', 'BHK', 'Local', !FiscalMonth, !Version, 'Calculated', 'Other 2 - (Cash)' );

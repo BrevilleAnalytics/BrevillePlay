@@ -1,0 +1,13 @@
+{
+	"@type":"Dimension",
+	"Name":"sySnapshotLineItem",
+	"AllLeavesHierarchyName":"",
+	"DefaultHierarchy":
+	{
+		"@id":"Dimensions('sySnapshotLineItem')/Hierarchies('sySnapshotLineItem')"
+	},
+	"Hierarchies@Code.links":
+	[
+		"sySnapshotLineItem.hierarchies/sySnapshotLineItem.json"
+	]
+}

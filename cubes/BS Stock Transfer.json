@@ -1,0 +1,27 @@
+{
+	"@type":"Cube",
+	"Name":"BS Stock Transfer",
+	"Rules@Code.link":"BS Stock Transfer.rules",
+	"Dimensions":
+	[
+		{
+			"@id":"Dimensions('Version')"
+		},
+		{
+			"@id":"Dimensions('FiscalMonth')"
+		},
+		{
+			"@id":"Dimensions('Currency')"
+		},
+		{
+			"@id":"Dimensions('From Business Unit')"
+		},
+		{
+			"@id":"Dimensions('To Business Unit')"
+		},
+		{
+			"@id":"Dimensions('BS Stock Transfer Measure')"
+		}
+	],
+	"Views@Code.links":[]
+}

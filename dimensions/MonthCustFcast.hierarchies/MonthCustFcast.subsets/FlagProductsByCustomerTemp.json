@@ -1,0 +1,13 @@
+{
+	"@type":"Subset",
+	"Name":"FlagProductsByCustomerTemp",
+	"Elements":
+	[
+		{
+			"@id":"Dimensions('MonthCustFcast')/Hierarchies('MonthCustFcast')/Elements('Report Flag')"
+		},
+		{
+			"@id":"Dimensions('MonthCustFcast')/Hierarchies('MonthCustFcast')/Elements('Financial Year')"
+		}
+	]
+}

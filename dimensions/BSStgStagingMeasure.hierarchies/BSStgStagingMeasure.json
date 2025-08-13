@@ -1,0 +1,2417 @@
+{
+	"@type":"Hierarchy",
+	"Name":"BSStgStagingMeasure",
+	"Elements":
+	[
+		{
+			"Name":"---Warranty---",
+			"Type":"Consolidated"
+		},
+		{
+			"Name":"Opening Provision",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"Warranty expense",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"Warranty claims",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"Closing Provision",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"Warranty claims as a % of OB",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"Freight",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"Marketing expenses",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"Overhead and other expenses",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"---GST---",
+			"Type":"Consolidated"
+		},
+		{
+			"Name":"Net GST payables",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"GST Opening Balance",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"GST - Collected",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"GST - Charge from ATO for deffered GST on stock",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"GST Paid on overheads",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"GST - Paid on additions",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"Claim for defered GST",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"Remitted",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"GST payable/(receivable)",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"GST Paid",
+			"Type":"Consolidated"
+		},
+		{
+			"Name":"Total overheads & marketing",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"Plus NPD captialised added back",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"less: Depreciation & Amortisation",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"less: Salaries and fringes benefits",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"Total overheads subject to GST",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"GST on Overheads",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"Fixed Asset Additions",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"GST on Additions",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"SUPPORTING CALCULATIONS",
+			"Type":"Consolidated"
+		},
+		{
+			"Name":"Total employee benefits expense",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"Approx GST applicable expense",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"% GST applicable expenses",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"Non GST applicable employee benefits expense",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"---PPE---",
+			"Type":"Consolidated"
+		},
+		{
+			"Name":"PPE",
+			"Type":"Consolidated"
+		},
+		{
+			"Name":"Right of use asset",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"Total PPE",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"---Tax---",
+			"Type":"Consolidated"
+		},
+		{
+			"Name":"--Current Tax Liability & WHT--",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"Current Tax",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"Opening tax liability",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"Tax expense",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"Tax installments",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"Year end tax paid",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"Offset of WHT asset",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"Closing Tax Payable/(receivable)",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"WHT",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"Opening WHT Asset",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"WHT for month (from VLF)",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"Offset against tax payable",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"WHT (Asset)/liability",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"Net",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"--Group Income Tax Installment Calculation (paid from AUD)--",
+			"Type":"Consolidated"
+		},
+		{
+			"Name":"Total VLF/recharges for the month",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"Net Sales for the month (AUS only)",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"Interest Income (and other income)",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"Total Income",
+			"Type":"Consolidated"
+		},
+		{
+			"Name":"ATO installment rate (per BAS)",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"Tax Installment for the Month",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"207001-AUC Current tax liabilities-Australia Corporate",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"207001-AUT Current tax liabilities-Australia Trading",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"207002-AUC Withholding tax payable-Australia Corporate",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"207002-AUT Withholding tax payable-Australia Trading",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"207002-AUT-8000 Withholding tax payable-Australia Trading-Group services",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"Total current tax liabiltiies",
+			"Type":"Consolidated"
+		},
+		{
+			"Name":"---Intercompany---",
+			"Type":"Consolidated"
+		},
+		{
+			"Name":"Net Sales per Consol Outlook",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"3 % of Net Sales",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"EBIT per Outlook",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"VLF for the Month",
+			"Type":"Consolidated"
+		},
+		{
+			"Name":"80% of VLF prepaid",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"Cash Payment",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"20% of VLF prepaid",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"Payment before chargebacks",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"Average chargebacks",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"Cash Payment after chargebacks",
+			"Type":"Consolidated"
+		},
+		{
+			"Name":"Total WHT",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"Opening Balance - VLF",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"WHT rate",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"---Procurement---",
+			"Type":"Consolidated"
+		},
+		{
+			"Name":"HWI, Hong Kong",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"Procurement fee income received (BAU)",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"Variable license fee payment (BAU)",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"BSSC, China",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"Total for CC 6070 & CC 9800 - Charge BAU)",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"---Stock Transfer---",
+			"Type":"Consolidated"
+		},
+		{
+			"Name":"Net Stock Balance",
+			"Type":"Consolidated"
+		},
+		{
+			"Name":"Stock In",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"Stock Out",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"---Accrued Marketing---",
+			"Type":"Consolidated"
+		},
+		{
+			"Name":"Accrued Marketing",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"Opening accrued marketing",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"Nespresso marketing (committed marketing)",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"Other marketing",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"Payments - Nespresso marketing",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"Payments - other marketing",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"Closing accrued marketing",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"---Lease Repay---",
+			"Type":"Consolidated"
+		},
+		{
+			"Name":"Lease Liability - Australian Dollars",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"B/Fwd Liability",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"Interest Expense",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"Lease Repayment",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"Principal",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"C/Fwd Liability",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"Right-of-Use Asset - Australian Dollars",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"B/Fwd RoU Asset",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"Dep'n Charge",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"C/Fwd RoU Asset",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"---Lease---",
+			"Type":"Consolidated"
+		},
+		{
+			"Name":"--Right of Use Asset--",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"RoU Opening balance",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"Depreciation",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"RoU Closing balance",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"--Lease Liability--",
+			"Type":"Consolidated"
+		},
+		{
+			"Name":"Lease Liability - Current",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"Lease Liability - Current Opening balance",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"Reclass non-current portion",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"Lease Liability - Current Closing balance",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"Lease Liability - Non-current",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"Lease Liability - Non-current Opening balance",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"Reclass non-current portion (-)",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"Lease Liability - Non-current Closing balance",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"Total lease liability",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"Check to leases summary",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"---Inventory---",
+			"Type":"Consolidated"
+		},
+		{
+			"Name":"Inventory - Finished Goods and Goods in Transit",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"Opening Inventory",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"Add Purchases",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"COGS FX amortised to P&L",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"Less Cost of Sales (per Outlook)",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"Less Transfers to NZ (per VG)",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"Closing Inventory (ex provision)",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"Provision",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"Total Inventories",
+			"Type":"Consolidated"
+		},
+		{
+			"Name":"Increase in purchases per NM",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"Total",
+			"Type":"Consolidated"
+		},
+		{
+			"Name":"BAU (AUD)  VG Transfers",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"---Divedend Payment---",
+			"Type":"Consolidated"
+		},
+		{
+			"Name":"Dividends paid",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"Dividends paid (inter-company)",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"---Trade Payables---",
+			"Type":"Consolidated"
+		},
+		{
+			"Name":"Trade Payables",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"Opening Trade Payables",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"Purchases",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"Payments - purchases",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"Closing Trade Payables",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"GRNI",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"Total Trade Payables",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"---Customer Rebate---",
+			"Type":"Consolidated"
+		},
+		{
+			"Name":"Opening customer rebate accrual",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"Expense per P&L",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"Balance TRF",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"Less claims",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"Closing customer rebate accrual",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"LTM Expense",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"Average claim days - sense check",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"Expense",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"Average balance",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"Days",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"Rebate and Promotion Rate",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"---Trade Receivables---",
+			"Type":"Consolidated"
+		},
+		{
+			"Name":"Trade Debtors Balance",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"Opening Trade Debtors",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"Add GROSS Sales (+GST)",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"Less rebate claims (non-cash)",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"Less Receipts",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"Balancing adjustment (Actuals)",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"Closing Trade Debtors",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"Days in month",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"Debtor Days - Recent Month Sales only (last 3 months)",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"Days for closing trade debtors calculation",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"Debtor Days Calc",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"Total Sales",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"Average Debtor Balance",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"Debtor Days",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"207001",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"207002",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"---Interest---",
+			"Type":"Consolidated"
+		},
+		{
+			"Name":"Unused",
+			"Type":"Consolidated"
+		},
+		{
+			"Name":"Borrowings",
+			"Type":"Consolidated"
+		},
+		{
+			"Name":"Borrowings (non-current)",
+			"Type":"Consolidated"
+		},
+		{
+			"Name":"Variable license expense - inter-company",
+			"Type":"Consolidated"
+		},
+		{
+			"Name":"Input % Variables",
+			"Type":"Consolidated"
+		},
+		{
+			"Name":"VAT % Input",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"Gross Sales - VAT",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"Gross Sales",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"Less Rebate Claims",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"VAT on Rebate Claims",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"Gross Sales inc VAT",
+			"Type":"Consolidated"
+		},
+		{
+			"Name":"Rebate Claims inc VAT",
+			"Type":"Consolidated"
+		},
+		{
+			"Name":"Settlement discounts and rebates",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"20% of VLF - Paid",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"80% of VLF - Paid",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"20% of VLF - Received",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"80% of VLF - Received",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"Other VLF",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"Closing Balance - VLF",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"Net VLF",
+			"Type":"Consolidated"
+		},
+		{
+			"Name":"Plant & Equipment - Other / Disposals",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"Plant & Equipment - CB",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"Plant & Equipment - OB",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"Plant & Equipment - Additions",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"Plant & Equipment - Depn",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"Intangible Assets - Development Costs - CB",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"Intangible Assets - Development Costs - OB",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"Intangible Assets - Development Costs - Additions",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"Intangible Assets - Development Costs - Depn",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"Intangible Assets - Development Costs - Other / Disposals",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"Intangible Assets - Other - CB",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"Intangible Assets - Other - OB",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"Intangible Assets - Other - Additions",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"Intangible Assets - Other - Depn",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"Intangible Assets - Other - Other / Disposals",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"Intangible Assets - Goodwill - CB",
+			"Type":"Consolidated"
+		},
+		{
+			"Name":"Intangible Assets - Goodwill - OB",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"Intangible Assets - Goodwill - Additions",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"Intangible Assets - Goodwill - Depn",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"Intangible Assets - Goodwill - Other / Disposals",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"Intangible Assets - Software - CB",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"Intangible Assets - Software - OB",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"Intangible Assets - Software - Additions",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"Intangible Assets - Software - Depn",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"Intangible Assets - Software - Other / Disposals",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"Capitalised Development Costs",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"PDD",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"Other GST",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"HK Procurement Fee",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"Recharges from China",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"Lelit VLF",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"Baratza VLF",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"VLF For CM",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"Net stock transfers - cash settlement",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"% GST applicable  - employee benefit expense",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"Approx GST applicable expense - employee benefits",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"Intangible Accum Depn - Software - OB",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"Intangible Accum Depn - Software - CB",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"Software",
+			"Type":"Consolidated"
+		},
+		{
+			"Name":"Intangible Assets - Other",
+			"Type":"Consolidated"
+		},
+		{
+			"Name":"Intangible Accum Depn - Other - OB",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"Intangible Accum Depn - Other - CB",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"Intangible Assets - Development Costs",
+			"Type":"Consolidated"
+		},
+		{
+			"Name":"Intangible Accum Depn - Development costs - OB",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"Intangible Accum Depn - Development costs  - CB",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"Intangible Assets - Tooling",
+			"Type":"Consolidated"
+		},
+		{
+			"Name":"Tooling - CB",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"Tooling - OB",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"Tooling - Additions",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"Tooling - Depn",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"Tooling - Other / Disposals",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"Tooling - Accum Depn - OB",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"Tooling - Accum Depn - CB",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"Intangible Assets - Plant & Equipment",
+			"Type":"Consolidated"
+		},
+		{
+			"Name":"Plant & Equipment - Accum Depn - OB",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"Plant & Equipment - Accum Depn - CB",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"Goods in Transit",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"Net VLF - (Invoiced)",
+			"Type":"Consolidated"
+		},
+		{
+			"Name":"WHT Tax paid",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"VAT - Paid on Stock (-)",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"Lelit VLF - (Cash)",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"Lelit VLF - (Invoiced)",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"Baratza VLF - (Cash)",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"Baratza VLF - (Invoiced)",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"Other 1 - (Invoiced)",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"Other 1 - (Cash)",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"Other 2 - (Invoiced)",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"Other 2 - (Cash)",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"Line Fee",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"Interest Fee",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"Interest Rate",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"Opening Balance - Borrowings",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"Drawdown",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"Repayment",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"Closing balance - Borrowings",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"Opening Balance - Borrowings (non-current)",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"Reclass",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"Closing Balance - Borrowings (non-current)",
+			"Type":"Numeric"
+		}
+	],
+	"Edges":
+	[
+		{
+			"ParentName":"---Warranty---",
+			"ComponentName":"Opening Provision",
+			"Weight":0
+		},
+		{
+			"ParentName":"---Warranty---",
+			"ComponentName":"Warranty expense",
+			"Weight":0
+		},
+		{
+			"ParentName":"---Warranty---",
+			"ComponentName":"Warranty claims",
+			"Weight":0
+		},
+		{
+			"ParentName":"---Warranty---",
+			"ComponentName":"Closing Provision",
+			"Weight":0
+		},
+		{
+			"ParentName":"---Warranty---",
+			"ComponentName":"Warranty claims as a % of OB",
+			"Weight":0
+		},
+		{
+			"ParentName":"---GST---",
+			"ComponentName":"Net GST payables",
+			"Weight":0
+		},
+		{
+			"ParentName":"---GST---",
+			"ComponentName":"GST Opening Balance",
+			"Weight":0
+		},
+		{
+			"ParentName":"---GST---",
+			"ComponentName":"GST - Collected",
+			"Weight":0
+		},
+		{
+			"ParentName":"---GST---",
+			"ComponentName":"GST - Charge from ATO for deffered GST on stock",
+			"Weight":0
+		},
+		{
+			"ParentName":"---GST---",
+			"ComponentName":"GST Paid on overheads",
+			"Weight":0
+		},
+		{
+			"ParentName":"---GST---",
+			"ComponentName":"GST - Paid on additions",
+			"Weight":0
+		},
+		{
+			"ParentName":"---GST---",
+			"ComponentName":"Claim for defered GST",
+			"Weight":0
+		},
+		{
+			"ParentName":"---GST---",
+			"ComponentName":"Remitted",
+			"Weight":0
+		},
+		{
+			"ParentName":"---GST---",
+			"ComponentName":"Other GST",
+			"Weight":0
+		},
+		{
+			"ParentName":"---GST---",
+			"ComponentName":"GST payable/(receivable)",
+			"Weight":0
+		},
+		{
+			"ParentName":"---GST---",
+			"ComponentName":"GST Paid",
+			"Weight":0
+		},
+		{
+			"ParentName":"---GST---",
+			"ComponentName":"SUPPORTING CALCULATIONS",
+			"Weight":0
+		},
+		{
+			"ParentName":"GST Paid",
+			"ComponentName":"Total overheads & marketing",
+			"Weight":0
+		},
+		{
+			"ParentName":"GST Paid",
+			"ComponentName":"Capitalised Development Costs",
+			"Weight":0
+		},
+		{
+			"ParentName":"GST Paid",
+			"ComponentName":"PDD",
+			"Weight":0
+		},
+		{
+			"ParentName":"GST Paid",
+			"ComponentName":"less: Salaries and fringes benefits",
+			"Weight":0
+		},
+		{
+			"ParentName":"GST Paid",
+			"ComponentName":"Total overheads subject to GST",
+			"Weight":0
+		},
+		{
+			"ParentName":"GST Paid",
+			"ComponentName":"GST on Overheads",
+			"Weight":0
+		},
+		{
+			"ParentName":"GST Paid",
+			"ComponentName":"Fixed Asset Additions",
+			"Weight":0
+		},
+		{
+			"ParentName":"GST Paid",
+			"ComponentName":"GST on Additions",
+			"Weight":0
+		},
+		{
+			"ParentName":"SUPPORTING CALCULATIONS",
+			"ComponentName":"Total employee benefits expense",
+			"Weight":0
+		},
+		{
+			"ParentName":"SUPPORTING CALCULATIONS",
+			"ComponentName":"Approx GST applicable expense",
+			"Weight":0
+		},
+		{
+			"ParentName":"SUPPORTING CALCULATIONS",
+			"ComponentName":"Approx GST applicable expense - employee benefits",
+			"Weight":0
+		},
+		{
+			"ParentName":"SUPPORTING CALCULATIONS",
+			"ComponentName":"% GST applicable  - employee benefit expense",
+			"Weight":0
+		},
+		{
+			"ParentName":"SUPPORTING CALCULATIONS",
+			"ComponentName":"% GST applicable expenses",
+			"Weight":0
+		},
+		{
+			"ParentName":"SUPPORTING CALCULATIONS",
+			"ComponentName":"Non GST applicable employee benefits expense",
+			"Weight":0
+		},
+		{
+			"ParentName":"---PPE---",
+			"ComponentName":"PPE",
+			"Weight":0
+		},
+		{
+			"ParentName":"PPE",
+			"ComponentName":"Intangible Assets - Plant & Equipment",
+			"Weight":0
+		},
+		{
+			"ParentName":"PPE",
+			"ComponentName":"Intangible Assets - Tooling",
+			"Weight":0
+		},
+		{
+			"ParentName":"PPE",
+			"ComponentName":"Intangible Assets - Development Costs",
+			"Weight":0
+		},
+		{
+			"ParentName":"PPE",
+			"ComponentName":"Intangible Assets - Other",
+			"Weight":0
+		},
+		{
+			"ParentName":"PPE",
+			"ComponentName":"Software",
+			"Weight":0
+		},
+		{
+			"ParentName":"PPE",
+			"ComponentName":"Intangible Assets - Goodwill - CB",
+			"Weight":1
+		},
+		{
+			"ParentName":"PPE",
+			"ComponentName":"Total PPE",
+			"Weight":0
+		},
+		{
+			"ParentName":"PPE",
+			"ComponentName":"Right of use asset",
+			"Weight":-1
+		},
+		{
+			"ParentName":"---Tax---",
+			"ComponentName":"--Current Tax Liability & WHT--",
+			"Weight":0
+		},
+		{
+			"ParentName":"---Tax---",
+			"ComponentName":"Current Tax",
+			"Weight":0
+		},
+		{
+			"ParentName":"---Tax---",
+			"ComponentName":"Opening tax liability",
+			"Weight":0
+		},
+		{
+			"ParentName":"---Tax---",
+			"ComponentName":"Tax expense",
+			"Weight":0
+		},
+		{
+			"ParentName":"---Tax---",
+			"ComponentName":"Tax installments",
+			"Weight":0
+		},
+		{
+			"ParentName":"---Tax---",
+			"ComponentName":"Year end tax paid",
+			"Weight":0
+		},
+		{
+			"ParentName":"---Tax---",
+			"ComponentName":"Offset of WHT asset",
+			"Weight":0
+		},
+		{
+			"ParentName":"---Tax---",
+			"ComponentName":"Closing Tax Payable/(receivable)",
+			"Weight":0
+		},
+		{
+			"ParentName":"---Tax---",
+			"ComponentName":"WHT",
+			"Weight":0
+		},
+		{
+			"ParentName":"---Tax---",
+			"ComponentName":"Opening WHT Asset",
+			"Weight":0
+		},
+		{
+			"ParentName":"---Tax---",
+			"ComponentName":"WHT for month (from VLF)",
+			"Weight":0
+		},
+		{
+			"ParentName":"---Tax---",
+			"ComponentName":"WHT Tax paid",
+			"Weight":0
+		},
+		{
+			"ParentName":"---Tax---",
+			"ComponentName":"Offset against tax payable",
+			"Weight":0
+		},
+		{
+			"ParentName":"---Tax---",
+			"ComponentName":"WHT (Asset)/liability",
+			"Weight":0
+		},
+		{
+			"ParentName":"---Tax---",
+			"ComponentName":"Net",
+			"Weight":0
+		},
+		{
+			"ParentName":"--Group Income Tax Installment Calculation (paid from AUD)--",
+			"ComponentName":"Total Income",
+			"Weight":0
+		},
+		{
+			"ParentName":"--Group Income Tax Installment Calculation (paid from AUD)--",
+			"ComponentName":"ATO installment rate (per BAS)",
+			"Weight":0
+		},
+		{
+			"ParentName":"--Group Income Tax Installment Calculation (paid from AUD)--",
+			"ComponentName":"Tax Installment for the Month",
+			"Weight":0
+		},
+		{
+			"ParentName":"Total Income",
+			"ComponentName":"Total VLF/recharges for the month",
+			"Weight":1
+		},
+		{
+			"ParentName":"Total Income",
+			"ComponentName":"Net Sales for the month (AUS only)",
+			"Weight":1
+		},
+		{
+			"ParentName":"Total Income",
+			"ComponentName":"Interest Income (and other income)",
+			"Weight":1
+		},
+		{
+			"ParentName":"Total current tax liabiltiies",
+			"ComponentName":"207002",
+			"Weight":1
+		},
+		{
+			"ParentName":"Total current tax liabiltiies",
+			"ComponentName":"207001",
+			"Weight":1
+		},
+		{
+			"ParentName":"---Intercompany---",
+			"ComponentName":"Opening Balance - VLF",
+			"Weight":0
+		},
+		{
+			"ParentName":"---Intercompany---",
+			"ComponentName":"Net VLF",
+			"Weight":0
+		},
+		{
+			"ParentName":"---Intercompany---",
+			"ComponentName":"Net VLF - (Invoiced)",
+			"Weight":0
+		},
+		{
+			"ParentName":"---Intercompany---",
+			"ComponentName":"VLF For CM",
+			"Weight":0
+		},
+		{
+			"ParentName":"---Intercompany---",
+			"ComponentName":"Lelit VLF - (Cash)",
+			"Weight":0
+		},
+		{
+			"ParentName":"---Intercompany---",
+			"ComponentName":"Lelit VLF - (Invoiced)",
+			"Weight":0
+		},
+		{
+			"ParentName":"---Intercompany---",
+			"ComponentName":"Baratza VLF - (Cash)",
+			"Weight":0
+		},
+		{
+			"ParentName":"---Intercompany---",
+			"ComponentName":"Baratza VLF - (Invoiced)",
+			"Weight":0
+		},
+		{
+			"ParentName":"---Intercompany---",
+			"ComponentName":"Other 1 - (Cash)",
+			"Weight":0
+		},
+		{
+			"ParentName":"---Intercompany---",
+			"ComponentName":"Other 1 - (Invoiced)",
+			"Weight":0
+		},
+		{
+			"ParentName":"---Intercompany---",
+			"ComponentName":"Other 2 - (Cash)",
+			"Weight":0
+		},
+		{
+			"ParentName":"---Intercompany---",
+			"ComponentName":"Other 2 - (Invoiced)",
+			"Weight":0
+		},
+		{
+			"ParentName":"---Intercompany---",
+			"ComponentName":"Lelit VLF",
+			"Weight":0
+		},
+		{
+			"ParentName":"---Intercompany---",
+			"ComponentName":"Baratza VLF",
+			"Weight":0
+		},
+		{
+			"ParentName":"---Intercompany---",
+			"ComponentName":"Recharges from China",
+			"Weight":0
+		},
+		{
+			"ParentName":"---Intercompany---",
+			"ComponentName":"HK Procurement Fee",
+			"Weight":0
+		},
+		{
+			"ParentName":"---Intercompany---",
+			"ComponentName":"Less Transfers to NZ (per VG)",
+			"Weight":0
+		},
+		{
+			"ParentName":"---Intercompany---",
+			"ComponentName":"Net stock transfers - cash settlement",
+			"Weight":0
+		},
+		{
+			"ParentName":"---Intercompany---",
+			"ComponentName":"Closing Balance - VLF",
+			"Weight":0
+		},
+		{
+			"ParentName":"---Intercompany---",
+			"ComponentName":"Net Sales per Consol Outlook",
+			"Weight":0
+		},
+		{
+			"ParentName":"---Intercompany---",
+			"ComponentName":"VLF for the Month",
+			"Weight":0
+		},
+		{
+			"ParentName":"---Intercompany---",
+			"ComponentName":"Total WHT",
+			"Weight":0
+		},
+		{
+			"ParentName":"VLF for the Month",
+			"ComponentName":"EBIT per Outlook",
+			"Weight":1
+		},
+		{
+			"ParentName":"VLF for the Month",
+			"ComponentName":"3 % of Net Sales",
+			"Weight":-1
+		},
+		{
+			"ParentName":"Cash Payment after chargebacks",
+			"ComponentName":"Payment before chargebacks",
+			"Weight":1
+		},
+		{
+			"ParentName":"Cash Payment after chargebacks",
+			"ComponentName":"Average chargebacks",
+			"Weight":-1
+		},
+		{
+			"ParentName":"---Procurement---",
+			"ComponentName":"HWI, Hong Kong",
+			"Weight":0
+		},
+		{
+			"ParentName":"---Procurement---",
+			"ComponentName":"Procurement fee income received (BAU)",
+			"Weight":0
+		},
+		{
+			"ParentName":"---Procurement---",
+			"ComponentName":"Variable license fee payment (BAU)",
+			"Weight":0
+		},
+		{
+			"ParentName":"---Procurement---",
+			"ComponentName":"BSSC, China",
+			"Weight":0
+		},
+		{
+			"ParentName":"---Procurement---",
+			"ComponentName":"Total for CC 6070 & CC 9800 - Charge BAU)",
+			"Weight":0
+		},
+		{
+			"ParentName":"---Stock Transfer---",
+			"ComponentName":"Net Stock Balance",
+			"Weight":0
+		},
+		{
+			"ParentName":"Net Stock Balance",
+			"ComponentName":"Stock In",
+			"Weight":1
+		},
+		{
+			"ParentName":"Net Stock Balance",
+			"ComponentName":"Stock Out",
+			"Weight":1
+		},
+		{
+			"ParentName":"---Accrued Marketing---",
+			"ComponentName":"Accrued Marketing",
+			"Weight":0
+		},
+		{
+			"ParentName":"---Accrued Marketing---",
+			"ComponentName":"Opening accrued marketing",
+			"Weight":0
+		},
+		{
+			"ParentName":"---Accrued Marketing---",
+			"ComponentName":"Other marketing",
+			"Weight":0
+		},
+		{
+			"ParentName":"---Accrued Marketing---",
+			"ComponentName":"Closing accrued marketing",
+			"Weight":0
+		},
+		{
+			"ParentName":"---Lease Repay---",
+			"ComponentName":"Lease Liability - Australian Dollars",
+			"Weight":0
+		},
+		{
+			"ParentName":"---Lease Repay---",
+			"ComponentName":"B/Fwd Liability",
+			"Weight":0
+		},
+		{
+			"ParentName":"---Lease Repay---",
+			"ComponentName":"Interest Expense",
+			"Weight":0
+		},
+		{
+			"ParentName":"---Lease Repay---",
+			"ComponentName":"Lease Repayment",
+			"Weight":0
+		},
+		{
+			"ParentName":"---Lease Repay---",
+			"ComponentName":"Reclass non-current portion",
+			"Weight":1
+		},
+		{
+			"ParentName":"---Lease Repay---",
+			"ComponentName":"C/Fwd Liability",
+			"Weight":0
+		},
+		{
+			"ParentName":"---Lease Repay---",
+			"ComponentName":"Right-of-Use Asset - Australian Dollars",
+			"Weight":0
+		},
+		{
+			"ParentName":"---Lease Repay---",
+			"ComponentName":"B/Fwd RoU Asset",
+			"Weight":0
+		},
+		{
+			"ParentName":"---Lease Repay---",
+			"ComponentName":"Dep'n Charge",
+			"Weight":0
+		},
+		{
+			"ParentName":"---Lease Repay---",
+			"ComponentName":"Principal",
+			"Weight":0
+		},
+		{
+			"ParentName":"---Lease Repay---",
+			"ComponentName":"C/Fwd RoU Asset",
+			"Weight":0
+		},
+		{
+			"ParentName":"---Lease---",
+			"ComponentName":"--Right of Use Asset--",
+			"Weight":0
+		},
+		{
+			"ParentName":"---Lease---",
+			"ComponentName":"RoU Opening balance",
+			"Weight":0
+		},
+		{
+			"ParentName":"---Lease---",
+			"ComponentName":"Depreciation",
+			"Weight":0
+		},
+		{
+			"ParentName":"---Lease---",
+			"ComponentName":"RoU Closing balance",
+			"Weight":0
+		},
+		{
+			"ParentName":"--Lease Liability--",
+			"ComponentName":"Lease Liability - Current",
+			"Weight":0
+		},
+		{
+			"ParentName":"--Lease Liability--",
+			"ComponentName":"Lease Liability - Current Opening balance",
+			"Weight":0
+		},
+		{
+			"ParentName":"--Lease Liability--",
+			"ComponentName":"Reclass non-current portion",
+			"Weight":0
+		},
+		{
+			"ParentName":"--Lease Liability--",
+			"ComponentName":"Lease Liability - Current Closing balance",
+			"Weight":0
+		},
+		{
+			"ParentName":"--Lease Liability--",
+			"ComponentName":"Lease Liability - Non-current",
+			"Weight":0
+		},
+		{
+			"ParentName":"--Lease Liability--",
+			"ComponentName":"Lease Liability - Non-current Opening balance",
+			"Weight":0
+		},
+		{
+			"ParentName":"--Lease Liability--",
+			"ComponentName":"Reclass non-current portion (-)",
+			"Weight":0
+		},
+		{
+			"ParentName":"--Lease Liability--",
+			"ComponentName":"Lease Liability - Non-current Closing balance",
+			"Weight":0
+		},
+		{
+			"ParentName":"--Lease Liability--",
+			"ComponentName":"Total lease liability",
+			"Weight":0
+		},
+		{
+			"ParentName":"--Lease Liability--",
+			"ComponentName":"Check to leases summary",
+			"Weight":0
+		},
+		{
+			"ParentName":"---Inventory---",
+			"ComponentName":"Inventory - Finished Goods and Goods in Transit",
+			"Weight":0
+		},
+		{
+			"ParentName":"---Inventory---",
+			"ComponentName":"Opening Inventory",
+			"Weight":0
+		},
+		{
+			"ParentName":"---Inventory---",
+			"ComponentName":"Add Purchases",
+			"Weight":0
+		},
+		{
+			"ParentName":"---Inventory---",
+			"ComponentName":"Less Cost of Sales (per Outlook)",
+			"Weight":0
+		},
+		{
+			"ParentName":"---Inventory---",
+			"ComponentName":"Less Transfers to NZ (per VG)",
+			"Weight":0
+		},
+		{
+			"ParentName":"---Inventory---",
+			"ComponentName":"COGS FX amortised to P&L",
+			"Weight":0
+		},
+		{
+			"ParentName":"---Inventory---",
+			"ComponentName":"Total Inventories",
+			"Weight":0
+		},
+		{
+			"ParentName":"Total Inventories",
+			"ComponentName":"Goods in Transit",
+			"Weight":1
+		},
+		{
+			"ParentName":"Total Inventories",
+			"ComponentName":"Closing Inventory (ex provision)",
+			"Weight":1
+		},
+		{
+			"ParentName":"Total Inventories",
+			"ComponentName":"Provision",
+			"Weight":1
+		},
+		{
+			"ParentName":"Total",
+			"ComponentName":"Increase in purchases per NM",
+			"Weight":0
+		},
+		{
+			"ParentName":"---Divedend Payment---",
+			"ComponentName":"Dividends paid",
+			"Weight":0
+		},
+		{
+			"ParentName":"---Divedend Payment---",
+			"ComponentName":"Dividends paid (inter-company)",
+			"Weight":0
+		},
+		{
+			"ParentName":"---Trade Payables---",
+			"ComponentName":"Trade Payables",
+			"Weight":0
+		},
+		{
+			"ParentName":"---Trade Payables---",
+			"ComponentName":"Opening Trade Payables",
+			"Weight":0
+		},
+		{
+			"ParentName":"---Trade Payables---",
+			"ComponentName":"Purchases",
+			"Weight":0
+		},
+		{
+			"ParentName":"---Trade Payables---",
+			"ComponentName":"VAT - Paid on Stock (-)",
+			"Weight":0
+		},
+		{
+			"ParentName":"---Trade Payables---",
+			"ComponentName":"Payments - purchases",
+			"Weight":0
+		},
+		{
+			"ParentName":"---Trade Payables---",
+			"ComponentName":"Closing Trade Payables",
+			"Weight":0
+		},
+		{
+			"ParentName":"---Trade Payables---",
+			"ComponentName":"GRNI",
+			"Weight":0
+		},
+		{
+			"ParentName":"---Trade Payables---",
+			"ComponentName":"Total Trade Payables",
+			"Weight":0
+		},
+		{
+			"ParentName":"---Customer Rebate---",
+			"ComponentName":"Opening customer rebate accrual",
+			"Weight":0
+		},
+		{
+			"ParentName":"---Customer Rebate---",
+			"ComponentName":"Settlement discounts and rebates",
+			"Weight":0
+		},
+		{
+			"ParentName":"---Customer Rebate---",
+			"ComponentName":"Less claims",
+			"Weight":0
+		},
+		{
+			"ParentName":"---Customer Rebate---",
+			"ComponentName":"Closing customer rebate accrual",
+			"Weight":0
+		},
+		{
+			"ParentName":"---Customer Rebate---",
+			"ComponentName":"Rebate and Promotion Rate",
+			"Weight":1
+		},
+		{
+			"ParentName":"---Trade Receivables---",
+			"ComponentName":"Trade Debtors Balance",
+			"Weight":0
+		},
+		{
+			"ParentName":"---Trade Receivables---",
+			"ComponentName":"Opening Trade Debtors",
+			"Weight":0
+		},
+		{
+			"ParentName":"---Trade Receivables---",
+			"ComponentName":"Gross Sales inc VAT",
+			"Weight":0
+		},
+		{
+			"ParentName":"---Trade Receivables---",
+			"ComponentName":"Rebate Claims inc VAT",
+			"Weight":0
+		},
+		{
+			"ParentName":"---Trade Receivables---",
+			"ComponentName":"Less Receipts",
+			"Weight":0
+		},
+		{
+			"ParentName":"---Trade Receivables---",
+			"ComponentName":"Balancing adjustment (Actuals)",
+			"Weight":0
+		},
+		{
+			"ParentName":"---Trade Receivables---",
+			"ComponentName":"Closing Trade Debtors",
+			"Weight":0
+		},
+		{
+			"ParentName":"---Trade Receivables---",
+			"ComponentName":"Debtor Days",
+			"Weight":0
+		},
+		{
+			"ParentName":"---Interest---",
+			"ComponentName":"Line Fee",
+			"Weight":0
+		},
+		{
+			"ParentName":"---Interest---",
+			"ComponentName":"Interest Fee",
+			"Weight":0
+		},
+		{
+			"ParentName":"---Interest---",
+			"ComponentName":"Interest Rate",
+			"Weight":0
+		},
+		{
+			"ParentName":"Unused",
+			"ComponentName":"Nespresso marketing (committed marketing)",
+			"Weight":0
+		},
+		{
+			"ParentName":"Unused",
+			"ComponentName":"Payments - Nespresso marketing",
+			"Weight":0
+		},
+		{
+			"ParentName":"Unused",
+			"ComponentName":"Payments - other marketing",
+			"Weight":0
+		},
+		{
+			"ParentName":"Unused",
+			"ComponentName":"Expense per P&L",
+			"Weight":0
+		},
+		{
+			"ParentName":"Unused",
+			"ComponentName":"Balance TRF",
+			"Weight":0
+		},
+		{
+			"ParentName":"Unused",
+			"ComponentName":"LTM Expense",
+			"Weight":0
+		},
+		{
+			"ParentName":"Unused",
+			"ComponentName":"Average claim days - sense check",
+			"Weight":0
+		},
+		{
+			"ParentName":"Unused",
+			"ComponentName":"Expense",
+			"Weight":0
+		},
+		{
+			"ParentName":"Unused",
+			"ComponentName":"Average balance",
+			"Weight":0
+		},
+		{
+			"ParentName":"Unused",
+			"ComponentName":"Days",
+			"Weight":0
+		},
+		{
+			"ParentName":"Unused",
+			"ComponentName":"BAU (AUD)  VG Transfers",
+			"Weight":0
+		},
+		{
+			"ParentName":"Unused",
+			"ComponentName":"Add GROSS Sales (+GST)",
+			"Weight":0
+		},
+		{
+			"ParentName":"Unused",
+			"ComponentName":"Less rebate claims (non-cash)",
+			"Weight":0
+		},
+		{
+			"ParentName":"Unused",
+			"ComponentName":"Average Debtor Balance",
+			"Weight":0
+		},
+		{
+			"ParentName":"Unused",
+			"ComponentName":"Total Sales",
+			"Weight":0
+		},
+		{
+			"ParentName":"Unused",
+			"ComponentName":"Days for closing trade debtors calculation",
+			"Weight":0
+		},
+		{
+			"ParentName":"Unused",
+			"ComponentName":"Debtor Days Calc",
+			"Weight":0
+		},
+		{
+			"ParentName":"Unused",
+			"ComponentName":"Days in month",
+			"Weight":0
+		},
+		{
+			"ParentName":"Unused",
+			"ComponentName":"Debtor Days - Recent Month Sales only (last 3 months)",
+			"Weight":0
+		},
+		{
+			"ParentName":"Unused",
+			"ComponentName":"Total",
+			"Weight":0
+		},
+		{
+			"ParentName":"Unused",
+			"ComponentName":"Cash Payment",
+			"Weight":0
+		},
+		{
+			"ParentName":"Unused",
+			"ComponentName":"Cash Payment after chargebacks",
+			"Weight":0
+		},
+		{
+			"ParentName":"Unused",
+			"ComponentName":"Plus NPD captialised added back",
+			"Weight":0
+		},
+		{
+			"ParentName":"Unused",
+			"ComponentName":"less: Depreciation & Amortisation",
+			"Weight":0
+		},
+		{
+			"ParentName":"Unused",
+			"ComponentName":"207001-AUC Current tax liabilities-Australia Corporate",
+			"Weight":1
+		},
+		{
+			"ParentName":"Unused",
+			"ComponentName":"207001-AUT Current tax liabilities-Australia Trading",
+			"Weight":1
+		},
+		{
+			"ParentName":"Unused",
+			"ComponentName":"207002-AUC Withholding tax payable-Australia Corporate",
+			"Weight":1
+		},
+		{
+			"ParentName":"Unused",
+			"ComponentName":"207002-AUT Withholding tax payable-Australia Trading",
+			"Weight":1
+		},
+		{
+			"ParentName":"Unused",
+			"ComponentName":"207002-AUT-8000 Withholding tax payable-Australia Trading-Group services",
+			"Weight":1
+		},
+		{
+			"ParentName":"Borrowings",
+			"ComponentName":"Opening Balance - Borrowings",
+			"Weight":0
+		},
+		{
+			"ParentName":"Borrowings",
+			"ComponentName":"Drawdown",
+			"Weight":0
+		},
+		{
+			"ParentName":"Borrowings",
+			"ComponentName":"Repayment",
+			"Weight":0
+		},
+		{
+			"ParentName":"Borrowings",
+			"ComponentName":"Reclass",
+			"Weight":0
+		},
+		{
+			"ParentName":"Borrowings",
+			"ComponentName":"Closing balance - Borrowings",
+			"Weight":0
+		},
+		{
+			"ParentName":"Borrowings (non-current)",
+			"ComponentName":"Opening Balance - Borrowings (non-current)",
+			"Weight":0
+		},
+		{
+			"ParentName":"Borrowings (non-current)",
+			"ComponentName":"Reclass",
+			"Weight":0
+		},
+		{
+			"ParentName":"Borrowings (non-current)",
+			"ComponentName":"Closing Balance - Borrowings (non-current)",
+			"Weight":0
+		},
+		{
+			"ParentName":"Variable license expense - inter-company",
+			"ComponentName":"VLF for the Month",
+			"Weight":1
+		},
+		{
+			"ParentName":"Variable license expense - inter-company",
+			"ComponentName":"Lelit VLF - (Invoiced)",
+			"Weight":1
+		},
+		{
+			"ParentName":"Variable license expense - inter-company",
+			"ComponentName":"Baratza VLF - (Invoiced)",
+			"Weight":1
+		},
+		{
+			"ParentName":"Variable license expense - inter-company",
+			"ComponentName":"Other 1 - (Invoiced)",
+			"Weight":1
+		},
+		{
+			"ParentName":"Variable license expense - inter-company",
+			"ComponentName":"Other 2 - (Invoiced)",
+			"Weight":1
+		},
+		{
+			"ParentName":"Input % Variables",
+			"ComponentName":"% GST applicable  - employee benefit expense",
+			"Weight":0
+		},
+		{
+			"ParentName":"Input % Variables",
+			"ComponentName":"VAT % Input",
+			"Weight":0
+		},
+		{
+			"ParentName":"Gross Sales inc VAT",
+			"ComponentName":"Gross Sales",
+			"Weight":1
+		},
+		{
+			"ParentName":"Gross Sales inc VAT",
+			"ComponentName":"Gross Sales - VAT",
+			"Weight":1
+		},
+		{
+			"ParentName":"Rebate Claims inc VAT",
+			"ComponentName":"Less Rebate Claims",
+			"Weight":1
+		},
+		{
+			"ParentName":"Rebate Claims inc VAT",
+			"ComponentName":"VAT on Rebate Claims",
+			"Weight":1
+		},
+		{
+			"ParentName":"Net VLF",
+			"ComponentName":"20% of VLF - Paid",
+			"Weight":1
+		},
+		{
+			"ParentName":"Net VLF",
+			"ComponentName":"80% of VLF - Paid",
+			"Weight":1
+		},
+		{
+			"ParentName":"Net VLF",
+			"ComponentName":"20% of VLF - Received",
+			"Weight":1
+		},
+		{
+			"ParentName":"Net VLF",
+			"ComponentName":"80% of VLF - Received",
+			"Weight":1
+		},
+		{
+			"ParentName":"Net VLF",
+			"ComponentName":"Other VLF",
+			"Weight":1
+		},
+		{
+			"ParentName":"Intangible Assets - Goodwill - CB",
+			"ComponentName":"Intangible Assets - Goodwill - OB",
+			"Weight":1
+		},
+		{
+			"ParentName":"Intangible Assets - Goodwill - CB",
+			"ComponentName":"Intangible Assets - Goodwill - Additions",
+			"Weight":1
+		},
+		{
+			"ParentName":"Intangible Assets - Goodwill - CB",
+			"ComponentName":"Intangible Assets - Goodwill - Depn",
+			"Weight":0
+		},
+		{
+			"ParentName":"Intangible Assets - Goodwill - CB",
+			"ComponentName":"Intangible Assets - Goodwill - Other / Disposals",
+			"Weight":1
+		},
+		{
+			"ParentName":"Software",
+			"ComponentName":"Intangible Assets - Software - CB",
+			"Weight":0
+		},
+		{
+			"ParentName":"Software",
+			"ComponentName":"Intangible Assets - Software - OB",
+			"Weight":0
+		},
+		{
+			"ParentName":"Software",
+			"ComponentName":"Intangible Assets - Software - Additions",
+			"Weight":0
+		},
+		{
+			"ParentName":"Software",
+			"ComponentName":"Intangible Assets - Software - Depn",
+			"Weight":0
+		},
+		{
+			"ParentName":"Software",
+			"ComponentName":"Intangible Assets - Software - Other / Disposals",
+			"Weight":0
+		},
+		{
+			"ParentName":"Software",
+			"ComponentName":"Intangible Accum Depn - Software - OB",
+			"Weight":0
+		},
+		{
+			"ParentName":"Software",
+			"ComponentName":"Intangible Accum Depn - Software - CB",
+			"Weight":0
+		},
+		{
+			"ParentName":"Intangible Assets - Other",
+			"ComponentName":"Intangible Assets - Other - CB",
+			"Weight":0
+		},
+		{
+			"ParentName":"Intangible Assets - Other",
+			"ComponentName":"Intangible Assets - Other - OB",
+			"Weight":0
+		},
+		{
+			"ParentName":"Intangible Assets - Other",
+			"ComponentName":"Intangible Assets - Other - Additions",
+			"Weight":0
+		},
+		{
+			"ParentName":"Intangible Assets - Other",
+			"ComponentName":"Intangible Assets - Other - Depn",
+			"Weight":0
+		},
+		{
+			"ParentName":"Intangible Assets - Other",
+			"ComponentName":"Intangible Assets - Other - Other / Disposals",
+			"Weight":0
+		},
+		{
+			"ParentName":"Intangible Assets - Other",
+			"ComponentName":"Intangible Accum Depn - Other - OB",
+			"Weight":0
+		},
+		{
+			"ParentName":"Intangible Assets - Other",
+			"ComponentName":"Intangible Accum Depn - Other - CB",
+			"Weight":0
+		},
+		{
+			"ParentName":"Intangible Assets - Development Costs",
+			"ComponentName":"Intangible Assets - Development Costs - CB",
+			"Weight":0
+		},
+		{
+			"ParentName":"Intangible Assets - Development Costs",
+			"ComponentName":"Intangible Assets - Development Costs - OB",
+			"Weight":0
+		},
+		{
+			"ParentName":"Intangible Assets - Development Costs",
+			"ComponentName":"Intangible Assets - Development Costs - Additions",
+			"Weight":0
+		},
+		{
+			"ParentName":"Intangible Assets - Development Costs",
+			"ComponentName":"Intangible Assets - Development Costs - Depn",
+			"Weight":0
+		},
+		{
+			"ParentName":"Intangible Assets - Development Costs",
+			"ComponentName":"Intangible Assets - Development Costs - Other / Disposals",
+			"Weight":0
+		},
+		{
+			"ParentName":"Intangible Assets - Development Costs",
+			"ComponentName":"Intangible Accum Depn - Development costs - OB",
+			"Weight":0
+		},
+		{
+			"ParentName":"Intangible Assets - Development Costs",
+			"ComponentName":"Intangible Accum Depn - Development costs  - CB",
+			"Weight":0
+		},
+		{
+			"ParentName":"Intangible Assets - Tooling",
+			"ComponentName":"Tooling - CB",
+			"Weight":0
+		},
+		{
+			"ParentName":"Intangible Assets - Tooling",
+			"ComponentName":"Tooling - OB",
+			"Weight":0
+		},
+		{
+			"ParentName":"Intangible Assets - Tooling",
+			"ComponentName":"Tooling - Additions",
+			"Weight":0
+		},
+		{
+			"ParentName":"Intangible Assets - Tooling",
+			"ComponentName":"Tooling - Depn",
+			"Weight":0
+		},
+		{
+			"ParentName":"Intangible Assets - Tooling",
+			"ComponentName":"Tooling - Other / Disposals",
+			"Weight":0
+		},
+		{
+			"ParentName":"Intangible Assets - Tooling",
+			"ComponentName":"Tooling - Accum Depn - OB",
+			"Weight":0
+		},
+		{
+			"ParentName":"Intangible Assets - Tooling",
+			"ComponentName":"Tooling - Accum Depn - CB",
+			"Weight":0
+		},
+		{
+			"ParentName":"Intangible Assets - Plant & Equipment",
+			"ComponentName":"Plant & Equipment - CB",
+			"Weight":0
+		},
+		{
+			"ParentName":"Intangible Assets - Plant & Equipment",
+			"ComponentName":"Plant & Equipment - OB",
+			"Weight":0
+		},
+		{
+			"ParentName":"Intangible Assets - Plant & Equipment",
+			"ComponentName":"Plant & Equipment - Other / Disposals",
+			"Weight":0
+		},
+		{
+			"ParentName":"Intangible Assets - Plant & Equipment",
+			"ComponentName":"Plant & Equipment - Additions",
+			"Weight":0
+		},
+		{
+			"ParentName":"Intangible Assets - Plant & Equipment",
+			"ComponentName":"Plant & Equipment - Depn",
+			"Weight":0
+		},
+		{
+			"ParentName":"Intangible Assets - Plant & Equipment",
+			"ComponentName":"Plant & Equipment - Accum Depn - OB",
+			"Weight":0
+		},
+		{
+			"ParentName":"Intangible Assets - Plant & Equipment",
+			"ComponentName":"Plant & Equipment - Accum Depn - CB",
+			"Weight":0
+		},
+		{
+			"ParentName":"Net VLF - (Invoiced)",
+			"ComponentName":"20% of VLF prepaid",
+			"Weight":1
+		},
+		{
+			"ParentName":"Net VLF - (Invoiced)",
+			"ComponentName":"80% of VLF prepaid",
+			"Weight":1
+		}
+	],
+	"Subsets@Code.links":
+	[
+		"BSStgStagingMeasure.subsets/Accrued Marketing.json",
+		"BSStgStagingMeasure.subsets/Customer Rebates.json",
+		"BSStgStagingMeasure.subsets/Dividend Payment.json",
+		"BSStgStagingMeasure.subsets/GST.json",
+		"BSStgStagingMeasure.subsets/InterCo.json",
+		"BSStgStagingMeasure.subsets/Inventory.json",
+		"BSStgStagingMeasure.subsets/Lease.json",
+		"BSStgStagingMeasure.subsets/Lease Repay.json",
+		"BSStgStagingMeasure.subsets/PPE.json",
+		"BSStgStagingMeasure.subsets/Procurement.json",
+		"BSStgStagingMeasure.subsets/Stock Transfer.json",
+		"BSStgStagingMeasure.subsets/Tax.json",
+		"BSStgStagingMeasure.subsets/Trade Payables.json",
+		"BSStgStagingMeasure.subsets/Trade Receivables.json",
+		"BSStgStagingMeasure.subsets/Warranty.json"
+	]
+}

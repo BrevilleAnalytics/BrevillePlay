@@ -1,0 +1,26 @@
+{
+	"@type":"Cube",
+	"Name":"BUAssumptions",
+	"Dimensions":
+	[
+		{
+			"@id":"Dimensions('BusinessUnit')"
+		},
+		{
+			"@id":"Dimensions('EmployeeType')"
+		},
+		{
+			"@id":"Dimensions('Year')"
+		},
+		{
+			"@id":"Dimensions('Version')"
+		},
+		{
+			"@id":"Dimensions('BUAssumptionsMeasure')"
+		}
+	],
+	"Views@Code.links":
+	[
+		"BUAssumptions.views/Default.json"
+	]
+}

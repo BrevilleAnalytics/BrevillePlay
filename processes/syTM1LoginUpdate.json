@@ -1,0 +1,48 @@
+{
+	"@type":"Process",
+	"Name":"syTM1LoginUpdate",
+	"HasSecurityAccess":false,
+	"Code@Code.link":"syTM1LoginUpdate.ti",
+	"UIData":"CubeAction=1511€DataAction=1503€CubeLogChanges=0€_ParameterConstraints=e30=€",
+	"VariablesUIData":
+	[
+		"VarType=32€ColType=827€"
+	],
+	"DataSource":
+	{
+		"Type":"ASCII",
+		"asciiDecimalSeparator":".",
+		"asciiDelimiterChar":"^",
+		"asciiDelimiterType":"Character",
+		"asciiHeaderRecords":0,
+		"asciiQuoteCharacter":"\"",
+		"asciiThousandSeparator":",",
+		"dataSourceNameForClient":"model_upload\\tm1login.log",
+		"dataSourceNameForServer":"model_upload\\tm1login.log"
+	},
+	"Parameters":
+	[
+		{
+			"Name":"pLogFile",
+			"Prompt":"Log file to process, tm1login.log by default",
+			"Value":"",
+			"Type":"String"
+		},
+		{
+			"Name":"psServer",
+			"Prompt":"Server name for Control parameters",
+			"Value":"Breville",
+			"Type":"String"
+		}
+	],
+	"Variables":
+	[
+		{
+			"Name":"vLogLine",
+			"Type":"String",
+			"Position":1,
+			"StartByte":0,
+			"EndByte":0
+		}
+	]
+}

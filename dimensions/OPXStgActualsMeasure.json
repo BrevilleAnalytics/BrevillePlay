@@ -1,0 +1,13 @@
+{
+	"@type":"Dimension",
+	"Name":"OPXStgActualsMeasure",
+	"AllLeavesHierarchyName":"",
+	"DefaultHierarchy":
+	{
+		"@id":"Dimensions('OPXStgActualsMeasure')/Hierarchies('OPXStgActualsMeasure')"
+	},
+	"Hierarchies@Code.links":
+	[
+		"OPXStgActualsMeasure.hierarchies/OPXStgActualsMeasure.json"
+	]
+}

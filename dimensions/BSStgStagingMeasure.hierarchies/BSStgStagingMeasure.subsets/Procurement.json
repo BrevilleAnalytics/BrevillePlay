@@ -1,0 +1,22 @@
+{
+	"@type":"Subset",
+	"Name":"Procurement",
+	"Elements":
+	[
+		{
+			"@id":"Dimensions('BSStgStagingMeasure')/Hierarchies('BSStgStagingMeasure')/Elements('HWI, Hong Kong')"
+		},
+		{
+			"@id":"Dimensions('BSStgStagingMeasure')/Hierarchies('BSStgStagingMeasure')/Elements('Procurement fee income received (BAU)')"
+		},
+		{
+			"@id":"Dimensions('BSStgStagingMeasure')/Hierarchies('BSStgStagingMeasure')/Elements('Variable license fee payment (BAU)')"
+		},
+		{
+			"@id":"Dimensions('BSStgStagingMeasure')/Hierarchies('BSStgStagingMeasure')/Elements('BSSC, China')"
+		},
+		{
+			"@id":"Dimensions('BSStgStagingMeasure')/Hierarchies('BSStgStagingMeasure')/Elements('Total for CC 6070 & CC 9800 - Charge BAU)')"
+		}
+	]
+}

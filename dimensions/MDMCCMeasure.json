@@ -1,0 +1,13 @@
+{
+	"@type":"Dimension",
+	"Name":"MDMCCMeasure",
+	"AllLeavesHierarchyName":"",
+	"DefaultHierarchy":
+	{
+		"@id":"Dimensions('MDMCCMeasure')/Hierarchies('MDMCCMeasure')"
+	},
+	"Hierarchies@Code.links":
+	[
+		"MDMCCMeasure.hierarchies/MDMCCMeasure.json"
+	]
+}

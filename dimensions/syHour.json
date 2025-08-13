@@ -1,0 +1,13 @@
+{
+	"@type":"Dimension",
+	"Name":"syHour",
+	"AllLeavesHierarchyName":"",
+	"DefaultHierarchy":
+	{
+		"@id":"Dimensions('syHour')/Hierarchies('syHour')"
+	},
+	"Hierarchies@Code.links":
+	[
+		"syHour.hierarchies/syHour.json"
+	]
+}

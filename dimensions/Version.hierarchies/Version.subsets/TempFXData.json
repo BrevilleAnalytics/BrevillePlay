@@ -1,0 +1,10 @@
+{
+	"@type":"Subset",
+	"Name":"TempFXData",
+	"Elements":
+	[
+		{
+			"@id":"Dimensions('Version')/Hierarchies('Version')/Elements('Currency')"
+		}
+	]
+}

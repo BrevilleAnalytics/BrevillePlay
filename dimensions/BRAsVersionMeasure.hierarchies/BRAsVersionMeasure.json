@@ -1,0 +1,123 @@
+{
+	"@type":"Hierarchy",
+	"Name":"BRAsVersionMeasure",
+	"Elements":
+	[
+		{
+			"Name":"Actual Month",
+			"Type":"String"
+		},
+		{
+			"Name":"Fiscal Year",
+			"Type":"String"
+		},
+		{
+			"Name":"Fiscal Year Numeric",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"Fiscal Year+1 Numeric",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"Actual Month YYYYMMM",
+			"Type":"String"
+		},
+		{
+			"Name":"Actual Month -1 YYYYMMM",
+			"Type":"String"
+		},
+		{
+			"Name":"Last Year",
+			"Type":"String"
+		},
+		{
+			"Name":"Budget Year",
+			"Type":"String"
+		},
+		{
+			"Name":"Outlook Year",
+			"Type":"String"
+		},
+		{
+			"Name":"NumofMonths",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"10th Working Day",
+			"Type":"String"
+		},
+		{
+			"Name":"APAC Actual Month",
+			"Type":"String"
+		},
+		{
+			"Name":"Americas Actual Month",
+			"Type":"String"
+		},
+		{
+			"Name":"EMEA Actual Month",
+			"Type":"String"
+		},
+		{
+			"Name":"Corporate Actual Month",
+			"Type":"String"
+		},
+		{
+			"Name":"Actual Month MMM",
+			"Type":"String"
+		},
+		{
+			"Name":"APAC Outlook Month",
+			"Type":"String"
+		},
+		{
+			"Name":"Americas Outlook Month",
+			"Type":"String"
+		},
+		{
+			"Name":"EMEA Outlook Month",
+			"Type":"String"
+		},
+		{
+			"Name":"Corporate Outlook Month",
+			"Type":"String"
+		},
+		{
+			"Name":"APAC Lock Outlook Month - CM",
+			"Type":"String"
+		},
+		{
+			"Name":"Americas Lock Outlook Month - CM",
+			"Type":"String"
+		},
+		{
+			"Name":"EMEA Lock Outlook Month - CM",
+			"Type":"String"
+		},
+		{
+			"Name":"Corporate Lock Outlook Month - CM",
+			"Type":"String"
+		},
+		{
+			"Name":"TAPAC Lock Outlook MonthCM",
+			"Type":"String"
+		},
+		{
+			"Name":"TAmericas Lock Outlook MonthCM",
+			"Type":"String"
+		},
+		{
+			"Name":"TEMEA Lock Outlook MonthCM",
+			"Type":"String"
+		},
+		{
+			"Name":"TCorporate Lock Outlook MonthCM",
+			"Type":"String"
+		}
+	],
+	"Subsets@Code.links":
+	[
+		"BRAsVersionMeasure.subsets/Default.json"
+	]
+}

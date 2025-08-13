@@ -1,0 +1,10 @@
+{
+	"@type":"Subset",
+	"Name":"}System.Tgt.CubeCMRunRatesRatiosCalc.20230124230531.225",
+	"Elements":
+	[
+		{
+			"@id":"Dimensions('BusinessUnit')/Hierarchies('BusinessUnit')/Elements('BAU')"
+		}
+	]
+}

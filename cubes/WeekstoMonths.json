@@ -1,0 +1,17 @@
+{
+	"@type":"Cube",
+	"Name":"WeekstoMonths",
+	"Dimensions":
+	[
+		{
+			"@id":"Dimensions('FiscalWeek')"
+		},
+		{
+			"@id":"Dimensions('FiscalMonth')"
+		}
+	],
+	"Views@Code.links":
+	[
+		"WeekstoMonths.views/App.WeeksToMonths.json"
+	]
+}

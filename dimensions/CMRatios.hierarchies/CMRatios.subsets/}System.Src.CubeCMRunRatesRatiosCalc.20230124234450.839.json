@@ -1,0 +1,28 @@
+{
+	"@type":"Subset",
+	"Name":"}System.Src.CubeCMRunRatesRatiosCalc.20230124234450.839",
+	"Elements":
+	[
+		{
+			"@id":"Dimensions('CMRatios')/Hierarchies('CMRatios')/Elements('Gross Sales')"
+		},
+		{
+			"@id":"Dimensions('CMRatios')/Hierarchies('CMRatios')/Elements('Shipped Units')"
+		},
+		{
+			"@id":"Dimensions('CMRatios')/Hierarchies('CMRatios')/Elements('Returned Units')"
+		},
+		{
+			"@id":"Dimensions('CMRatios')/Hierarchies('CMRatios')/Elements('Rebates')"
+		},
+		{
+			"@id":"Dimensions('CMRatios')/Hierarchies('CMRatios')/Elements('Cost of Goods Sold')"
+		},
+		{
+			"@id":"Dimensions('CMRatios')/Hierarchies('CMRatios')/Elements('Warranty')"
+		},
+		{
+			"@id":"Dimensions('CMRatios')/Hierarchies('CMRatios')/Elements('Freight')"
+		}
+	]
+}

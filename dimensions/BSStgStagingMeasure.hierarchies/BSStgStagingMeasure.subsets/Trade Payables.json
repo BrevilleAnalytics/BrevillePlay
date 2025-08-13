@@ -1,0 +1,28 @@
+{
+	"@type":"Subset",
+	"Name":"Trade Payables",
+	"Elements":
+	[
+		{
+			"@id":"Dimensions('BSStgStagingMeasure')/Hierarchies('BSStgStagingMeasure')/Elements('Trade Payables')"
+		},
+		{
+			"@id":"Dimensions('BSStgStagingMeasure')/Hierarchies('BSStgStagingMeasure')/Elements('Opening Trade Payables')"
+		},
+		{
+			"@id":"Dimensions('BSStgStagingMeasure')/Hierarchies('BSStgStagingMeasure')/Elements('Purchases')"
+		},
+		{
+			"@id":"Dimensions('BSStgStagingMeasure')/Hierarchies('BSStgStagingMeasure')/Elements('Payments - purchases')"
+		},
+		{
+			"@id":"Dimensions('BSStgStagingMeasure')/Hierarchies('BSStgStagingMeasure')/Elements('Closing Trade Payables')"
+		},
+		{
+			"@id":"Dimensions('BSStgStagingMeasure')/Hierarchies('BSStgStagingMeasure')/Elements('GRNI')"
+		},
+		{
+			"@id":"Dimensions('BSStgStagingMeasure')/Hierarchies('BSStgStagingMeasure')/Elements('Total Trade Payables')"
+		}
+	]
+}

@@ -1,0 +1,13 @@
+{
+	"@type":"Dimension",
+	"Name":"BSStgActualsMeasure",
+	"AllLeavesHierarchyName":"",
+	"DefaultHierarchy":
+	{
+		"@id":"Dimensions('BSStgActualsMeasure')/Hierarchies('BSStgActualsMeasure')"
+	},
+	"Hierarchies@Code.links":
+	[
+		"BSStgActualsMeasure.hierarchies/BSStgActualsMeasure.json"
+	]
+}

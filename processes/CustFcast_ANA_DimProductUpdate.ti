@@ -1,0 +1,278 @@
+#region Prolog
+#****Begin: Generated Statements***
+#****End: Generated Statements****
+DataSourceType = 'ODBC';
+
+
+# SQL query
+
+ sSQL = 'SET NOCOUNT ON ; 
+select 
+Distinct itemcode,
+parentcode,
+category,
+Portfolio,
+HierarchyBrand, 
+Segment,
+BusinessUnit 
+from DimProduct 
+where itemcode <>'''' OR itemcode <> ''NULL''' ;
+						
+
+DNS_Server = CellGetS( 'syEnvironment', 'Breville', 'ODBC DSN for DL'  );
+
+
+# Data Source
+
+ DataSourceType = 'ODBC' ;
+ DatasourceNameForServer = DNS_Server ;
+ DatasourceQuery = sSQL;
+ 
+ 
+
+sDimNameTrgt = 'ProductCustFcast';
+#DimensionDeleteAllElements(sDimNameTrgt);
+
+#~~~~~~~~~ Build dimension ~~~~~~~~~~~~~~~~
+#-- Create a target dimesnion
+
+# constant
+sDimName_Tgt = 'ProductCustFcast';
+sHierName_Tgt = 'ProductCustFcast';
+
+ If(DimensionExists( sDimName_Tgt  ) = 0 ) ;
+    DimensionCreate( sDimName_Tgt  ) ;
+ Endif;
+
+
+ #-- Create a target dimension hieararchy
+ If(HierarchyExists(sDimName_Tgt, sHierName_Tgt) = 0);
+    HierarchyCreate(sDimName_Tgt, sHierName_Tgt);
+ Else;
+    HierarchyDeleteAllElements(sDimName_Tgt, sHierName_Tgt);
+ Endif;
+
+
+# Create Top Parent in Hierarchy
+sElTopParent = 'Root ' | sHierName_Tgt  ;
+HierarchyElementInsert ( sDimName_Tgt, sHierName_Tgt, '',sElTopParent, 'C');
+HierarchySortOrder( sDimName_Tgt,  sHierName_Tgt,  'ByName', 'Ascending','ByHierarchy', 'Ascending'); 
+
+# Create 2 roots in Hierarchy
+sElRegion = 'All' | sHierName_Tgt;
+sElBrand = 'All Products by Brand';
+HierarchyElementComponentAdd ( sDimName_Tgt , sHierName_Tgt , sElTopParent , sElRegion , 1 ) ;
+HierarchyElementComponentAdd ( sDimName_Tgt , sHierName_Tgt , sElTopParent , sElBrand , 1 ) ;
+HierarchySortOrder( sDimName_Tgt,  sHierName_Tgt,  'ByName', 'Ascending','ByHierarchy', 'Ascending'); 
+
+# ~~~~~~~~~~ Create attribtues ~~~~~~~~~~~~~~~~~~~~
+# ElementAttrInsert(sDimName_Tgt, sHierName_Tgt, '', 'Caption', 'S');
+# ElementAttrInsert(sDimName_Tgt, sHierName_Tgt, '', 'CodeCaption', 'A');
+
+DimensionAttrDelete( 'BusinessUnit' );
+DimensionAttrInsert( '', 'BusinessUnit','S' );
+ElementAttrDelete( sDimName_Tgt, sHierName_Tgt,'BusinessUnit' );
+ElementAttrInsert(sDimName_Tgt, sHierName_Tgt, '', 'BusinessUnit', 'S');
+
+DimensionAttrDelete( 'Category' );
+DimensionAttrInsert( '', 'Category','S' );
+ElementAttrDelete( sDimName_Tgt, sHierName_Tgt,'Category' );
+ElementAttrInsert(sDimName_Tgt, sHierName_Tgt, '', 'Category', 'S');
+
+DimensionAttrDelete( 'Brand' );
+DimensionAttrInsert( '', 'Brand','S' );
+ElementAttrDelete( sDimName_Tgt, sHierName_Tgt,'Brand' );
+ElementAttrInsert(sDimName_Tgt, sHierName_Tgt, '', 'Brand', 'S');
+
+# cDimScr = 'Product';
+# cSubsetScr = 'zTemp'| GetProcessName;
+
+# cAttr = 'ProductRegion';
+# cHierarchy = 'ProductCustForecast';
+# cTotalHierarchy = 'All Regions';
+
+# #Create Hierarchy
+
+# IF(HierarchyExists( cDimScr, cHierarchy )=0);
+#   HierarchyCreate( cDimScr, cHierarchy );
+# Else;
+#   HierarchyDeleteAllElements( cDimScr, cHierarchy );
+# EndIf;
+# #Add Total
+# HierarchyElementInsert( cDimScr, cHierarchy, '', cTotalHierarchy, 'C' );
+
+#Create Subset Source
+
+#endregion
+#region Metadata
+#****Begin: Generated Statements***
+#****End: Generated Statements****
+
+# DimName_Src = 'Product';
+# AttrName_Scr = 'ProductRegion';
+
+# Set Attribute for ProductRegion with catch all bucket for elements with null attribute value
+# If (ATTRS(DimName_Src, vProduct, AttrName_Scr ) @= '');
+# vPR = 'No Product Region';
+# Else;
+# vPR = ATTRS(DimName_Src, vProduct, AttrName_Scr );
+# endIf;
+
+#Add Chidren to hierarchy
+# DimensionElementComponentAdd( sDimName_Tgt, sElTopParent, vPR, 1 );
+# DimensionElementComponentAdd(sDimName_Tgt, vPR,vProduct, 1 );
+
+
+#ElementAttrPutS( 'Category', sDimName_Tgt, 'Category' );
+
+# sDim = 'Product';
+# sMDX ='{TM1FILTERBYLEVEL ( {TM1SUBSETALL ( ['|sDim|']) } , 3 ) }' ;
+
+#{DRILLDOWNMEMBER({{[Product].[Product].[All Product]}}, {{[Product].[Product].[All Product]}}, RECURSIVE)};
+
+#SubsetCreatebyMDX( «NewSubsetName», sMDX, «AsTemporary» );
+#HierarchySubsetIsAllSet( DimName_Src, DimName_Src, 'All Set', 0 );
+
+#{TM1SUBSETALL([Product])}
+#TM1SubsetToSet([Product].[Product] , "AllSet" , "public")
+
+#HierarchyElementInsert ( sDimName_Tgt , sHierName_Tgt , '' , sMDX , 'N' ) ;
+#HierarchyElementInsert ( sDimName_Tgt , sHierName_Tgt , '' , 'NoProductBORK' , 'N' ) ;
+
+# sDim = 'Product' ;
+# sSub = 'AllSet' ;
+# ptemp = 0;
+
+# sMDX ='{TM1FILTERBYLEVEL ( {TM1SUBSETALL ( ['|sDim|']) } , 1 ) }' ;
+# If ( SubsetExists ( sDim , sSub ) = 1 ) ;
+#    SubsetDestroy ( sDim , sSub ) ;
+# EndIf ;
+# SubsetCreatebyMDX ( sSub , sMDX , pTemp ) ;
+# DimensionElementComponentAdd( sDimName_Tgt, sElTopParent, vProduct, 1 );
+
+# sMDX ='{TM1FILTERBYLEVEL ( {TM1SUBSETALL ( ['|sDim|']) } , 0 ) }' ;
+# If ( SubsetExists ( sDim , sSub ) = 1 ) ;
+#    SubsetDestroy ( sDim , sSub ) ;
+# EndIf ;
+# SubsetCreatebyMDX ( sSub , sMDX , pTemp ) ;
+# DimensionElementComponentAdd( sDimName_Tgt,sElTopParent,vProduct, 1) ;
+
+
+
+#HierarchyElementInsert( «DimName», «HierName», «InsertionPoint», «NewElName», «ElType» );
+sElName = ItemCode ;
+
+
+sELRegionParentName1 = BusinessUnit;
+sElRegionParentName2 = Category ;
+
+#Skip product called Nespresso as this causes item codes to be added twice (i.e. under 'Nespresso' itemcode and 'Nespresso' brand)
+If (itemcode @= 'Nespresso');
+itemskip;
+#sElName = 'Nespresso SKU';
+#Else;
+#sElName = sElName ;
+
+endif;
+
+
+# Load all Leaf elements from file
+      HierarchyElementInsert ( sDimName_Tgt , sHierName_Tgt , '' , sElName , 'N' ) ;
+      
+# Insert Region Parents and assign to leavess if category and businessunit values are not blank
+      if ( sELRegionParentName1 @<> '' & sElName @<> '' ) ;
+
+         HierarchyElementInsert ( sDimName_Tgt , sHierName_Tgt , '' ,  sELRegionParentName1 |'-'| sElRegionParentName2, 'C' ) ;
+         HierarchyElementInsert ( sDimName_Tgt , sHierName_Tgt , '' , sELRegionParentName1 | ' - ' | 'BusinessUnit' , 'C' ) ;
+         HierarchyElementComponentAdd ( sDimName_Tgt , sHierName_Tgt , sELRegionParentName1 |'-'| sElRegionParentName2, sElName , 1 ) ;
+         HierarchyElementComponentAdd ( sDimName_Tgt , sHierName_Tgt , sELRegionParentName1 | ' - ' | 'BusinessUnit', sELRegionParentName1 |'-'| sElRegionParentName2 , 1 ) ;
+         HierarchyElementComponentAdd ( sDimName_Tgt , sHierName_Tgt , sElRegion , sELRegionParentName1 | ' - ' | 'BusinessUnit' , 1 ) ;
+      endif ;
+
+# Insert Region Parents and assign to leaves if businessunit values are blank
+      if ( sELRegionParentName1 @= '' & sElName @<> '' ) ;
+
+          HierarchyElementInsert ( sDimName_Tgt , sHierName_Tgt , '' ,  sELRegionParentName1 |'-'| sElRegionParentName2, 'C' ) ;
+          HierarchyElementInsert ( sDimName_Tgt , sHierName_Tgt , '' , 'No BusinessUnit' , 'C' ) ;    
+          HierarchyElementComponentAdd ( sDimName_Tgt , sHierName_Tgt , sELRegionParentName1 |'-'| sElRegionParentName2, sElName , 1 ) ;
+          HierarchyElementComponentAdd ( sDimName_Tgt , sHierName_Tgt ,'No BusinessUnit' , sELRegionParentName1 |'-'| sElRegionParentName2 , 1 ) ;
+          HierarchyElementComponentAdd ( sDimName_Tgt , sHierName_Tgt , sElRegion , 'No BusinessUnit' , 1 ) ;
+      endif ;
+
+# Insert Region Parents and assign to leaves if category values are blank
+      if ( sELRegionParentName1 @<> '' & sElName @= '' ) ;
+
+         HierarchyElementInsert ( sDimName_Tgt , sHierName_Tgt , '' ,  sELRegionParentName1 |'- No Category', 'C' ) ;
+         HierarchyElementInsert ( sDimName_Tgt , sHierName_Tgt , '' , sELRegionParentName1 | ' - ' | 'BusinessUnit' , 'C' ) ;
+         HierarchyElementComponentAdd ( sDimName_Tgt , sHierName_Tgt , sELRegionParentName1 |'- No Category', sElName , 1 ) ;
+         HierarchyElementComponentAdd ( sDimName_Tgt , sHierName_Tgt , sELRegionParentName1 | ' - ' | 'BusinessUnit', sELRegionParentName1 |'- No Category' , 1 ) ;
+         HierarchyElementComponentAdd ( sDimName_Tgt , sHierName_Tgt , sElRegion , sELRegionParentName1 | ' - ' | 'BusinessUnit' , 1 ) ;
+      endif ;
+
+
+
+sElBrandParentName = HierarchyBrand;
+
+
+# Insert Brand Parents and assign to leavess if not blank
+      if ( sElBrandParentName @<> '' & sElName @<> '' ) ;
+
+     #    HierarchyElementInsert ( sDimName_Tgt , sHierName_Tgt , '' , sElBrandParentName, 'C' ) ;
+         HierarchyElementComponentAdd ( sDimName_Tgt , sHierName_Tgt ,sElBrand, sElBrandParentName , 1 ) ;
+         HierarchyElementComponentAdd ( sDimName_Tgt , sHierName_Tgt ,sElBrandParentName, sElName , 1 ) ;
+      endif ;
+
+# Insert Brand Parents and assign to leaves if values are blank
+      if ( sElBrandParentName @= '' & sElName @<> '' ) ;
+
+         #HierarchyElementInsert ( sDimName_Tgt , sHierName_Tgt , '' , 'No Brand' , 'C' ) ;    
+         HierarchyElementComponentAdd ( sDimName_Tgt , sHierName_Tgt , sElBrand , 'No Brand' , 1 ) ;
+         HierarchyElementComponentAdd ( sDimName_Tgt , sHierName_Tgt ,'No Brand', sElName , 1 ) ;
+      endif ;
+
+
+
+
+ElementAttrPutS(  BusinessUnit , sDimName_Tgt , sHierName_Tgt , sElName  , 'BusinessUnit'  );
+ElementAttrPutS(  category , sDimName_Tgt , sHierName_Tgt , sElName  , 'Category'  );
+ElementAttrPutS(  HierarchyBrand , sDimName_Tgt , sHierName_Tgt , sElName  , 'Brand'  );
+
+
+#ElementAttrPutS( sElParentName2, sDimName_Tgt, sHierName_Tgt, sElParentName1 |'-'| sElParentName2,'Category');
+
+if (sELRegionParentName1 @<> ''); 
+ElementAttrPutS( 'All Categories', sDimName_Tgt, sHierName_Tgt, sELRegionParentName1 | ' - ' | 'BusinessUnit','Category');
+endif;
+
+if (sELRegionParentName1 @<> '' & sElRegionParentName2 @<> ''); 
+ElementAttrPutS( 'All Brands', sDimName_Tgt, sHierName_Tgt, sELRegionParentName1 |'-'| sElRegionParentName2,'Brand');
+endif;
+
+if (sELRegionParentName1 @<> ''); 
+ElementAttrPutS( 'All Brands', sDimName_Tgt, sHierName_Tgt, sELRegionParentName1 | ' - ' | 'BusinessUnit','Brand');
+endif;
+#endregion
+#region Data
+# #****Begin: Generated Statements***
+#****End: Generated Statements****
+#ElementAttrPutS(  BusinessUnit , sDimName_Tgt , sHierName_Tgt , sElName  , 'BusinessUnit'  );
+#HierarchyElementComponentAdd ( sDimName_Tgt , sHierName_Tgt , sElTopParent , sSub , 1 ) ;
+#endregion
+#region Epilog
+#****Begin: Generated Statements***
+#****End: Generated Statements****
+#CreateHierarchyByAttribute(sDimName_Tgt, 'BusinessUnit', 'No Region' , 'All Regions' );
+
+
+#-- Create a target dimension hieararchy
+
+# sAttrName = 'Brand';
+
+# If(HierarchyExists(sDimName_Tgt, sAttrName) = 1);
+# HierarchyDestroy( sDimName_Tgt, sAttrName );
+# endif;
+
+# CreateHierarchyByAttribute(sDimName_Tgt, sAttrName);
+
+
+#endregion

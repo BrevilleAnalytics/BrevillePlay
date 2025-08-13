@@ -1,0 +1,5 @@
+{
+	"@type":"Subset",
+	"Name":"App.ProductswithShippingUnits",
+	"Expression":"{FILTER(TM1FILTERBYLEVEL(TM1SUBSETALL([Product].[Product]) , 0) , [CMStgForecast].([Version].[Outlook],[CMStgForecastMeasure].[Shipped Units]) > 0)}"
+}

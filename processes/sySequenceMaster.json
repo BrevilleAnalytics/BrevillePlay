@@ -1,0 +1,27 @@
+{
+	"@type":"Process",
+	"Name":"sySequenceMaster",
+	"HasSecurityAccess":false,
+	"Code@Code.link":"sySequenceMaster.ti",
+	"UIData":"_ParameterConstraints=eyJwRXhlY3V0aW9uR3JvdXAiOnsiQ29uc3RyYWludFR5cGUiOiJFZGl0Qm94IiwiVmFsdWVzIjoiIn0sInBMaW5lIjp7IkNvbnN0cmFpbnRUeXBlIjoiRWRpdEJveCIsIlZhbHVlcyI6IiJ9fQ==€",
+	"DataSource":
+	{
+		"Type":"None"
+	},
+	"Parameters":
+	[
+		{
+			"Name":"pExecutionGroup",
+			"Prompt":"Enter the sequence execution group to process (leave blank for all steps)",
+			"Value":"",
+			"Type":"String"
+		},
+		{
+			"Name":"pLine",
+			"Prompt":"",
+			"Value":"",
+			"Type":"String"
+		}
+	],
+	"Variables":[]
+}

@@ -1,0 +1,34 @@
+{
+	"@type":"Hierarchy",
+	"Name":"PnLPlanMeasure",
+	"Elements":
+	[
+		{
+			"Name":"Amount",
+			"Type":"Numeric"
+		}
+	],
+	"Subsets@Code.links":
+	[
+		"PnLPlanMeasure.subsets/TempCMDataLoad.json",
+		"PnLPlanMeasure.subsets/TempCMDataLoadOH.json",
+		"PnLPlanMeasure.subsets/TempCMPnLPlan.json",
+		"PnLPlanMeasure.subsets/TempCMPnLPlanOutlook.json",
+		"PnLPlanMeasure.subsets/TempCorporateMktgPnLPlan.json",
+		"PnLPlanMeasure.subsets/TempCorporateMktgPnLPlanOutlook.json",
+		"PnLPlanMeasure.subsets/TempLoadOHCorporate.json",
+		"PnLPlanMeasure.subsets/TempOHPnLPlan.json",
+		"PnLPlanMeasure.subsets/TempOHPnLPlanOutlook.json",
+		"PnLPlanMeasure.subsets/TempOtherIncomePnLPlan.json",
+		"PnLPlanMeasure.subsets/TempOtherIncomePnLPlanOutlook.json",
+		"PnLPlanMeasure.subsets/TempPnLCurrencyConversion.json",
+		"PnLPlanMeasure.subsets/TempPnLLCOutlook.json",
+		"PnLPlanMeasure.subsets/TempPnLLocalCurrency.json",
+		"PnLPlanMeasure.subsets/TempPnLLY.json",
+		"PnLPlanMeasure.subsets/TempPnLPlanOutlook.json",
+		"PnLPlanMeasure.subsets/TempPnLTarget.json",
+		"PnLPlanMeasure.subsets/TempRMktgPnLPlan.json",
+		"PnLPlanMeasure.subsets/TempRMktgPnLPlanOutlook.json",
+		"PnLPlanMeasure.subsets/TempWFPDataImport.json"
+	]
+}

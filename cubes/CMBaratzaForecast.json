@@ -1,0 +1,35 @@
+{
+	"@type":"Cube",
+	"Name":"CMBaratzaForecast",
+	"Rules@Code.link":"CMBaratzaForecast.rules",
+	"Dimensions":
+	[
+		{
+			"@id":"Dimensions('Product')"
+		},
+		{
+			"@id":"Dimensions('BusinessUnit')"
+		},
+		{
+			"@id":"Dimensions('Theatre')"
+		},
+		{
+			"@id":"Dimensions('Version')"
+		},
+		{
+			"@id":"Dimensions('FiscalMonth')"
+		},
+		{
+			"@id":"Dimensions('Currency')"
+		},
+		{
+			"@id":"Dimensions('CMBaratzaForecastMeasure')"
+		}
+	],
+	"Views@Code.links":
+	[
+		"CMBaratzaForecast.views/TempCMBaratza.json",
+		"CMBaratzaForecast.views/App.BaratzaDataEntry.json",
+		"CMBaratzaForecast.views/Default.json"
+	]
+}

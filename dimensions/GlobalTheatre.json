@@ -1,0 +1,13 @@
+{
+	"@type":"Dimension",
+	"Name":"GlobalTheatre",
+	"AllLeavesHierarchyName":"",
+	"DefaultHierarchy":
+	{
+		"@id":"Dimensions('GlobalTheatre')/Hierarchies('GlobalTheatre')"
+	},
+	"Hierarchies@Code.links":
+	[
+		"GlobalTheatre.hierarchies/GlobalTheatre.json"
+	]
+}

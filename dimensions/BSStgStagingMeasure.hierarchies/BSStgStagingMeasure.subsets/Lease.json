@@ -1,0 +1,58 @@
+{
+	"@type":"Subset",
+	"Name":"Lease",
+	"Elements":
+	[
+		{
+			"@id":"Dimensions('BSStgStagingMeasure')/Hierarchies('BSStgStagingMeasure')/Elements('--Right of Use Asset--')"
+		},
+		{
+			"@id":"Dimensions('BSStgStagingMeasure')/Hierarchies('BSStgStagingMeasure')/Elements('RoU Opening balance')"
+		},
+		{
+			"@id":"Dimensions('BSStgStagingMeasure')/Hierarchies('BSStgStagingMeasure')/Elements('Depreciation')"
+		},
+		{
+			"@id":"Dimensions('BSStgStagingMeasure')/Hierarchies('BSStgStagingMeasure')/Elements('RoU Closing balance')"
+		},
+		{
+			"@id":"Dimensions('BSStgStagingMeasure')/Hierarchies('BSStgStagingMeasure')/Elements('--Lease Liability--')"
+		},
+		{
+			"@id":"Dimensions('BSStgStagingMeasure')/Hierarchies('BSStgStagingMeasure')/Elements('Lease Liability - Current')"
+		},
+		{
+			"@id":"Dimensions('BSStgStagingMeasure')/Hierarchies('BSStgStagingMeasure')/Elements('Lease Liability - Current Opening balance')"
+		},
+		{
+			"@id":"Dimensions('BSStgStagingMeasure')/Hierarchies('BSStgStagingMeasure')/Elements('Interest Expense')"
+		},
+		{
+			"@id":"Dimensions('BSStgStagingMeasure')/Hierarchies('BSStgStagingMeasure')/Elements('Lease Repayment')"
+		},
+		{
+			"@id":"Dimensions('BSStgStagingMeasure')/Hierarchies('BSStgStagingMeasure')/Elements('Reclass non-current portion')"
+		},
+		{
+			"@id":"Dimensions('BSStgStagingMeasure')/Hierarchies('BSStgStagingMeasure')/Elements('Lease Liability - Current Closing balance')"
+		},
+		{
+			"@id":"Dimensions('BSStgStagingMeasure')/Hierarchies('BSStgStagingMeasure')/Elements('Lease Liability - Non-current')"
+		},
+		{
+			"@id":"Dimensions('BSStgStagingMeasure')/Hierarchies('BSStgStagingMeasure')/Elements('Lease Liability - Non-current Opening balance')"
+		},
+		{
+			"@id":"Dimensions('BSStgStagingMeasure')/Hierarchies('BSStgStagingMeasure')/Elements('Reclass non-current portion (-)')"
+		},
+		{
+			"@id":"Dimensions('BSStgStagingMeasure')/Hierarchies('BSStgStagingMeasure')/Elements('Lease Liability - Non-current Closing balance')"
+		},
+		{
+			"@id":"Dimensions('BSStgStagingMeasure')/Hierarchies('BSStgStagingMeasure')/Elements('Total lease liability')"
+		},
+		{
+			"@id":"Dimensions('BSStgStagingMeasure')/Hierarchies('BSStgStagingMeasure')/Elements('Check to leases summary')"
+		}
+	]
+}

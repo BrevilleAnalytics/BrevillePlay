@@ -1,0 +1,42 @@
+{
+	"@type":"Chore",
+	"Name":"ImportWFPintoPLBudget",
+	"StartTime":"2023-02-16T20:10Z",
+	"DSTSensitive":true,
+	"Active":true,
+	"ExecutionMode":"SingleCommit",
+	"Frequency":"P1DT00H00M00S",
+	"Tasks":
+	[
+		{
+			"Step":0,
+			"Parameters":
+			[
+				{
+					"Name":"pBU",
+					"Value":""
+				},
+				{
+					"Name":"psProcessReference",
+					"Value":""
+				},
+				{
+					"Name":"pssyProcessLog",
+					"Value":""
+				},
+				{
+					"Name":"psTITracker",
+					"Value":""
+				},
+				{
+					"Name":"pVersion",
+					"Value":"Working Budget"
+				}
+			],
+			"Process":
+			{
+				"@id":"Processes('CubePnLPlanUpdateImportFileWFPGLData')"
+			}
+		}
+	]
+}

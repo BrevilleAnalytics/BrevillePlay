@@ -1,0 +1,196 @@
+{
+	"@type":"Hierarchy",
+	"Name":"syEnvironmentMeasure",
+	"Elements":
+	[
+		{
+			"Name":"--Email Parameters--",
+			"Type":"String"
+		},
+		{
+			"Name":"SMTP Server",
+			"Type":"String"
+		},
+		{
+			"Name":"Email Prefix for Environment",
+			"Type":"String"
+		},
+		{
+			"Name":"Email From Address",
+			"Type":"String"
+		},
+		{
+			"Name":"Email To Address Override",
+			"Type":"String"
+		},
+		{
+			"Name":"Email To Technical Support",
+			"Type":"String"
+		},
+		{
+			"Name":"--TM1 Parameters--",
+			"Type":"String"
+		},
+		{
+			"Name":"7z location",
+			"Type":"String"
+		},
+		{
+			"Name":"Data Folder",
+			"Type":"String"
+		},
+		{
+			"Name":"Log Folder",
+			"Type":"String"
+		},
+		{
+			"Name":"Backup Folder",
+			"Type":"String"
+		},
+		{
+			"Name":"Temp Folder",
+			"Type":"String"
+		},
+		{
+			"Name":"File Transfer Folder",
+			"Type":"String"
+		},
+		{
+			"Name":"Backup Retention days",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"Log Retention days",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"Temp Retention days",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"Archive Retention days",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"SourceFiles Folder",
+			"Type":"String"
+		},
+		{
+			"Name":"OutputFiles Folder",
+			"Type":"String"
+		},
+		{
+			"Name":"PIISourceFiles Folder",
+			"Type":"String"
+		},
+		{
+			"Name":"PIIOutFiles Folder",
+			"Type":"String"
+		},
+		{
+			"Name":"Archive Folder",
+			"Type":"String"
+		},
+		{
+			"Name":"SourceFileNameHive",
+			"Type":"String"
+		},
+		{
+			"Name":"--Temp Views and Subsets (0 or 1)--",
+			"Type":"String"
+		},
+		{
+			"Name":"pTemp",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"--Debug for Processing --",
+			"Type":"String"
+		},
+		{
+			"Name":"pDebug",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"--syProcessLog Parameter--",
+			"Type":"String"
+		},
+		{
+			"Name":"psyProcessLog",
+			"Type":"String"
+		},
+		{
+			"Name":"--TITracker Parameter--",
+			"Type":"String"
+		},
+		{
+			"Name":"psyTITracker",
+			"Type":"String"
+		},
+		{
+			"Name":"--DL Parameters--",
+			"Type":"String"
+		},
+		{
+			"Name":"DL Bucket Name",
+			"Type":"String"
+		},
+		{
+			"Name":"DL Out Bucket Name",
+			"Type":"String"
+		},
+		{
+			"Name":"ODBC DSN for DL",
+			"Type":"String"
+		},
+		{
+			"Name":"ODBC DSN for DL SQL",
+			"Type":"String"
+		},
+		{
+			"Name":"DL Client Name",
+			"Type":"String"
+		},
+		{
+			"Name":"ODBCOut DSN",
+			"Type":"String"
+		},
+		{
+			"Name":"--Timezone Conversion Parameters--",
+			"Type":"String"
+		},
+		{
+			"Name":"Server Locale",
+			"Type":"String"
+		},
+		{
+			"Name":"Default user timezone",
+			"Type":"String"
+		},
+		{
+			"Name":"AEST TimeZone",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"PaW Security Group Prefix 1",
+			"Type":"String"
+		},
+		{
+			"Name":"PaW Security Group Prefix 2",
+			"Type":"String"
+		},
+		{
+			"Name":"PaW Security Group Prefix 3",
+			"Type":"String"
+		},
+		{
+			"Name":"PaW Security Group Prefix 4",
+			"Type":"String"
+		},
+		{
+			"Name":"PaW Security Group Prefix 5",
+			"Type":"String"
+		}
+	],
+	"Subsets@Code.links":[]
+}

@@ -1,0 +1,28 @@
+#region Prolog
+#****Begin: Generated Statements***
+#****End: Generated Statements****
+#endregion
+#region Metadata
+#****Begin: Generated Statements***
+#****End: Generated Statements****
+#endregion
+#region Data
+#****Begin: Generated Statements***
+#****End: Generated Statements****
+#endregion
+#region Epilog
+#****Begin: Generated Statements***
+#****End: Generated Statements****
+
+# 1 - BusinessUnit
+# 2 - FiscalMonth 
+# 3 - Currency
+# 4 - Version
+# 5 - BRExchangeRateMeasure
+
+ # SecurityOverlayDestroyGlobalDefault ( 'CMForecast' );
+
+# SecurityOverlayCreateGlobalDefault ( 'CMForecast', '0:0:1:1:1:1:0:0:0' );
+
+ SecurityOverlayCreateGlobalDefault ( 'PnLPlan', '0:0:1:0:0:0:1:1:1:0' );
+#endregion

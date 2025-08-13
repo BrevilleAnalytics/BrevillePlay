@@ -1,0 +1,489 @@
+#region Prolog
+#****Begin: Generated Statements***
+#****End: Generated Statements****
+
+
+#------------------------------------------------------------------------------------------
+#****Begin  'TI Summary'
+
+#<Purpose>
+# This is the master process which calls the salve process to perform the TI processing for the OH application
+																  
+#<Purpose\>
+
+#<Maintenance Log>
+# <Build|---Date---|---Programmer---|---Description------------------------------->
+# 001  15/080/2022 - Jithu Varghese - CPM Group - Intial Draft
+        
+#<Maintenance Log\>
+
+#<Parameters>
+# pExecutionGroup - An execution sequence Group
+# pLine - Line number of sequence 
+
+#<Parameters\>
+
+#<Execute Method>
+# Manual triggered by Submitter 
+#<Execute Method\>
+
+#<Processes Executed>
+#  as per syManagement - Sequence View
+#<Processes Executed\>
+
+#<Execute Schedule>
+
+#<Execute Schedule\>
+
+#<Estimated Run Time>
+# depends on sequence
+#<Estimated Run Time\>
+
+#****End: 'TI Summary'
+#------------------------------------------------------------------------------------------
+
+#### syManagement ####
+# 01 syYear		- no year
+# 02 syManagementParameter	
+# 03 BRIndex
+# 04 BRLineItem
+# 05 syManagementMeasure 	- String
+
+
+#------------------------------------------------------------------------------------------
+#****Begin 'Declare Variables'
+
+NumericGlobalVariable ( 'PrologMinorErrorCount' );
+NumericGlobalVariable ( 'MetaDataMinorErrorCount' );
+NumericGlobalVariable ( 'DataMinorErrorCount' );
+
+nRecordsProcessedData = 0;
+nRecordsProcessedMeta = 0;
+nCompletedWithMinorErrors = 0;
+nCompletedWithMajorErrors = 0;
+nCompletedSuccessfully = 0;
+sErrorMessage = '';
+sClientMessage = '';
+
+sSystemMessage = '' ;					
+nValidationError = 0;
+
+sProcess = GetProcessName();
+
+sMessage2 = 'Execution Group does not exist. Proces proceed to Quit.' ;
+sMessage3 = 'Line Item does not exist. Please select a valid line item.' ;
+
+sTM1UserID = TM1User();
+sUser = TM1User ( ) ;
+If ( DIMIX ( '}Clients' , sUser ) > 0 ) ;
+   sUserName = NUMBERTOSTRING ( DIMIX ( '}Clients' , sUser ) ) ;
+ElseIf ( DIMIX ( '}Chores' , TRIM ( SUBST ( sUser , 3 , 255 ) ) ) > 0 ) ;
+   sUserName = TRIM ( SUBST ( sUser , 3 , 255 ) ) ;
+Else ;
+   sUserName = 'Unknown' ;
+EndIf ;
+
+#****End 'Declare Variables'
+#------------------------------------------------------------------------------------------
+
+
+#------------------------------------------------------------------------------------------
+#****Begin: 'Sys TI Tracker'
+  nTIStartTime= NOW;
+   ExecuteProcess( 'SyTITracker' ,
+   'pProcessName' , GetProcessName ,
+   'pTime' , nTIStartTime ,
+   'pStatus' , 1
+ , 'pTM1User' , sUserName
+ , 'pSystemMessage' , sSystemMessage
+   );
+
+#****End: 'Sys TI Tracker'
+#------------------------------------------------------------------------------------------
+
+
+
+
+#****End: 'Param Checks'
+#----------------------------------------------------------------------------------
+
+#------------------------------------------------------------------------------------------
+#****Begin: 'Param Checks'
+
+
+IF ( pExecutionGroup @= 'All Sequence Execution Group' );
+      pExecutionGroup = '';
+ENDIF;
+
+nFoundExecGrp = 0;
+IF( pExecutionGroup @<> '' );
+   sIndex = '0001';
+   WHILE( sIndex @<> 'END' );
+      sExecutionGroup = CELLGETS ( 'syManagement', 'No Year','Sequence Execution Group' , sIndex , pLine , 'String' );
+      IF( pExecutionGroup @= sExecutionGroup );
+         nFoundExecGrp = 1;
+      ENDIF;
+      sIndex = ATTRS( 'BRIndex' , sIndex , 'Next' );
+   END;
+ENDIF;
+
+IF( nFoundExecGrp = 0 & pExecutionGroup @<> '' );
+   IF( sSystemMessage @= '' );
+       sSystemMessage = sMessage2;
+   ELSE;
+       sSystemMessage = sErrorMessage | '; ' | sMessage2;
+   ENDIF;
+       nValidationError = nValidationError + 1;
+ENDIF;
+
+IF( DIMIX( 'BRLineItem' , pLine) = 0 );
+  IF( sSystemMessage @= '' );
+     sSystemMessage = sMessage3;
+  ELSE;
+     sSystemMessage = sSystemMessage | '; ' | sMessage3;
+  ENDIF;
+  nValidationError = nValidationError + 1;
+ENDIF;
+
+#****End: 'Declare Variables'
+#------------------------------------------------------------------------------------------
+
+# --------------------------------------------------------------------
+# Process Break to Epilog if Validation fails
+# --------------------------------------------------------------------
+IF(nValidationError>0);
+#   CellPutS(sErrorMessage, '}ElementAttributes_}Clients', TM1User(),  'Msg');
+#   sClientMessage = sErrorMessage;
+   ProcessBreak;
+ENDIF;
+
+#****End: 'Param Checks'
+#----------------------------------------------------------------------------------
+
+#Loop through the Sequence Execution
+
+sIndex = '0001';
+
+sExecutionStep 	=  CELLGETS ( 'syManagement' , 'No Year' , 'Sequence Execution' , sIndex, pLine, 'String');
+sExecutionGroup	=  CELLGETS ( 'syManagement' , 'No Year', 'Sequence Execution Group' , sIndex, pLine, 'String');
+sDeliminator = CELLGETS ( 'syManagement' , 'No Year' ,  'Sequence Parameter Delimiter' , '0000', '00000' , 'String');
+
+WHILE( sIndex @<> 'END' & UPPER( sExecutionStep ) @<> 'END' );
+
+   nReturn_Value=9999;    
+   IF(pExecutionGroup @= '' % pExecutionGroup @= sExecutionGroup);
+
+      sProcess = CELLGETS ( 'syManagement', 'No Year', 'Sequence TI Process' , sIndex, pLine, 'String');
+      sParameter = CELLGETS ( 'syManagement', 'No Year', 'Sequence TI Process Params' , sIndex, pLine, 'String');
+      nParameterCount = 0;
+
+      CELLPUTS('', 'syManagement', 'No Year', 'P1' , '0045', '00001', 'String');
+      CELLPUTS('', 'syManagement', 'No Year', 'V1' , '0045', '00001', 'String');
+      CELLPUTS('', 'syManagement', 'No Year', 'P2' , '0045', '00001', 'String');
+      CELLPUTS('', 'syManagement', 'No Year', 'V2' , '0045', '00001', 'String');
+      CELLPUTS('', 'syManagement', 'No Year', 'P3' , '0045', '00001', 'String');
+      CELLPUTS('', 'syManagement', 'No Year', 'V3' , '0045', '00001', 'String');
+      CELLPUTS('', 'syManagement', 'No Year', 'P4' , '0045', '00001', 'String');
+      CELLPUTS('', 'syManagement', 'No Year', 'V4' , '0045', '00001', 'String');
+      CELLPUTS('', 'syManagement', 'No Year', 'P5' , '0045', '00001', 'String');
+      CELLPUTS('', 'syManagement', 'No Year', 'V5' , '0045', '00001', 'String');
+      CELLPUTS('', 'syManagement', 'No Year', 'P6' , '0045', '00001', 'String');
+      CELLPUTS('', 'syManagement', 'No Year', 'V6' , '0045', '00001', 'String');
+      CELLPUTS('', 'syManagement', 'No Year', 'P7' , '0045', '00001', 'String');
+      CELLPUTS('', 'syManagement', 'No Year', 'V7' , '0045', '00001', 'String');
+      CELLPUTS('', 'syManagement', 'No Year', 'P8' , '0045', '00001', 'String');
+      CELLPUTS('', 'syManagement', 'No Year', 'V8' , '0045', '00001', 'String');
+      CELLPUTS('', 'syManagement', 'No Year', 'P9' , '0045', '00001', 'String');
+      CELLPUTS('', 'syManagement', 'No Year', 'V9' , '0045', '00001', 'String');
+      CELLPUTS('', 'syManagement', 'No Year', 'P10' , '0045', '00001', 'String');
+      CELLPUTS('', 'syManagement', 'No Year', 'V10' , '0045', '00001', 'String');
+      CELLPUTS('', 'syManagement', 'No Year', 'P11' , '0045', '00001', 'String');
+      CELLPUTS('', 'syManagement', 'No Year', 'V11' , '0045', '00001', 'String');
+      CELLPUTS('', 'syManagement', 'No Year', 'P12' , '0045', '00001', 'String');
+      CELLPUTS('', 'syManagement', 'No Year', 'V12' , '0045', '00001', 'String');
+      CELLPUTS('', 'syManagement', 'No Year', 'P13' , '0045', '00001', 'String');
+      CELLPUTS('', 'syManagement', 'No Year', 'V13' , '0045', '00001', 'String');
+      CELLPUTS('', 'syManagement', 'No Year', 'P14' , '0045', '00001', 'String');
+      CELLPUTS('', 'syManagement', 'No Year', 'V14' , '0045', '00001', 'String');
+      CELLPUTS('', 'syManagement', 'No Year', 'P15' , '0045', '00001', 'String');
+      CELLPUTS('', 'syManagement', 'No Year', 'V15' , '0045', '00001', 'String');
+      CELLPUTS('', 'syManagement', 'No Year', 'P16' , '0045', '00001', 'String');
+      CELLPUTS('', 'syManagement', 'No Year', 'V16' , '0045', '00001', 'String');
+      CELLPUTS('', 'syManagement', 'No Year', 'P17' , '0045', '00001', 'String');
+      CELLPUTS('', 'syManagement', 'No Year', 'V17' , '0045', '00001', 'String');
+      CELLPUTS('', 'syManagement', 'No Year', 'P18' , '0045', '00001', 'String');
+      CELLPUTS('', 'syManagement', 'No Year', 'V18' , '0045', '00001', 'String');
+      CELLPUTS('', 'syManagement', 'No Year', 'P19' , '0045', '00001', 'String');
+      CELLPUTS('', 'syManagement', 'No Year', 'V19' , '0045', '00001', 'String');
+      CELLPUTS('', 'syManagement', 'No Year', 'P20' , '0045', '00001', 'String');
+      CELLPUTS('', 'syManagement', 'No Year', 'V20' , '0045', '00001', 'String');
+
+      WHILE( LONG( sParameter ) > 0 & nParameterCount <= 20 );
+         
+         nDeliminatorIndex = SCAN(sDeliminator, sParameter);
+
+         IF(nDeliminatorIndex > 0);
+      
+            nParameterCount = nParameterCount + 1;
+            sElement.P = 'P' | NumberToString(nParameterCount);
+            sElement.V = 'V' | NumberToString(nParameterCount);
+            sP = TRIM( SUBST(sParameter, 1, nDeliminatorIndex - 1) );
+      
+            CellPutS(sP, 'syManagement', 'No Year' , sElement.P , '0045', '00001', 'String');
+      
+            sParameter = TRIM( SUBST(sParameter, nDeliminatorIndex + 1, LONG(sParameter) - nDeliminatorIndex) );
+            nDeliminatorIndex = SCAN(sDeliminator, sParameter);
+      
+            IF(nDeliminatorIndex > 0);
+      
+               sV = TRIM( SUBST(sParameter, 1, nDeliminatorIndex - 1) );
+      
+               CellPutS(sV, 'syManagement', 'No Year', sElement.V , '0045', '00001', 'String');
+      
+               sParameter = TRIM( SUBST(sParameter, nDeliminatorIndex + 1, LONG(sParameter) - nDeliminatorIndex) );
+      
+            ELSE;
+      
+               sV = sParameter;
+      
+               CellPutS(sV,  'syManagement', 'No Year', sElement.V , '0045', '00001', 'String');
+      
+               sParameter = '';
+      
+            ENDIF;
+      
+         ENDIF;
+      
+      END;
+
+      sP1 = CELLGETS(  'syManagement', 'No Year', 'P1' , '0045', '00001', 'String');
+      sV1 = CELLGETS(  'syManagement', 'No Year', 'V1' , '0045', '00001', 'String');
+
+      sP2 = CELLGETS(  'syManagement', 'No Year', 'P2' , '0045', '00001', 'String');
+      sV2 = CELLGETS(  'syManagement', 'No Year', 'V2' , '0045', '00001', 'String');
+
+      sP3 = CELLGETS(  'syManagement', 'No Year', 'P3' , '0045', '00001', 'String');
+      sV3 = CELLGETS(  'syManagement', 'No Year', 'V3' , '0045', '00001', 'String');
+      
+      sP4 = CELLGETS(  'syManagement', 'No Year', 'P4' , '0045', '00001', 'String');
+      sV4 = CELLGETS(  'syManagement', 'No Year', 'V4' , '0045', '00001', 'String');
+      
+      sP5 = CELLGETS(  'syManagement', 'No Year', 'P5' , '0045', '00001', 'String');
+      sV5 = CELLGETS(  'syManagement', 'No Year', 'V5' , '0045', '00001', 'String');
+      
+      sP6 = CELLGETS(  'syManagement', 'No Year', 'P6' , '0045', '00001', 'String');
+      sV6 = CELLGETS(  'syManagement', 'No Year', 'V6' , '0045', '00001', 'String');
+      
+      sP7 = CELLGETS(  'syManagement', 'No Year', 'P7' , '0045', '00001', 'String');
+      sV7 = CELLGETS(  'syManagement', 'No Year', 'V7' , '0045', '00001', 'String');
+
+      sP8 = CELLGETS(  'syManagement', 'No Year', 'P8' , '0045', '00001', 'String');
+      sV8 = CELLGETS(  'syManagement', 'No Year', 'V8' , '0045', '00001', 'String');
+      
+      sP9 = CELLGETS(  'syManagement', 'No Year', 'P9' , '0045', '00001', 'String');
+      sV9 = CELLGETS(  'syManagement', 'No Year', 'V9' , '0045', '00001', 'String');
+      
+      sP10 = CELLGETS(  'syManagement', 'No Year', 'P10' , '0045', '00001', 'String');
+      sV10 = CELLGETS(  'syManagement', 'No Year', 'V10' , '0045', '00001', 'String');
+
+      sP11 = CELLGETS(  'syManagement', 'No Year', 'P11' , '0045', '00001', 'String');
+      sV11 = CELLGETS(  'syManagement', 'No Year', 'V11' , '0045', '00001', 'String');
+
+      sP12 = CELLGETS(  'syManagement', 'No Year', 'P12' , '0045', '00001', 'String');
+      sV12 = CELLGETS(  'syManagement', 'No Year', 'V12' , '0045', '00001', 'String');
+
+      sP13 = CELLGETS(  'syManagement', 'No Year', 'P13' , '0045', '00001', 'String');
+      sV13 = CELLGETS(  'syManagement', 'No Year', 'V13' , '0045', '00001', 'String');
+      
+      sP14 = CELLGETS(  'syManagement', 'No Year', 'P14' , '0045', '00001', 'String');
+      sV14 = CELLGETS(  'syManagement', 'No Year', 'V14' , '0045', '00001', 'String');
+      
+      sP15 = CELLGETS(  'syManagement', 'No Year', 'P15' , '0045', '00001', 'String');
+      sV15 = CELLGETS(  'syManagement', 'No Year', 'V15' , '0045', '00001', 'String');
+      
+      sP16 = CELLGETS(  'syManagement', 'No Year', 'P16' , '0045', '00001', 'String');
+      sV16 = CELLGETS(  'syManagement', 'No Year', 'V16' , '0045', '00001', 'String');
+      
+      sP17 = CELLGETS(  'syManagement', 'No Year', 'P17' , '0045', '00001', 'String');
+      sV17 = CELLGETS(  'syManagement', 'No Year', 'V17' , '0045', '00001', 'String');
+
+      sP18 = CELLGETS(  'syManagement', 'No Year', 'P18' , '0045', '00001', 'String');
+      sV18 = CELLGETS(  'syManagement', 'No Year', 'V18' , '0045', '00001', 'String');
+      
+      sP19 = CELLGETS(  'syManagement', 'No Year', 'P19' , '0045', '00001', 'String');
+      sV19 = CELLGETS(  'syManagement', 'No Year', 'V19' , '0045', '00001', 'String');
+      
+      sP20 = CELLGETS(  'syManagement', 'No Year', 'P20' , '0045', '00001', 'String');
+      sV20 = CELLGETS(  'syManagement', 'No Year', 'V20' , '0045', '00001', 'String');
+
+      IF(DIMIX('}Processes', sProcess) > 0);
+
+##PROCESSERROR;
+         IF(nParameterCount = 0);
+      
+            nReturn_Value=EXECUTEPROCESS(sProcess);
+      
+         ELSEIF(nParameterCount = 1);
+      
+            nReturn_Value=EXECUTEPROCESS(sProcess, sP1, sV1);
+      
+         ELSEIF(nParameterCount = 2);
+      
+            nReturn_Value=EXECUTEPROCESS(sProcess, sP1, sV1, sP2, sV2);
+      
+         ELSEIF(nParameterCount = 3);
+      
+            nReturn_Value=EXECUTEPROCESS(sProcess, sP1, sV1, sP2, sV2, sP3, sV3);
+      
+         ELSEIF(nParameterCount = 4);
+      
+            nReturn_Value=EXECUTEPROCESS(sProcess, sP1, sV1, sP2, sV2, sP3, sV3, sP4, sV4);
+      
+         ELSEIF(nParameterCount = 5);
+      
+            nReturn_Value=EXECUTEPROCESS(sProcess, sP1, sV1, sP2, sV2, sP3, sV3, sP4, sV4, sP5, sV5);
+      
+         ELSEIF(nParameterCount = 6);
+      
+            nReturn_Value=EXECUTEPROCESS(sProcess, sP1, sV1, sP2, sV2, sP3, sV3, sP4, sV4, sP5, sV5, sP6, sV6);
+            
+         ELSEIF(nParameterCount = 7);
+      
+            nReturn_Value=EXECUTEPROCESS(sProcess, sP1, sV1, sP2, sV2, sP3, sV3, sP4, sV4, sP5, sV5, sP6, sV6, sP7, sV7);
+      
+         ELSEIF(nParameterCount = 8);
+      
+            nReturn_Value=EXECUTEPROCESS(sProcess, sP1, sV1, sP2, sV2, sP3, sV3, sP4, sV4, sP5, sV5, sP6, sV6, sP7, sV7, sP8, sV8);
+      
+         ELSEIF(nParameterCount = 9);
+      
+            nReturn_Value=EXECUTEPROCESS(sProcess, sP1, sV1, sP2, sV2, sP3, sV3, sP4, sV4, sP5, sV5, sP6, sV6, sP7, sV7, sP8, sV8, sP9, sV9);
+   
+         ELSEIF(nParameterCount = 10);
+      
+            nReturn_Value=EXECUTEPROCESS(sProcess, sP1, sV1, sP2, sV2, sP3, sV3, sP4, sV4, sP5, sV5, sP6, sV6, sP7, sV7, sP8, sV8, sP9, sV9, sP10, sV10);
+      
+         ELSEIF(nParameterCount = 11);
+
+            nReturn_Value=EXECUTEPROCESS(sProcess, sP1, sV1, sP2, sV2, sP3, sV3, sP4, sV4, sP5, sV5, sP6, sV6, sP7, sV7, sP8, sV8, sP9, sV9, sP10, sV10
+            , sP11, sV11);
+      
+         ELSEIF(nParameterCount = 12);
+      
+            nReturn_Value=EXECUTEPROCESS(sProcess, sP1, sV1, sP2, sV2, sP3, sV3, sP4, sV4, sP5, sV5, sP6, sV6, sP7, sV7, sP8, sV8, sP9, sV9, sP10, sV10
+            , sP11, sV11, sP12, sV12);
+      
+         ELSEIF(nParameterCount = 13);
+      
+            nReturn_Value=EXECUTEPROCESS(sProcess, sP1, sV1, sP2, sV2, sP3, sV3, sP4, sV4, sP5, sV5, sP6, sV6, sP7, sV7, sP8, sV8, sP9, sV9, sP10, sV10
+            , sP11, sV11, sP12, sV12, sP13, sV13);
+      
+         ELSEIF(nParameterCount = 14);
+      
+            nReturn_Value=EXECUTEPROCESS(sProcess, sP1, sV1, sP2, sV2, sP3, sV3, sP4, sV4, sP5, sV5, sP6, sV6, sP7, sV7, sP8, sV8, sP9, sV9, sP10, sV10
+            , sP11, sV11, sP12, sV12, sP13, sV13, sP14, sV14);
+      
+         ELSEIF(nParameterCount = 15);
+      
+            nReturn_Value=EXECUTEPROCESS(sProcess, sP1, sV1, sP2, sV2, sP3, sV3, sP4, sV4, sP5, sV5, sP6, sV6, sP7, sV7, sP8, sV8, sP9, sV9, sP10, sV10
+            , sP11, sV11, sP12, sV12, sP13, sV13, sP14, sV14, sP15, sV15);
+      
+         ELSEIF(nParameterCount = 16);
+
+            nReturn_Value=EXECUTEPROCESS(sProcess, sP1, sV1, sP2, sV2, sP3, sV3, sP4, sV4, sP5, sV5, sP6, sV6, sP7, sV7, sP8, sV8, sP9, sV9, sP10, sV10      
+            , sP11, sV11, sP12, sV12, sP13, sV13, sP14, sV14, sP15, sV15, sP16, sV16);
+            
+         ELSEIF(nParameterCount = 17);
+      
+            nReturn_Value=EXECUTEPROCESS(sProcess, sP1, sV1, sP2, sV2, sP3, sV3, sP4, sV4, sP5, sV5, sP6, sV6, sP7, sV7, sP8, sV8, sP9, sV9, sP10, sV10
+            , sP11, sV11, sP12, sV12, sP13, sV13, sP14, sV14, sP15, sV15, sP16, sV16, sP17, sV17);
+      
+         ELSEIF(nParameterCount = 18);
+      
+            nReturn_Value=EXECUTEPROCESS(sProcess, sP1, sV1, sP2, sV2, sP3, sV3, sP4, sV4, sP5, sV5, sP6, sV6, sP7, sV7, sP8, sV8, sP9, sV9, sP10, sV10
+            , sP11, sV11, sP12, sV12, sP13, sV13, sP14, sV14, sP15, sV15, sP16, sV16, sP17, sV17, sP18, sV18);
+      
+         ELSEIF(nParameterCount = 19);
+      
+            nReturn_Value=EXECUTEPROCESS(sProcess, sP1, sV1, sP2, sV2, sP3, sV3, sP4, sV4, sP5, sV5, sP6, sV6, sP7, sV7, sP8, sV8, sP9, sV9, sP10, sV10
+            , sP11, sV11, sP12, sV12, sP13, sV13, sP14, sV14, sP15, sV15, sP16, sV16, sP17, sV17, sP18, sV18, sP19, sV19);
+   
+         ELSEIF(nParameterCount = 20);
+      
+            nReturn_Value=EXECUTEPROCESS(sProcess, sP1, sV1, sP2, sV2, sP3, sV3, sP4, sV4, sP5, sV5, sP6, sV6, sP7, sV7, sP8, sV8, sP9, sV9, sP10, sV10
+            , sP11, sV11, sP12, sV12, sP13, sV13, sP14, sV14, sP15, sV15, sP16, sV16, sP17, sV17, sP18, sV18, sP19, sV19, sP20, sV20);
+
+         ENDIF;
+      
+      ENDIF;
+
+   ENDIF;
+
+   IF(nReturn_Value<>9999);
+
+# xx  sReturn_Value=ATTRS('}TM1ErrorLookUp', 'PE' | NumberToString(nReturn_Value), 'Detail');
+      sReturn_Value=NumberToString(nReturn_Value) ;
+# xx
+      CELLPUTS(sTM1UserID, 'syManagement' , 'No Year' , 'Sequence Executed By' , sIndex, pLine, 'String');
+      CELLPUTS(sReturn_Value, 'syManagement' , 'No Year' , 'Sequence Execution Status' , sIndex, pLine, 'String');
+
+       nLastExecutedOn = nTIStartTime+ CellGetN( 'syEnvironment', 'Breville' ,'AEST TimeZone')/24;
+      #sLastExecutedOn = TIMST(nTIStartTime, 'On \M \D, \Y at \H\p \imin\ssec'); 
+       sLastExecutedOn = TIMST(nLastExecutedOn , 'On \M \D, \Y at \H\p \imin\ssec'); 
+      CELLPUTS(sLastExecutedOn, 'syManagement', 'No Year', 'Sequence Last Executed On' , sIndex, pLine, 'String');
+      
+   ENDIF;
+
+   sIndex=ATTRS('BRIndex', sIndex, 'Next');
+   IF( sIndex @<> 'END' );
+      sExecutionStep    = CELLGETS('syManagement', 'No Year','Sequence Execution' , sIndex, pLine, 'String');
+      sExecutionGroup   = CELLGETS('syManagement', 'No Year','Sequence Execution Group' , sIndex, pLine, 'String');
+   ENDIF;
+   
+END;
+#endregion
+#region Epilog
+#****Begin: Generated Statements***
+#****End: Generated Statements****
+
+
+#----------------------------------------------------------------------------------------------------------
+# Region # TI Tracker
+# Check for minor errors
+
+If ( sSystemMessage @= '' ) ;
+   If ( DataMinorErrorCount = 0 & PrologMinorErrorCount = 0 & MetaDataMinorErrorCount = 0 ) ;
+      sSystemMessage = 'Successful' ;
+   Else ;
+      If ( DataMinorErrorCount <> 0 ) ;
+         sSystemMessage = NumberToString ( DataMinorErrorCount ) | ' data error/s ; ' ;
+      EndIf ;
+      If ( PrologMinorErrorCount <> 0 ) ;
+         sSystemMessage = NumberToString ( PrologMinorErrorCount ) | ' prolog error/s ; ' ;
+      EndIf ;
+      If ( MetaDataMinorErrorCount <> 0 ) ;
+         sSystemMessage = NumberToString ( MetaDataMinorErrorCount ) | ' metadata error/s' ;
+      EndIf ;
+      sSystemMessage = sSystemMessage | ' Check settings or contact the adminstrator If the error/s persists' ;
+   EndIf ;
+EndIf ;
+
+ExecuteProcess ( 'syTITracker'
+ , 'pProcessName' , GetProcessName
+ , 'pTime' , nTIStartTime
+ , 'pStatus' , 0
+
+  , 'pParameter01', 'pExecutionGroup:' | pExecutionGroup
+  , 'pParameter02', 'pLine:' | pLine
+
+ , 'pTM1User' , sUserName
+ , 'pSystemMessage' , sSystemMessage
+# , 'pRecordCount' , nRecordCountData + nRecordCountMetadata
+ , 'pPrologMinorErrorCount' , PrologMinorErrorCount
+ , 'pMetaDataMinorErrorCount' , MetaDataMinorErrorCount
+ , 'pDataMinorErrorCount' , DataMinorErrorCount
+# , 'pDebug' , pDebug 
+   ) ;
+
+# End Region # TI Tracker
+#endregion

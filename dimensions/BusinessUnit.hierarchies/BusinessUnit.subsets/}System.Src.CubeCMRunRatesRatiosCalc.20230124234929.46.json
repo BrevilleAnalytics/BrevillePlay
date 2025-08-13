@@ -1,0 +1,10 @@
+{
+	"@type":"Subset",
+	"Name":"}System.Src.CubeCMRunRatesRatiosCalc.20230124234929.46",
+	"Elements":
+	[
+		{
+			"@id":"Dimensions('BusinessUnit')/Hierarchies('BusinessUnit')/Elements('BCA')"
+		}
+	]
+}

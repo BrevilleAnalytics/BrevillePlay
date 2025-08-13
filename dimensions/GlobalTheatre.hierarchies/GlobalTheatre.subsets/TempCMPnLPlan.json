@@ -1,0 +1,28 @@
+{
+	"@type":"Subset",
+	"Name":"TempCMPnLPlan",
+	"Elements":
+	[
+		{
+			"@id":"Dimensions('GlobalTheatre')/Hierarchies('GlobalTheatre')/Elements('APAC')"
+		},
+		{
+			"@id":"Dimensions('GlobalTheatre')/Hierarchies('GlobalTheatre')/Elements('Americas')"
+		},
+		{
+			"@id":"Dimensions('GlobalTheatre')/Hierarchies('GlobalTheatre')/Elements('EMEA')"
+		},
+		{
+			"@id":"Dimensions('GlobalTheatre')/Hierarchies('GlobalTheatre')/Elements('Corporate')"
+		},
+		{
+			"@id":"Dimensions('GlobalTheatre')/Hierarchies('GlobalTheatre')/Elements('Global')"
+		},
+		{
+			"@id":"Dimensions('GlobalTheatre')/Hierarchies('GlobalTheatre')/Elements('Global Functions Adjustments')"
+		},
+		{
+			"@id":"Dimensions('GlobalTheatre')/Hierarchies('GlobalTheatre')/Elements('Corporate Adjustments')"
+		}
+	]
+}

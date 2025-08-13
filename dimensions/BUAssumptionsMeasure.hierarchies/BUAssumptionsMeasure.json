@@ -1,0 +1,72 @@
+{
+	"@type":"Hierarchy",
+	"Name":"BUAssumptionsMeasure",
+	"Elements":
+	[
+		{
+			"Name":"Payroll Tax",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"Work Cover",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"Long Service Leave",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"Salary Recovery",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"13th month pay",
+			"Type":"String"
+		},
+		{
+			"Name":"FBT",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"Super Cap",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"Medical",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"Annual Leave Weeks",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"Super%",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"Overtime%",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"Pension Plan",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"Employment Plan",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"Parental Leave Plan",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"Health Plan",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"Directors Fee",
+			"Type":"Numeric"
+		}
+	],
+	"Subsets@Code.links":[]
+}

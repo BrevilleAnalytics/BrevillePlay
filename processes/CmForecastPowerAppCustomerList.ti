@@ -1,0 +1,47 @@
+#region Prolog
+sDimName_Tgt = 'Customer';
+sHierName_Tgt = 'Customer';
+
+ElementAttrInsert(sDimName_Tgt, sHierName_Tgt, '', 'DA_EU_FE', 'N');
+ElementAttrInsert(sDimName_Tgt, sHierName_Tgt, '', 'DA_EU_BE', 'N');
+ElementAttrInsert(sDimName_Tgt, sHierName_Tgt, '', 'DA_EU_Warranty', 'N');
+ElementAttrInsert(sDimName_Tgt, sHierName_Tgt, '', 'DA_EU_Freight', 'N');
+ElementAttrInsert(sDimName_Tgt, sHierName_Tgt, '', 'DA_EU_VAT', 'N');
+
+# SQL query
+
+ sSQL = 'SET NOCOUNT ON;
+SELECT [CustomerNo]
+      ,[Region]
+      ,[FE]
+      ,[BE]
+      ,[Warranty]
+      ,[Freight]
+      ,[VAT]
+      ,[BusinessUnit]
+  FROM [stg].[DealAnalyzerEUCustomerList]
+#where[monthYear] = ''' |sCurrentMonth| ''' and [businessUnit] = ''' |pBU| '''
+';
+ 
+		
+DNS_Server = 'brev-dev-syn-fpa';
+#CellGetS( 'syEnvironment', 'Breville', 'ODBC DSN for DL SQL'  );
+
+
+# Data Source
+
+ DataSourceType = 'ODBC' ;
+ DatasourceNameForServer = DNS_Server ;
+ DatasourceQuery = sSQL;
+#endregion
+#region Data
+
+sCustomerNo  = vBusinessUnit|vCustomerNo;
+
+ElementAttrPutN ( vFE, sDimName_Tgt , sHierName_Tgt , sCustomerNo , 'DA_EU_FE' ) ;
+ElementAttrPutN ( vBE, sDimName_Tgt , sHierName_Tgt , sCustomerNo , 'DA_EU_BE' ) ;
+ElementAttrPutN ( vWarranty, sDimName_Tgt , sHierName_Tgt , sCustomerNo , 'DA_EU_Warranty' ) ;
+ElementAttrPutN ( vFreight, sDimName_Tgt , sHierName_Tgt , sCustomerNo , 'DA_EU_Freight' ) ;
+ElementAttrPutN ( vVAT, sDimName_Tgt , sHierName_Tgt , sCustomerNo , 'DA_EU_VAT' ) ;
+
+#endregion

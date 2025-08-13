@@ -1,0 +1,5 @@
+{
+	"@type":"Subset",
+	"Name":"App.BudgetSnapshotVersions",
+	"Expression":"{EXCEPT(DISTINCT({[Version].[Version].[Budget Snapshot Versions],DESCENDANTS({[Version].[Version].[Budget Snapshot Versions]} , 99 , LEAVES)}) , {[Version].[Version].[Budget Snapshot Versions]}),[Version].[Version].[Budget]}"
+}

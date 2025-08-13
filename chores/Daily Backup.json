@@ -1,0 +1,26 @@
+{
+	"@type":"Chore",
+	"Name":"Daily Backup",
+	"StartTime":"2022-08-24T20:00Z",
+	"DSTSensitive":true,
+	"Active":true,
+	"ExecutionMode":"SingleCommit",
+	"Frequency":"P1DT00H00M00S",
+	"Tasks":
+	[
+		{
+			"Step":0,
+			"Parameters":
+			[
+				{
+					"Name":"psServer",
+					"Value":"BrevillePlay"
+				}
+			],
+			"Process":
+			{
+				"@id":"Processes('syBackup')"
+			}
+		}
+	]
+}

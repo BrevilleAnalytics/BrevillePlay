@@ -1,0 +1,30 @@
+{
+	"@type":"Cube",
+	"Name":"BS Interco Transfer",
+	"Rules@Code.link":"BS Interco Transfer.rules",
+	"Dimensions":
+	[
+		{
+			"@id":"Dimensions('Version')"
+		},
+		{
+			"@id":"Dimensions('FiscalMonth')"
+		},
+		{
+			"@id":"Dimensions('Currency')"
+		},
+		{
+			"@id":"Dimensions('From Business Unit')"
+		},
+		{
+			"@id":"Dimensions('To Business Unit')"
+		},
+		{
+			"@id":"Dimensions('BS Interco Transfer Measure')"
+		}
+	],
+	"Views@Code.links":
+	[
+		"BS Interco Transfer.views/Test.json"
+	]
+}

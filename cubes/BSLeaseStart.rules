@@ -1,0 +1,35 @@
+#Region System
+FEEDSTRINGS;
+SKIPCHECK;
+#EndRegion
+
+# Cube name: BSLeaseStart
+# Description: to holds assumption data for lease
+
+
+
+FEEDERS ;
+
+#== External Feeders
+# ['Start Month for B/Fwd Liability'] => 
+#   DB('BSLease', 'All Business Unit', 'Local', 'Calculated',!BSLeaseLocation, 'All Years', 'Outlook', 'B/Fwd Liability'),
+#   DB('BSLease', 'All Business Unit', 'Local', 'Calculated',!BSLeaseLocation, 'All Years', 'Working Budget', 'B/Fwd Liability');
+
+# ['Australia Incremental Borrowing Rate / Discount Rate'] => 
+# DB('BSLease', !BSLeaseLocation, 'Interest Expense');
+
+# ['B/Fwd Liability'] => 
+# DB('BSLease', !BSLeaseLocation, 'B/Fwd RoU Asset');
+
+ ['No. of Period'] => 
+ DB('BSLease', 'BusinessUnit':'All Business Unit', 'Local Currency', 'Calculated', !BSLeaseLocation, 'FiscalMonth':'All Years', 'Working Budget', 'Period' ),
+ DB('BSLease', 'BusinessUnit':'All Business Unit', 'Local Currency', 'Calculated', !BSLeaseLocation, 'FiscalMonth':'All Years', 'Outlook', 'Period' ); 
+# DB('BSLease', !BSLeaseLocation, 'Dep''n Charge');
+
+# ['Australia Incremental Borrowing Rate / Discount Rate']=>
+# DB('BSLease', 'BusinessUnit':'All Business Unit', 'Local Currency', 'Calculated', !BSLeaseLocation, 'FiscalMonth':'All Years', 'Working Budget', 'C/Fwd Liability' ),
+# DB('BSLease', 'BusinessUnit':'All Business Unit', 'Local Currency', 'Calculated', !BSLeaseLocation, 'FiscalMonth':'All Years', 'Working Budget', 'B/Fwd Liability' ),
+# DB('BSLease', 'BusinessUnit':'All Business Unit', 'Local Currency', 'Calculated', !BSLeaseLocation, 'FiscalMonth':'All Years', 'Working Budget', 'Interest Expense' )
+
+
+# ;

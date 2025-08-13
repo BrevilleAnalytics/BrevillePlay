@@ -1,0 +1,10 @@
+{
+	"@type":"Subset",
+	"Name":"}System.Src.CubeCMRunRatesRatiosCalc.20220829072304.567",
+	"Elements":
+	[
+		{
+			"@id":"Dimensions('FiscalMonth')/Hierarchies('FiscalMonth')/Elements('No FiscalMonth')"
+		}
+	]
+}

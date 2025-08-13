@@ -1,0 +1,16 @@
+{
+	"@type":"Hierarchy",
+	"Name":"BRExchangeRateMeasure",
+	"Elements":
+	[
+		{
+			"Name":"FXRate",
+			"Type":"Numeric"
+		}
+	],
+	"Subsets@Code.links":
+	[
+		"BRExchangeRateMeasure.subsets/TempFXData.json",
+		"BRExchangeRateMeasure.subsets/TempFXRate.json"
+	]
+}

@@ -1,0 +1,56 @@
+{
+	"@type":"Hierarchy",
+	"Name":"EBITAccounts",
+	"Elements":
+	[
+		{
+			"Name":"Gross Sales",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"SKU Promo Costs",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"Rebates",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"Net Sales",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"Cost of Goods Sold",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"COGS FX Variance",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"Gross Margin",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"GM%",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"Freight",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"Warranty",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"Contribution Margin",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"CM%",
+			"Type":"Numeric"
+		}
+	],
+	"Subsets@Code.links":[]
+}

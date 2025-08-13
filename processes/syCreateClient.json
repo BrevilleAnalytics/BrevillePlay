@@ -1,0 +1,21 @@
+{
+	"@type":"Process",
+	"Name":"syCreateClient",
+	"HasSecurityAccess":true,
+	"Code@Code.link":"syCreateClient.ti",
+	"UIData":"_ParameterConstraints=e30=€",
+	"DataSource":
+	{
+		"Type":"None"
+	},
+	"Parameters":
+	[
+		{
+			"Name":"pClientID",
+			"Prompt":"Client to create",
+			"Value":"",
+			"Type":"String"
+		}
+	],
+	"Variables":[]
+}

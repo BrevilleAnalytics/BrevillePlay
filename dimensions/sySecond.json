@@ -1,0 +1,13 @@
+{
+	"@type":"Dimension",
+	"Name":"sySecond",
+	"AllLeavesHierarchyName":"",
+	"DefaultHierarchy":
+	{
+		"@id":"Dimensions('sySecond')/Hierarchies('sySecond')"
+	},
+	"Hierarchies@Code.links":
+	[
+		"sySecond.hierarchies/sySecond.json"
+	]
+}

@@ -1,0 +1,10 @@
+{
+	"@type":"Subset",
+	"Name":"TempCMForecastRatios",
+	"Elements":
+	[
+		{
+			"@id":"Dimensions('Component')/Hierarchies('Component')/Elements('Calculated')"
+		}
+	]
+}

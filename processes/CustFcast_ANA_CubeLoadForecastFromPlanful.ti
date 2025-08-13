@@ -1,0 +1,25 @@
+#region Prolog
+MinorErrorLogMax = -1;
+OnMinorErrorDoItemSkip = 1;
+CurrentLogSetting = CubeGetLogChanges('CustomerForecast');
+CubeSetLogChanges('CustomerForecast', 0);
+NumRowsRead = 0;
+NumRowsProcessed = 0;
+SetInputCharacterSet('TM1CS_ISO_8859_1');
+#endregion
+#region Metadata
+#****Begin: Generated Statements***
+#****End: Generated Statements****
+#endregion
+#region Data
+NumRowsRead = NumRowsRead + 1;
+CellPutN(StringToNumberEx(vValue,'.',','),'CustomerForecast',vDim1,vDim2,vDim3,'Americas','Forecast',vDim6,'Local',vDim8);
+NumRowsProcessed = NumRowsProcessed + 1;
+#endregion
+#region Epilog
+If (pResult @<> '');
+TextOutput(pResult, NumberToString(NumRowsRead), NumberToString(NumRowsProcessed));
+EndIf;
+CubeSaveData('CustomerForecast');
+CubeSetLogChanges('CustomerForecast', CurrentLogSetting);
+#endregion

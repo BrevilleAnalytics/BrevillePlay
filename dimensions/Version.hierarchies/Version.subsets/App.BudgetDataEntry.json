@@ -1,0 +1,16 @@
+{
+	"@type":"Subset",
+	"Name":"App.BudgetDataEntry",
+	"Elements":
+	[
+		{
+			"@id":"Dimensions('Version')/Hierarchies('Version')/Elements('Working Budget')"
+		},
+		{
+			"@id":"Dimensions('Version')/Hierarchies('Version')/Elements('Actual')"
+		},
+		{
+			"@id":"Dimensions('Version')/Hierarchies('Version')/Elements('LY')"
+		}
+	]
+}

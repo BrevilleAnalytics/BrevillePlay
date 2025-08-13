@@ -1,0 +1,14 @@
+{
+	"@type":"Dimension",
+	"Name":"EBITAccount",
+	"AllLeavesHierarchyName":"Leaves",
+	"DefaultHierarchy":
+	{
+		"@id":"Dimensions('EBITAccount')/Hierarchies('EBITAccount')"
+	},
+	"Hierarchies@Code.links":
+	[
+		"EBITAccount.hierarchies/EBITAccount.json",
+		"EBITAccount.hierarchies/EBITAccounts.json"
+	]
+}

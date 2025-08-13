@@ -1,0 +1,5 @@
+{
+	"@type":"Subset",
+	"Name":"FcastMonths",
+	"Expression":"{FILTER( {TM1SUBSETALL( [MonthCustFcast] )}, [MonthCustFcast].[OutlookMonth] = 1)}"
+}

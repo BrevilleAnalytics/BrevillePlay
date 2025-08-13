@@ -1,0 +1,35 @@
+{
+	"@type":"Cube",
+	"Name":"OPXStgActuals",
+	"Dimensions":
+	[
+		{
+			"@id":"Dimensions('GLAccount')"
+		},
+		{
+			"@id":"Dimensions('CostCentre')"
+		},
+		{
+			"@id":"Dimensions('BusinessUnit')"
+		},
+		{
+			"@id":"Dimensions('FiscalMonth')"
+		},
+		{
+			"@id":"Dimensions('Version')"
+		},
+		{
+			"@id":"Dimensions('OPXStgActualsMeasure')"
+		}
+	],
+	"Views@Code.links":
+	[
+		"OPXStgActuals.views/TempOPXRegMktg.json",
+		"OPXStgActuals.views/App.StagingGLActuals.json",
+		"OPXStgActuals.views/Default.json",
+		"OPXStgActuals.views/Quick Report.json",
+		"OPXStgActuals.views/Regional Marketing expenses split.json",
+		"OPXStgActuals.views/Test.json",
+		"OPXStgActuals.views/Working Budget Cube Viewer.json"
+	]
+}

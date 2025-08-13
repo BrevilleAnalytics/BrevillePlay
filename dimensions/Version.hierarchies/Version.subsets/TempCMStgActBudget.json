@@ -1,0 +1,10 @@
+{
+	"@type":"Subset",
+	"Name":"TempCMStgActBudget",
+	"Elements":
+	[
+		{
+			"@id":"Dimensions('Version')/Hierarchies('Version')/Elements('Budget')"
+		}
+	]
+}

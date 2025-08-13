@@ -1,0 +1,13 @@
+{
+	"@type":"Subset",
+	"Name":"Cust3MthRRTemp",
+	"Elements":
+	[
+		{
+			"@id":"Dimensions('VersionCustFcast')/Hierarchies('VersionCustFcast')/Elements('Forecast')"
+		},
+		{
+			"@id":"Dimensions('VersionCustFcast')/Hierarchies('VersionCustFcast')/Elements('Forecast NY')"
+		}
+	]
+}

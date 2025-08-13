@@ -1,0 +1,24 @@
+FEEDSTRINGS;
+SKIPCHECK;
+#EndRegion
+
+# Cube name: MDMGL
+# Description:
+# V1.00 - 2022-04-08 - Jithu Varghese - CPM Group : initial version
+#
+# 
+
+ ['Parent Level 1'] = S:
+ If ( DB( 'MDMGL', ELPAR( 'GLAccount' ,!GLAccount, 1 ) , 'Parent Level 1' ) @<> '' ,
+ 	DB( 'MDMGL', ELPAR( 'GLAccount' ,!GLAccount, 1 ) , 'Parent Level 1' ) ,
+ 	STET) ;
+
+ ['Parent Level 2'] = S:
+ If ( DB( 'MDMGL', ELPAR( 'GLAccount' ,!GLAccount, 1 ) , 'Parent Level 2' ) @<> '' ,
+ 	DB( 'MDMGL', ELPAR( 'GLAccount' ,!GLAccount, 1 ) , 'Parent Level 2' ) ,
+ 	STET) ;
+
+ ['Parent Level 3'] = S:
+ If ( DB( 'MDMGL', ELPAR( 'GLAccount' ,!GLAccount, 1 ) , 'Parent Level 3' ) @<> '' ,
+ 	DB( 'MDMGL', ELPAR( 'GLAccount' ,!GLAccount, 1 ) , 'Parent Level 3' ) ,
+ 	STET) ; 

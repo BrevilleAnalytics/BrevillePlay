@@ -1,0 +1,25 @@
+#region Prolog
+#****Begin: Generated Statements***
+#****End: Generated Statements****
+
+#CellSecurityCubeDestroy('PnLPlan');
+#CellSecurityCubeCreate( 'PnLPlan', '0:1:1:0:0:0:0:0:1:0' );
+
+
+#CellSecurityCubeCreate( 'GlobalEBIT', '0:1:0:0:0:0:1:0' );
+
+
+
+#endregion
+#region Metadata
+#****Begin: Generated Statements***
+#****End: Generated Statements****
+#endregion
+#region Data
+#****Begin: Generated Statements***
+#****End: Generated Statements****
+#endregion
+#region Epilog
+#****Begin: Generated Statements***
+#****End: Generated Statements****
+#endregion

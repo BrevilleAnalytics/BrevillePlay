@@ -1,0 +1,157 @@
+{
+	"@type":"Hierarchy",
+	"Name":"syTITrackerMeasure",
+	"Elements":
+	[
+		{
+			"Name":"Run Time",
+			"Type":"Consolidated"
+		},
+		{
+			"Name":"Start Time",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"End Time",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"Parameter 01",
+			"Type":"String"
+		},
+		{
+			"Name":"Parameter 02",
+			"Type":"String"
+		},
+		{
+			"Name":"Parameter 03",
+			"Type":"String"
+		},
+		{
+			"Name":"Parameter 04",
+			"Type":"String"
+		},
+		{
+			"Name":"Parameter 05",
+			"Type":"String"
+		},
+		{
+			"Name":"Parameter 06",
+			"Type":"String"
+		},
+		{
+			"Name":"Parameter 07",
+			"Type":"String"
+		},
+		{
+			"Name":"Parameter 08",
+			"Type":"String"
+		},
+		{
+			"Name":"Parameter 09",
+			"Type":"String"
+		},
+		{
+			"Name":"Parameter 10",
+			"Type":"String"
+		},
+		{
+			"Name":"Parameter 11",
+			"Type":"String"
+		},
+		{
+			"Name":"Parameter 12",
+			"Type":"String"
+		},
+		{
+			"Name":"Parameter 13",
+			"Type":"String"
+		},
+		{
+			"Name":"Parameter 14",
+			"Type":"String"
+		},
+		{
+			"Name":"Parameter 15",
+			"Type":"String"
+		},
+		{
+			"Name":"Parameter 16",
+			"Type":"String"
+		},
+		{
+			"Name":"Parameter 17",
+			"Type":"String"
+		},
+		{
+			"Name":"Parameter 18",
+			"Type":"String"
+		},
+		{
+			"Name":"Parameter 19",
+			"Type":"String"
+		},
+		{
+			"Name":"Parameter 20",
+			"Type":"String"
+		},
+		{
+			"Name":"Parameter 21",
+			"Type":"String"
+		},
+		{
+			"Name":"Parameter 22",
+			"Type":"String"
+		},
+		{
+			"Name":"Parameter 23",
+			"Type":"String"
+		},
+		{
+			"Name":"Parameter 24",
+			"Type":"String"
+		},
+		{
+			"Name":"Parameter 25",
+			"Type":"String"
+		},
+		{
+			"Name":"System Message",
+			"Type":"String"
+		},
+		{
+			"Name":"Record Count",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"Prolog Minor Error Count",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"MetaData Minor Error Count",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"Data Minor Error Count",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"pDebug",
+			"Type":"Numeric"
+		}
+	],
+	"Edges":
+	[
+		{
+			"ParentName":"Run Time",
+			"ComponentName":"Start Time",
+			"Weight":-1
+		},
+		{
+			"ParentName":"Run Time",
+			"ComponentName":"End Time",
+			"Weight":1
+		}
+	],
+	"Subsets@Code.links":[]
+}

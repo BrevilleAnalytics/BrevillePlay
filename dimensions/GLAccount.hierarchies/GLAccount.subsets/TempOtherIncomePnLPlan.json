@@ -1,0 +1,13 @@
+{
+	"@type":"Subset",
+	"Name":"TempOtherIncomePnLPlan",
+	"Elements":
+	[
+		{
+			"@id":"Dimensions('GLAccount')/Hierarchies('GLAccount')/Elements('610101')"
+		},
+		{
+			"@id":"Dimensions('GLAccount')/Hierarchies('GLAccount')/Elements('610102')"
+		}
+	]
+}

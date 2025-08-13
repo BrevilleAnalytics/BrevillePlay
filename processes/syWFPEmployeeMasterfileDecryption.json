@@ -1,0 +1,13 @@
+{
+	"@type":"Process",
+	"Name":"syWFPEmployeeMasterfileDecryption",
+	"HasSecurityAccess":false,
+	"Code@Code.link":"syWFPEmployeeMasterfileDecryption.ti",
+	"UIData":"_ParameterConstraints=e30=€",
+	"DataSource":
+	{
+		"Type":"None"
+	},
+	"Parameters":[],
+	"Variables":[]
+}

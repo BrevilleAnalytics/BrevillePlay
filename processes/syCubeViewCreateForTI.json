@@ -1,0 +1,21 @@
+{
+	"@type":"Process",
+	"Name":"syCubeViewCreateForTI",
+	"HasSecurityAccess":false,
+	"Code@Code.link":"syCubeViewCreateForTI.ti",
+	"UIData":"CubeAction=1511€DataAction=1503€CubeLogChanges=0€",
+	"DataSource":
+	{
+		"Type":"None"
+	},
+	"Parameters":
+	[
+		{
+			"Name":"pCube",
+			"Prompt":"Cube Name or All",
+			"Value":"",
+			"Type":"String"
+		}
+	],
+	"Variables":[]
+}

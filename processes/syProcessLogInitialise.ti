@@ -1,0 +1,101 @@
+#region Prolog
+
+#****Begin: Generated Statements***
+#****End: Generated Statements****
+
+
+#------------------------------------------------------------------------
+#Region # Process Summary
+# This process collects status of all processes executed as part of a chore 
+# and sends email notification in case of any of process finished with errors
+
+
+#------------------------------------------------------------------------
+#<Changes History>
+# v.01 24.06.2021 - Woolworths - Initial draft
+# v.
+#<Changes History\>
+
+#<Execute Method>
+# as part of each process
+#<Execute Method\>
+
+#<Processes Executed>
+# 
+#<Processes Executed\>
+
+#<Estimated Run Time>
+# ~5 sec
+#<Estimated Run Time\>
+
+#EndRegion # Process Summary
+#------------------------------------------------------------------------
+
+
+
+# Add dimension element
+sDimName = 'syProcessLog';
+logCubeName = 'syProcessLog';
+logsUserName = 'syProcessLog';
+
+#### Create process name element
+if (DIMIX(sDimName , psProcessName ) = 0);
+  DimensionElementInsertDirect ( sDimName , '' , psProcessName , 'N' ) ; 
+endif;
+
+# check that dummy log user exists
+if (DIMIX('}Clients',logsUserName) = 0);
+       AddClient(logsUserName );
+endif;
+#endregion
+#region Metadata
+
+#****Begin: Generated Statements***
+#****End: Generated Statements****
+#endregion
+#region Data
+
+#****Begin: Generated Statements***
+#****End: Generated Statements****
+#endregion
+#region Epilog
+
+#****Begin: Generated Statements***
+#****End: Generated Statements****
+
+
+###################
+####### Clearing existing messages
+###################
+
+CellPutS('NO','}CubeProperties',logCubeName, 'Logging');
+sViewName = GetProcessName() |'_' | NumberToString(10000 * Rand());
+nTabDim = 1 ;
+
+## Destroy View
+IF(ViewExists(logCubeName, sViewName) = 1);
+   ViewDestroy(logCubeName, sViewName);
+ENDIF;
+
+### View Create
+ViewCreate(logCubeName, sViewName,1);
+While( TabDim( logCubeName, nTabDim ) @<> '' ) ;
+    sDimName = TabDim( logCubeName, nTabDim ) ;
+    If( sDimname @= '}Clients' ) ; 
+        sMDX = '{[ ' | sDimName | ' ].['| TM1User() |'],[ ' | sDimName | ' ].['| logsUserName |']}' ;
+    ElseIf( sDimname @= 'syProcessLog' ) ; 
+        sMDX = '{[ ' | sDimName | ' ].['| psProcessName |']}';
+    Else;
+          sMDX = '{TM1FILTERBYLEVEL({ TM1SUBSETALL( [' | sDimName | '] )},0)}';
+    EndIf ;
+    SubsetCreateByMDX(  sViewName , sMDX, 1 ) ;
+    ViewSubsetAssign( logCubeName,  sViewName, sDimName,  sViewName ) ;
+    nTabDim = nTabDim + 1 ;
+End;
+
+# Skip Consolidate, Zero, Rule set 1
+ViewExtractSkipCalcsSet(logCubeName, sViewName,0);
+ViewExtractSkipZeroesSet(logCubeName, sViewName, 1);
+ViewExtractSkipRuleValuesSet(logCubeName, sViewName, 0);
+ViewZeroout(logCubeName,sViewName);
+#endregion

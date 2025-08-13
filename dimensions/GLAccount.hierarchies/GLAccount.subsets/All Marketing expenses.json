@@ -1,0 +1,5 @@
+{
+	"@type":"Subset",
+	"Name":"All Marketing expenses",
+	"Expression":"{DRILLDOWNMEMBER({[GLAccount].[GLAccount].[Marketing expenses]} , {[GLAccount].[GLAccount].[Marketing expenses],[GLAccount].[GLAccount].[Regional Marketing],[GLAccount].[GLAccount].[Marketing Region ATL],[GLAccount].[GLAccount].[Marketing Region BTL],[GLAccount].[GLAccount].[Marketing Region Committed],[GLAccount].[GLAccount].[Corporate Marketing - GTM],[GLAccount].[GLAccount].[Marketing Corporate Committed],[GLAccount].[GLAccount].[Marketing Corporate Uncommitted],[GLAccount].[GLAccount].[Marketing Corporate BTL],[GLAccount].[GLAccount].[Marketing Corporate ATL],[GLAccount].[GLAccount].[Corporate Marketing - Specialty],[GLAccount].[GLAccount].[Marketing Specialty BTL],[GLAccount].[GLAccount].[Marketing Specialty ATL]} , RECURSIVE)}"
+}

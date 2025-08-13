@@ -1,0 +1,28 @@
+{
+	"@type":"Subset",
+	"Name":"TempCMRatiosCalc",
+	"Elements":
+	[
+		{
+			"@id":"Dimensions('CMForecastMeasure')/Hierarchies('CMForecastMeasure')/Elements('Baseline Return %')"
+		},
+		{
+			"@id":"Dimensions('CMForecastMeasure')/Hierarchies('CMForecastMeasure')/Elements('Average Selling Price')"
+		},
+		{
+			"@id":"Dimensions('CMForecastMeasure')/Hierarchies('CMForecastMeasure')/Elements('COGS Unit Cost')"
+		},
+		{
+			"@id":"Dimensions('CMForecastMeasure')/Hierarchies('CMForecastMeasure')/Elements('Rebate %')"
+		},
+		{
+			"@id":"Dimensions('CMForecastMeasure')/Hierarchies('CMForecastMeasure')/Elements('Warranty Unit Cost')"
+		},
+		{
+			"@id":"Dimensions('CMForecastMeasure')/Hierarchies('CMForecastMeasure')/Elements('Freight Unit Cost')"
+		},
+		{
+			"@id":"Dimensions('CMForecastMeasure')/Hierarchies('CMForecastMeasure')/Elements('SKU Promo Cost Input')"
+		}
+	]
+}

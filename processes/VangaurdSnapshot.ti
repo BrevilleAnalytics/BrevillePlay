@@ -1,0 +1,45 @@
+#region Prolog
+
+sCubeName = 'VangaurdPurchases';
+
+sDimVersion = 'Version';
+
+sVersionFrom = 'Working Outlook';
+sVersionTo = 'FY23 Out 7 + 5';
+
+sFilter = 'Checkpoint:2023-09-19';
+#sFilterTarget = 'Checkpoint:Base';
+nSuppressConsols = 1;
+
+nSuppressRules = 1;
+
+nIncludeDescendants = 0;
+
+sProcessName = ' VangaurdSnapshot';
+
+vnReturnCode = ExecuteProcess(
+            				'syCubeCopyData',
+                            'pCube', sCubeName,
+                            'pDimension', sDimVersion,  
+                            'pSourceElement', sVersionFrom,   
+                            'pTargetElement',sVersionTo,  
+                            'pFilter', sFilter, 
+                            'pSuppressConsol', nSuppressConsols,
+                            'pSuppressRules', nSuppressRules, 
+                            'pIncludeDescendants', nIncludeDescendants,
+                            'psProcessNameForLogging', sProcessName); 
+     
+vnReturnCode = ExecuteProcess(
+            				'syCubeCopyData',
+                            'pCube', sCubeName,
+                            'pDimension', 'Checkpoint',
+                            'pSourceElement', '2023-09-19',
+                            'pTargetElement','Base',
+                            'pFilter', 'Version:FY23 Out 7 + 5', 
+                            'pSuppressConsol', nSuppressConsols,
+                            'pSuppressRules', nSuppressRules, 
+                            'pIncludeDescendants', nIncludeDescendants,
+                            'psProcessNameForLogging', sProcessName); 
+                            
+                            
+#endregion

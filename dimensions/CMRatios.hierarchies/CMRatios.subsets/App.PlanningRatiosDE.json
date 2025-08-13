@@ -1,0 +1,28 @@
+{
+	"@type":"Subset",
+	"Name":"App.PlanningRatiosDE",
+	"Elements":
+	[
+		{
+			"@id":"Dimensions('CMRatios')/Hierarchies('CMRatios')/Elements('Baseline Return %')"
+		},
+		{
+			"@id":"Dimensions('CMRatios')/Hierarchies('CMRatios')/Elements('Average Selling Price')"
+		},
+		{
+			"@id":"Dimensions('CMRatios')/Hierarchies('CMRatios')/Elements('COGS Unit Cost')"
+		},
+		{
+			"@id":"Dimensions('CMRatios')/Hierarchies('CMRatios')/Elements('Rebate %')"
+		},
+		{
+			"@id":"Dimensions('CMRatios')/Hierarchies('CMRatios')/Elements('Warranty Unit Cost')"
+		},
+		{
+			"@id":"Dimensions('CMRatios')/Hierarchies('CMRatios')/Elements('Freight Unit Cost')"
+		},
+		{
+			"@id":"Dimensions('CMRatios')/Hierarchies('CMRatios')/Elements('SKU Promo Cost Input')"
+		}
+	]
+}

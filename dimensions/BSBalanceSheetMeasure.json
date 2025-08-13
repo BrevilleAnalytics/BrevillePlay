@@ -1,0 +1,13 @@
+{
+	"@type":"Dimension",
+	"Name":"BSBalanceSheetMeasure",
+	"AllLeavesHierarchyName":"",
+	"DefaultHierarchy":
+	{
+		"@id":"Dimensions('BSBalanceSheetMeasure')/Hierarchies('BSBalanceSheetMeasure')"
+	},
+	"Hierarchies@Code.links":
+	[
+		"BSBalanceSheetMeasure.hierarchies/BSBalanceSheetMeasure.json"
+	]
+}

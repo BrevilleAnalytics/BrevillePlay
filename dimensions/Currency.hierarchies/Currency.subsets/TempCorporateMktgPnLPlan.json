@@ -1,0 +1,37 @@
+{
+	"@type":"Subset",
+	"Name":"TempCorporateMktgPnLPlan",
+	"Elements":
+	[
+		{
+			"@id":"Dimensions('Currency')/Hierarchies('Currency')/Elements('Local Currency')"
+		},
+		{
+			"@id":"Dimensions('Currency')/Hierarchies('Currency')/Elements('EUR-Constant')"
+		},
+		{
+			"@id":"Dimensions('Currency')/Hierarchies('Currency')/Elements('AUD-MonthEnd')"
+		},
+		{
+			"@id":"Dimensions('Currency')/Hierarchies('Currency')/Elements('AUD-Constant')"
+		},
+		{
+			"@id":"Dimensions('Currency')/Hierarchies('Currency')/Elements('AUD-Budget')"
+		},
+		{
+			"@id":"Dimensions('Currency')/Hierarchies('Currency')/Elements('USD-Constant')"
+		},
+		{
+			"@id":"Dimensions('Currency')/Hierarchies('Currency')/Elements('AUD-Outlook')"
+		},
+		{
+			"@id":"Dimensions('Currency')/Hierarchies('Currency')/Elements('EUR-Budget')"
+		},
+		{
+			"@id":"Dimensions('Currency')/Hierarchies('Currency')/Elements('USD-Budget')"
+		},
+		{
+			"@id":"Dimensions('Currency')/Hierarchies('Currency')/Elements('Transfer Currency')"
+		}
+	]
+}

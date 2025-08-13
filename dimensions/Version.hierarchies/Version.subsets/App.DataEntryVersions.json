@@ -1,0 +1,22 @@
+{
+	"@type":"Subset",
+	"Name":"App.DataEntryVersions",
+	"Elements":
+	[
+		{
+			"@id":"Dimensions('Version')/Hierarchies('Version')/Elements('Outlook')"
+		},
+		{
+			"@id":"Dimensions('Version')/Hierarchies('Version')/Elements('Working Budget')"
+		},
+		{
+			"@id":"Dimensions('Version')/Hierarchies('Version')/Elements('FCST 3+9')"
+		},
+		{
+			"@id":"Dimensions('Version')/Hierarchies('Version')/Elements('FCST 6+6')"
+		},
+		{
+			"@id":"Dimensions('Version')/Hierarchies('Version')/Elements('FCST 9+3')"
+		}
+	]
+}

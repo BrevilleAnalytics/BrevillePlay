@@ -1,0 +1,32 @@
+#region Prolog
+#****Begin: Generated Statements***
+#****End: Generated Statements****
+
+vsTargetDimensionName = pDimensionName;
+
+vnDimCount = DIMSIZ(vsTargetDimensionName);
+vni=1;
+WHILE (vni<=vnDimCount);
+
+    IF ( (ELCOMPN(vsTargetDimensionName, DIMNM(vsTargetDimensionName, vni))>0) );
+        vsElementName =DIMNM(vsTargetDimensionName, vni);
+        vnChildCount = ELCOMPN(vsTargetDimensionName,vsElementName);
+
+        WHILE(vnChildCount > 0);
+            vsChildElement = ELCOMP(vsTargetDimensionName,vsElementName,vnChildCount);
+            DIMENSIONELEMENTCOMPONENTDELETE(vsTargetDimensionName, vsElementName, vsChildElement);
+            vnChildCount = vnChildCount - 1;
+        END;
+
+    ELSE;
+
+        vni = vni+1;
+
+    ENDIF;
+
+END;
+#endregion
+#region Epilog
+#****Begin: Generated Statements***
+#****End: Generated Statements****
+#endregion

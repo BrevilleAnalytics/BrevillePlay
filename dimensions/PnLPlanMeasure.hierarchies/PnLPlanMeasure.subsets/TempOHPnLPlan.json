@@ -1,0 +1,10 @@
+{
+	"@type":"Subset",
+	"Name":"TempOHPnLPlan",
+	"Elements":
+	[
+		{
+			"@id":"Dimensions('PnLPlanMeasure')/Hierarchies('PnLPlanMeasure')/Elements('Amount')"
+		}
+	]
+}

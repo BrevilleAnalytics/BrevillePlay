@@ -1,0 +1,5 @@
+{
+	"@type":"Subset",
+	"Name":"App.Products",
+	"Expression":"{DRILLDOWNMEMBER([Product].[Product].LEVELS(0).MEMBERS , {[Product].[Product].[All Product]} , RECURSIVE)}"
+}

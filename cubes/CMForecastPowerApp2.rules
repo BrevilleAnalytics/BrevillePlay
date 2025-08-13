@@ -1,0 +1,91 @@
+SKIPCHECK;
+
+
+
+['Net Sales Actual','Local'] = ['GS Actual'] - ['Rebates Actual'];
+['Net Sales Released'] = ['GS Released'] - ['Rebates Released'];
+['Net Sales Not Released'] = ['GS Not Released'] - ['Rebates Not Released'];
+['Net Sales Adjusted'] = ['GS Adjusted'] + ['GS Adjusted OU'] - ['Rebates Adjusted'] - ['Rebates Adjusted OU'];
+
+['Freight Adjusted Calc'] = ATTRN('Customer', !Customer, 'DA_EU_Freight') * ['Net Sales Adjusted'];
+['Warranty Adjusted Calc'] = ATTRN('Customer', !Customer, 'DA_EU_Warranty') * ['Net Sales Adjusted'];
+
+['CM Actual'] = ['Net Sales Actual'] - ['COGS Actual'] - ['Freight Actual'] - ['Warranty Actual'];
+['CM Released'] = ['Net Sales Released'] - ['COGS Released'] - ['Freight Released'] - ['Warranty Released'];
+['CM Adjusted'] = ['Net Sales Adjusted'] - ['COGS Adjusted']  - ['COGS Adjusted OU'] - ['Freight Adjusted'] - ['Freight Adjusted OU'] - ['Freight Adjusted Calc']- ['Warranty Adjusted'] - ['Warranty Adjusted OU'] - ['Warranty Adjusted Calc'];
+['CM Not Released'] = ['Net Sales Not Released'] - ['COGS Not Released'] - ['Freight Not Released'] - ['Warranty Not Released'];
+
+
+['CM % Actual'] = ['CM Actual'] / ['Net Sales Actual'];
+['CM % Released'] = ['CM Released'] / ['Net Sales Released'];
+['CM % Total'] = ['CM Total'] / ['Net Sales Total'];
+['CM % Not Released'] = ['CM Total'] / ['Net Sales Not Released'];
+['CM % Total + Not Released'] = ['CM Total + Not Released'] / ['Net Sales Total Not Released'];
+
+['EUR-Constant'] = ['Local'] / DB('BRExchangeRate',!BusinessUnit,!FiscalMonth,!Currency,'Currency','FXRate');
+['AUD-MonthEnd'] = ['Local'] / DB('BRExchangeRate',!BusinessUnit,!FiscalMonth,!Currency,'Currency','FXRate');
+['Constant'] = ['Local'] / DB('BRExchangeRate',!BusinessUnit,!FiscalMonth,!Currency,'Currency','FXRate');
+['AUD-Budget'] = ['Local'] / DB('BRExchangeRate',!BusinessUnit,!FiscalMonth,!Currency,'Currency','FXRate');
+['USD-Constant'] = ['Local'] / DB('BRExchangeRate',!BusinessUnit,!FiscalMonth,!Currency,'Currency','FXRate');
+['AUD-Constant'] = ['Local'] / DB('BRExchangeRate',!BusinessUnit,!FiscalMonth,!Currency,'Currency','FXRate');
+['AUD-Outlook'] = ['Local'] / DB('BRExchangeRate',!BusinessUnit,!FiscalMonth,!Currency,'Currency','FXRate');
+['EUR-Budget'] = ['Local'] / DB('BRExchangeRate',!BusinessUnit,!FiscalMonth,!Currency,'Currency','FXRate');
+['USD-Budget'] = ['Local'] / DB('BRExchangeRate',!BusinessUnit,!FiscalMonth,!Currency,'Currency','FXRate');
+
+FEEDERS;
+['Local'] => ['EUR-Constant'];
+['Local'] => ['AUD-MonthEnd'];
+['Local'] => ['Constant'];
+['Local'] => ['AUD-Budget'];
+['Local'] => ['USD-Constant'];
+['Local'] => ['AUD-Constant'];
+['Local'] => ['AUD-Outlook'];
+['Local'] => ['EUR-Budget'];
+['Local'] => ['USD-Budget'];
+
+
+['Net Sales Actual'] => ['Net Sales Actual'];
+['GS Actual'] => ['Net Sales Actual'];
+['Rebates Actual'] => ['Net Sales Actual'];
+
+['GS Released'] => ['Net Sales Released'];
+['Rebates Released'] => ['Net Sales Released'];
+
+['GS Not Released'] => ['Net Sales Not Released'];
+['Rebates Not Released'] => ['Net Sales Not Released'];
+
+['GS Adjusted'] => ['Net Sales Adjusted'];
+['GS Adjusted OU'] => ['Net Sales Adjusted'];
+['Rebates Adjusted'] => ['Net Sales Adjusted'];
+['Rebates Adjusted OU'] => ['Net Sales Adjusted'];
+
+['Net Sales Adjusted'] => ['Freight Adjusted Calc'];
+['Net Sales Adjusted'] => ['Warranty Adjusted Calc'];
+
+
+['Net Sales Actual'] => ['CM Actual'];
+['COGS Actual'] => ['CM Actual'];
+['Freight Actual'] => ['CM Actual'];
+['Warranty Actual'] => ['CM Actual'];
+
+['Net Sales Released'] => ['CM Released'];
+['COGS Released'] => ['CM Released'];
+['Freight Released'] => ['CM Released'];
+['Warranty Released'] => ['CM Released'];
+
+
+['Net Sales Adjusted'] => ['CM Adjusted'];
+['COGS Adjusted'] => ['CM Adjusted'];
+['COGS Adjusted OU'] => ['CM Adjusted']; 
+['Freight Adjusted'] => ['CM Adjusted'];
+['Freight Adjusted OU'] => ['CM Adjusted'];
+['Freight Adjusted Calc'] => ['CM Adjusted'];
+['Warranty Adjusted'] => ['CM Adjusted'];
+['Warranty Adjusted OU'] => ['CM Adjusted'];
+['Warranty Adjusted Calc'] => ['CM Adjusted'];
+
+
+['Net Sales Not Released'] => ['CM Not Released'];
+['COGS Not Released'] => ['CM Not Released'];
+['Freight Not Released'] => ['CM Not Released'];
+['Warranty Not Released'] => ['CM Not Released'];

@@ -1,0 +1,10 @@
+{
+	"@type":"Subset",
+	"Name":"TempOPXRegOH",
+	"Elements":
+	[
+		{
+			"@id":"Dimensions('OPXStgActualsMeasure')/Hierarchies('OPXStgActualsMeasure')/Elements('Amount')"
+		}
+	]
+}

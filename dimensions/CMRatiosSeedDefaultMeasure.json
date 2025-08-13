@@ -1,0 +1,13 @@
+{
+	"@type":"Dimension",
+	"Name":"CMRatiosSeedDefaultMeasure",
+	"AllLeavesHierarchyName":"",
+	"DefaultHierarchy":
+	{
+		"@id":"Dimensions('CMRatiosSeedDefaultMeasure')/Hierarchies('CMRatiosSeedDefaultMeasure')"
+	},
+	"Hierarchies@Code.links":
+	[
+		"CMRatiosSeedDefaultMeasure.hierarchies/CMRatiosSeedDefaultMeasure.json"
+	]
+}

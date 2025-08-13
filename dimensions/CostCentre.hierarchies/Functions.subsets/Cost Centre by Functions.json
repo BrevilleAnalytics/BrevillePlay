@@ -1,0 +1,10 @@
+{
+	"@type":"Subset",
+	"Name":"Cost Centre by Functions",
+	"Elements":
+	[
+		{
+			"@id":"Dimensions('CostCentre')/Hierarchies('Functions')/Elements('All Functions')"
+		}
+	]
+}

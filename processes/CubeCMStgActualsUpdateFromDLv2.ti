@@ -1,0 +1,413 @@
+#region Prolog
+#****Begin: Generated Statements***
+#****End: Generated Statements****
+
+#----------------------------------------------------------------------------------------------------------------------------
+#Region # Process Summary
+#----------------------------------------------------------------------------------------------------------------------------
+
+#<Process Description>
+# This process updates historical CM sales data by month cube CMStgActuals from Azure DataLake
+# NOT To be run independently [ needs a Theatre selected] 
+# The chore/caller process will be used to run for all BUs and Theatres 
+
+#<Changes Log>
+# V1 - 08/08/2022 - Jithu Varghese - CPM Group - First draft
+# V2 - 11/10/2022 - Jithu Varghese - CPM Group - Update to use Theatre as Filter
+#<Maintenance Log\>
+
+#<Execute Method>
+# Daily Schedule
+#<Execute Method\>
+
+#<Processes Executed>
+# syProcessLogInitialise
+# syProcessLogMessage
+# syTITracker
+#<Processes Executed\>
+
+#<Execute Schedule>
+# Scheduled daily
+#<Execute Schedule\>
+
+#<Estimated Run Time>
+# ~3 secs
+#<Estimated Run Time\>
+
+#EndRegion # Process Summary
+
+#----------------------------------------------------------------------------------------------------------------------------
+# ~~~~~~~~~~Debugging ~~~~~~~~~~~~~~~#
+#----------------------------------------------------------------------------------------------------------------------------
+# Debug Flie Reference
+  sDebugFile = CellGetS( 'syEnvironment', 'Breville', 'Temp Folder') | '\' | GetProcessName() | '.txt';
+  sTestFile = CellGetS( 'syEnvironment', 'Breville', 'Temp Folder') | '\' | 'STGActuals.txt';
+
+#----------------------------------------------------------------------------------------------------------------------------
+# ~~~~~~~~~~System Variables ~~~~~~~~~~~~~~~#
+#----------------------------------------------------------------------------------------------------------------------------
+ IF ( psTITracker @= '' ) ;
+  psTITracker =  CellGetS ( 'syEnvironment', 'Breville', 'psyProcessLog' ) ;
+
+ ENDIF ;
+ 
+  sServer = 'Breville' ;
+  sUser = TM1User();
+  nStartTime = NOW;
+  sSystemMessage = '';
+  nRecordCountData = 0;
+  nRecordCountMetadata = 0;
+  NumericGlobalVariable( 'PrologMinorErrorCount' );
+  NumericGlobalVariable( 'MetaDataMinorErrorCount' );
+  NumericGlobalVariable( 'DataMinorErrorCount' );
+  nErrors = 0 ;
+
+IF ( DIMIX ( '}Clients', sUser ) > 0 );
+	sUserName = NUMBERTOSTRING ( DIMIX ( '}Clients', sUser ) );
+ELSEIF ( DIMIX ( '}Chores', TRIM ( SUBST ( sUser, 3, 255 ) ) ) > 0 );
+	sUserName= TRIM ( SUBST ( sUser, 3, 255 ) );
+ELSE;
+	sUserName = 'Unknown';
+ENDIF;
+
+
+#----------------------------------------------------------------------------------------------------------------------------
+# ~~~~~~~~~~Logging ~~~~~~~~~~~~~~~#
+#----------------------------------------------------------------------------------------------------------------------------
+
+## Process Logging - 1
+csProcess = GetProcessName( ) ;
+If( psProcessReference @<> '' ) ;
+   csProcessReference = psProcessReference ;
+Else ; 
+   csProcessReference = csProcess ;
+   ExecuteProcess('syProcessLogInitialise' , 'psProcessName' , csProcessReference);
+EndIf ;
+ExecuteProcess('syProcessLogMessage' , 'psProcessName' , csProcessReference , 'psLogLevel' , 'INFO' , 'psMessage' , 'Starting Process ' | csProcess  ) ;
+
+## TI Tracker Process Logging - 2
+IF( psTITracker @= 'Y' );
+	ExecuteProcess('syTITracker',
+	  'pProcessName', GetProcessName,
+	  'pTime', nStartTime ,
+	  'pStatus', 1,
+	  'pTM1User', sUserName,
+	  'pSystemMessage', sSystemMessage,
+	  'pRecordCount', nRecordCountData + nRecordCountMetadata,
+	  'pPrologMinorErrorCount', PrologMinorErrorCount,
+	  'pMetaDataMinorErrorCount', MetaDataMinorErrorCount,
+	  'pDataMinorErrorCount', DataMinorErrorCount,
+	  'pDebug', 1 );
+ENDIF;
+
+
+
+#End Region # Logging
+#------------------------------------------------------------------------------------------
+
+
+
+#----------------------------------------------------------------------------------------------------------------------------
+# ~~~~~~~~~~Process Constants and Variables ~~~~~~~~~~~~~~~#
+#----------------------------------------------------------------------------------------------------------------------------
+# Region: General
+
+
+sProcess = GetProcessName();
+sTimestamp = TimSt( Now, '\Y\m\d\h\i\s' );
+sRandomInt = NumberToString( INT( RAND( ) * 1000 ));
+sUniqueName  =  sProcess |'.'| sTimestamp | '.' | sRandomInt;
+
+sSub_Tgt= '}System.Tgt.' | sUniqueName ;
+
+
+
+sMonth = TIMST ( nStartTime, '\m' );
+sDay = TIMST ( nStartTime, '\d' );
+sHour = TIMST ( nStartTime, '\h' );
+
+
+#End Region # Process control
+
+
+# Process Variables
+
+# General
+sTimestamp = TimSt( Now, '\Y\m\d\h\i\s' );
+sRandomInt = NumberToString( INT( RAND( ) * 1000 ));
+sUniqueName  =  csProcess |'.'| sTimestamp | '.' | sRandomInt;
+sSub_Src = '}System.Src.' | sUniqueName ;
+sView_Src = '}System.Src.' | sUniqueName ;
+sSub_Tgt = '}System.Tgt.' | sUniqueName ;
+sView_Tgt = '}System.Tgt.' | sUniqueName ;
+sLogMessage ='';
+
+# Constants
+sSub_Tgt= '}System.Tgt.' | sUniqueName ;
+sCub_Tgt = 'CMStgActuals' ;
+
+#-- Set the period range to update 
+#-- the period range 
+# sFiscalMonth = DimensionElementPrincipalName( 'FiscalMonth', CellGetS( 'BRAsVersion', 'Actual', 'Actual Month'));
+# nPeriodIndex_End = StringToNumber(ATTRS('FiscalMonth', sFiscalMonth, 'PeriodIndex'));
+# nPeriodIndex_Start = nPeriodIndex_End - pnPeriodsUpdate;
+# sFiscalMonth_Start = DimensionElementPrincipalName( 'FiscalMonth', FILL( '0', 10 - LONG(NumberToString(nPeriodIndex_Start))) | NumberToString(nPeriodIndex_Start));
+
+
+if ( pTheatre @= 'APAC' ) ;
+sFiscalMonth = DimensionElementPrincipalName( 'FiscalMonth', CellGetS( 'BRAsVersion', 'NoVersion', 'APAC Actual Month'));
+endif ;
+
+if ( pTheatre @= 'EMEA' ) ;
+sFiscalMonth = DimensionElementPrincipalName( 'FiscalMonth', CellGetS( 'BRAsVersion', 'NoVersion', 'EMEA Actual Month'));
+endif ;
+
+if ( pTheatre @= 'Americas' ) ;
+sFiscalMonth = DimensionElementPrincipalName( 'FiscalMonth', CellGetS( 'BRAsVersion', 'NoVersion', 'Americas Actual Month'));
+endif ;
+
+if ( pTheatre @= 'Corporate' ) ;
+sFiscalMonth = DimensionElementPrincipalName( 'FiscalMonth', CellGetS( 'BRAsVersion', 'NoVersion', 'Corporate Actual Month'));
+endif ;
+
+ sCurrentMonth = ATTRS( 'FiscalMonth', sFiscalMonth , 'CalendarMonth' ) ;
+
+#ODBC SQL Statement to update historical CM sales data by month cube CMStgActuals from Azure DataLake
+#----------------------------------------------------------------------------------------------------------------------------
+ DataSourceType = 'ODBC';
+
+
+# SQL query
+if (pBU @<> '' ) ;
+ sSQL = 'SET NOCOUNT ON ; 
+SELECT [Account]
+      ,[CustomerNo]
+      ,[Theatre]
+      ,[BusinessUnit]
+      ,[Product]
+      ,[Month_Name]
+      , [Segment] 
+      ,[Value]
+  FROM [ActualCM] WHERE [Month_Name] = ''' |sCurrentMonth| ''' and [Theatre] = ''' |pTheatre| ''' and
+  [BusinessUnit] = ''' |pBU| ''' ' ;
+else ;
+ sSQL = 'SET NOCOUNT ON ; 
+SELECT [Account]
+      ,[CustomerNo]
+      ,[Theatre]
+      ,[BusinessUnit]
+      ,[Product]
+      ,[Month_Name]
+      , [Segment] 
+      ,[Value]
+  FROM [ActualCM] WHERE [Month_Name] = ''' |sCurrentMonth| ''' and [Theatre] = ''' |pTheatre| '''  ' ;
+endif ;
+						
+DNS_Server = CellGetS( 'syEnvironment', 'Breville', 'ODBC DSN for DL'  );
+
+
+# Data Source
+
+ DataSourceType = 'ODBC' ;
+ DatasourceNameForServer = DNS_Server ;
+ DatasourceQuery = sSQL;
+ 
+# Create temp cubeview
+IF( ViewExists( sCub_Tgt , sView_Tgt ) = 1 ) ; 
+ ViewDestroy ( sCub_Tgt, sView_Tgt ) ;
+ENDIF;
+ViewCreate( sCub_Tgt, sView_Tgt , 1 ) ;
+
+
+# Create temp subsets and assign it to the view
+
+i_TabDim = 1 ;
+While ( TabDim ( sCub_Tgt , i_TabDim ) @<> '' ) ;
+   sDim = TabDim ( sCub_Tgt , i_TabDim ) ;
+
+   If( sDim @= 'Customer' ) ;
+      sMDX = '{TM1FILTERBYLEVEL ( {TM1SUBSETALL ( ['|sDim|'] ) } , 0 ) }' ;
+   ElseIf( sDim @= 'Product' ) ;
+      sMDX = '{TM1FILTERBYLEVEL ( {TM1SUBSETALL ( ['|sDim|'] ) } , 0 ) }' ;
+   ElseIf( sDim @= 'Segment' ) ;
+      sMDX = '{TM1FILTERBYLEVEL ( {TM1SUBSETALL ( ['|sDim|'] ) } , 0 ) }' ;
+   ElseIf( sDim @= 'BusinessUnit' ) ;
+         if( pBU @= '' ) ;
+            sMDX = '{TM1FILTERBYLEVEL ( {TM1SUBSETALL ( ['|sDim|'] ) } , 0 ) }' ;
+            else ;
+            sMDX = '{ [' | sDim | '].[' | sDim | '].[' | pBU | '] }' ;
+         endif;
+
+   ElseIf( sDim @= 'Version' ) ;
+      sMDX = '{ [' | sDim | '].[' | sDim | '].[Actual] }' ;
+   ElseIf( sDim @= 'FiscalMonth' ) ;
+      sMDX = '{ [' | sDim | '].[' | sDim | '].[' | sFiscalMonth | '] }' ;
+         # sMDX = '{TM1FILTERBYLEVEL( {DISTINCT({DESCENDANTS([' | sDim | '].[' | sDim | '].[All FY])})}, 0)}' ;
+   ElseIf( sDim @= 'Theatre' ) ;
+        # sMDX = '{TM1FILTERBYLEVEL ( {TM1SUBSETALL ( ['|sDim|'] ) } , 0 ) }' ;
+            sMDX = '{ [' | sDim | '].[' | sDim | '].[' | pTheatre | '] }' ;
+   ElseIf( sDim @= 'CMStgActualsMeasure' ) ;
+      sMDX = '{TM1FILTERBYLEVEL ( {TM1SUBSETALL ( ['|sDim|'] ) } , 0 ) }' ;
+   Else ;
+      sMDX = '{TM1FILTERBYLEVEL ( {TM1SUBSETALL ( ['|sDim|'] ) } , 0 ) }' ;
+   EndIf ;
+
+   SubsetCreateByMDX ( sSub_Tgt , sMDX , 1 ) ;
+   SubsetMDXSet (sDim , sSub_Tgt , '' ) ;
+   ViewSubsetAssign ( sCub_Tgt , sView_Tgt , sDim , sSub_Tgt ) ;
+
+i_TabDim = i_TabDim + 1 ;
+End ;
+
+#------ View zero out
+ViewZeroOut(sCub_Tgt, sView_Tgt);
+
+ASCIIOutput( sTestFile, sCurrentMonth, vBusinessUnit|vCustomerNo, vBusinessUnit|vProduct, vBusinessUnit , 'Actual' , vTheatre, vAccount, NumberToString(vValue) );
+#endregion
+#region Metadata
+#****Begin: Generated Statements***
+#****End: Generated Statements****
+
+            
+           
+
+                  
+#endregion
+#region Data
+#****Begin: Generated Statements***
+#****End: Generated Statements****
+
+# sMonth = SUBST( vMonth , 1 , 3 );
+# sYear = SUBST ( vMonth, LONG (vMonth) -4 +1 , 4);
+# sPeriod = 'F' | sYear | '-' | sMonth ;
+
+ASCIIOutput( sTestFile, sCurrentMonth, vBusinessUnit|vCustomerNo, vBusinessUnit|vProduct, vBusinessUnit , 'Actual' , vTheatre, vAccount, NumberToString(vValue) );
+
+sPeriod = ATTRS( 'CalendarMonth', sCurrentMonth , 'FiscalMonth' );
+
+if ( vSegment @= '' ) ;
+sSegment = 'No Segment' ;
+else ;
+sSegment = vSegment ;
+endif ;
+
+# ASCIIOutput( sTestFile, sPeriod, vBusinessUnit|vCustomerNo, vBusinessUnit|vProduct, vBusinessUnit , 'Actual' , vTheatre, vAccount, NumberToString(vValue) );
+
+
+#~~~~~~~~~ set validation ~~~~~~~~~~
+#~~~ check if element exists
+# Customer
+sDim = 'Customer' ;
+sEl = vBusinessUnit | vCustomerNo ;
+If (DIMIX( sDim, sEl  ) = 0  );
+  sMessage = 'Customer = ' | sEl | ' does not exist' ;
+  If(SCAN(sMessage, sLogMessage) =0);
+         ExecuteProcess('syProcessLogMessage','psProcessName',csProcess,'psLogLevel','INFO','psMessage',sMessage ) ;
+         sLogMessage = sLogMessage | sMessage;
+  Endif;
+   Itemskip;
+Endif;
+
+# Product
+sDim = 'Product' ;
+sEl = vProduct ;
+If (DIMIX( sDim, sEl  ) = 0  );
+  sMessage = 'Product = ' | sEl | ' does not exist' ;
+  If(SCAN(sMessage, sLogMessage) =0);
+         ExecuteProcess('syProcessLogMessage','psProcessName',csProcess,'psLogLevel','INFO','psMessage',sMessage ) ;
+         sLogMessage = sLogMessage | sMessage;
+  Endif;
+   Itemskip;
+Endif;
+
+# BU
+sDim = 'BusinessUnit' ;
+sEl = vBusinessUnit ;
+If (DIMIX( sDim, sEl  ) = 0  );
+  sMessage = 'BusinessUnit = ' | sEl | ' does not exist' ;
+  If(SCAN(sMessage, sLogMessage) =0);
+         ExecuteProcess('syProcessLogMessage','psProcessName',csProcess,'psLogLevel','INFO','psMessage',sMessage ) ;
+         sLogMessage = sLogMessage | sMessage;
+  Endif;
+   Itemskip;
+Endif;
+
+sDim = 'FiscalMonth' ;
+sEl = sPeriod ;
+If (DIMIX( sDim, sEl  ) = 0  );
+  sMessage = 'FiscalMonth = ' | sEl | ' does not exist' ;
+  If(SCAN(sMessage, sLogMessage) =0);
+         ExecuteProcess('syProcessLogMessage','psProcessName',csProcess,'psLogLevel','INFO','psMessage',sMessage ) ;
+         sLogMessage = sLogMessage | sMessage;
+  Endif;
+   Itemskip;
+Endif;
+
+if ( pBU @= '' ) ;
+CellIncrementN( vValue , sCub_Tgt , vBusinessUnit | vCustomerNo , vProduct , sSegment , vBusinessUnit , 'Actual' , sPeriod , pTheatre , vAccount );
+endif ;
+
+if ( pBU @<> '' ) ;
+CellIncrementN( vValue , sCub_Tgt , pBU | vCustomerNo , vProduct , sSegment , pBU , 'Actual' , sPeriod , pTheatre , vAccount );
+endif ;
+
+nRecordCountData = nRecordCountData + 1 ;
+#endregion
+#region Epilog
+#****Begin: Generated Statements***
+#****End: Generated Statements****
+
+
+            
+#----------------------------------------------------------------------------------------------------------------------------
+# ~~~~~~~~~~Logging ~~~~~~~~~~~~~~~#
+#----------------------------------------------------------------------------------------------------------------------------
+# Finish Process log 1
+nErrors = MetaDataMinorErrorCount + DataMinorErrorCount ;
+If( GetProcessErrorFilename() @<> '' % nErrors > 0 );
+  sLogLevel = 'ERROR';
+  sLogReference = GetProcessErrorFilename();
+  sMessage = 'Process completed with ' | NumberToString( nErrors ) | ' minor errors';
+Else;
+  sLogLevel = 'INFO';
+  sLogReference = '';
+  sMessage = 'Process completed successfully. Total records: ' | NumberToString ( nRecordCountData )   ;
+EndIf;
+
+#logoutput( 'INFO', sMessage );
+ExecuteProcess('syProcessLogMessage', 'psProcessName', csProcessReference, 'psLogLevel', sLogLevel, 'psMessage', sMessage , 'psProcessErrorReference' , sLogReference );
+
+## Finish TI Tracker Process Logging - 2
+IF( psTITracker @= 'Y' );
+ # Check for minor errors
+ IF ( sSystemMessage @= '' );
+   IF ( DataMinorErrorCount = 0 & PrologMinorErrorCount = 0 & MetaDataMinorErrorCount = 0 );
+     sSystemMessage = 'Successful';
+   ELSE;
+     IF ( DataMinorErrorCount <> 0 );
+       sSystemMessage = NumberToString ( DataMinorErrorCount ) | ' data error/s; ';
+     ENDIF;
+     IF ( PrologMinorErrorCount <> 0 );
+       sSystemMessage =NumberToString ( PrologMinorErrorCount ) | ' prolog error/s; ';
+     ENDIF;
+     IF ( MetaDataMinorErrorCount <> 0 );
+       sSystemMessage = NumberToString ( MetaDataMinorErrorCount ) | ' metadata error/s';
+     ENDIF;
+         sSystemMessage= sSystemMessage ;
+    ENDIF;
+ ENDIF;
+
+  ExecuteProcess('syTITracker',
+   'pProcessName', GetProcessName,
+   'pTime', nStartTime ,
+   'pStatus', 0,
+   'pTM1User', sUserName,
+   'pSystemMessage', sSystemMessage,
+   'pRecordCount', nRecordCountData + nRecordCountMetadata,
+   'pPrologMinorErrorCount', PrologMinorErrorCount,
+   'pMetaDataMinorErrorCount', MetaDataMinorErrorCount,
+   'pDataMinorErrorCount', DataMinorErrorCount,
+   'pDebug', 1 );
+ENDIF;
+#End Region # TI Tracker
+#endregion

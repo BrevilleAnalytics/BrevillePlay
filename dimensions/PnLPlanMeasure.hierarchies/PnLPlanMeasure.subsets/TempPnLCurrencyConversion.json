@@ -1,0 +1,10 @@
+{
+	"@type":"Subset",
+	"Name":"TempPnLCurrencyConversion",
+	"Elements":
+	[
+		{
+			"@id":"Dimensions('PnLPlanMeasure')/Hierarchies('PnLPlanMeasure')/Elements('Amount')"
+		}
+	]
+}

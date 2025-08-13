@@ -1,0 +1,68 @@
+{
+	"@type":"Hierarchy",
+	"Name":"syCubeCopyMeasure",
+	"Elements":
+	[
+		{
+			"Name":"Copy",
+			"Type":"String"
+		},
+		{
+			"Name":"Version From",
+			"Type":"String"
+		},
+		{
+			"Name":"Version To",
+			"Type":"String"
+		},
+		{
+			"Name":"Theatre",
+			"Type":"String"
+		},
+		{
+			"Name":"Business Unit",
+			"Type":"String"
+		},
+		{
+			"Name":"Filter",
+			"Type":"String"
+		},
+		{
+			"Name":"Filter Snippet",
+			"Type":"String"
+		},
+		{
+			"Name":"Filter Result",
+			"Type":"String"
+		},
+		{
+			"Name":"Status",
+			"Type":"String"
+		},
+		{
+			"Name":"Copy Rule Values",
+			"Type":"String"
+		},
+		{
+			"Name":"Copy Consolidated Values",
+			"Type":"String"
+		},
+		{
+			"Name":"Include Descendants",
+			"Type":"String"
+		},
+		{
+			"Name":"Version Default",
+			"Type":"String"
+		},
+		{
+			"Name":"User",
+			"Type":"String"
+		},
+		{
+			"Name":"Link",
+			"Type":"String"
+		}
+	],
+	"Subsets@Code.links":[]
+}

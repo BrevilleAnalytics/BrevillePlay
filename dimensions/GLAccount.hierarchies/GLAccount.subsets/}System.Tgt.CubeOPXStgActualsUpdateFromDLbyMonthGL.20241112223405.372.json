@@ -1,0 +1,25 @@
+{
+	"@type":"Subset",
+	"Name":"}System.Tgt.CubeOPXStgActualsUpdateFromDLbyMonthGL.20241112223405.372",
+	"Elements":
+	[
+		{
+			"@id":"Dimensions('GLAccount')/Hierarchies('GLAccount')/Elements('639001')"
+		},
+		{
+			"@id":"Dimensions('GLAccount')/Hierarchies('GLAccount')/Elements('639002')"
+		},
+		{
+			"@id":"Dimensions('GLAccount')/Hierarchies('GLAccount')/Elements('639101')"
+		},
+		{
+			"@id":"Dimensions('GLAccount')/Hierarchies('GLAccount')/Elements('639102')"
+		},
+		{
+			"@id":"Dimensions('GLAccount')/Hierarchies('GLAccount')/Elements('639003')"
+		},
+		{
+			"@id":"Dimensions('GLAccount')/Hierarchies('GLAccount')/Elements('639004')"
+		}
+	]
+}

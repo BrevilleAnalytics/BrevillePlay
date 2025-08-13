@@ -1,0 +1,10 @@
+{
+	"@type":"Subset",
+	"Name":"}System.Src.CubeCMRunRatesRatiosCalc.20221207000008.420",
+	"Elements":
+	[
+		{
+			"@id":"Dimensions('BusinessUnit')/Hierarchies('BusinessUnit')/Elements('All Business Unit')"
+		}
+	]
+}

@@ -1,0 +1,22 @@
+{
+	"@type":"Hierarchy",
+	"Name":"syManagementMeasure",
+	"Elements":
+	[
+		{
+			"Name":"Number",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"String",
+			"Type":"String"
+		}
+	],
+	"Subsets@Code.links":
+	[
+		"syManagementMeasure.subsets/}System.Src.SubsetCustomerUpdateFromsyManagement.20220908225403.551.json",
+		"syManagementMeasure.subsets/}System.Src.SubsetCustomerUpdateFromsyManagement.20220908225457.16.json",
+		"syManagementMeasure.subsets/}System.Src.SubsetCustomerUpdateFromsyManagement.20220908225655.949.json",
+		"syManagementMeasure.subsets/}System.Src.SubsetCustomerUpdateFromsyManagement.20220908225814.301.json"
+	]
+}

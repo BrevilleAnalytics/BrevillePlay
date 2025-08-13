@@ -1,0 +1,563 @@
+#region Prolog
+#****Begin: Generated Statements***
+#****End: Generated Statements****
+
+#=====================
+# Purpose of this process
+#=====================
+
+# Copy data for any cube by exporting data to a file and importing it back
+# Inspired by bedrock tm1
+
+#=====================
+# Declare control variables
+#=====================
+
+NumericGlobalVariable('ProcessReturnCode');
+
+sProcessName = GetProcessName;
+sTimeStamp = TIMST ( NOW , '\Y\m\d\h\i\s' );
+sPath = GetProcessErrorFileDirectory;
+sDebugFile = sPath | sProcessName | '_' | sTimeStamp | '.txt';
+sRandomStr = NumberToString(INT(Rand() * 10000));
+# Export file path
+sFolder = CellGets('syEnvironment',psServer,'Temp Folder');
+sFilePath = '\';
+nCells = 0;
+
+#~~~~~~~~~ Init ~~~~~~~~~~~~~~~~
+# Process Logging
+sProcessName = GetProcessName( );
+If( psProcessNameForLogging @<> '' ) ;
+   sProcessName = psProcessNameForLogging ;
+Else ; 
+   ExecuteProcess('syProcessLogInitialise','psProcessname',sProcessName);
+EndIf ;
+
+#=====================
+# Declare object variables
+#=====================
+
+sSourceCubeName = pCube;
+sSourceViewName = sSourceCubeName | '_' | sProcessName | '_Source' | sTimeStamp | sRandomStr;
+sTargetCubeName = pCube;
+sTargetViewName = sTargetCubeName | '_' | sProcessName | '_Target'  | sTimeStamp | sRandomStr ;
+vnDimExists = 0;
+
+# Export file name
+sExportFile =sFolder | sFilePath | sSourceViewName | '_' | sTimestamp |'_' | sRandomStr | '.txt';
+
+#=====================
+# Validate parameters
+#=====================
+
+# Debug
+ csDebugFile = CellGets('syEnvironment',psServer,'Log Folder') | '\' | sTargetViewName | '.txt';
+# csDebugFile = CellGets('syEnvironment',psServer,'Log Folder') | '\' | 'test' | '.txt';
+
+
+# Validate if cube exists at all
+IF(CubeExists(pCube) = 0);
+    ItemReject('Cube ' | pCube | ' does not exist'); 
+ENDIF;
+# Validate if dimension exists at all
+IF(DimensionExists(pDimension) = 0);
+    ItemReject('Dimension ' | pDimension | ' does not exist'); 
+ENDIF;
+# Validate source item exists in the dimension
+IF(DIMIX(pDimension, pSourceElement) =0);
+    ItemReject('Source Item ' | pSourceElement | ' does not exist'); 
+ENDIF;
+# Validate target item exists in the dimension
+IF(DIMIX(pDimension, pTargetElement) =0);
+    ItemReject('Target Item ' | pTargetElement | ' does not exist'); 
+ENDIF;
+
+
+#=====================
+# Validate selected dimension
+#=====================
+
+# Validate if dimension exists in the cube
+vnDimensionIndex = 1;
+vsDimensionName = TABDIM(pCube, vnDimensionIndex);
+
+# Build cellput statement
+WHILE (vsDimensionName @<> '');
+    # ASCIIOutput (csDebugFile, vsDimensionName);
+    # Check if Dimension exists in the cube
+    IF(vsDimensionName @= pDimension);
+        # Change Convert Dynamic subset to Static subset
+        vnDimExists = vnDimensionIndex;
+    ENDIF;
+    vnDimensionIndex = vnDimensionIndex + 1;
+    vsDimensionName = TABDIM(pCube, vnDimensionIndex); 
+END;
+
+
+# Error if no copy dimension found in the cube
+IF(vnDimExists = 0);
+    ItemReject('Dimension ' | pDimension | ' is not used in the cube ' | pCube); 
+ENDIF;
+
+
+vnDimensionIndex = vnDimensionIndex - 1;
+
+
+sDimensionDelim = '$';
+sElementDelim = '\';
+
+
+#=====================
+# Disable cube logging
+#=====================
+
+# Cube logging
+OldCubeLogChanges = CellGets('}CubeProperties', sTargetCubeName , 'Logging');
+CellPuts('NO', '}CubeProperties', sTargetCubeName , 'Logging');
+
+#=====================
+# Create view to zero
+#=====================
+# Add target element to the filter
+IF(pFilter @='');
+    sFilter = pDimension | ' : ' | pTargetElement;
+ELSE;
+    sFilter = pFilter | ' ' | sDimensionDelim | ' ' | pDimension | ' : ' | pTargetElement;
+ENDIF;
+
+ExecuteProcess ( 'syCubeViewCreate'
+                           , 'pCube' , sTargetCubeName
+                           , 'pView', sTargetViewName
+						   , 'pSuppressRules', 1
+                           , 'pSuppressZero', 1                           
+                           , 'pSuppressConsol', pSuppressConsol
+                           , 'pIncludeDescendants', pIncludeDescendants
+                           , 'pDimensionDelim' , sDimensionDelim
+                           , 'pElementDelim', sElementDelim
+                           , 'pFilter' , sFilter
+                           , 'pTemporary', 1
+                           );
+# Check process execution status
+IF(ProcessReturnCode <>ProcessExitNormal());
+    sMessage = 'Creating view ' | sTargetCubeName | '.' | sTargetViewName | ' failed, aborting';
+	logoutput('error',sMessage);
+ENDIF;
+# Zero out target data in the view
+VIEWZEROOUT(sTargetCubeName, sTargetViewName);
+
+#=====================
+# Create source view
+#=====================
+# Add source element to the filter
+IF(pFilter @='');
+    sFilter = pDimension | ' : ' | pSourceElement;
+ELSE;
+    sFilter = pFilter | ' ' | sDimensionDelim | ' ' | pDimension | ' : ' | pSourceElement;
+ENDIF;
+ExecuteProcess ( 'syCubeViewCreate'
+                           , 'pCube' , sSourceCubeName
+                           , 'pView', sSourceViewName
+                           , 'pDimensionDelim' , sDimensionDelim
+                           , 'pElementDelim', sElementDelim
+                           , 'pFilter' , sFilter
+                           , 'pSuppressRules', pSuppressRules
+                           , 'pSuppressConsol', pSuppressConsol
+						   , 'pIncludeDescendants', pIncludeDescendants
+                           , 'pTemporary', 1
+                           );
+# Check process execution status
+IF(ProcessReturnCode <>ProcessExitNormal());
+    sMessage = 'Creating view ' | sSourceCubeName | '.' | sSourceViewName | ' failed, aborting';
+	logoutput('error',sMessage);
+	ProcessQuit;
+ENDIF;
+
+#=====================
+# Extract source data
+#=====================
+# Export view data
+ExecuteProcess('syCubeViewExport', 
+				'pCube', sSourceCubeName, 
+                'pView', sSourceViewName, 
+                'pDebug', 0, 
+                'pFileName', sExportFile);
+
+# Check process execution status
+IF(ProcessReturnCode <>ProcessExitNormal());
+	sMessage = 'Exporting cube ' | sSourceCubeName | ' view ' | sSourceViewName | ' failed, aborting';
+	logoutput('error',sMessage);
+	ProcessQuit;
+ENDIF;
+
+
+#=====================
+# Set source
+#=====================
+# Check if file exists -- if we were exporting a blank view file will be missing
+IF (FileExists(sExportFile) = 1);
+    cDSType = 'CHARACTERDELIMITED';
+    cDSName = sExportFile;
+    DataSourceType = cDSType;
+    DatasourceNameForServer = cDSName;
+    DatasourceNameForClient = cDSName;
+    DatasourceASCIIDelimiter=Char(9);
+    DatasourceASCIIQuoteCharacter='';
+    DatasourceASCIIHeaderRecords=0;
+ELSE;
+    DataSourceType = 'NULL';
+ENDIF;
+
+
+#endregion
+#region Metadata
+#****Begin: Generated Statements***
+#****End: Generated Statements****
+#endregion
+#region Data
+#****Begin: Generated Statements***
+#****End: Generated Statements****
+
+
+#=====================
+# Swap source element for target
+#=====================
+
+IF(vnDimExists = 1);
+
+    V1 = pTargetElement;
+
+ELSEIF (vnDimExists = 2);
+
+    V2 = pTargetElement;
+
+ELSEIF (vnDimExists = 3);
+
+    V3 = pTargetElement;
+
+ELSEIF (vnDimExists = 4);
+
+    V4 = pTargetElement;
+
+ELSEIF (vnDimExists = 5);
+
+    V5 = pTargetElement;
+
+ELSEIF(vnDimExists = 6);
+
+    V6 = pTargetElement;
+
+ELSEIF (vnDimExists = 7);
+
+    V7= pTargetElement;
+
+ELSEIF (vnDimExists = 8);
+
+    V8 = pTargetElement;
+
+ELSEIF (vnDimExists = 9);
+
+    V9 = pTargetElement;
+
+ELSEIF (vnDimExists = 10);
+
+    V10 = pTargetElement;
+
+ELSEIF(vnDimExists = 11);
+
+    V11 = pTargetElement;
+
+ELSEIF (vnDimExists = 12);
+
+    V12= pTargetElement;
+
+ELSEIF (vnDimExists = 13);
+
+    V13 = pTargetElement;
+
+ELSEIF (vnDimExists = 14);
+
+    V14 = pTargetElement;
+
+ELSEIF (vnDimExists = 15);
+
+    V15 = pTargetElement;
+
+ELSEIF(vnDimExists = 16);
+
+    V16 = pTargetElement;
+
+ELSEIF (vnDimExists = 17);
+
+    V17= pTargetElement;
+
+ELSEIF (vnDimExists = 18);
+
+    V18 = pTargetElement;
+
+ELSEIF (vnDimExists = 19);
+
+    V19 = pTargetElement;
+
+ELSEIF (vnDimExists = 20);
+
+    V20 = pTargetElement;
+
+
+ENDIF;
+
+# AS per https://pmsquare.atlassian.net/browse/EGCO-400 copying small numbers fails as they are exported as 0
+# let's check if we've got a zero and try converting from string value again
+# 7/07/2020 comment N_Value = 0 because user input decimal more than 10 digit and full digit could not be imported
+IF (STRING_1_0 = 0 & S_Value @<> '' );
+#& N_Value = 0);
+	N_VALUE = StringToNumber(S_VALUE);
+ENDIF;
+
+#=====================
+# Write Data
+#=====================
+#textoutput( csDebugFile, pCube, V1, V2, V3, V4, V5, V6, V7, V8,V9,V10,V11,V12,V13,V14,V15,V16,V17,V18,V19,V20  ) ;
+
+IF(vnDimensionIndex = 2);
+
+    IF(CellIsUpdateable(pCube, V1, V2) = 0);
+
+        ItemSkip;
+
+    ENDIF;
+
+    IF(STRING_1_0 = 1, CellPutS(S_VALUE, pCube, V1, V2), 
+    CellPutN(N_VALUE, pCube, V1, V2));
+
+
+ELSEIF (vnDimensionIndex = 3);
+
+    IF(CellIsUpdateable(pCube, V1, V2, V3) = 0);
+
+        ItemSkip;
+
+    ENDIF;
+
+    IF(STRING_1_0 = 1, CellPutS(S_VALUE, pCube, V1, V2, V3), 
+    CellPutN(N_VALUE, pCube, V1, V2, V3));
+
+
+ELSEIF (vnDimensionIndex = 4);
+
+    IF(CellIsUpdateable(pCube, V1, V2, V3, V4) = 0);
+
+        ItemSkip;
+
+    ENDIF;
+
+    IF(STRING_1_0 = 1, CellPutS(S_VALUE, pCube, V1, V2, V3, V4), 
+    CellPutN(N_VALUE, pCube, V1, V2, V3, V4));
+
+
+
+ELSEIF (vnDimensionIndex = 5);
+
+    IF(CellIsUpdateable(pCube, V1, V2, V3, V4, V5) = 0);
+
+        ItemSkip;
+
+    ENDIF;
+
+    IF(STRING_1_0 = 1, CellPutS(S_VALUE, pCube, V1, V2, V3, V4, V5), 
+    CellPutN(N_VALUE, pCube, V1, V2, V3, V4, V5));
+
+ELSEIF (vnDimensionIndex = 6);
+
+    IF(CellIsUpdateable(pCube, V1, V2, V3, V4, V5, V6) = 0);
+
+        ItemSkip;
+
+    ENDIF;
+
+    IF(STRING_1_0 = 1, CellPutS(S_VALUE, pCube, V1, V2, V3, V4, V5, V6), 
+    CellPutN(N_VALUE, pCube, V1, V2, V3, V4, V5, V6));
+
+ELSEIF (vnDimensionIndex = 7);
+
+    IF(CellIsUpdateable(pCube, V1, V2, V3, V4, V5, V6, V7) = 0);
+
+        ItemSkip;
+
+    ENDIF;
+
+    IF(STRING_1_0 = 1, CellPutS(S_VALUE, pCube, V1, V2, V3, V4, V5, V6, V7), 
+    CellPutN(N_VALUE, pCube, V1, V2, V3, V4, V5, V6, V7));
+
+ELSEIF (vnDimensionIndex = 8);
+
+    IF(CellIsUpdateable(pCube, V1, V2, V3, V4, V5, V6, V7, V8) = 0);
+
+        ItemSkip;
+
+    ENDIF;
+
+    IF(STRING_1_0 = 1, CellPutS(S_VALUE, pCube, V1, V2, V3, V4, V5, V6, V7, V8), 
+    CellPutN(N_VALUE, pCube, V1, V2, V3, V4, V5, V6, V7, V8));
+
+
+ELSEIF (vnDimensionIndex = 9);
+
+    IF(CellIsUpdateable(pCube, V1, V2, V3, V4, V5, V6, V7, V8, V9) = 0);
+
+        ItemSkip;
+
+    ENDIF;
+
+    IF(STRING_1_0 = 1, CellPutS(S_VALUE, pCube, V1, V2, V3, V4, V5, V6, V7, V8,V9), 
+    CellPutN(N_VALUE, pCube, V1, V2, V3, V4, V5, V6, V7, V8,V9));
+
+ELSEIF (vnDimensionIndex = 10);
+
+    IF(CellIsUpdateable(pCube, V1, V2, V3, V4, V5, V6, V7, V8, V9, V10) = 0);
+
+        ItemSkip;
+
+    ENDIF;
+
+    IF(STRING_1_0 = 1, CellPutS(S_VALUE, pCube, V1, V2, V3, V4, V5, V6, V7, V8,V9,V10), 
+    CellPutN(N_VALUE, pCube, V1, V2, V3, V4, V5, V6, V7, V8,V9,V10));
+
+ELSEIF (vnDimensionIndex = 11);
+
+    IF(CellIsUpdateable(pCube, V1, V2, V3, V4, V5, V6, V7, V8, V9, V10,V11) = 0);
+
+        ItemSkip;
+
+    ENDIF;
+
+    IF(STRING_1_0 = 1, CellPutS(S_VALUE, pCube, V1, V2, V3, V4, V5, V6, V7, V8,V9,V10,V11), 
+    CellPutN(N_VALUE, pCube, V1, V2, V3, V4, V5, V6, V7, V8,V9,V10,V11));
+
+ELSEIF (vnDimensionIndex = 12);
+
+    IF(CellIsUpdateable(pCube, V1, V2, V3, V4, V5, V6, V7, V8, V9, V10,V11,V12) = 0);
+
+        ItemSkip;
+
+   ENDIF;
+
+    IF(STRING_1_0 = 1, CellPutS(S_VALUE, pCube, V1, V2, V3, V4, V5, V6, V7, V8,V9,V10,V11,V12), 
+    CellPutN(N_VALUE, pCube, V1, V2, V3, V4, V5, V6, V7, V8,V9,V10,V11,V12));
+
+
+ELSEIF (vnDimensionIndex = 13);
+
+    IF(CellIsUpdateable(pCube, V1, V2, V3, V4, V5, V6, V7, V8, V9, V10,V11,V12,V13) = 0);
+
+        ItemSkip;
+
+   ENDIF;
+
+    IF(STRING_1_0 = 1, CellPutS(S_VALUE, pCube, V1, V2, V3, V4, V5, V6, V7, V8,V9,V10,V11,V12,V13), 
+    CellPutN(N_VALUE, pCube, V1, V2, V3, V4, V5, V6, V7, V8,V9,V10,V11,V12,V13));
+
+
+ELSEIF (vnDimensionIndex = 14);
+
+    IF(CellIsUpdateable(pCube, V1, V2, V3, V4, V5, V6, V7, V8, V9, V10,V11,V12,V13,V14) = 0);
+
+        ItemSkip;
+
+   ENDIF;
+
+    IF(STRING_1_0 = 1, CellPutS(S_VALUE, pCube, V1, V2, V3, V4, V5, V6, V7, V8,V9,V10,V11,V12,V13,V14), 
+    CellPutN(N_VALUE, pCube, V1, V2, V3, V4, V5, V6, V7, V8,V9,V10,V11,V12,V13,V14));
+
+
+ELSEIF (vnDimensionIndex = 15);
+
+    IF(CellIsUpdateable(pCube, V1, V2, V3, V4, V5, V6, V7, V8, V9, V10,V11,V12,V13,V14,V15) = 0);
+
+        ItemSkip;
+
+   ENDIF;
+
+    IF(STRING_1_0 = 1, CellPutS(S_VALUE, pCube, V1, V2, V3, V4, V5, V6, V7, V8,V9,V10,V11,V12,V13,V14,V15), 
+    CellPutN(N_VALUE, pCube, V1, V2, V3, V4, V5, V6, V7, V8,V9,V10,V11,V12,V13,V14,V15));
+
+ELSEIF (vnDimensionIndex = 16);
+
+    IF(CellIsUpdateable(pCube, V1, V2, V3, V4, V5, V6, V7, V8, V9, V10,V11,V12,V13,V14,V15,V16) = 0);
+
+        ItemSkip;
+
+    ENDIF;
+
+    IF(STRING_1_0 = 1, CellPutS(S_VALUE, pCube, V1, V2, V3, V4, V5, V6, V7, V8,V9,V10,V11,V12,V13,V14,V15,V16), 
+    CellPutN(N_VALUE, pCube, V1, V2, V3, V4, V5, V6, V7, V8,V9,V10,V11,V12,V13,V14,V15,V16));
+
+
+ELSEIF (vnDimensionIndex = 17);
+
+    IF(CellIsUpdateable(pCube, V1, V2, V3, V4, V5, V6, V7, V8, V9, V10,V11,V12,V13,V14,V15,V16,V17) = 0);
+
+        ItemSkip;
+
+    ENDIF;
+
+    IF(STRING_1_0 = 1, CellPutS(S_VALUE, pCube, V1, V2, V3, V4, V5, V6, V7, V8,V9,V10,V11,V12,V13,V14,V15,V16,V17), 
+    CellPutN(N_VALUE, pCube, V1, V2, V3, V4, V5, V6, V7, V8,V9,V10,V11,V12,V13,V14,V15,V16,V17));
+
+ELSEIF (vnDimensionIndex = 18);
+
+    IF(CellIsUpdateable(pCube, V1, V2, V3, V4, V5, V6, V7, V8, V9, V10,V11,V12,V13,V14,V15,V16,V17,V18) = 0);
+
+        ItemSkip;
+
+    ENDIF;
+
+    IF(STRING_1_0 = 1, CellPutS(S_VALUE, pCube, V1, V2, V3, V4, V5, V6, V7, V8,V9,V10,V11,V12,V13,V14,V15,V16,V17,V18), 
+    CellPutN(N_VALUE, pCube, V1, V2, V3, V4, V5, V6, V7, V8,V9,V10,V11,V12,V13,V14,V15,V16,V17,V18));
+
+ELSEIF (vnDimensionIndex = 19);
+
+    IF(CellIsUpdateable(pCube, V1, V2, V3, V4, V5, V6, V7, V8, V9, V10,V11,V12,V13,V14,V15,V16,V17,V18,V19) = 0);
+
+        ItemSkip;
+
+    ENDIF;
+
+    IF(STRING_1_0 = 1, CellPutS(S_VALUE, pCube, V1, V2, V3, V4, V5, V6, V7, V8,V9,V10,V11,V12,V13,V14,V15,V16,V17,V18,V19), 
+    CellPutN(N_VALUE, pCube, V1, V2, V3, V4, V5, V6, V7, V8,V9,V10,V11,V12,V13,V14,V15,V16,V17,V18,V19));
+
+ELSEIF (vnDimensionIndex = 20);
+
+    IF(CellIsUpdateable(pCube, V1, V2, V3, V4, V5, V6, V7, V8, V9, V10,V11,V12,V13,V14,V15,V16,V17,V18,V19,V20) = 0);
+
+        ItemSkip;
+
+    ENDIF;
+
+    IF(STRING_1_0 = 1, CellPutS(S_VALUE, pCube, V1, V2, V3, V4, V5, V6, V7, V8,V9,V10,V11,V12,V13,V14,V15,V16,V17,V18,V19,V20), 
+    CellPutN(N_VALUE, pCube, V1, V2, V3, V4, V5, V6, V7, V8,V9,V10,V11,V12,V13,V14,V15,V16,V17,V18,V19,V20));
+
+ENDIF;
+
+nCells = nCells + 1;
+#endregion
+#region Epilog
+#****Begin: Generated Statements***
+#****End: Generated Statements****
+
+sMessage = 'Copied ' | NumberToString(nCells) | ' cells';
+ExecuteProcess('syProcessLogMessage','psProcessName', sProcessName, 'psLogLevel','INFO','psMessage',sMessage);
+#=====================
+# Enable cube logging
+#=====================
+
+# Cube logging
+# ykud, 20200629 - update to make non-locking
+CellPuts(OldCubeLogChanges, '}CubeProperties', sTargetCubeName , 'Logging');
+#CUBESETLOGCHANGES ( csTargetCubeName , OldCubeLogChanges );
+
+# update flag file to notify parent process that we're done
+if (pFlagFile @<> '');
+   AsciiOutput(pFlagFile,  TIMST ( NOW , '\Y\m\d\h\i\s' ));
+endif;
+#endregion

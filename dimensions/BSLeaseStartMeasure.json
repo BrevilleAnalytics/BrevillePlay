@@ -1,0 +1,13 @@
+{
+	"@type":"Dimension",
+	"Name":"BSLeaseStartMeasure",
+	"AllLeavesHierarchyName":"",
+	"DefaultHierarchy":
+	{
+		"@id":"Dimensions('BSLeaseStartMeasure')/Hierarchies('BSLeaseStartMeasure')"
+	},
+	"Hierarchies@Code.links":
+	[
+		"BSLeaseStartMeasure.hierarchies/BSLeaseStartMeasure.json"
+	]
+}

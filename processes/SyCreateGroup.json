@@ -1,0 +1,27 @@
+{
+	"@type":"Process",
+	"Name":"SyCreateGroup",
+	"HasSecurityAccess":false,
+	"Code@Code.link":"SyCreateGroup.ti",
+	"UIData":"CubeAction=1511€DataAction=1503€CubeLogChanges=0€_ParameterConstraints=e30=€",
+	"DataSource":
+	{
+		"Type":"None"
+	},
+	"Parameters":
+	[
+		{
+			"Name":"pGroupName",
+			"Prompt":"The Group name (make sure you prefix correctly)",
+			"Value":"",
+			"Type":"String"
+		},
+		{
+			"Name":"psProcessReference",
+			"Prompt":"",
+			"Value":"SyCreateGroup",
+			"Type":"String"
+		}
+	],
+	"Variables":[]
+}

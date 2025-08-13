@@ -1,0 +1,36 @@
+{
+	"@type":"Hierarchy",
+	"Name":"sySubsetMaintenanceMeasure",
+	"Elements":
+	[
+		{
+			"Name":"Subset",
+			"Type":"String"
+		},
+		{
+			"Name":"MDX",
+			"Type":"String"
+		},
+		{
+			"Name":"Alias",
+			"Type":"String"
+		},
+		{
+			"Name":"ExpandAbove",
+			"Type":"String"
+		},
+		{
+			"Name":"Note",
+			"Type":"String"
+		},
+		{
+			"Name":"Convert To Static",
+			"Type":"String"
+		},
+		{
+			"Name":"Hierarchy",
+			"Type":"String"
+		}
+	],
+	"Subsets@Code.links":[]
+}

@@ -1,0 +1,10 @@
+{
+	"@type":"Subset",
+	"Name":"TempExchangeRates",
+	"Elements":
+	[
+		{
+			"@id":"Dimensions('Version')/Hierarchies('Version')/Elements('Currency')"
+		}
+	]
+}

@@ -1,0 +1,92 @@
+{
+	"@type":"Hierarchy",
+	"Name":"sySnapshotMeasure",
+	"Elements":
+	[
+		{
+			"Name":"User",
+			"Type":"String"
+		},
+		{
+			"Name":"Version",
+			"Type":"String"
+		},
+		{
+			"Name":"FYear",
+			"Type":"String"
+		},
+		{
+			"Name":"Next Sunday",
+			"Type":"String"
+		},
+		{
+			"Name":"Last Weekly Budget Snapshot",
+			"Type":"String"
+		},
+		{
+			"Name":"10 Working Day of Month",
+			"Type":"String"
+		},
+		{
+			"Name":"Last Monthly Outlook",
+			"Type":"String"
+		},
+		{
+			"Name":"Outlook Date",
+			"Type":"String"
+		},
+		{
+			"Name":"Next Monthly Outlook",
+			"Type":"String"
+		},
+		{
+			"Name":"Last Final Budget",
+			"Type":"String"
+		},
+		{
+			"Name":"Final Budget Date",
+			"Type":"String"
+		},
+		{
+			"Name":"Next Final Budget",
+			"Type":"String"
+		},
+		{
+			"Name":"Last Adhoc Budget Snapshot",
+			"Type":"String"
+		},
+		{
+			"Name":"Adhoc Budget Date",
+			"Type":"String"
+		},
+		{
+			"Name":"Next Adhoc Budget Snapshot",
+			"Type":"String"
+		},
+		{
+			"Name":"Adhoc Budget Snapshot Short Name",
+			"Type":"String"
+		},
+		{
+			"Name":"Adhoc Budget: for whom",
+			"Type":"String"
+		},
+		{
+			"Name":"Adhoc Budget: Comment",
+			"Type":"String"
+		},
+		{
+			"Name":"-",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"Comment",
+			"Type":"String"
+		},
+		{
+			"Name":"sysFeeder",
+			"Type":"String"
+		}
+	],
+	"Subsets@Code.links":[]
+}

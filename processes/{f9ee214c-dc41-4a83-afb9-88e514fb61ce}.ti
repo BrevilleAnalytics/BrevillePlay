@@ -1,0 +1,12 @@
+#region Prolog
+MinorErrorLogMax = -1;
+OnMinorErrorDoItemSkip = 1;
+SetInputCharacterSet('TM1CS_ISO_8859_1');
+vType='N';
+vWeight_num=1.0;
+#endregion
+#region Metadata
+If(vLevel0@<>'');
+HierarchyElementInsert('BSStgStagingMeasure','BSStgStagingMeasure','',vLevel0,vType);
+EndIf;
+#endregion

@@ -1,0 +1,18 @@
+{
+	"@type":"Cube",
+	"Name":"BSLeaseStart",
+	"Rules@Code.link":"BSLeaseStart.rules",
+	"Dimensions":
+	[
+		{
+			"@id":"Dimensions('BSLeaseLocation')"
+		},
+		{
+			"@id":"Dimensions('BSLeaseStartMeasure')"
+		}
+	],
+	"Views@Code.links":
+	[
+		"BSLeaseStart.views/App.BSLeaseStart.json"
+	]
+}

@@ -1,0 +1,33 @@
+{
+	"@type":"Process",
+	"Name":"OutlookSnapshotAutoRun",
+	"HasSecurityAccess":false,
+	"Code@Code.link":"OutlookSnapshotAutoRun.ti",
+	"UIData":"CubeAction=1511€DataAction=1503€CubeLogChanges=0€_ParameterConstraints=e30=€",
+	"DataSource":
+	{
+		"Type":"None"
+	},
+	"Parameters":
+	[
+		{
+			"Name":"psProcessReference",
+			"Prompt":"",
+			"Value":"",
+			"Type":"String"
+		},
+		{
+			"Name":"pssyProcessLog",
+			"Prompt":"To enable or disable Process Log - Y/N",
+			"Value":"",
+			"Type":"String"
+		},
+		{
+			"Name":"psTITracker",
+			"Prompt":"To enable or disable syTI Tracker - Y/N",
+			"Value":"",
+			"Type":"String"
+		}
+	],
+	"Variables":[]
+}

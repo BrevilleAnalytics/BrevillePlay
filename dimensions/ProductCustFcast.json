@@ -1,0 +1,13 @@
+{
+	"@type":"Dimension",
+	"Name":"ProductCustFcast",
+	"AllLeavesHierarchyName":"",
+	"DefaultHierarchy":
+	{
+		"@id":"Dimensions('ProductCustFcast')/Hierarchies('ProductCustFcast')"
+	},
+	"Hierarchies@Code.links":
+	[
+		"ProductCustFcast.hierarchies/ProductCustFcast.json"
+	]
+}

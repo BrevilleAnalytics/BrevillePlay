@@ -1,0 +1,41 @@
+{
+	"@type":"Cube",
+	"Name":"CMStgActuals",
+	"Dimensions":
+	[
+		{
+			"@id":"Dimensions('Customer')"
+		},
+		{
+			"@id":"Dimensions('Product')"
+		},
+		{
+			"@id":"Dimensions('Segment')"
+		},
+		{
+			"@id":"Dimensions('BusinessUnit')"
+		},
+		{
+			"@id":"Dimensions('Version')"
+		},
+		{
+			"@id":"Dimensions('FiscalMonth')"
+		},
+		{
+			"@id":"Dimensions('Theatre')"
+		},
+		{
+			"@id":"Dimensions('CMStgActualsMeasure')"
+		}
+	],
+	"Views@Code.links":
+	[
+		"CMStgActuals.views/DG_CMStgActOutlook.json",
+		"CMStgActuals.views/AmericasDefault.json",
+		"CMStgActuals.views/APACDefault.json",
+		"CMStgActuals.views/Daniel Grahame.json",
+		"CMStgActuals.views/Data Spreading Example.json",
+		"CMStgActuals.views/Default.json",
+		"CMStgActuals.views/EMEADefault.json"
+	]
+}

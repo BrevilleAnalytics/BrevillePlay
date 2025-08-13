@@ -1,0 +1,5 @@
+{
+	"@type":"Subset",
+	"Name":"TestPick",
+	"Expression":"{DRILLDOWNMEMBER({[GLAccount].[GLAccount].[All Management Reporting]} , {[GLAccount].[GLAccount].[All Management Reporting],[GLAccount].[GLAccount].[Profit After Tax],[GLAccount].[GLAccount].[Profit Before Tax],[GLAccount].[GLAccount].[EBIT]} , RECURSIVE)}"
+}

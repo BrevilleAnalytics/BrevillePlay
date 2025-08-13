@@ -1,0 +1,19 @@
+{
+	"@type":"Subset",
+	"Name":"DG_CMStgActOutlook",
+	"Elements":
+	[
+		{
+			"@id":"Dimensions('CMStgActualsMeasure')/Hierarchies('CMStgActualsMeasure')/Elements('Contribution Margin')"
+		},
+		{
+			"@id":"Dimensions('CMStgActualsMeasure')/Hierarchies('CMStgActualsMeasure')/Elements('Shipped Units')"
+		},
+		{
+			"@id":"Dimensions('CMStgActualsMeasure')/Hierarchies('CMStgActualsMeasure')/Elements('Returned Units')"
+		},
+		{
+			"@id":"Dimensions('CMStgActualsMeasure')/Hierarchies('CMStgActualsMeasure')/Elements('Net Sales')"
+		}
+	]
+}

@@ -1,0 +1,106 @@
+{
+	"@type":"Subset",
+	"Name":"App.CFMeasures",
+	"Elements":
+	[
+		{
+			"@id":"Dimensions('CFCashFlowMeasure')/Hierarchies('CFCashFlowMeasure')/Elements('Opening Balance - Cash at Bank')"
+		},
+		{
+			"@id":"Dimensions('CFCashFlowMeasure')/Hierarchies('CFCashFlowMeasure')/Elements('Receipts')"
+		},
+		{
+			"@id":"Dimensions('CFCashFlowMeasure')/Hierarchies('CFCashFlowMeasure')/Elements('Trade receivable receipts')"
+		},
+		{
+			"@id":"Dimensions('CFCashFlowMeasure')/Hierarchies('CFCashFlowMeasure')/Elements('DI sales received on behalf on NZ')"
+		},
+		{
+			"@id":"Dimensions('CFCashFlowMeasure')/Hierarchies('CFCashFlowMeasure')/Elements('Cash received for stock sent to NZ')"
+		},
+		{
+			"@id":"Dimensions('CFCashFlowMeasure')/Hierarchies('CFCashFlowMeasure')/Elements('Drawdown facility')"
+		},
+		{
+			"@id":"Dimensions('CFCashFlowMeasure')/Hierarchies('CFCashFlowMeasure')/Elements('Payments')"
+		},
+		{
+			"@id":"Dimensions('CFCashFlowMeasure')/Hierarchies('CFCashFlowMeasure')/Elements('Repay facility')"
+		},
+		{
+			"@id":"Dimensions('CFCashFlowMeasure')/Hierarchies('CFCashFlowMeasure')/Elements('China Service Fee Payment')"
+		},
+		{
+			"@id":"Dimensions('CFCashFlowMeasure')/Hierarchies('CFCashFlowMeasure')/Elements('Procument Fee payment')"
+		},
+		{
+			"@id":"Dimensions('CFCashFlowMeasure')/Hierarchies('CFCashFlowMeasure')/Elements('STI payment')"
+		},
+		{
+			"@id":"Dimensions('CFCashFlowMeasure')/Hierarchies('CFCashFlowMeasure')/Elements('Stock payments')"
+		},
+		{
+			"@id":"Dimensions('CFCashFlowMeasure')/Hierarchies('CFCashFlowMeasure')/Elements('Add back FX on COGs (BPL paying at FEC rate or spot)')"
+		},
+		{
+			"@id":"Dimensions('CFCashFlowMeasure')/Hierarchies('CFCashFlowMeasure')/Elements('Net GST')"
+		},
+		{
+			"@id":"Dimensions('CFCashFlowMeasure')/Hierarchies('CFCashFlowMeasure')/Elements('Income tax payment')"
+		},
+		{
+			"@id":"Dimensions('CFCashFlowMeasure')/Hierarchies('CFCashFlowMeasure')/Elements('Dividend income/(payment)')"
+		},
+		{
+			"@id":"Dimensions('CFCashFlowMeasure')/Hierarchies('CFCashFlowMeasure')/Elements('CAPEX-PPE')"
+		},
+		{
+			"@id":"Dimensions('CFCashFlowMeasure')/Hierarchies('CFCashFlowMeasure')/Elements('CAPEX-Non-NPD- Intangibles')"
+		},
+		{
+			"@id":"Dimensions('CFCashFlowMeasure')/Hierarchies('CFCashFlowMeasure')/Elements('CAPEX- Tooling for Projects')"
+		},
+		{
+			"@id":"Dimensions('CFCashFlowMeasure')/Hierarchies('CFCashFlowMeasure')/Elements('Freight')"
+		},
+		{
+			"@id":"Dimensions('CFCashFlowMeasure')/Hierarchies('CFCashFlowMeasure')/Elements('Warranty claims')"
+		},
+		{
+			"@id":"Dimensions('CFCashFlowMeasure')/Hierarchies('CFCashFlowMeasure')/Elements('Net outflow for finance costs')"
+		},
+		{
+			"@id":"Dimensions('CFCashFlowMeasure')/Hierarchies('CFCashFlowMeasure')/Elements('DI sales remitted to NZ')"
+		},
+		{
+			"@id":"Dimensions('CFCashFlowMeasure')/Hierarchies('CFCashFlowMeasure')/Elements('COGS FX impact')"
+		},
+		{
+			"@id":"Dimensions('CFCashFlowMeasure')/Hierarchies('CFCashFlowMeasure')/Elements('Lelit payment')"
+		},
+		{
+			"@id":"Dimensions('CFCashFlowMeasure')/Hierarchies('CFCashFlowMeasure')/Elements('LTI share purchase')"
+		},
+		{
+			"@id":"Dimensions('CFCashFlowMeasure')/Hierarchies('CFCashFlowMeasure')/Elements('Plug to balance Balance Sheet')"
+		},
+		{
+			"@id":"Dimensions('CFCashFlowMeasure')/Hierarchies('CFCashFlowMeasure')/Elements('Total Closing Cash')"
+		},
+		{
+			"@id":"Dimensions('CFCashFlowMeasure')/Hierarchies('CFCashFlowMeasure')/Elements('Variance')"
+		},
+		{
+			"@id":"Dimensions('CFCashFlowMeasure')/Hierarchies('CFCashFlowMeasure')/Elements('Borrowings')"
+		},
+		{
+			"@id":"Dimensions('CFCashFlowMeasure')/Hierarchies('CFCashFlowMeasure')/Elements('Drawdown')"
+		},
+		{
+			"@id":"Dimensions('CFCashFlowMeasure')/Hierarchies('CFCashFlowMeasure')/Elements('Repayment')"
+		},
+		{
+			"@id":"Dimensions('CFCashFlowMeasure')/Hierarchies('CFCashFlowMeasure')/Elements('Closing balance')"
+		}
+	]
+}

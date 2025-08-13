@@ -1,0 +1,194 @@
+{
+	"@type":"Hierarchy",
+	"Name":"MonthCustFcast",
+	"Elements":
+	[
+		{
+			"Name":"Financial Year",
+			"Type":"Consolidated"
+		},
+		{
+			"Name":"Aug",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"Sep",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"Oct",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"Nov",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"Dec",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"Jan",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"Feb",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"Mar",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"Apr",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"May",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"Jun",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"Jul",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"Run Rates",
+			"Type":"Consolidated"
+		},
+		{
+			"Name":"Last Month",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"Last 3 Months",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"Last 6 Months",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"Last 12 Months",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"Now",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"Report Flag",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"H2",
+			"Type":"Consolidated"
+		},
+		{
+			"Name":"H1",
+			"Type":"Consolidated"
+		}
+	],
+	"Edges":
+	[
+		{
+			"ParentName":"Financial Year",
+			"ComponentName":"H1",
+			"Weight":1
+		},
+		{
+			"ParentName":"Financial Year",
+			"ComponentName":"H2",
+			"Weight":1
+		},
+		{
+			"ParentName":"Run Rates",
+			"ComponentName":"Last Month",
+			"Weight":1
+		},
+		{
+			"ParentName":"Run Rates",
+			"ComponentName":"Last 3 Months",
+			"Weight":1
+		},
+		{
+			"ParentName":"Run Rates",
+			"ComponentName":"Last 6 Months",
+			"Weight":1
+		},
+		{
+			"ParentName":"Run Rates",
+			"ComponentName":"Last 12 Months",
+			"Weight":1
+		},
+		{
+			"ParentName":"H2",
+			"ComponentName":"Jan",
+			"Weight":1
+		},
+		{
+			"ParentName":"H2",
+			"ComponentName":"Feb",
+			"Weight":1
+		},
+		{
+			"ParentName":"H2",
+			"ComponentName":"Mar",
+			"Weight":1
+		},
+		{
+			"ParentName":"H2",
+			"ComponentName":"Apr",
+			"Weight":1
+		},
+		{
+			"ParentName":"H2",
+			"ComponentName":"May",
+			"Weight":1
+		},
+		{
+			"ParentName":"H2",
+			"ComponentName":"Jun",
+			"Weight":1
+		},
+		{
+			"ParentName":"H1",
+			"ComponentName":"Jul",
+			"Weight":1
+		},
+		{
+			"ParentName":"H1",
+			"ComponentName":"Aug",
+			"Weight":1
+		},
+		{
+			"ParentName":"H1",
+			"ComponentName":"Sep",
+			"Weight":1
+		},
+		{
+			"ParentName":"H1",
+			"ComponentName":"Oct",
+			"Weight":1
+		},
+		{
+			"ParentName":"H1",
+			"ComponentName":"Nov",
+			"Weight":1
+		},
+		{
+			"ParentName":"H1",
+			"ComponentName":"Dec",
+			"Weight":1
+		}
+	],
+	"Subsets@Code.links":
+	[
+		"MonthCustFcast.subsets/Cust3MthRRTemp.json",
+		"MonthCustFcast.subsets/FcastMonths.json",
+		"MonthCustFcast.subsets/FlagProductsByCustomerTemp.json"
+	]
+}

@@ -1,0 +1,5 @@
+{
+	"@type":"Subset",
+	"Name":"App.CMBU",
+	"Expression":"{{FILTER(TM1SubsetAll([BusinessUnit].[BusinessUnit]), ([BusinessUnit].[BusinessUnit].CURRENTMEMBER.PROPERTIES(\"CMBU\") = \"Y\"))}}"
+}

@@ -1,0 +1,28 @@
+{
+	"@type":"Hierarchy",
+	"Name":"syProcessLogMeasure",
+	"Elements":
+	[
+		{
+			"Name":"Log Level",
+			"Type":"String"
+		},
+		{
+			"Name":"Datetime",
+			"Type":"String"
+		},
+		{
+			"Name":"Message",
+			"Type":"String"
+		},
+		{
+			"Name":"Datetime UTC",
+			"Type":"String"
+		},
+		{
+			"Name":"Error Reference",
+			"Type":"String"
+		}
+	],
+	"Subsets@Code.links":[]
+}

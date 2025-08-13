@@ -1,0 +1,34 @@
+{
+	"@type":"Subset",
+	"Name":"Accrual Cost Centres",
+	"Elements":
+	[
+		{
+			"@id":"Dimensions('CostCentre')/Hierarchies('CostCentre')/Elements('4900')"
+		},
+		{
+			"@id":"Dimensions('CostCentre')/Hierarchies('CostCentre')/Elements('2041')"
+		},
+		{
+			"@id":"Dimensions('CostCentre')/Hierarchies('CostCentre')/Elements('3350')"
+		},
+		{
+			"@id":"Dimensions('CostCentre')/Hierarchies('CostCentre')/Elements('5022')"
+		},
+		{
+			"@id":"Dimensions('CostCentre')/Hierarchies('CostCentre')/Elements('6005')"
+		},
+		{
+			"@id":"Dimensions('CostCentre')/Hierarchies('CostCentre')/Elements('9080')"
+		},
+		{
+			"@id":"Dimensions('CostCentre')/Hierarchies('CostCentre')/Elements('9180')"
+		},
+		{
+			"@id":"Dimensions('CostCentre')/Hierarchies('CostCentre')/Elements('7010')"
+		},
+		{
+			"@id":"Dimensions('CostCentre')/Hierarchies('CostCentre')/Elements('8350')"
+		}
+	]
+}

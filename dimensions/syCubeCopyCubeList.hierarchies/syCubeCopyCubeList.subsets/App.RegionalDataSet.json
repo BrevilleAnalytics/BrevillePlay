@@ -1,0 +1,25 @@
+{
+	"@type":"Subset",
+	"Name":"App.RegionalDataSet",
+	"Elements":
+	[
+		{
+			"@id":"Dimensions('syCubeCopyCubeList')/Hierarchies('syCubeCopyCubeList')/Elements('CMBaratzaForecast')"
+		},
+		{
+			"@id":"Dimensions('syCubeCopyCubeList')/Hierarchies('syCubeCopyCubeList')/Elements('CMBHKForecast')"
+		},
+		{
+			"@id":"Dimensions('syCubeCopyCubeList')/Hierarchies('syCubeCopyCubeList')/Elements('CMForecast')"
+		},
+		{
+			"@id":"Dimensions('syCubeCopyCubeList')/Hierarchies('syCubeCopyCubeList')/Elements('CMRunRates')"
+		},
+		{
+			"@id":"Dimensions('syCubeCopyCubeList')/Hierarchies('syCubeCopyCubeList')/Elements('PnLPlan')"
+		},
+		{
+			"@id":"Dimensions('syCubeCopyCubeList')/Hierarchies('syCubeCopyCubeList')/Elements('GlobalEBIT')"
+		}
+	]
+}

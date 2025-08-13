@@ -1,0 +1,25 @@
+#region Prolog
+#****Begin: Generated Statements***
+#****End: Generated Statements****
+sDimName_Tgt = 'ProductCustFcast';
+sAttrName = 'Brand';
+
+If(HierarchyExists(sDimName_Tgt, sAttrName) = 1);
+HierarchyDestroy( sDimName_Tgt, sAttrName );
+endif;
+
+  CreateHierarchyByAttribute(sDimName_Tgt, sAttrName);
+CreateHierarchyByAttribute(sDimName_Tgt, sAttrName, 'Orphans', 'AllBrands');
+#endregion
+#region Metadata
+#****Begin: Generated Statements***
+#****End: Generated Statements****
+#endregion
+#region Data
+#****Begin: Generated Statements***
+#****End: Generated Statements****
+#endregion
+#region Epilog
+#****Begin: Generated Statements***
+#****End: Generated Statements****
+#endregion

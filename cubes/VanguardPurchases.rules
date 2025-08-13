@@ -1,0 +1,29 @@
+SKIPCHECK;
+
+#Prevent Base being pushed to Children of Outlook Snapshot Versions
+[] = N: IF ( ELISANC ( 'Version','Outlook Snapshot Versions', !Version) = 1, STET, CONTINUE );
+
+#Prevent Base being pushed to Children of Budget Snapshot Versions
+[] = N: IF ( ELISANC ( 'Version','Budget Snapshot Versions', !Version) = 1, STET, CONTINUE );
+
+#Flag for reporting - row still shows when zero suppressed for entering override
+[CMStgForecastMeasure:'COGS per Unit Override', 'No FiscalMonth'] = N: IF(DB ('VanguardPurchases', !Product, 'FY24', !BusinessUnit, !Currency, !Version, 'Base','Purchased Units') > 0
+,1,0);
+
+#Ignore 'COGS per Unit Override' measure in all business rules
+[] = N: IF (!CMStgForecastMeasure@= 'COGS per Unit Override' , STET, CONTINUE);
+
+#Push Checkpoint Selected in Checkpoint Attribute Picklist to Base Checkpoint
+[Checkpoint:'Base'] = N: db('VanguardPurchases', !Product, !FiscalMonth, !BusinessUnit, !Currency, !Version, ATTRS('Checkpoint','Base','Picklist'), !CMStgForecastMeasure);
+
+
+FEEDERS;
+
+['All Checkpoints'] => ['Base'];
+['COGS per Unit'] =>['COGS per Unit Override'];
+['All FY'] => ['No FiscalMonth'];
+
+#External Feeders
+
+['Product':'All Product', 'Base', 'Purchase Value'] => 
+DB('BSStgStaging',!BusinessUnit, !Currency, !FiscalMonth, !Version, 'Calculated', 'BAU (AUD)  VG Transfers');

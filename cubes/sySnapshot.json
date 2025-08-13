@@ -1,0 +1,20 @@
+{
+	"@type":"Cube",
+	"Name":"sySnapshot",
+	"Dimensions":
+	[
+		{
+			"@id":"Dimensions('Theatre')"
+		},
+		{
+			"@id":"Dimensions('Version')"
+		},
+		{
+			"@id":"Dimensions('sySnapshotLineItem')"
+		},
+		{
+			"@id":"Dimensions('sySnapshotMeasure')"
+		}
+	],
+	"Views@Code.links":[]
+}

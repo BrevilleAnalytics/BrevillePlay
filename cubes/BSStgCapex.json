@@ -1,0 +1,33 @@
+{
+	"@type":"Cube",
+	"Name":"BSStgCapex",
+	"Rules@Code.link":"BSStgCapex.rules",
+	"Dimensions":
+	[
+		{
+			"@id":"Dimensions('BusinessUnit')"
+		},
+		{
+			"@id":"Dimensions('Currency')"
+		},
+		{
+			"@id":"Dimensions('BSComponent')"
+		},
+		{
+			"@id":"Dimensions('GLAccount')"
+		},
+		{
+			"@id":"Dimensions('FiscalMonth')"
+		},
+		{
+			"@id":"Dimensions('Version')"
+		},
+		{
+			"@id":"Dimensions('BSStgCapexMeasure')"
+		}
+	],
+	"Views@Code.links":
+	[
+		"BSStgCapex.views/Default.json"
+	]
+}

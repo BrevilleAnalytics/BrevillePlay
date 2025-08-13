@@ -1,0 +1,39 @@
+{
+	"@type":"Process",
+	"Name":"syProcessLogNotification",
+	"HasSecurityAccess":false,
+	"Code@Code.link":"syProcessLogNotification.ti",
+	"UIData":"_ParameterConstraints=e30=€",
+	"DataSource":
+	{
+		"Type":"None"
+	},
+	"Parameters":
+	[
+		{
+			"Name":"psProcessName",
+			"Prompt":"Process or Chore Alias",
+			"Value":"",
+			"Type":"String"
+		},
+		{
+			"Name":"psLogLevel",
+			"Prompt":"Log Level ( INFO | ERROR | FAILED )",
+			"Value":"",
+			"Type":"String"
+		},
+		{
+			"Name":"psAttachLogFiles",
+			"Prompt":"Attach Log Files (Y=Yes or N=No)",
+			"Value":"N",
+			"Type":"String"
+		},
+		{
+			"Name":"psServer",
+			"Prompt":"Server",
+			"Value":"Breville",
+			"Type":"String"
+		}
+	],
+	"Variables":[]
+}

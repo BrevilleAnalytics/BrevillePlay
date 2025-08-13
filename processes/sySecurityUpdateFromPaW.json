@@ -1,0 +1,76 @@
+{
+	"@type":"Process",
+	"Name":"sySecurityUpdateFromPaW",
+	"HasSecurityAccess":true,
+	"Code@Code.link":"sySecurityUpdateFromPaW.ti",
+	"UIData":"CubeAction=1511€DataAction=1503€CubeLogChanges=0€_ParameterConstraints=e30=€",
+	"VariablesUIData":
+	[
+		"VarType=32€ColType=827€",
+		"VarType=32€ColType=827€",
+		"VarType=32€ColType=827€"
+	],
+	"DataSource":
+	{
+		"Type":"ASCII",
+		"asciiDecimalSeparator":".",
+		"asciiDelimiterChar":",",
+		"asciiDelimiterType":"Character",
+		"asciiHeaderRecords":1,
+		"asciiQuoteCharacter":"\"",
+		"asciiThousandSeparator":",",
+		"dataSourceNameForClient":"\\\\data\\s\\prod\\security\\all-groups.csv",
+		"dataSourceNameForServer":"\\\\data\\s\\prod\\security\\all-groups.csv"
+	},
+	"Parameters":
+	[
+		{
+			"Name":"psSecurityFile",
+			"Prompt":"Name security file with exported users and groups from PaW",
+			"Value":"S:\\prod\\security\\all-groups.csv",
+			"Type":"String"
+		},
+		{
+			"Name":"psServer",
+			"Prompt":"Servername in Control cube",
+			"Value":"Breville",
+			"Type":"String"
+		},
+		{
+			"Name":"psClearAllGroups",
+			"Prompt":"Remove all users from all groups? Do this to reset security entirely",
+			"Value":"no",
+			"Type":"String"
+		},
+		{
+			"Name":"psProcessNameForLogging",
+			"Prompt":"Append to log file for this process",
+			"Value":"",
+			"Type":"String"
+		}
+	],
+	"Variables":
+	[
+		{
+			"Name":"vGroup",
+			"Type":"String",
+			"Position":1,
+			"StartByte":0,
+			"EndByte":0
+		},
+		{
+			"Name":"vUser",
+			"Type":"String",
+			"Position":2,
+			"StartByte":0,
+			"EndByte":0
+		},
+		{
+			"Name":"vDirective",
+			"Type":"String",
+			"Position":3,
+			"StartByte":0,
+			"EndByte":0
+		}
+	]
+}

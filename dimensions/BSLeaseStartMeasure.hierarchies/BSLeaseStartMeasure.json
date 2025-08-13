@@ -1,0 +1,32 @@
+{
+	"@type":"Hierarchy",
+	"Name":"BSLeaseStartMeasure",
+	"Elements":
+	[
+		{
+			"Name":"Start Month for B/Fwd Liability",
+			"Type":"String"
+		},
+		{
+			"Name":"B/Fwd Liability",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"B/Fwd RoU Asset",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"No. of Period",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"Australia Incremental Borrowing Rate / Discount Rate",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"Business Unit",
+			"Type":"String"
+		}
+	],
+	"Subsets@Code.links":[]
+}

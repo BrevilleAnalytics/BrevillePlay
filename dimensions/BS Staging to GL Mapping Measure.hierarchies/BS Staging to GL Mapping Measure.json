@@ -1,0 +1,20 @@
+{
+	"@type":"Hierarchy",
+	"Name":"BS Staging to GL Mapping Measure",
+	"Elements":
+	[
+		{
+			"Name":"GL Account",
+			"Type":"String"
+		},
+		{
+			"Name":"Type",
+			"Type":"String"
+		},
+		{
+			"Name":"Description",
+			"Type":"String"
+		}
+	],
+	"Subsets@Code.links":[]
+}

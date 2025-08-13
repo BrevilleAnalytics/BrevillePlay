@@ -1,0 +1,5 @@
+{
+	"@type":"Subset",
+	"Name":"App.MarketingRegional",
+	"Expression":"{{TM1FILTERBYPATTERN(TM1SubsetAll([GLAccount].[Management Reporting]),\"*Marketing Region*\",\"CodeCaption\")}}"
+}

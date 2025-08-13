@@ -1,0 +1,13 @@
+{
+	"@type":"Process",
+	"Name":"HA_ClearView",
+	"HasSecurityAccess":false,
+	"Code@Code.link":"HA_ClearView.ti",
+	"UIData":"_ParameterConstraints=e30=€",
+	"DataSource":
+	{
+		"Type":"None"
+	},
+	"Parameters":[],
+	"Variables":[]
+}

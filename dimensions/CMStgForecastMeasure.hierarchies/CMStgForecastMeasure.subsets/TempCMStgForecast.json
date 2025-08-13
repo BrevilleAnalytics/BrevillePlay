@@ -1,0 +1,10 @@
+{
+	"@type":"Subset",
+	"Name":"TempCMStgForecast",
+	"Elements":
+	[
+		{
+			"@id":"Dimensions('CMStgForecastMeasure')/Hierarchies('CMStgForecastMeasure')/Elements('Shipped Units')"
+		}
+	]
+}

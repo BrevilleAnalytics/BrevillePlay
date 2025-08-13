@@ -1,0 +1,1173 @@
+{
+	"@type":"Hierarchy",
+	"Name":"FiscalMonthJJ",
+	"Elements":
+	[
+		{
+			"Name":"No FiscalMonth",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"All FY",
+			"Type":"Consolidated"
+		},
+		{
+			"Name":"All Years",
+			"Type":"Consolidated"
+		},
+		{
+			"Name":"YTD",
+			"Type":"Consolidated"
+		},
+		{
+			"Name":"YTG",
+			"Type":"Consolidated"
+		},
+		{
+			"Name":"FY16",
+			"Type":"Consolidated"
+		},
+		{
+			"Name":"2016",
+			"Type":"Consolidated"
+		},
+		{
+			"Name":"2016H1",
+			"Type":"Consolidated"
+		},
+		{
+			"Name":"2016H2",
+			"Type":"Consolidated"
+		},
+		{
+			"Name":"2016Q1",
+			"Type":"Consolidated"
+		},
+		{
+			"Name":"2016Q2",
+			"Type":"Consolidated"
+		},
+		{
+			"Name":"2016Q3",
+			"Type":"Consolidated"
+		},
+		{
+			"Name":"2016Q4",
+			"Type":"Consolidated"
+		},
+		{
+			"Name":"2016001",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"YTD 2016001",
+			"Type":"Consolidated"
+		},
+		{
+			"Name":"YTG 2016001",
+			"Type":"Consolidated"
+		},
+		{
+			"Name":"2016002",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"YTD 2016002",
+			"Type":"Consolidated"
+		},
+		{
+			"Name":"YTG 2016002",
+			"Type":"Consolidated"
+		},
+		{
+			"Name":"2016003",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"YTD 2016003",
+			"Type":"Consolidated"
+		},
+		{
+			"Name":"YTG 2016003",
+			"Type":"Consolidated"
+		},
+		{
+			"Name":"2016004",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"YTD 2016004",
+			"Type":"Consolidated"
+		},
+		{
+			"Name":"YTG 2016004",
+			"Type":"Consolidated"
+		},
+		{
+			"Name":"2016005",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"YTD 2016005",
+			"Type":"Consolidated"
+		},
+		{
+			"Name":"YTG 2016005",
+			"Type":"Consolidated"
+		},
+		{
+			"Name":"2016006",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"YTD 2016006",
+			"Type":"Consolidated"
+		},
+		{
+			"Name":"YTG 2016006",
+			"Type":"Consolidated"
+		},
+		{
+			"Name":"2016007",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"YTD 2016007",
+			"Type":"Consolidated"
+		},
+		{
+			"Name":"YTG 2016007",
+			"Type":"Consolidated"
+		},
+		{
+			"Name":"2016008",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"YTD 2016008",
+			"Type":"Consolidated"
+		},
+		{
+			"Name":"YTG 2016008",
+			"Type":"Consolidated"
+		},
+		{
+			"Name":"2016009",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"YTD 2016009",
+			"Type":"Consolidated"
+		},
+		{
+			"Name":"YTG 2016009",
+			"Type":"Consolidated"
+		},
+		{
+			"Name":"2016010",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"YTD 2016010",
+			"Type":"Consolidated"
+		},
+		{
+			"Name":"YTG 2016010",
+			"Type":"Consolidated"
+		},
+		{
+			"Name":"2016011",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"YTD 2016011",
+			"Type":"Consolidated"
+		},
+		{
+			"Name":"YTG 2016011",
+			"Type":"Consolidated"
+		},
+		{
+			"Name":"2016012",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"YTD 2016012",
+			"Type":"Consolidated"
+		},
+		{
+			"Name":"YTG 2016012",
+			"Type":"Consolidated"
+		},
+		{
+			"Name":"FY17",
+			"Type":"Consolidated"
+		},
+		{
+			"Name":"2017",
+			"Type":"Consolidated"
+		},
+		{
+			"Name":"2017H1",
+			"Type":"Consolidated"
+		},
+		{
+			"Name":"2017H2",
+			"Type":"Consolidated"
+		},
+		{
+			"Name":"2017Q1",
+			"Type":"Consolidated"
+		},
+		{
+			"Name":"2017Q2",
+			"Type":"Consolidated"
+		},
+		{
+			"Name":"2017Q3",
+			"Type":"Consolidated"
+		},
+		{
+			"Name":"2017Q4",
+			"Type":"Consolidated"
+		},
+		{
+			"Name":"2017001",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"YTD 2017001",
+			"Type":"Consolidated"
+		},
+		{
+			"Name":"YTG 2017001",
+			"Type":"Consolidated"
+		},
+		{
+			"Name":"2017002",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"YTD 2017002",
+			"Type":"Consolidated"
+		},
+		{
+			"Name":"YTG 2017002",
+			"Type":"Consolidated"
+		},
+		{
+			"Name":"2017003",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"YTD 2017003",
+			"Type":"Consolidated"
+		},
+		{
+			"Name":"YTG 2017003",
+			"Type":"Consolidated"
+		},
+		{
+			"Name":"2017004",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"YTD 2017004",
+			"Type":"Consolidated"
+		},
+		{
+			"Name":"YTG 2017004",
+			"Type":"Consolidated"
+		},
+		{
+			"Name":"2017005",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"YTD 2017005",
+			"Type":"Consolidated"
+		},
+		{
+			"Name":"YTG 2017005",
+			"Type":"Consolidated"
+		},
+		{
+			"Name":"2017006",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"YTD 2017006",
+			"Type":"Consolidated"
+		},
+		{
+			"Name":"YTG 2017006",
+			"Type":"Consolidated"
+		},
+		{
+			"Name":"2017007",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"YTD 2017007",
+			"Type":"Consolidated"
+		},
+		{
+			"Name":"YTG 2017007",
+			"Type":"Consolidated"
+		},
+		{
+			"Name":"2017008",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"YTD 2017008",
+			"Type":"Consolidated"
+		},
+		{
+			"Name":"YTG 2017008",
+			"Type":"Consolidated"
+		},
+		{
+			"Name":"2017009",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"YTD 2017009",
+			"Type":"Consolidated"
+		},
+		{
+			"Name":"YTG 2017009",
+			"Type":"Consolidated"
+		},
+		{
+			"Name":"2017010",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"YTD 2017010",
+			"Type":"Consolidated"
+		},
+		{
+			"Name":"YTG 2017010",
+			"Type":"Consolidated"
+		},
+		{
+			"Name":"2017011",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"YTD 2017011",
+			"Type":"Consolidated"
+		},
+		{
+			"Name":"YTG 2017011",
+			"Type":"Consolidated"
+		},
+		{
+			"Name":"2017012",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"YTD 2017012",
+			"Type":"Consolidated"
+		},
+		{
+			"Name":"YTG 2017012",
+			"Type":"Consolidated"
+		}
+	],
+	"Edges":
+	[
+		{
+			"ParentName":"All FY",
+			"ComponentName":"2016",
+			"Weight":1
+		},
+		{
+			"ParentName":"All FY",
+			"ComponentName":"2017",
+			"Weight":1
+		},
+		{
+			"ParentName":"All Years",
+			"ComponentName":"FY16",
+			"Weight":1
+		},
+		{
+			"ParentName":"All Years",
+			"ComponentName":"FY17",
+			"Weight":1
+		},
+		{
+			"ParentName":"YTD",
+			"ComponentName":"YTD 2016012",
+			"Weight":1
+		},
+		{
+			"ParentName":"YTD",
+			"ComponentName":"YTD 2017012",
+			"Weight":1
+		},
+		{
+			"ParentName":"YTG",
+			"ComponentName":"YTG 2016001",
+			"Weight":1
+		},
+		{
+			"ParentName":"YTG",
+			"ComponentName":"YTG 2017001",
+			"Weight":1
+		},
+		{
+			"ParentName":"FY16",
+			"ComponentName":"2016001",
+			"Weight":1
+		},
+		{
+			"ParentName":"FY16",
+			"ComponentName":"2016002",
+			"Weight":1
+		},
+		{
+			"ParentName":"FY16",
+			"ComponentName":"2016003",
+			"Weight":1
+		},
+		{
+			"ParentName":"FY16",
+			"ComponentName":"2016004",
+			"Weight":1
+		},
+		{
+			"ParentName":"FY16",
+			"ComponentName":"2016005",
+			"Weight":1
+		},
+		{
+			"ParentName":"FY16",
+			"ComponentName":"2016006",
+			"Weight":1
+		},
+		{
+			"ParentName":"FY16",
+			"ComponentName":"2016007",
+			"Weight":1
+		},
+		{
+			"ParentName":"FY16",
+			"ComponentName":"2016008",
+			"Weight":1
+		},
+		{
+			"ParentName":"FY16",
+			"ComponentName":"2016009",
+			"Weight":1
+		},
+		{
+			"ParentName":"FY16",
+			"ComponentName":"2016010",
+			"Weight":1
+		},
+		{
+			"ParentName":"FY16",
+			"ComponentName":"2016011",
+			"Weight":1
+		},
+		{
+			"ParentName":"FY16",
+			"ComponentName":"2016012",
+			"Weight":1
+		},
+		{
+			"ParentName":"2016",
+			"ComponentName":"2016H1",
+			"Weight":1
+		},
+		{
+			"ParentName":"2016",
+			"ComponentName":"2016H2",
+			"Weight":1
+		},
+		{
+			"ParentName":"2016H1",
+			"ComponentName":"2016Q1",
+			"Weight":1
+		},
+		{
+			"ParentName":"2016H1",
+			"ComponentName":"2016Q2",
+			"Weight":1
+		},
+		{
+			"ParentName":"2016H2",
+			"ComponentName":"2016Q3",
+			"Weight":1
+		},
+		{
+			"ParentName":"2016H2",
+			"ComponentName":"2016Q4",
+			"Weight":1
+		},
+		{
+			"ParentName":"2016Q1",
+			"ComponentName":"2016001",
+			"Weight":1
+		},
+		{
+			"ParentName":"2016Q1",
+			"ComponentName":"2016002",
+			"Weight":1
+		},
+		{
+			"ParentName":"2016Q1",
+			"ComponentName":"2016003",
+			"Weight":1
+		},
+		{
+			"ParentName":"2016Q2",
+			"ComponentName":"2016004",
+			"Weight":1
+		},
+		{
+			"ParentName":"2016Q2",
+			"ComponentName":"2016005",
+			"Weight":1
+		},
+		{
+			"ParentName":"2016Q2",
+			"ComponentName":"2016006",
+			"Weight":1
+		},
+		{
+			"ParentName":"2016Q3",
+			"ComponentName":"2016007",
+			"Weight":1
+		},
+		{
+			"ParentName":"2016Q3",
+			"ComponentName":"2016008",
+			"Weight":1
+		},
+		{
+			"ParentName":"2016Q3",
+			"ComponentName":"2016009",
+			"Weight":1
+		},
+		{
+			"ParentName":"2016Q4",
+			"ComponentName":"2016010",
+			"Weight":1
+		},
+		{
+			"ParentName":"2016Q4",
+			"ComponentName":"2016011",
+			"Weight":1
+		},
+		{
+			"ParentName":"2016Q4",
+			"ComponentName":"2016012",
+			"Weight":1
+		},
+		{
+			"ParentName":"YTD 2016001",
+			"ComponentName":"2016001",
+			"Weight":1
+		},
+		{
+			"ParentName":"YTG 2016001",
+			"ComponentName":"2016002",
+			"Weight":1
+		},
+		{
+			"ParentName":"YTG 2016001",
+			"ComponentName":"YTG 2016002",
+			"Weight":1
+		},
+		{
+			"ParentName":"YTD 2016002",
+			"ComponentName":"2016002",
+			"Weight":1
+		},
+		{
+			"ParentName":"YTD 2016002",
+			"ComponentName":"YTD 2016001",
+			"Weight":1
+		},
+		{
+			"ParentName":"YTG 2016002",
+			"ComponentName":"2016003",
+			"Weight":1
+		},
+		{
+			"ParentName":"YTG 2016002",
+			"ComponentName":"YTG 2016003",
+			"Weight":1
+		},
+		{
+			"ParentName":"YTD 2016003",
+			"ComponentName":"2016003",
+			"Weight":1
+		},
+		{
+			"ParentName":"YTD 2016003",
+			"ComponentName":"YTD 2016002",
+			"Weight":1
+		},
+		{
+			"ParentName":"YTG 2016003",
+			"ComponentName":"2016004",
+			"Weight":1
+		},
+		{
+			"ParentName":"YTG 2016003",
+			"ComponentName":"YTG 2016004",
+			"Weight":1
+		},
+		{
+			"ParentName":"YTD 2016004",
+			"ComponentName":"2016004",
+			"Weight":1
+		},
+		{
+			"ParentName":"YTD 2016004",
+			"ComponentName":"YTD 2016003",
+			"Weight":1
+		},
+		{
+			"ParentName":"YTG 2016004",
+			"ComponentName":"2016005",
+			"Weight":1
+		},
+		{
+			"ParentName":"YTG 2016004",
+			"ComponentName":"YTG 2016005",
+			"Weight":1
+		},
+		{
+			"ParentName":"YTD 2016005",
+			"ComponentName":"2016005",
+			"Weight":1
+		},
+		{
+			"ParentName":"YTD 2016005",
+			"ComponentName":"YTD 2016004",
+			"Weight":1
+		},
+		{
+			"ParentName":"YTG 2016005",
+			"ComponentName":"2016006",
+			"Weight":1
+		},
+		{
+			"ParentName":"YTG 2016005",
+			"ComponentName":"YTG 2016006",
+			"Weight":1
+		},
+		{
+			"ParentName":"YTD 2016006",
+			"ComponentName":"2016006",
+			"Weight":1
+		},
+		{
+			"ParentName":"YTD 2016006",
+			"ComponentName":"YTD 2016005",
+			"Weight":1
+		},
+		{
+			"ParentName":"YTG 2016006",
+			"ComponentName":"2016007",
+			"Weight":1
+		},
+		{
+			"ParentName":"YTG 2016006",
+			"ComponentName":"YTG 2016007",
+			"Weight":1
+		},
+		{
+			"ParentName":"YTD 2016007",
+			"ComponentName":"2016007",
+			"Weight":1
+		},
+		{
+			"ParentName":"YTD 2016007",
+			"ComponentName":"YTD 2016006",
+			"Weight":1
+		},
+		{
+			"ParentName":"YTG 2016007",
+			"ComponentName":"2016008",
+			"Weight":1
+		},
+		{
+			"ParentName":"YTG 2016007",
+			"ComponentName":"YTG 2016008",
+			"Weight":1
+		},
+		{
+			"ParentName":"YTD 2016008",
+			"ComponentName":"2016008",
+			"Weight":1
+		},
+		{
+			"ParentName":"YTD 2016008",
+			"ComponentName":"YTD 2016007",
+			"Weight":1
+		},
+		{
+			"ParentName":"YTG 2016008",
+			"ComponentName":"2016009",
+			"Weight":1
+		},
+		{
+			"ParentName":"YTG 2016008",
+			"ComponentName":"YTG 2016009",
+			"Weight":1
+		},
+		{
+			"ParentName":"YTD 2016009",
+			"ComponentName":"2016009",
+			"Weight":1
+		},
+		{
+			"ParentName":"YTD 2016009",
+			"ComponentName":"YTD 2016008",
+			"Weight":1
+		},
+		{
+			"ParentName":"YTG 2016009",
+			"ComponentName":"2016010",
+			"Weight":1
+		},
+		{
+			"ParentName":"YTG 2016009",
+			"ComponentName":"YTG 2016010",
+			"Weight":1
+		},
+		{
+			"ParentName":"YTD 2016010",
+			"ComponentName":"2016010",
+			"Weight":1
+		},
+		{
+			"ParentName":"YTD 2016010",
+			"ComponentName":"YTD 2016009",
+			"Weight":1
+		},
+		{
+			"ParentName":"YTG 2016010",
+			"ComponentName":"2016011",
+			"Weight":1
+		},
+		{
+			"ParentName":"YTG 2016010",
+			"ComponentName":"YTG 2016011",
+			"Weight":1
+		},
+		{
+			"ParentName":"YTD 2016011",
+			"ComponentName":"2016011",
+			"Weight":1
+		},
+		{
+			"ParentName":"YTD 2016011",
+			"ComponentName":"YTD 2016010",
+			"Weight":1
+		},
+		{
+			"ParentName":"YTG 2016011",
+			"ComponentName":"2016012",
+			"Weight":1
+		},
+		{
+			"ParentName":"YTG 2016011",
+			"ComponentName":"YTG 2016012",
+			"Weight":1
+		},
+		{
+			"ParentName":"YTD 2016012",
+			"ComponentName":"2016012",
+			"Weight":1
+		},
+		{
+			"ParentName":"YTD 2016012",
+			"ComponentName":"YTD 2016011",
+			"Weight":1
+		},
+		{
+			"ParentName":"FY17",
+			"ComponentName":"2017001",
+			"Weight":1
+		},
+		{
+			"ParentName":"FY17",
+			"ComponentName":"2017002",
+			"Weight":1
+		},
+		{
+			"ParentName":"FY17",
+			"ComponentName":"2017003",
+			"Weight":1
+		},
+		{
+			"ParentName":"FY17",
+			"ComponentName":"2017004",
+			"Weight":1
+		},
+		{
+			"ParentName":"FY17",
+			"ComponentName":"2017005",
+			"Weight":1
+		},
+		{
+			"ParentName":"FY17",
+			"ComponentName":"2017006",
+			"Weight":1
+		},
+		{
+			"ParentName":"FY17",
+			"ComponentName":"2017007",
+			"Weight":1
+		},
+		{
+			"ParentName":"FY17",
+			"ComponentName":"2017008",
+			"Weight":1
+		},
+		{
+			"ParentName":"FY17",
+			"ComponentName":"2017009",
+			"Weight":1
+		},
+		{
+			"ParentName":"FY17",
+			"ComponentName":"2017010",
+			"Weight":1
+		},
+		{
+			"ParentName":"FY17",
+			"ComponentName":"2017011",
+			"Weight":1
+		},
+		{
+			"ParentName":"FY17",
+			"ComponentName":"2017012",
+			"Weight":1
+		},
+		{
+			"ParentName":"2017",
+			"ComponentName":"2017H1",
+			"Weight":1
+		},
+		{
+			"ParentName":"2017",
+			"ComponentName":"2017H2",
+			"Weight":1
+		},
+		{
+			"ParentName":"2017H1",
+			"ComponentName":"2017Q1",
+			"Weight":1
+		},
+		{
+			"ParentName":"2017H1",
+			"ComponentName":"2017Q2",
+			"Weight":1
+		},
+		{
+			"ParentName":"2017H2",
+			"ComponentName":"2017Q3",
+			"Weight":1
+		},
+		{
+			"ParentName":"2017H2",
+			"ComponentName":"2017Q4",
+			"Weight":1
+		},
+		{
+			"ParentName":"2017Q1",
+			"ComponentName":"2017001",
+			"Weight":1
+		},
+		{
+			"ParentName":"2017Q1",
+			"ComponentName":"2017002",
+			"Weight":1
+		},
+		{
+			"ParentName":"2017Q1",
+			"ComponentName":"2017003",
+			"Weight":1
+		},
+		{
+			"ParentName":"2017Q2",
+			"ComponentName":"2017004",
+			"Weight":1
+		},
+		{
+			"ParentName":"2017Q2",
+			"ComponentName":"2017005",
+			"Weight":1
+		},
+		{
+			"ParentName":"2017Q2",
+			"ComponentName":"2017006",
+			"Weight":1
+		},
+		{
+			"ParentName":"2017Q3",
+			"ComponentName":"2017007",
+			"Weight":1
+		},
+		{
+			"ParentName":"2017Q3",
+			"ComponentName":"2017008",
+			"Weight":1
+		},
+		{
+			"ParentName":"2017Q3",
+			"ComponentName":"2017009",
+			"Weight":1
+		},
+		{
+			"ParentName":"2017Q4",
+			"ComponentName":"2017010",
+			"Weight":1
+		},
+		{
+			"ParentName":"2017Q4",
+			"ComponentName":"2017011",
+			"Weight":1
+		},
+		{
+			"ParentName":"2017Q4",
+			"ComponentName":"2017012",
+			"Weight":1
+		},
+		{
+			"ParentName":"YTD 2017001",
+			"ComponentName":"2017001",
+			"Weight":1
+		},
+		{
+			"ParentName":"YTG 2017001",
+			"ComponentName":"2017002",
+			"Weight":1
+		},
+		{
+			"ParentName":"YTG 2017001",
+			"ComponentName":"YTG 2017002",
+			"Weight":1
+		},
+		{
+			"ParentName":"YTD 2017002",
+			"ComponentName":"2017002",
+			"Weight":1
+		},
+		{
+			"ParentName":"YTD 2017002",
+			"ComponentName":"YTD 2017001",
+			"Weight":1
+		},
+		{
+			"ParentName":"YTG 2017002",
+			"ComponentName":"2017003",
+			"Weight":1
+		},
+		{
+			"ParentName":"YTG 2017002",
+			"ComponentName":"YTG 2017003",
+			"Weight":1
+		},
+		{
+			"ParentName":"YTD 2017003",
+			"ComponentName":"2017003",
+			"Weight":1
+		},
+		{
+			"ParentName":"YTD 2017003",
+			"ComponentName":"YTD 2017002",
+			"Weight":1
+		},
+		{
+			"ParentName":"YTG 2017003",
+			"ComponentName":"2017004",
+			"Weight":1
+		},
+		{
+			"ParentName":"YTG 2017003",
+			"ComponentName":"YTG 2017004",
+			"Weight":1
+		},
+		{
+			"ParentName":"YTD 2017004",
+			"ComponentName":"2017004",
+			"Weight":1
+		},
+		{
+			"ParentName":"YTD 2017004",
+			"ComponentName":"YTD 2017003",
+			"Weight":1
+		},
+		{
+			"ParentName":"YTG 2017004",
+			"ComponentName":"2017005",
+			"Weight":1
+		},
+		{
+			"ParentName":"YTG 2017004",
+			"ComponentName":"YTG 2017005",
+			"Weight":1
+		},
+		{
+			"ParentName":"YTD 2017005",
+			"ComponentName":"2017005",
+			"Weight":1
+		},
+		{
+			"ParentName":"YTD 2017005",
+			"ComponentName":"YTD 2017004",
+			"Weight":1
+		},
+		{
+			"ParentName":"YTG 2017005",
+			"ComponentName":"2017006",
+			"Weight":1
+		},
+		{
+			"ParentName":"YTG 2017005",
+			"ComponentName":"YTG 2017006",
+			"Weight":1
+		},
+		{
+			"ParentName":"YTD 2017006",
+			"ComponentName":"2017006",
+			"Weight":1
+		},
+		{
+			"ParentName":"YTD 2017006",
+			"ComponentName":"YTD 2017005",
+			"Weight":1
+		},
+		{
+			"ParentName":"YTG 2017006",
+			"ComponentName":"2017007",
+			"Weight":1
+		},
+		{
+			"ParentName":"YTG 2017006",
+			"ComponentName":"YTG 2017007",
+			"Weight":1
+		},
+		{
+			"ParentName":"YTD 2017007",
+			"ComponentName":"2017007",
+			"Weight":1
+		},
+		{
+			"ParentName":"YTD 2017007",
+			"ComponentName":"YTD 2017006",
+			"Weight":1
+		},
+		{
+			"ParentName":"YTG 2017007",
+			"ComponentName":"2017008",
+			"Weight":1
+		},
+		{
+			"ParentName":"YTG 2017007",
+			"ComponentName":"YTG 2017008",
+			"Weight":1
+		},
+		{
+			"ParentName":"YTD 2017008",
+			"ComponentName":"2017008",
+			"Weight":1
+		},
+		{
+			"ParentName":"YTD 2017008",
+			"ComponentName":"YTD 2017007",
+			"Weight":1
+		},
+		{
+			"ParentName":"YTG 2017008",
+			"ComponentName":"2017009",
+			"Weight":1
+		},
+		{
+			"ParentName":"YTG 2017008",
+			"ComponentName":"YTG 2017009",
+			"Weight":1
+		},
+		{
+			"ParentName":"YTD 2017009",
+			"ComponentName":"2017009",
+			"Weight":1
+		},
+		{
+			"ParentName":"YTD 2017009",
+			"ComponentName":"YTD 2017008",
+			"Weight":1
+		},
+		{
+			"ParentName":"YTG 2017009",
+			"ComponentName":"2017010",
+			"Weight":1
+		},
+		{
+			"ParentName":"YTG 2017009",
+			"ComponentName":"YTG 2017010",
+			"Weight":1
+		},
+		{
+			"ParentName":"YTD 2017010",
+			"ComponentName":"2017010",
+			"Weight":1
+		},
+		{
+			"ParentName":"YTD 2017010",
+			"ComponentName":"YTD 2017009",
+			"Weight":1
+		},
+		{
+			"ParentName":"YTG 2017010",
+			"ComponentName":"2017011",
+			"Weight":1
+		},
+		{
+			"ParentName":"YTG 2017010",
+			"ComponentName":"YTG 2017011",
+			"Weight":1
+		},
+		{
+			"ParentName":"YTD 2017011",
+			"ComponentName":"2017011",
+			"Weight":1
+		},
+		{
+			"ParentName":"YTD 2017011",
+			"ComponentName":"YTD 2017010",
+			"Weight":1
+		},
+		{
+			"ParentName":"YTG 2017011",
+			"ComponentName":"2017012",
+			"Weight":1
+		},
+		{
+			"ParentName":"YTG 2017011",
+			"ComponentName":"YTG 2017012",
+			"Weight":1
+		},
+		{
+			"ParentName":"YTD 2017012",
+			"ComponentName":"2017012",
+			"Weight":1
+		},
+		{
+			"ParentName":"YTD 2017012",
+			"ComponentName":"YTD 2017011",
+			"Weight":1
+		}
+	],
+	"Subsets@Code.links":[]
+}

@@ -1,0 +1,28 @@
+{
+	"@type":"Hierarchy",
+	"Name":"BSLeaseAssumpMeasure",
+	"Elements":
+	[
+		{
+			"Name":"Increase",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"Annual",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"Discount",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"Rent Adj",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"Monthly",
+			"Type":"Numeric"
+		}
+	],
+	"Subsets@Code.links":[]
+}

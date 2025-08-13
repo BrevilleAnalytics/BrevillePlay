@@ -1,0 +1,125 @@
+#Region System
+FEEDSTRINGS;
+SKIPCHECK;
+#EndRegion
+
+# Cube name: BRAsFiscalMonth
+# Description: to keep actual flag by month
+
+
+[ 'Actual Flag' , 'APAC' ] = N:
+IF ( NUMBR ( !FiscalMonth )
+  <= NUMBR ( SUBST ( DIMNM( 'FiscalMonth' , DIMIX( 'FiscalMonth' , DB( 'BRAsVersion' , 'NoVersion' , 'APAC Actual Month' ) ) ) , 1 , 4 )
+     |
+     SUBST ( DIMNM( 'FiscalMonth' , DIMIX( 'FiscalMonth' , DB( 'BRAsVersion' , 'NoVersion' , 'APAC Actual Month' ) ) ) , 5 , 3 ) ) 
+   , 1
+   , CONTINUE ) ;
+
+[ 'Actual Flag' , 'EMEA' ] = N:
+IF ( NUMBR ( !FiscalMonth )
+  <= NUMBR ( SUBST ( DIMNM( 'FiscalMonth' , DIMIX( 'FiscalMonth' , DB( 'BRAsVersion' , 'NoVersion' , 'EMEA Actual Month' ) ) ) , 1 , 4 )
+     |
+     SUBST ( DIMNM( 'FiscalMonth' , DIMIX( 'FiscalMonth' , DB( 'BRAsVersion' , 'NoVersion' , 'EMEA Actual Month' ) ) ) , 5 , 3 ) ) 
+   , 1
+   , CONTINUE ) ;
+   
+   
+[ 'Actual Flag' , 'Americas' ] = N:
+IF ( NUMBR ( !FiscalMonth )
+  <= NUMBR ( SUBST ( DIMNM( 'FiscalMonth' , DIMIX( 'FiscalMonth' , DB( 'BRAsVersion' , 'NoVersion' , 'Americas Actual Month' ) ) ) , 1 , 4 )
+     |
+     SUBST ( DIMNM( 'FiscalMonth' , DIMIX( 'FiscalMonth' , DB( 'BRAsVersion' , 'NoVersion' , 'Americas Actual Month' ) ) ) , 5 , 3 ) ) 
+   , 1
+   , CONTINUE ) ;
+
+[ 'Actual Flag' , 'Corporate' ] = N:
+IF ( NUMBR ( !FiscalMonth )
+  <= NUMBR ( SUBST ( DIMNM( 'FiscalMonth' , DIMIX( 'FiscalMonth' , DB( 'BRAsVersion' , 'NoVersion' , 'Corporate Actual Month' ) ) ) , 1 , 4 )
+     |
+     SUBST ( DIMNM( 'FiscalMonth' , DIMIX( 'FiscalMonth' , DB( 'BRAsVersion' , 'NoVersion' , 'Corporate Actual Month' ) ) ) , 5 , 3 ) ) 
+   , 1
+   , CONTINUE ) ;
+   
+ # Set read by default
+[ 'Default Access' ] = S: 'READ' ;
+
+[ 'Outlook' , 'Override' , 'APAC'  ] = S: 
+IF ( NUMBR ( !FiscalMonth )
+  = NUMBR ( SUBST ( DIMNM( 'FiscalMonth' , DIMIX( 'FiscalMonth' , DB( 'BRAsVersion' , 'NoVersion' , 'APAC Lock Outlook Month - CM' ) ) ) , 1 , 4 )
+     |
+     SUBST ( DIMNM( 'FiscalMonth' , DIMIX( 'FiscalMonth' , DB( 'BRAsVersion' , 'NoVersion' , 'APAC Lock Outlook Month - CM' ) ) ) , 5 , 3 ) ) 
+   , 'READ'
+   , CONTINUE ) ;
+
+[ 'Outlook' , 'Override' , 'APAC'  ] = S: 
+IF ( NUMBR ( !FiscalMonth )
+  > NUMBR ( SUBST ( DIMNM( 'FiscalMonth' , DIMIX( 'FiscalMonth' , DB( 'BRAsVersion' , 'NoVersion' , 'APAC Actual Month' ) ) ) , 1 , 4 )
+     |
+     SUBST ( DIMNM( 'FiscalMonth' , DIMIX( 'FiscalMonth' , DB( 'BRAsVersion' , 'NoVersion' , 'APAC Actual Month' ) ) ) , 5 , 3 ) ) 
+   , 'WRITE'
+   , STET ) ;
+   
+[ 'Outlook' , 'Override' , 'EMEA'  ] = S: 
+IF ( NUMBR ( !FiscalMonth )
+  = NUMBR ( SUBST ( DIMNM( 'FiscalMonth' , DIMIX( 'FiscalMonth' , DB( 'BRAsVersion' , 'NoVersion' , 'EMEA Lock Outlook Month - CM' ) ) ) , 1 , 4 )
+     |
+     SUBST ( DIMNM( 'FiscalMonth' , DIMIX( 'FiscalMonth' , DB( 'BRAsVersion' , 'NoVersion' , 'EMEA Lock Outlook Month - CM' ) ) ) , 5 , 3 ) ) 
+   , 'READ'
+   , CONTINUE ) ;
+
+[ 'Outlook' , 'Override' , 'EMEA'  ] = S: 
+IF ( NUMBR ( !FiscalMonth )
+  > NUMBR ( SUBST ( DIMNM( 'FiscalMonth' , DIMIX( 'FiscalMonth' , DB( 'BRAsVersion' , 'NoVersion' , 'EMEA Actual Month' ) ) ) , 1 , 4 )
+     |
+     SUBST ( DIMNM( 'FiscalMonth' , DIMIX( 'FiscalMonth' , DB( 'BRAsVersion' , 'NoVersion' , 'EMEA Actual Month' ) ) ) , 5 , 3 ) ) 
+   , 'WRITE'
+   , STET ) ;
+
+[ 'Outlook' , 'Override' , 'Americas'  ] = S: 
+IF ( NUMBR ( !FiscalMonth )
+  = NUMBR ( SUBST ( DIMNM( 'FiscalMonth' , DIMIX( 'FiscalMonth' , DB( 'BRAsVersion' , 'NoVersion' , 'Americas Lock Outlook Month - CM' ) ) ) , 1 , 4 )
+     |
+     SUBST ( DIMNM( 'FiscalMonth' , DIMIX( 'FiscalMonth' , DB( 'BRAsVersion' , 'NoVersion' , 'Americas Lock Outlook Month - CM' ) ) ) , 5 , 3 ) ) 
+   , 'READ'
+   , CONTINUE ) ;
+
+
+[ 'Outlook' , 'Override' , 'Americas'  ] = S: 
+IF ( NUMBR ( !FiscalMonth )
+  > NUMBR ( SUBST ( DIMNM( 'FiscalMonth' , DIMIX( 'FiscalMonth' , DB( 'BRAsVersion' , 'NoVersion' , 'Americas Actual Month' ) ) ) , 1 , 4 )
+     |
+     SUBST ( DIMNM( 'FiscalMonth' , DIMIX( 'FiscalMonth' , DB( 'BRAsVersion' , 'NoVersion' , 'Americas Actual Month' ) ) ) , 5 , 3 ) ) 
+   , 'WRITE'
+   , STET ) ;
+
+[ 'Outlook' , 'Override' , 'Corporate'  ] = S: 
+IF ( NUMBR ( !FiscalMonth )
+  = NUMBR ( SUBST ( DIMNM( 'FiscalMonth' , DIMIX( 'FiscalMonth' , DB( 'BRAsVersion' , 'NoVersion' , 'Corporate Lock Outlook Month - CM' ) ) ) , 1 , 4 )
+     |
+     SUBST ( DIMNM( 'FiscalMonth' , DIMIX( 'FiscalMonth' , DB( 'BRAsVersion' , 'NoVersion' , 'Corporate Lock Outlook Month - CM' ) ) ) , 5 , 3 ) ) 
+   , 'READ'
+   , CONTINUE ) ;
+   
+[ 'Outlook' , 'Override' , 'Corporate'  ] = S: 
+IF ( NUMBR ( !FiscalMonth )
+  > NUMBR ( SUBST ( DIMNM( 'FiscalMonth' , DIMIX( 'FiscalMonth' , DB( 'BRAsVersion' , 'NoVersion' , 'Corporate Actual Month' ) ) ) , 1 , 4 )
+     |
+     SUBST ( DIMNM( 'FiscalMonth' , DIMIX( 'FiscalMonth' , DB( 'BRAsVersion' , 'NoVersion' , 'Corporate Actual Month' ) ) ) , 5 , 3 ) ) 
+   , 'WRITE'
+   , STET ) ;
+     
+[ 'Final Access' ] = S:
+IF ( DB ( 'BRAsFiscalMonth' , !Version , !Theatre , !FiscalMonth , 'Override' ) @<> '' , 
+   DB ( 'BRAsFiscalMonth' , !Version , !Theatre , !FiscalMonth , 'Override' ) , 
+   DB ( 'BRAsFiscalMonth' , !Version , !Theatre , !FiscalMonth , 'Default Access' ) ) ;
+   
+[ 'Days in Month']= N:
+   IF ( 
+   SUBST (ATTRS('FiscalMonth',!FiscalMonth,'CalendarYYYMM'),6,2) @<>'12',
+        DayNo( SUBST (ATTRS('FiscalMonth',!FiscalMonth,'CalendarYYYMM'),1,4) |'-'| STR((NUMBR(SUBST (ATTRS('FiscalMonth',!FiscalMonth,'CalendarYYYMM'),6,2)))+1,2,0) |'-01') 
+        - DayNo( SUBST (ATTRS('FiscalMonth',!FiscalMonth,'CalendarYYYMM'),1,4) |'-'| SUBST (ATTRS('FiscalMonth',!FiscalMonth,'CalendarYYYMM'),6,2) |'-01'),
+
+        DayNo( SUBST (!FiscalMonth,1,4) |'-'| '01' |'-01') 
+        - DayNo( SUBST (ATTRS('FiscalMonth',!FiscalMonth,'CalendarYYYMM'),1,4) |'-'| SUBST (ATTRS('FiscalMonth',!FiscalMonth,'CalendarYYYMM'),6,2) |'-01')
+   );    
+

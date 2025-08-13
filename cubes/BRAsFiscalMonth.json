@@ -1,0 +1,24 @@
+{
+	"@type":"Cube",
+	"Name":"BRAsFiscalMonth",
+	"Rules@Code.link":"BRAsFiscalMonth.rules",
+	"Dimensions":
+	[
+		{
+			"@id":"Dimensions('Version')"
+		},
+		{
+			"@id":"Dimensions('Theatre')"
+		},
+		{
+			"@id":"Dimensions('FiscalMonth')"
+		},
+		{
+			"@id":"Dimensions('BRAsFiscalMonthMeasure')"
+		}
+	],
+	"Views@Code.links":
+	[
+		"BRAsFiscalMonth.views/Default.json"
+	]
+}

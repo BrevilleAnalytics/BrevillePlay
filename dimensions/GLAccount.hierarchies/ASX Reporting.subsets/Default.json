@@ -1,0 +1,58 @@
+{
+	"@type":"Subset",
+	"Name":"Default",
+	"Elements":
+	[
+		{
+			"@id":"Dimensions('GLAccount')/Hierarchies('ASX Reporting')/Elements('Revenue')"
+		},
+		{
+			"@id":"Dimensions('GLAccount')/Hierarchies('ASX Reporting')/Elements('Cost of sales')"
+		},
+		{
+			"@id":"Dimensions('GLAccount')/Hierarchies('ASX Reporting')/Elements('Gross Profit')"
+		},
+		{
+			"@id":"Dimensions('GLAccount')/Hierarchies('ASX Reporting')/Elements('Other Income (ASX view)')"
+		},
+		{
+			"@id":"Dimensions('GLAccount')/Hierarchies('ASX Reporting')/Elements('Employee benefits expenses (ASX view)')"
+		},
+		{
+			"@id":"Dimensions('GLAccount')/Hierarchies('ASX Reporting')/Elements('Premises and Utilities expenses')"
+		},
+		{
+			"@id":"Dimensions('GLAccount')/Hierarchies('ASX Reporting')/Elements('Advertising and marketing expense')"
+		},
+		{
+			"@id":"Dimensions('GLAccount')/Hierarchies('ASX Reporting')/Elements('Other expenses')"
+		},
+		{
+			"@id":"Dimensions('GLAccount')/Hierarchies('ASX Reporting')/Elements('EBITDA (ASX view)')"
+		},
+		{
+			"@id":"Dimensions('GLAccount')/Hierarchies('ASX Reporting')/Elements('Depreciation and amortisation expense (ASX view)')"
+		},
+		{
+			"@id":"Dimensions('GLAccount')/Hierarchies('ASX Reporting')/Elements('EBIT (ASX view)')"
+		},
+		{
+			"@id":"Dimensions('GLAccount')/Hierarchies('ASX Reporting')/Elements('Finance costs')"
+		},
+		{
+			"@id":"Dimensions('GLAccount')/Hierarchies('ASX Reporting')/Elements('Finance income')"
+		},
+		{
+			"@id":"Dimensions('GLAccount')/Hierarchies('ASX Reporting')/Elements('Finance inter-company')"
+		},
+		{
+			"@id":"Dimensions('GLAccount')/Hierarchies('ASX Reporting')/Elements('Profit before income tax')"
+		},
+		{
+			"@id":"Dimensions('GLAccount')/Hierarchies('ASX Reporting')/Elements('Income tax expense')"
+		},
+		{
+			"@id":"Dimensions('GLAccount')/Hierarchies('ASX Reporting')/Elements('Profit After Tax (ASX view)')"
+		}
+	]
+}

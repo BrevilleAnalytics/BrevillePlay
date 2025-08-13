@@ -1,0 +1,38 @@
+#Region System
+FEEDSTRINGS;
+SKIPCHECK;
+#EndRegion
+
+# Version control
+#v 1.0: initial draft
+
+###### Dimension: FiscalMonth
+### subset 1: App.CYMonths
+['FiscalMonth', '0001', 'MDX' ] = S: '{
+	{TM1FILTERBYLEVEL( {Descendants ( [FiscalMonth].[' | Str ( DB('BRAsVersion','NoVersion','Fiscal Year Numeric') ,4,0) | '] ) },0)}
+}' ;
+
+### subset 2: App.C2YsMonths
+['FiscalMonth', '0002', 'MDX' ] = S:
+'{
+	{TM1FILTERBYLEVEL( {Descendants ( [FiscalMonth].[' | Str ( DB('BRAsVersion','NoVersion','Fiscal Year Numeric') ,4,0) | '] ) , Descendants ( [FiscalMonth].[' | Str ( DB('BRAsVersion','NoVersion','Fiscal Year+1 Numeric') ,4,0) | '] ) },0)}
+}' ;
+
+### subset 3: App.BudgetYear
+['FiscalMonth', '0003', 'MDX' ] = S:
+'{ [FiscalMonth].[' | DB('BRAsVersion','NoVersion','Budget Year') | '] }' ;
+
+### subset 4: App.ForecastYear
+['FiscalMonth', '0004', 'MDX' ] = S:
+'{ [FiscalMonth].[' | DB('BRAsVersion','NoVersion','Fiscal Year') | '] }' ;
+
+### subset 5: App.BudgetMonths
+['FiscalMonth', '0005', 'MDX' ] = S: '{
+	{TM1FILTERBYLEVEL( {Descendants ( [FiscalMonth].[' | DB('BRAsVersion','NoVersion','Budget Year') | '] ) },0)}
+}' ;
+
+
+###### Dimension: FiscalWeek
+### subset 1: App.BudgetWeek
+['FiscalWeek', '0001', 'MDX' ] = S:
+'{TM1FILTERBYLEVEL(DISTINCT(DESCENDANTS([FiscalWeek].[FiscalWeek].[' | DB('BRAsVersion','NoVersion','Budget Year') | '])) , 1)}' ;

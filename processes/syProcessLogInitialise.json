@@ -1,0 +1,21 @@
+{
+	"@type":"Process",
+	"Name":"syProcessLogInitialise",
+	"HasSecurityAccess":false,
+	"Code@Code.link":"syProcessLogInitialise.ti",
+	"UIData":"CubeAction=1511€DataAction=1503€CubeLogChanges=0€_ParameterConstraints=e30€",
+	"DataSource":
+	{
+		"Type":"None"
+	},
+	"Parameters":
+	[
+		{
+			"Name":"psProcessName",
+			"Prompt":"Name of process to initialise log for",
+			"Value":"Default",
+			"Type":"String"
+		}
+	],
+	"Variables":[]
+}

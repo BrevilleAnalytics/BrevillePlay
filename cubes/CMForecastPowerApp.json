@@ -1,0 +1,29 @@
+{
+	"@type":"Cube",
+	"Name":"CMForecastPowerApp",
+	"Dimensions":
+	[
+		{
+			"@id":"Dimensions('Customer')"
+		},
+		{
+			"@id":"Dimensions('Product')"
+		},
+		{
+			"@id":"Dimensions('Segment')"
+		},
+		{
+			"@id":"Dimensions('BusinessUnit')"
+		},
+		{
+			"@id":"Dimensions('FiscalMonth')"
+		},
+		{
+			"@id":"Dimensions('Theatre')"
+		},
+		{
+			"@id":"Dimensions('CMForecastPAMeasure')"
+		}
+	],
+	"Views@Code.links":[]
+}

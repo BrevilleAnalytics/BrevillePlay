@@ -1,0 +1,5 @@
+{
+	"@type":"Subset",
+	"Name":"App.Regions",
+	"Expression":"{EXCEPT(DRILLDOWNMEMBER({[BusinessUnit].[Region].[All Region]} , {[BusinessUnit].[Region].[All Region],[BusinessUnit].[Region].[Breville Group Total]} , RECURSIVE) , {[BusinessUnit].[Region].[All Region]})}"
+}

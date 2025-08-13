@@ -1,0 +1,16 @@
+{
+	"@type":"Hierarchy",
+	"Name":"BSStgActualsMeasure",
+	"Elements":
+	[
+		{
+			"Name":"Movement",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"Balance",
+			"Type":"Numeric"
+		}
+	],
+	"Subsets@Code.links":[]
+}

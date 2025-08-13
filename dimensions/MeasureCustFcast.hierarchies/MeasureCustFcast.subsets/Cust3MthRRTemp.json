@@ -1,0 +1,10 @@
+{
+	"@type":"Subset",
+	"Name":"Cust3MthRRTemp",
+	"Elements":
+	[
+		{
+			"@id":"Dimensions('MeasureCustFcast')/Hierarchies('MeasureCustFcast')/Elements('Shipped Units')"
+		}
+	]
+}

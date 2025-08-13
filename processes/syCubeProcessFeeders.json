@@ -1,0 +1,21 @@
+{
+	"@type":"Process",
+	"Name":"syCubeProcessFeeders",
+	"HasSecurityAccess":false,
+	"Code@Code.link":"syCubeProcessFeeders.ti",
+	"UIData":"_ParameterConstraints=e30=€",
+	"DataSource":
+	{
+		"Type":"None"
+	},
+	"Parameters":
+	[
+		{
+			"Name":"pCubeName",
+			"Prompt":"",
+			"Value":"",
+			"Type":"String"
+		}
+	],
+	"Variables":[]
+}

@@ -1,0 +1,5 @@
+{
+	"@type":"Subset",
+	"Name":"All Segment",
+	"Expression":"{DRILLDOWNMEMBER({[Segment].[Segment].[All Segment]} , {[Segment].[Segment].[All Segment],[Segment].[Segment].[Global incl No segment]} , RECURSIVE)}"
+}

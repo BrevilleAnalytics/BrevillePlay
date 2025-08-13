@@ -1,0 +1,485 @@
+SKIPCHECK;
+
+#Region - Rule #1 Override Calculated
+['Reported Value'] = N:
+  IF (DB( 'BS Reporting', !Version, !FiscalMonth, !Currency, !BusinessUnit, !GLAccount, 'Override', !'BS Measure') <> 0,
+     DB( 'BS Reporting', !Version, !FiscalMonth, !Currency, !BusinessUnit, !GLAccount, 'Override', !'BS Measure'),
+     DB( 'BS Reporting', !Version, !FiscalMonth, !Currency, !BusinessUnit, !GLAccount, 'Total', !'BS Measure')  
+     );
+#EndRegion
+
+#Region Dividends paid from Cashflow
+  [ 'GLAccount':'300706', 'Calculated', 'Movement']=N:
+  DB('CF Reporting', !Version, !FiscalMonth, !Currency, !BusinessUnit, 'Reported Value', 'Dividend income/(payment)' );
+#EndRegion
+
+#Region - Current Period - 3 Way Adjustments
+          # New measure
+# ['Calculated', {'Outlook','Working Budget'}, 'Current Period - 3 Way Adjustments', 'Movement']=N:
+#     IF ( DB( 'BRAsFiscalMonth' , 'Actual' , ATTRS( 'BusinessUnit', !BusinessUnit , 'OPXTheatre' ), !FiscalMonth , 'Actual Flag' ) <> 1,
+#         (DB('PnLPlan', '720110', 'All Functions', !BusinessUnit, 'All Segment', 'Total', !Currency, !FiscalMonth, !Version, 'All Theatre', 'Amount' )+
+#         DB('PnLPlan', '760101', 'All Functions', !BusinessUnit, 'All Segment', 'Total', !Currency, !FiscalMonth, !Version, 'All Theatre', 'Amount' ))  *-1,CONTINUE);
+      
+# ['Calculated', {'Outlook','Working Budget'}, GLAccount:'GLAccount':'Current Period - 3 Way Adjustments', 'Balance']=N:
+#         DB('BS Reporting', !Version, !FiscalMonth, !Currency, !BusinessUnit, !GLAccount, !BSComponent, 'Movement' );
+#EndRegion
+
+#Region - Current Period - Intercompany
+          # New measure
+          # Added logic to convert BHK Local currency from USD (PnL PLan) to HKD (based on AUD-Outlook)
+          
+# [ 'GLAccount':'Current Period – Intercompany', 'Calculated', 'Movement', 'Local', 'BHK']=N:
+#    (DB('BSStgActuals', 'GLAccount':'Gross Sales', !BusinessUnit, !Currency, !FiscalMonth, 'Reported Value', 'Balance')+
+#    DB('BSStgActuals', 'GLAccount':'COGS', !BusinessUnit, !Currency, !FiscalMonth, 'Reported Value', 'Balance'))
+#  / DB('BRExchangeRate',!BusinessUnit,!FiscalMonth,'AUD-Outlook','Currency','FXRate')
+#  * DB('BRExchangeRate','HKT',!FiscalMonth,'AUD-Outlook','Currency','FXRate');
+
+# [ 'GLAccount':'Current Period – Intercompany', 'Calculated', 'Movement']=N:
+#     IF ( DB( 'BRAsFiscalMonth' , 'Actual' , ATTRS( 'BusinessUnit', !BusinessUnit , 'OPXTheatre' ), !FiscalMonth , 'Actual Flag' ) <> 1,        
+#         (DB('BSStgStaging', !BusinessUnit, !Currency, !FiscalMonth, !Version, !BSComponent, 'VLF for the Month' ) *-1),0);
+
+# [ 'GLAccount':'Current Period – Intercompany', 'Calculated', 'Movement']=N:
+#       # IF ( AttrS ('FiscalMonth',!FiscalMonth, 'Short_Text')@= 'Jul',
+#       #   DB('BSStgStaging', !BusinessUnit, !Currency, !FiscalMonth, !Version, !BSComponent, 'VLF for the Month' )*-1, 
+#     IF ( DB( 'BRAsFiscalMonth' , 'Actual' , ATTRS( 'BusinessUnit', !BusinessUnit , 'OPXTheatre' ), !FiscalMonth , 'Actual Flag' ) <> 1,        
+#         (DB('BSStgStaging', !BusinessUnit, !Currency, !FiscalMonth, !Version, !BSComponent, 'VLF for the Month' )-
+#         DB('BSStgStaging', !BusinessUnit, !Currency, AttrS('FiscalMonth',!FiscalMonth,'PrevPeriod'), !Version, !BSComponent, 'VLF for the Month' )) *-1,0
+#    )
+#   ;
+      
+[ 'GLAccount':'Current Period – Intercompany', 'Calculated', 'Balance']=N:
+      # IF ( AttrS ('FiscalMonth',!FiscalMonth, 'Short_Text')@= 'Jul',
+      #   DB('BS Reporting', !Version, !FiscalMonth, !Currency, !BusinessUnit, !GLAccount, !BSComponent, 'Movement' ), 
+    IF ( DB( 'BRAsFiscalMonth' , 'Actual' , ATTRS( 'BusinessUnit', !BusinessUnit , 'OPXTheatre' ), !FiscalMonth , 'Actual Flag' ) <> 1,         
+        DB('BS Reporting', !Version, AttrS('FiscalMonth',!FiscalMonth,'PrevPeriod'), !Currency, !BusinessUnit, !GLAccount, !BSComponent, 'Balance' )+
+        DB('BS Reporting', !Version, !FiscalMonth, !Currency, !BusinessUnit, !GLAccount, !BSComponent, 'Movement' ),0);
+
+#EndRegion 
+
+#Region - Bring in Movement and Balance from BSStgActuals cube for actual data
+[ 'Calculated', {'Outlook','Working Budget'}, {'Balance','Movement'}]=N:
+  IF( 
+    DB( 'BRAsFiscalMonth' , 'Actual' , ATTRS( 'BusinessUnit', !BusinessUnit , 'OPXTheatre' ), !FiscalMonth , 'Actual Flag' ) = 1 & !GLAccount @<> 'Current Period Earnings',
+    DB('BSStgActuals', !GLAccount, !BusinessUnit, !Currency, !FiscalMonth, !BSComponent, !BS Measure),
+    CONTINUE
+    ) ;
+#EndRegion 
+
+#Region - Cash Closing Balance from CF Reporting cube
+[ 'Calculated', {'Outlook','Working Budget'}, {'Movement'}, '100110']=N:
+IF ( DB( 'BRAsFiscalMonth' , 'Actual' , ATTRS( 'BusinessUnit', !BusinessUnit , 'OPXTheatre' ), !FiscalMonth , 'Actual Flag' ) <> 1,
+  DB('CF Reporting', !Version, !FiscalMonth, !Currency, !BusinessUnit, 'Reported Value', 'Closing balance' )-
+  DB('BS Reporting', !Version, Attrs('FiscalMonth', !FiscalMonth, 'PrevPeriod'), !Currency, !BusinessUnit, 'GLAccount':'Cash at bank - BS', 'Reported Value', 'Balance' )  
+  ,CONTINUE);
+
+[ 'GLAccount':'105001', 'Calculated', 'Movement']=N:
+    IF ( DB( 'BRAsFiscalMonth' , 'Actual' , ATTRS( 'BusinessUnit', !BusinessUnit , 'OPXTheatre' ), !FiscalMonth , 'Actual Flag' ) <> 1,
+  DB('BSStgStaging', !BusinessUnit, !Currency, !FiscalMonth, !Version, 'Reported Value', 'BSStgStagingMeasure':'Closing Inventory (ex provision)')-
+  DB('BS Reporting', !Version, Attrs('FiscalMonth', !FiscalMonth, 'PrevPeriod'), !Currency, !BusinessUnit, 'GLAccount':'Finished goods (at lower cost) - BS', 'Reported Value', 'Balance' ),CONTINUE);  
+
+#EndRegion
+
+#Region - Cash advances from CF Reporting cube
+[ 'Calculated', {'Outlook','Working Budget'}, {'Movement'}, '200110']=N:
+IF ( DB( 'BRAsFiscalMonth' , 'Actual' , ATTRS( 'BusinessUnit', !BusinessUnit , 'OPXTheatre' ), !FiscalMonth , 'Actual Flag' ) <> 1,
+  DB('CF Reporting', !Version, !FiscalMonth, !Currency, !BusinessUnit, 'Reported Value', 'Drawdown' )+
+  DB('CF Reporting', !Version, !FiscalMonth, !Currency, !BusinessUnit, 'Reported Value', 'Repayment' )  
+  ,CONTINUE);
+
+[ 'Calculated', {'Outlook','Working Budget'}, {'Balance'}, '200110']=N:
+  ['Movement'] + DB('BS Reporting', !Version, AttrS('FiscalMonth', !FiscalMonth,'PrevPeriod'), !Currency, !BusinessUnit, !GLAccount, !BSComponent, !BS Measure );
+
+#Region - Cash advances Facilities (current) from CF Reporting cube
+[ 'Calculated', {'Outlook','Working Budget'}, {'Balance'}, '200185']=N:
+IF ( DB( 'BRAsFiscalMonth' , 'Actual' , ATTRS( 'BusinessUnit', !BusinessUnit , 'OPXTheatre' ), !FiscalMonth , 'Actual Flag' ) <> 1,
+  DB('CF Reporting', !Version, !FiscalMonth, !Currency, !BusinessUnit, 'Reported Value', 'Closing balance - Borrowings' ) 
+  ,CONTINUE);
+#Feeder required
+
+#Region - Cash advances Facilities (non-current) from CF Reporting cube
+[ 'Calculated', {'Outlook','Working Budget'}, {'Balance'}, '210101']=N:
+IF ( DB( 'BRAsFiscalMonth' , 'Actual' , ATTRS( 'BusinessUnit', !BusinessUnit , 'OPXTheatre' ), !FiscalMonth , 'Actual Flag' ) <> 1,
+  DB('CF Reporting', !Version, !FiscalMonth, !Currency, !BusinessUnit, 'Reported Value', 'Closing Balance - Borrowings (non-current)' ) 
+  ,CONTINUE);
+#Feeder required
+
+#Region - Warranty Provisions
+#Movement
+[ 'GLAccount':'205504', 'Calculated', 'Movement']=N:
+  DB('BSStgStaging', !BusinessUnit, !Currency, !FiscalMonth, !Version, 'Reported Value', 'Warranty Expense')+
+  DB('BSStgStaging', !BusinessUnit, !Currency, !FiscalMonth, !Version, 'Reported Value', 'Warranty Claims'); 
+
+# #Balance forecast periods
+[ 'GLAccount':'205504', 'Calculated', {'Outlook','Working Budget'}, 'Balance']=N:
+  ['Movement']+
+  DB('BS Reporting', !Version, Attrs('FiscalMonth', !FiscalMonth, 'PrevPeriod'), !Currency, !BusinessUnit, !GLAccount, 'Reported Value', !'BS Measure' );
+
+#EndRegion
+
+#Region - Right of Use
+[ 'GLAccount':'110600', 'Calculated', 'Movement']=N:
+IF ( DB( 'BRAsFiscalMonth' , 'Actual' , ATTRS( 'BusinessUnit', !BusinessUnit , 'OPXTheatre' ), !FiscalMonth , 'Actual Flag' ) <> 1,  
+  DB('BSStgStaging', !BusinessUnit, !Currency, !FiscalMonth, !Version, !BSComponent, 'Depreciation' ),0); 
+#EndRegion
+
+#Region - Marketing Provisions
+
+#Movement
+[ 'GLAccount':'202005', 'Calculated', 'Movement']=N:
+  DB('BSStgStaging', !BusinessUnit, !Currency, !FiscalMonth, !Version, 'Reported Value', 'Other marketing'); 
+
+#Balance forecast periods
+[ 'GLAccount':'202005', 'Calculated', {'Outlook','Working Budget'}, 'Balance']=N:
+  ['Movement']+
+  DB('BS Reporting', !Version, Attrs('FiscalMonth', !FiscalMonth, 'PrevPeriod'), !Currency, !BusinessUnit, !GLAccount, 'Reported Value', !'BS Measure' );
+
+#EndRegion
+
+#Region - Trade Payables including GRNI
+
+[ 'GLAccount':'201001', 'Calculated', 'Movement']=N:
+  IF( DB( 'BRAsFiscalMonth' , 'Actual' , ATTRS( 'BusinessUnit', !BusinessUnit , 'OPXTheatre' ), !FiscalMonth , 'Actual Flag' ) <> 1,
+  DB('BSStgStaging', !BusinessUnit, !Currency, !FiscalMonth, !Version, 'Reported Value', 'Closing Trade Payables')-
+  DB('BSStgStaging', !BusinessUnit, !Currency, AttrS('FiscalMonth',!FiscalMonth,'PrevPeriod'), !Version, 'Reported Value', 'Closing Trade Payables')
+  ,0);  
+#EndRegion
+
+#Region - Accrued short-term incentives (bonuses) - BS
+[ 'GLAccount':'202016', 'Calculated', 'Movement']=N:
+  IF( DB( 'BRAsFiscalMonth' , 'Actual' , ATTRS( 'BusinessUnit', !BusinessUnit , 'OPXTheatre' ), !FiscalMonth , 'Actual Flag' ) <> 1,
+  DB('PnLPlan', 'STI', 'All Functions', !BusinessUnit, 'All Segment', 'OPEX', !Currency, !FiscalMonth, !Version, 'All Theatre', 'Amount' ),0);
+#EndRegion
+
+#Region Employee equity benefits reserve - BS
+[ 'GLAccount':'300401', 'Calculated', 'Movement']=N:
+  IF( DB( 'BRAsFiscalMonth' , 'Actual' , ATTRS( 'BusinessUnit', !BusinessUnit , 'OPXTheatre' ), !FiscalMonth , 'Actual Flag' ) <> 1,
+  DB('PnLPlan', 'LTI', 'All Functions', !BusinessUnit, 'All Segment', 'OPEX', !Currency, !FiscalMonth, !Version, 'All Theatre', 'Amount' ),0);
+#EndRegion
+
+#Region - CAPEX
+
+#Plant & Equipment
+[ 'GLAccount':'110101', 'Calculated', 'Movement']=N:
+  IF( DB( 'BRAsFiscalMonth' , 'Actual' , ATTRS( 'BusinessUnit', !BusinessUnit , 'OPXTheatre' ), !FiscalMonth , 'Actual Flag' ) <> 1,   
+  DB('BSStgStaging', !BusinessUnit, !Currency, !FiscalMonth, !Version, 'Reported Value', 'Plant & Equipment - Additions')+
+  DB('BSStgStaging', !BusinessUnit, !Currency, !FiscalMonth, !Version, 'Reported Value', 'Plant & Equipment - Other / Disposals')
+  ,0)  ;  
+
+[ 'GLAccount':'110301', 'Calculated', 'Movement']=N:
+  IF( DB( 'BRAsFiscalMonth' , 'Actual' , ATTRS( 'BusinessUnit', !BusinessUnit , 'OPXTheatre' ), !FiscalMonth , 'Actual Flag' ) <> 1,   
+  (DB('BSStgStaging', !BusinessUnit, !Currency, AttrS('FiscalMonth',!FiscalMonth,'PrevPeriod'), !Version, 'Reported Value', 'Plant & Equipment - Accum Depn - CB')-
+  DB('BSStgStaging', !BusinessUnit, !Currency, !FiscalMonth, !Version, 'Reported Value', 'Plant & Equipment - Accum Depn - CB'))*-1
+  ,0)  ;
+
+#Tooling
+[ 'GLAccount':'110112', 'Calculated', 'Movement']=N:
+  IF( DB( 'BRAsFiscalMonth' , 'Actual' , ATTRS( 'BusinessUnit', !BusinessUnit , 'OPXTheatre' ), !FiscalMonth , 'Actual Flag' ) <> 1,   
+  DB('BSStgStaging', !BusinessUnit, !Currency, !FiscalMonth, !Version, 'Reported Value', 'Tooling - Additions')+
+  DB('BSStgStaging', !BusinessUnit, !Currency, !FiscalMonth, !Version, 'Reported Value', 'Tooling - Other / Disposals')
+  ,0)  ;
+
+[ 'GLAccount':'110312', 'Calculated', 'Movement']=N:
+  IF( DB( 'BRAsFiscalMonth' , 'Actual' , ATTRS( 'BusinessUnit', !BusinessUnit , 'OPXTheatre' ), !FiscalMonth , 'Actual Flag' ) <> 1,   
+  (DB('BSStgStaging', !BusinessUnit, !Currency, AttrS('FiscalMonth',!FiscalMonth,'PrevPeriod'), !Version, 'Reported Value', 'Tooling - Accum Depn - CB')-
+  DB('BSStgStaging', !BusinessUnit, !Currency, !FiscalMonth, !Version, 'Reported Value', 'Tooling - Accum Depn - CB'))*-1
+  ,0)  ;
+
+#Intangible Assets - Development Costs
+[ 'GLAccount':'111001', 'Calculated', 'Movement']=N:
+  IF( DB( 'BRAsFiscalMonth' , 'Actual' , ATTRS( 'BusinessUnit', !BusinessUnit , 'OPXTheatre' ), !FiscalMonth , 'Actual Flag' ) <> 1,   
+  DB('BSStgStaging', !BusinessUnit, !Currency, !FiscalMonth, !Version, 'Reported Value', 'Intangible Assets - Development Costs - Additions')+
+  DB('BSStgStaging', !BusinessUnit, !Currency, !FiscalMonth, !Version, 'Reported Value', 'Intangible Assets - Development Costs - Other / Disposals')
+  ,0)  ;
+
+[ 'GLAccount':'111251', 'Calculated', 'Movement']=N:
+  IF( DB( 'BRAsFiscalMonth' , 'Actual' , ATTRS( 'BusinessUnit', !BusinessUnit , 'OPXTheatre' ), !FiscalMonth , 'Actual Flag' ) <> 1,   
+  (DB('BSStgStaging', !BusinessUnit, !Currency, AttrS('FiscalMonth',!FiscalMonth,'PrevPeriod'), !Version, 'Reported Value', 'Intangible Accum Depn - Development costs  - CB')-
+  DB('BSStgStaging', !BusinessUnit, !Currency, !FiscalMonth, !Version, 'Reported Value', 'Intangible Accum Depn - Development costs  - CB'))*-1
+  ,0)  ;
+
+#Intangible Assets - Other Costs
+[ 'GLAccount':'114001', 'Calculated', 'Movement']=N:
+  IF( DB( 'BRAsFiscalMonth' , 'Actual' , ATTRS( 'BusinessUnit', !BusinessUnit , 'OPXTheatre' ), !FiscalMonth , 'Actual Flag' ) <> 1,   
+  DB('BSStgStaging', !BusinessUnit, !Currency, !FiscalMonth, !Version, 'Reported Value', 'Intangible Assets - Other - Additions')+
+  DB('BSStgStaging', !BusinessUnit, !Currency, !FiscalMonth, !Version, 'Reported Value', 'Intangible Assets - Other - Other / Disposals')
+  ,0)  ;
+
+[ 'GLAccount':'114151', 'Calculated', 'Movement']=N:
+  IF( DB( 'BRAsFiscalMonth' , 'Actual' , ATTRS( 'BusinessUnit', !BusinessUnit , 'OPXTheatre' ), !FiscalMonth , 'Actual Flag' ) <> 1,   
+  (DB('BSStgStaging', !BusinessUnit, !Currency, AttrS('FiscalMonth',!FiscalMonth,'PrevPeriod'), !Version, 'Reported Value', 'Intangible Accum Depn - Other - CB')-
+  DB('BSStgStaging', !BusinessUnit, !Currency, !FiscalMonth, !Version, 'Reported Value', 'Intangible Accum Depn - Other - CB'))*-1
+  ,0)  ;
+
+#Intangible Assets - Software
+[ 'GLAccount':'112001', 'Calculated', 'Movement']=N:
+  IF( DB( 'BRAsFiscalMonth' , 'Actual' , ATTRS( 'BusinessUnit', !BusinessUnit , 'OPXTheatre' ), !FiscalMonth , 'Actual Flag' ) <> 1,   
+  DB('BSStgStaging', !BusinessUnit, !Currency, !FiscalMonth, !Version, 'Reported Value', 'Intangible Assets - Software - Additions')+
+  DB('BSStgStaging', !BusinessUnit, !Currency, !FiscalMonth, !Version, 'Reported Value', 'Intangible Assets - Software - Other / Disposals')
+  ,0)  ;
+
+[ 'GLAccount':'112202', 'Calculated', 'Movement']=N:
+  IF( DB( 'BRAsFiscalMonth' , 'Actual' , ATTRS( 'BusinessUnit', !BusinessUnit , 'OPXTheatre' ), !FiscalMonth , 'Actual Flag' ) <> 1,   
+  (DB('BSStgStaging', !BusinessUnit, !Currency, AttrS('FiscalMonth',!FiscalMonth,'PrevPeriod'), !Version, 'Reported Value', 'Intangible Accum Depn - Software - CB')-
+  DB('BSStgStaging', !BusinessUnit, !Currency, !FiscalMonth, !Version, 'Reported Value', 'Intangible Accum Depn - Software - CB'))*-1
+  ,0)  ;
+
+#EndRegion
+
+#Region - Inventory
+
+#Movement
+[ 'GLAccount':'105001', 'Calculated', 'Movement']=N:
+    IF ( DB( 'BRAsFiscalMonth' , 'Actual' , ATTRS( 'BusinessUnit', !BusinessUnit , 'OPXTheatre' ), !FiscalMonth , 'Actual Flag' ) <> 1,
+  DB('BSStgStaging', !BusinessUnit, !Currency, !FiscalMonth, !Version, 'Reported Value', 'BSStgStagingMeasure':'Closing Inventory (ex provision)')-
+  DB('BS Reporting', !Version, Attrs('FiscalMonth', !FiscalMonth, 'PrevPeriod'), !Currency, !BusinessUnit, 'GLAccount':'Finished goods (at lower cost) - BS', 'Reported Value', 'Balance' ),CONTINUE);  
+
+[ 'GLAccount':'105201', 'Calculated', 'Movement']=N:
+    IF ( DB( 'BRAsFiscalMonth' , 'Actual' , ATTRS( 'BusinessUnit', !BusinessUnit , 'OPXTheatre' ), !FiscalMonth , 'Actual Flag' ) <> 1, 
+  DB('BSStgStaging', !BusinessUnit, !Currency, !FiscalMonth, !Version, 'Reported Value', 'BSStgStagingMeasure':'Provision')-  
+  DB('BS Reporting', !Version, Attrs('FiscalMonth', !FiscalMonth, 'PrevPeriod'), !Currency, !BusinessUnit, 'GLAccount':'Allowance for net realisable value - BS', 'Reported Value', 'Balance' ),CONTINUE);  
+
+#EndRegion
+
+#Region - Trade Receivables
+
+    #Movement
+    [ 'GLAccount':'101001F', 'Calculated', 'Movement']=N:
+      DB('BSStgStaging', !BusinessUnit, !Currency, !FiscalMonth, !Version, 'Reported Value', 'BSStgStagingMeasure':'Gross Sales inc VAT')+
+      DB('BSStgStaging', !BusinessUnit, !Currency, !FiscalMonth, !Version, 'Reported Value', 'BSStgStagingMeasure':'Rebate Claims inc VAT')+
+      DB('BSStgStaging', !BusinessUnit, !Currency, !FiscalMonth, !Version, 'Reported Value', 'Less Receipts');  
+    
+    #CPM 16/07/2024 - Change to logic per Breville review of model
+    [ 'GLAccount':'101053', 'Calculated', 'Movement']=N:
+      IF( DB( 'BRAsFiscalMonth' , 'Actual' , ATTRS( 'BusinessUnit', !BusinessUnit , 'OPXTheatre' ), !FiscalMonth , 'Actual Flag' ) <> 1,
+      DB('PnLPlan', '634054', 'All Functions', !BusinessUnit, 'All Segment', 'Total', !Currency, !FiscalMonth, !Version, 'All Theatre', 'Amount')*-1,0);  
+
+#EndRegion
+
+#Region - Lease Liabilities (Current and Non Current)
+
+#Movement - Current
+[ 'GLAccount':'200201', 'Calculated', 'Movement']=N:
+  (DB('BSStgStaging', !BusinessUnit, !Currency, !FiscalMonth, !Version, 'Reported Value', 'Reclass non-current portion')+
+  DB('BSStgStaging', !BusinessUnit, !Currency, !FiscalMonth, !Version, 'Reported Value', 'Interest Expense')+
+  DB('BSStgStaging', !BusinessUnit, !Currency, !FiscalMonth, !Version, 'Reported Value', 'Lease Repayment'))  ; 
+
+# #Movement - Non Current
+[ 'GLAccount':'211200', 'Calculated', 'Movement']=N:
+  DB('BSStgStaging', !BusinessUnit, !Currency, !FiscalMonth, !Version, 'Reported Value', 'Reclass non-current portion (-)');   
+  
+#EndRegion
+
+#Region - Customer Rebates 
+
+#Movement - Customer Rebates
+[ 'GLAccount':'202002', 'Calculated', 'Movement']=N:
+  IF( DB( 'BRAsFiscalMonth' , 'Actual' , ATTRS( 'BusinessUnit', !BusinessUnit , 'OPXTheatre' ), !FiscalMonth , 'Actual Flag' ) <> 1,  
+  DB('BSStgStaging', !BusinessUnit, !Currency, !FiscalMonth, !Version, 'Reported Value', 'Settlement discounts and rebates')+
+  DB('BSStgStaging', !BusinessUnit, !Currency, !FiscalMonth, !Version, 'Reported Value', 'Less claims'),0); 
+
+#Balance forecast periods - GST
+[ 'GLAccount':'202002', 'Calculated', {'Outlook','Working Budget'}, 'Balance']=N:
+  ['Movement']+
+  DB('BS Reporting', !Version, Attrs('FiscalMonth', !FiscalMonth, 'PrevPeriod'), !Currency, !BusinessUnit, !GLAccount, 'Reported Value', !BS Measure );
+
+# #EndRegion
+
+# #Region - Inventories 
+
+# #Movement - Inventories
+[ 'GLAccount':'105001', 'Calculated', 'Movement']=N:
+  DB('BSStgStaging', !BusinessUnit, !Currency, !FiscalMonth, !Version, 'Reported Value', 'Add Purchases')+
+  DB('BSStgStaging', !BusinessUnit, !Currency, !FiscalMonth, !Version, 'Reported Value', 'Reduction in purchases (Per NM)')+
+  DB('BSStgStaging', !BusinessUnit, !Currency, !FiscalMonth, !Version, 'Reported Value', 'COGS FX amortised to P&L')+
+  DB('BSStgStaging', !BusinessUnit, !Currency, !FiscalMonth, !Version, 'Reported Value', 'Less Cost of Sales (per Outlook)')+
+  DB('BSStgStaging', !BusinessUnit, !Currency, !FiscalMonth, !Version, 'Reported Value', 'Less Transfers to NZ (per VG)') 
+  ; 
+
+#Balance forecast periods - Inventories
+[ 'GLAccount':'105001', 'Calculated', {'Outlook','Working Budget'}, 'Balance']=N:
+  ['Movement']+
+  DB('BS Reporting', !Version, Attrs('FiscalMonth', !FiscalMonth, 'PrevPeriod'), !Currency, !BusinessUnit, !GLAccount, 'Reported Value', !BS Measure );
+
+#EndRegion
+
+#Region - GST 
+
+#Movement - GST
+
+[ 'GLAccount':'203001', 'Calculated', 'Movement']=N:
+  IF ( DB( 'BRAsFiscalMonth' , 'Actual' , ATTRS( 'BusinessUnit', !BusinessUnit , 'OPXTheatre' ), !FiscalMonth , 'Actual Flag' ) <> 1, 
+  DB('BSStgStaging', !BusinessUnit, !Currency, !FiscalMonth, !Version, 'Reported Value', 'GST payable/(receivable)')-
+  DB('BSStgStaging', !BusinessUnit, !Currency, AttrS('FiscalMonth',!FiscalMonth,'PrevPeriod'), !Version, 'Reported Value', 'GST payable/(receivable)'), 
+  CONTINUE);  
+
+# #Balance forecast periods - GST
+[ 'GLAccount':'203001', 'Calculated', {'Outlook','Working Budget'}, 'Balance']=N:
+  ['Movement']+
+  DB('BS Reporting', !Version, Attrs('FiscalMonth', !FiscalMonth, 'PrevPeriod'), !Currency, !BusinessUnit, !GLAccount, 'Reported Value', !BS Measure );
+
+#EndRegion
+
+#Region - Tax 
+
+#Movement - Tax
+[ 'GLAccount':'207001', 'Calculated', 'Movement']=N:
+          DB('BSStgStaging', !BusinessUnit, !Currency, !FiscalMonth, !Version, 'Reported Value', 'Tax expense')+
+          DB('BSStgStaging', !BusinessUnit, !Currency, !FiscalMonth, !Version, 'Reported Value', 'Tax installments')+
+          DB('BSStgStaging', !BusinessUnit, !Currency, !FiscalMonth, !Version, 'Reported Value', 'Year end tax paid')+
+          DB('BSStgStaging', !BusinessUnit, !Currency, !FiscalMonth, !Version, 'Reported Value', 'Offset of WHT asset');  
+
+#Balance forecast periods - Tax
+[ 'GLAccount':'207001', 'Calculated', {'Outlook','Working Budget'}, 'Balance']=N:
+  ['Movement']+
+  DB('BS Reporting', !Version, Attrs('FiscalMonth', !FiscalMonth, 'PrevPeriod'), !Currency, !BusinessUnit, !GLAccount, 'Reported Value', !BS Measure );
+
+#EndRegion
+
+#Region - WHT 
+
+#Movement - WHT
+[ 'GLAccount':'207002', 'Calculated', 'Movement']=N:
+  DB('BSStgStaging', !BusinessUnit, !Currency, !FiscalMonth, !Version, 'Reported Value', 'WHT for month (from VLF)')+
+  DB('BSStgStaging', !BusinessUnit, !Currency, !FiscalMonth, !Version, 'Reported Value', 'WHT Tax paid')  
+  ; 
+
+#Balance forecast periods - WHT
+[ 'GLAccount':'207002', 'Calculated', {'Outlook','Working Budget'}, 'Balance']=N:
+  ['Movement']+
+  DB('BS Reporting', !Version, Attrs('FiscalMonth', !FiscalMonth, 'PrevPeriod'), !Currency, !BusinessUnit, !GLAccount, 'Reported Value', !BS Measure );
+
+#EndRegion
+
+#Region - Dividends
+
+  
+[ 'GLAccount':'300703', 'Calculated', 'Movement']=N:
+ DB('BSStgStaging', !BusinessUnit, !Currency, !FiscalMonth, !Version, 'Reported Value', 'Dividends paid') ;
+
+[ 'GLAccount':'300704', 'Calculated', 'Movement']=N:
+ DB('BSStgStaging', !BusinessUnit, !Currency, !FiscalMonth, !Version, 'Reported Value', 'Dividends paid (inter-company)') ;
+#EndRegion
+
+#Region - Intercompany
+
+[ 'GLAccount':'104001', 'Calculated', 'Movement']=N:
+    IF ( DB( 'BRAsFiscalMonth' , 'Actual' , ATTRS( 'BusinessUnit', !BusinessUnit , 'OPXTheatre' ), !FiscalMonth , 'Actual Flag' ) <> 1,
+  DB('BSStgStaging', !BusinessUnit, !Currency, !FiscalMonth, !Version, 'Reported Value', 'BSStgStagingMeasure':'Closing Balance - VLF')-
+  DB('BS Reporting', !Version, Attrs('FiscalMonth', !FiscalMonth, 'PrevPeriod'), !Currency, !BusinessUnit, 'GLAccount':'Inter-company receivables (current) - BS', 'Reported Value', 'Balance' ),CONTINUE);  
+
+
+#EndRegion
+
+#Region - Current Period Earnings
+          # Changed to Current Period Earnings per business requirement
+          # Added logic to convert BHK Local currency from USD (PnL PLan) to HKD (based on AUD-Outlook)
+          
+[ 'GLAccount':'Current Period Earnings', 'Calculated', 'Movement', 'Local', 'BHK']=N:
+   DB('PnLPlan', 'Profit After Tax', 'All Functions', !BusinessUnit, 'All Segment', 'Total', !Currency, !FiscalMonth, !Version, 'All Theatre', 'Amount' )  
+ / DB('BRExchangeRate',!BusinessUnit,!FiscalMonth,'AUD-Outlook','Currency','FXRate')
+ * DB('BRExchangeRate','HKT',!FiscalMonth,'AUD-Outlook','Currency','FXRate');
+          
+[ 'GLAccount':'Current Period Earnings', 'Calculated', 'Movement']=N:
+   DB('PnLPlan', 'Profit After Tax', 'All Functions', !BusinessUnit, 'All Segment', 'Total', !Currency, !FiscalMonth, !Version, 'All Theatre', 'Amount' ) ;        
+      
+[ 'GLAccount':'Current Period Earnings', 'Calculated', 'Balance']=N:
+      IF ( AttrS ('FiscalMonth',!FiscalMonth, 'Short_Text')@= 'Jul',
+        DB('BS Reporting', !Version, !FiscalMonth, !Currency, !BusinessUnit, !GLAccount, !BSComponent, 'Movement' ), 
+        
+        DB('BS Reporting', !Version, AttrS('FiscalMonth',!FiscalMonth,'PrevPeriod'), !Currency, !BusinessUnit, !GLAccount, !BSComponent, 'Balance' )+
+        DB('BS Reporting', !Version, !FiscalMonth, !Currency, !BusinessUnit, !GLAccount, !BSComponent, 'Movement' ));
+
+#EndRegion        
+
+#Region - Carry forward balances from Actual to Forecast periods
+
+#Region - Movement and Balance for non actual periods 
+        #If not part of staging cube models then bring forward actuals balance
+[ 'Calculated', {'Outlook','Working Budget'}, {'Balance'}]=N:
+      DB('BS Reporting', !Version, !FiscalMonth, !Currency, !BusinessUnit, !GLAccount, !BSComponent, 'Movement' )+
+      DB('BS Reporting', !Version, AttrS('FiscalMonth',!FiscalMonth,'PrevPeriod'), !Currency, !BusinessUnit, !GLAccount, !BSComponent, 'Balance' );
+
+#EndRegion
+
+#Region G.S.T. / V.A.T. payables - BS
+# [ {'Outlook','Working Budget'} , 'G.S.T. / V.A.T. payables - BS', {'Calculated','Reported Value'}, 'Balance' ] =  C:
+#   IF ( ( DB( 'BRAsFiscalMonth' , 'Actual' , ATTRS( 'BusinessUnit', !BusinessUnit , 'BSReporting' ), !FiscalMonth , 'Actual Flag' ) <> 1
+#     # %  ( ELLEV ('BusinessUnit', !BusinessUnit) <> 0 ) 
+#         ), 
+#        DB('BSStgStaging', !BusinessUnit, !Currency, !FiscalMonth, !Version, 'Reported Value', 'GST payable/(receivable)' ),
+#        # ['GST/VAT/QST receivable - BS'],
+#        # DB('BS Reporting', !Version, !FiscalMonth, !Currency, !BusinessUnit, 'GST/VAT/QST receivable - BS', !BSComponent, !BS Measure ),
+# 	   CONTINUE);
+#EndRegion
+
+FEEDERS;
+
+#Region Override 
+[{'Override','Total'}]=> 
+  ['Reported Value'];
+  
+['Calculated']=> 
+  ['Total'];
+#EndRegion
+  
+[ 'Current Period Earnings', 'Calculated']=>
+  [ 'Current Period Earnings', 'Total'];
+ 
+['Movement']=> 
+  ['Balance'];
+
+[ 'Calculated', {'Outlook','Working Budget'}, 'Balance'] =>
+ DB('BS Reporting', !Version, AttrS('FiscalMonth',!FiscalMonth,'NextPeriod'), !Currency, !BusinessUnit, !GLAccount, !BSComponent, !BS Measure );  
+
+[GLAccount:'GLAccount':'All BalanceSheet GLAccounts']=>
+  ['Current Period Earnings'];
+
+['300701']=>
+  ['Current Period Earnings'];  
+  
+#Region - Trade Payables including GRNI
+['GLAccount':'GLAccount':'Trade payables - BS']=>
+['201001'],
+['GLAccount':'GLAccount':'Trade payables - GRNI - BS'];
+
+['GLAccount':'GLAccount':'Trade & other payables - BS']=>
+DB('BS Reporting', !Version, AttrS('FiscalMonth',!FiscalMonth,'NextPeriod'), !Currency, !BusinessUnit, !GLAccount, !BSComponent, !BS Measure );   
+
+['GLAccount':'GLAccount':'Trade payables - GRNI - BS']=>
+['201001'];
+#EndRegion
+
+#Region - Trade Receivables
+['GLAccount':'GLAccount':'Trade receivables - BS']=>
+['101001'];
+#EndRegion
+
+#Region - Lease Liabilities (Current and Non Current)
+['GLAccount':'GLAccount':'Lease liabilities (current) - BS']=>
+['200201'];
+
+['GLAccount':'GLAccount':'Lease liabilities (non-current) - BS']=>
+['211200'];
+
+
+[FiscalMonth:'FiscalMonth':'2024011', 'Balance']=>
+  [FiscalMonth:'FiscalMonth':'2024012', 'Balance'];
+  
+#EndRegion
+
+#Region - CF Reporting
+
+['GLAccount':'GLAccount':'All BalanceSheet GLAccounts', 'Balance']=>
+  DB('CF Reporting', !Version, !FiscalMonth, !Currency, !BusinessUnit, !BSComponent, 'All Measures');
+
+
+#EndRegion
+
+['Goods in transit (at cost) - BS']=>
+  DB('BSStgStaging', !BusinessUnit, !Currency, !FiscalMonth, !Version, !BSComponent,'Goods in Transit' );
+
+[{'Outlook','Working Budget'}, 'GLAccount':'GLAccount':'Cash advance facilities (current) - BS', 'Balance']=>
+  DB('CF Reporting', !Version, !FiscalMonth, !Currency, !BusinessUnit, 'Reported Value', 'Closing balance - Borrowings');
+
+[{'Outlook','Working Budget'}, 'GLAccount':'GLAccount':'Cash advance facilities (non-current) - BS', 'Balance']=>
+  DB('CF Reporting', !Version, !FiscalMonth, !Currency, !BusinessUnit, 'Reported Value', 'Closing Balance - Borrowings (non-current)');

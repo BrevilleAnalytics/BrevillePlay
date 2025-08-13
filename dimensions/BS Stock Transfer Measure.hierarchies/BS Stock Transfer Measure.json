@@ -1,0 +1,16 @@
+{
+	"@type":"Hierarchy",
+	"Name":"BS Stock Transfer Measure",
+	"Elements":
+	[
+		{
+			"Name":"To Business Unit Flag",
+			"Type":"String"
+		},
+		{
+			"Name":"Transfer $",
+			"Type":"Numeric"
+		}
+	],
+	"Subsets@Code.links":[]
+}

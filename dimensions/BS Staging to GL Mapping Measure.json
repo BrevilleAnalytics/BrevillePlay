@@ -1,0 +1,13 @@
+{
+	"@type":"Dimension",
+	"Name":"BS Staging to GL Mapping Measure",
+	"AllLeavesHierarchyName":"",
+	"DefaultHierarchy":
+	{
+		"@id":"Dimensions('BS Staging to GL Mapping Measure')/Hierarchies('BS Staging to GL Mapping Measure')"
+	},
+	"Hierarchies@Code.links":
+	[
+		"BS Staging to GL Mapping Measure.hierarchies/BS Staging to GL Mapping Measure.json"
+	]
+}

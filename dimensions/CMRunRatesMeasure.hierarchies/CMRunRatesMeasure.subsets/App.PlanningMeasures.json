@@ -1,0 +1,5 @@
+{
+	"@type":"Subset",
+	"Name":"App.PlanningMeasures",
+	"Expression":"{EXCEPT([CMRunRatesMeasure].[CMRunRatesMeasure].LEVELS(0).MEMBERS , {[CMRunRatesMeasure].[CMRunRatesMeasure].[DataEntry],[CMRunRatesMeasure].[CMRunRatesMeasure].[Flag]})}"
+}

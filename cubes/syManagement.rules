@@ -1,0 +1,35 @@
+FEEDSTRINGS ;
+SKIPCHECK ;
+
+##############
+## SEQUENCE ####
+##############
+# Rules to prevent incorrect data entry
+
+[ 'Sequence Parameter Delimiter' , 'String' , BRLineItem:'00000' , BRIndex:'0000' ] = S: STET;
+[ 'Sequence Parameter Delimiter' , 'String'  ] = S: '';
+
+
+[ 'Sequence Name' ,  BRIndex:'0000' ] = S: STET;
+[ 'Sequence Name' ] = S: '';
+
+[
+{ 'Sequence Execution Purpose'  ,  'Sequence Execution Group'
+, 'Sequence TI Process'
+, 'Sequence TI Process Params'
+, ' Sequence Execution'
+, 'Sequence User Execution Flag'
+, 'Sequence Executed By'
+, 'Sequence Execution Status'
+, 'Sequence Last Executed On' } , BRIndex:'0000' ] =S: '' ;
+
+[
+{ 'Sequence Execution Purpose'  ,  'Sequence Execution Group'
+, 'Sequence TI Process'
+, 'Sequence TI Process Params'
+, 'Sequence User Execution Flag'
+, 'Sequence Executed By'
+, 'Sequence Execution Status'
+, 'Sequence Last Executed On' } ] =S: IF( DB('syManagement',!syYear,'Sequence Execution',!BRIndex,!BRLineItem,!syManagementMeasure) @='END', '', CONTINUE ) ;
+
+FEEDERS ;

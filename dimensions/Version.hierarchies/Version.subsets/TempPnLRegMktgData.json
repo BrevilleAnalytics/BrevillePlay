@@ -1,0 +1,10 @@
+{
+	"@type":"Subset",
+	"Name":"TempPnLRegMktgData",
+	"Elements":
+	[
+		{
+			"@id":"Dimensions('Version')/Hierarchies('Version')/Elements('Actual')"
+		}
+	]
+}

@@ -1,0 +1,40 @@
+  SKIPCHECK;
+# [] = IF(!Version @='Actual', CONTINUE, STET);
+#  ['Local','Contribution Margin'] = N:DB('CMStgActuals',!Customer,!Product,'All Segment',!BusinessUnit,!Version,!FiscalMonth,!Theatre,'Contribution Margin');
+
+#Calculate Forecast Net Sales
+['Local Currency','Forecast','Net Sales'] = N: ['Local Currency','Forecast','Net Sales per Unit']*['Local Currency','Forecast','Shipped Units'];
+
+#Populate Outlook scenario with Actuals and Forecast
+[ 'Outlook' ]  = N: If (ATTRN('MonthCustFcast',!MonthCustFcast,'OutlookMonth') = 0 , 
+                    DB ('CustomerForecast', !ProductCustFcast, !CustomerCustFcast, !BusinessUnit, !Theatre, 'Actual' , !MonthCustFcast, !Currency, !MeasureCustFcast) , continue ) ;
+
+[ 'Outlook' ]  = N: If (ATTRN('MonthCustFcast',!MonthCustFcast,'OutlookMonth') = 1 , 
+                    DB ('CustomerForecast', !ProductCustFcast, !CustomerCustFcast, !BusinessUnit, !Theatre, 'Forecast' , !MonthCustFcast, !Currency, !MeasureCustFcast) , continue ) ;                   
+    
+#Calculate Net Sales per Unit
+['Local Currency',{'Actual','Prior Year'},{'Jul','Aug','Sep','Oct','Nov','Dec','Jan','Feb','Mar','Apr','May','Jun','Financial Year'},'Net Sales per Unit'] =   ['Net Sales']\['Shipped Units'];
+['Local Currency',{'Forecast','Outlook','Actual'},'Net Sales per Unit'] =  C: ['Net Sales']\['Shipped Units'];   
+
+#Calculate Shipped Units % Growth
+
+['Shipped Units % Growth','Actual'] = If (['Actual','Shipped Units']\['Prior Year','Shipped Units'] > 0,
+                                      (['Actual','Shipped Units']\['Prior Year','Shipped Units'])-1, CONTINUE);
+['Shipped Units % Growth','Prior Year'] =  IF (['Prior Year','Shipped Units']\['2 Years Prior','Shipped Units'] > 0,
+                                      (['Prior Year','Shipped Units']\['2 Years Prior','Shipped Units'])-1, CONTINUE);
+['Shipped Units % Growth','Outlook'] =  IF (['Outlook','Shipped Units']\['Prior Year','Shipped Units'] > 0,
+                                      (['Outlook','Shipped Units']\['Prior Year','Shipped Units'])-1, CONTINUE);
+['Shipped Units % Growth','Forecast'] =  IF (['Forecast','Shipped Units']\['Prior Year','Shipped Units'] > 0,
+                                      (['Forecast','Shipped Units']\['Prior Year','Shipped Units'])-1, CONTINUE);    
+['Shipped Units % Growth','Forecast NY'] =  IF (['Forecast NY','Shipped Units']\['Forecast','Shipped Units'] > 0,
+                                      (['Forecast NY','Shipped Units']\['Forecast','Shipped Units'])-1, CONTINUE);                                         
+
+ FEEDERS;
+['Net Sales per Unit'] => ['Local Currency','Forecast','Net Sales'];
+
+['Actual'] => ['Outlook'] ;  
+['Forecast'] => ['Outlook'] ; 
+
+['Local Currency',{'Forecast','Actual','Prior Year','Outlook'},'Net Sales'] => ['Net Sales per Unit'];
+
+['Net Sales',{'Forecast','Outlook','Actual'}] => ['Net Sales per Unit'];

@@ -1,0 +1,13 @@
+{
+	"@type":"Process",
+	"Name":"syCellSecurityCreatePnLGlobalEBIT",
+	"HasSecurityAccess":false,
+	"Code@Code.link":"syCellSecurityCreatePnLGlobalEBIT.ti",
+	"UIData":"_ParameterConstraints=e30=€",
+	"DataSource":
+	{
+		"Type":"None"
+	},
+	"Parameters":[],
+	"Variables":[]
+}

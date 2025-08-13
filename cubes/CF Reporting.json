@@ -1,0 +1,30 @@
+{
+	"@type":"Cube",
+	"Name":"CF Reporting",
+	"Rules@Code.link":"CF Reporting.rules",
+	"Dimensions":
+	[
+		{
+			"@id":"Dimensions('Version')"
+		},
+		{
+			"@id":"Dimensions('FiscalMonth')"
+		},
+		{
+			"@id":"Dimensions('Currency')"
+		},
+		{
+			"@id":"Dimensions('BusinessUnit')"
+		},
+		{
+			"@id":"Dimensions('BSComponent')"
+		},
+		{
+			"@id":"Dimensions('CFCashFlowMeasure')"
+		}
+	],
+	"Views@Code.links":
+	[
+		"CF Reporting.views/Default.json"
+	]
+}

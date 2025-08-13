@@ -1,0 +1,200 @@
+#region Prolog
+
+#****Begin: Generated Statements***
+#****End: Generated Statements****
+
+
+
+
+####################################
+sCube = 'syManagement';
+sCubView = '}Sequence_Master';
+sDimSub = sCubView ;
+###################################
+
+#Create View
+If ( ViewExists ( sCube , sCubView ) <> 0 ) ;
+   ViewDestroy (  sCube , sCubView ) ;
+EndIf ;
+ViewCreate ( sCube , sCubView , 0 ) ;
+
+
+sDim = 'HCYear' ;
+If ( SubsetExists ( sDim , sDimSub ) <> 0 ) ;
+   SubsetDeleteAllElements( sDim , sDimSub ) ;
+ ELSE;
+   SubsetCreate( sDim , sDimSub ) ;
+ENDIF;
+SubsetElementInsert (  sDim, sDimSub, 'No Year' , 1 ) ;
+ViewSubsetAssign (sCube , sCubView , sDim , sDimSub  ) ;
+
+sDim = 'HCVersion' ;
+If ( SubsetExists ( sDim , sDimSub ) <> 0 ) ;
+   SubsetDeleteAllElements( sDim , sDimSub ) ;
+ ELSE;
+   SubsetCreate( sDim , sDimSub ) ;
+ENDIF;
+SubsetElementInsert (  sDim, sDimSub, 'HBW' , 1 ) ;
+ViewSubsetAssign (sCube , sCubView , sDim , sDimSub  ) ;
+
+sDim = 'HCCostCenter' ;
+If ( SubsetExists ( sDim , sDimSub ) <> 0 ) ;
+   SubsetDeleteAllElements( sDim , sDimSub ) ;
+ ELSE;
+   SubsetCreate( sDim , sDimSub ) ;
+ENDIF;
+SubsetElementInsert (  sDim, sDimSub, 'No Cost Centre' , 1 ) ;
+ViewSubsetAssign (sCube , sCubView ,sDim , sDimSub  ) ;
+
+sDim = 'HCManagementMeasure' ;
+If ( SubsetExists ( sDim , sDimSub ) <> 0 ) ;
+   SubsetDeleteAllElements( sDim , sDimSub ) ;
+ ELSE;
+   SubsetCreate( sDim , sDimSub ) ;
+ENDIF;
+SubsetElementInsert (  sDim, sDimSub, 'String' , 1 ) ;
+ViewSubsetAssign (sCube , sCubView, sDim , sDimSub  ) ;
+
+
+##MDX
+sDim = 'HCManagementParameter' ;
+sMDX = '{[' | sDim | '].[Sequence].CHILDREN}' ;
+If ( SubsetExists ( sDim , sDimSub ) <> 0 ) ;
+   SubsetDestroy ( sDim , sDimSub ) ;
+EndIf ;
+SubsetCreatebyMDX ( sDimSub , sMDX , 0 ) ;
+SubsetMDXSet (sDim ,sDimSub ,  '' ) ;
+ViewSubsetAssign (sCube , sCubView ,sDim , sDimSub  ) ;
+
+sDim = 'HCIndex' ;
+sMDX = '{[hcindex]. [0000],[' | sDim | '].[All Indexes].CHILDREN}' ;
+If ( SubsetExists ( sDim , sDimSub ) <> 0 ) ;
+   SubsetDestroy ( sDim , sDimSub ) ;
+EndIf ;
+SubsetCreatebyMDX ( sDimSub , sMDX , 0 ) ;
+SubsetMDXSet (sDim ,sDimSub ,  '' ) ;
+ViewSubsetAssign (sCube , sCubView ,sDim , sDimSub  ) ;
+
+
+sDim = 'HCLineItem' ;
+sMDX = '{[' | sDim | '].[All Line Items].CHILDREN}' ;
+If ( SubsetExists ( sDim , sDimSub ) <> 0 ) ;
+   SubsetDestroy ( sDim , sDimSub ) ;
+EndIf ;
+SubsetCreatebyMDX ( sDimSub , sMDX , 0 ) ;
+SubsetMDXSet (sDim ,sDimSub ,  '' ) ;
+ViewSubsetAssign (sCube , sCubView ,sDim , sDimSub  ) ;
+
+
+## View Set
+ViewRowDimensionSet( sCube, sCubView, 'HCLineItem', 1);
+ViewRowDimensionSet( sCube, sCubView, 'HCIndex', 2);
+ViewRowSuppressZeroesSet(sCube, sCubView, 1);
+
+ViewColumnDimensionSet(sCube, sCubView , 'HCManagementParameter' , 1);
+
+
+
+
+####################################
+sCube = 'syManagement';
+sCubView = '}Above_Store_Planning_CC';
+sDimSub = sCubView ;
+###################################
+#Create View
+If ( ViewExists ( sCube , sCubView ) <> 0 ) ;
+   ViewDestroy (  sCube , sCubView ) ;
+EndIf ;
+ViewCreate ( sCube , sCubView , 0 ) ;
+
+
+sDim = 'HCYear' ;
+If ( SubsetExists ( sDim , sDimSub ) <> 0 ) ;
+   SubsetDeleteAllElements( sDim , sDimSub ) ;
+ ELSE;
+   SubsetCreate( sDim , sDimSub ) ;
+ENDIF;
+SubsetElementInsert (  sDim, sDimSub, 'No Year' , 1 ) ;
+ViewSubsetAssign (sCube , sCubView , sDim , sDimSub  ) ;
+
+sDim = 'HCVersion' ;
+If ( SubsetExists ( sDim , sDimSub ) <> 0 ) ;
+   SubsetDeleteAllElements( sDim , sDimSub ) ;
+ ELSE;
+   SubsetCreate( sDim , sDimSub ) ;
+ENDIF;
+SubsetElementInsert (  sDim, sDimSub, 'HBW' , 1 ) ;
+ViewSubsetAssign (sCube , sCubView , sDim , sDimSub  ) ;
+
+sDim = 'HCCostCenter' ;
+If ( SubsetExists ( sDim , sDimSub ) <> 0 ) ;
+   SubsetDeleteAllElements( sDim , sDimSub ) ;
+ ELSE;
+   SubsetCreate( sDim , sDimSub ) ;
+ENDIF;
+SubsetElementInsert (  sDim, sDimSub, 'No Cost Centre' , 1 ) ;
+ViewSubsetAssign (sCube , sCubView ,sDim , sDimSub  ) ;
+
+sDim = 'HCManagementMeasure' ;
+If ( SubsetExists ( sDim , sDimSub ) <> 0 ) ;
+   SubsetDeleteAllElements( sDim , sDimSub ) ;
+ ELSE;
+   SubsetCreate( sDim , sDimSub ) ;
+ENDIF;
+SubsetElementInsert (  sDim, sDimSub, 'String' , 1 ) ;
+ViewSubsetAssign (sCube , sCubView, sDim , sDimSub  ) ;
+
+sDim = 'HCIndex' ;
+If ( SubsetExists ( sDim , sDimSub ) <> 0 ) ;
+   SubsetDeleteAllElements( sDim , sDimSub ) ;
+ ELSE;
+   SubsetCreate( sDim , sDimSub ) ;
+ENDIF;
+SubsetElementInsert (  sDim, sDimSub, '0001' , 1 ) ;
+ViewSubsetAssign (sCube , sCubView, sDim , sDimSub  ) ;
+
+
+
+##MDX
+sDim = 'HC ManagementParameter' ;
+sMDX = '{[' | sDim | '].[Cost Centres used in AOP].CHILDREN}' ;
+If ( SubsetExists ( sDim , sDimSub ) <> 0 ) ;
+   SubsetDestroy ( sDim , sDimSub ) ;
+EndIf ;
+SubsetCreatebyMDX ( sDimSub , sMDX , 0 ) ;
+SubsetMDXSet (sDim ,sDimSub ,  '' ) ;
+ViewSubsetAssign (sCube , sCubView ,sDim , sDimSub  ) ;
+
+sDim = 'HC LineItem' ;
+sMDX = '{[' | sDim | '].[All LineItems].CHILDREN}' ;
+If ( SubsetExists ( sDim , sDimSub ) <> 0 ) ;
+   SubsetDestroy ( sDim , sDimSub ) ;
+EndIf ;
+SubsetCreatebyMDX ( sDimSub , sMDX , 0 ) ;
+SubsetMDXSet (sDim ,sDimSub ,  '' ) ;
+ViewSubsetAssign (sCube , sCubView ,sDim , sDimSub  ) ;
+
+
+
+## View Set
+ViewRowDimensionSet( sCube, sCubView, 'HCLineItem', 1);
+#ViewRowDimensionSet( sCube, sCubView, 'HCIndex', 2);
+ViewRowSuppressZeroesSet(sCube, sCubView, 1);
+
+ViewColumnDimensionSet(sCube, sCubView , 'HCManagementParameter' , 1);
+#endregion
+#region Metadata
+
+#****Begin: Generated Statements***
+#****End: Generated Statements****
+#endregion
+#region Data
+
+#****Begin: Generated Statements***
+#****End: Generated Statements****
+#endregion
+#region Epilog
+
+#****Begin: Generated Statements***
+#****End: Generated Statements****
+#endregion

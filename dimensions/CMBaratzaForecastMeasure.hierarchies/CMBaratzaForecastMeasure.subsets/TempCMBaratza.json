@@ -1,0 +1,28 @@
+{
+	"@type":"Subset",
+	"Name":"TempCMBaratza",
+	"Elements":
+	[
+		{
+			"@id":"Dimensions('CMBaratzaForecastMeasure')/Hierarchies('CMBaratzaForecastMeasure')/Elements('Warranty')"
+		},
+		{
+			"@id":"Dimensions('CMBaratzaForecastMeasure')/Hierarchies('CMBaratzaForecastMeasure')/Elements('Freight')"
+		},
+		{
+			"@id":"Dimensions('CMBaratzaForecastMeasure')/Hierarchies('CMBaratzaForecastMeasure')/Elements('Cost of Goods Sold')"
+		},
+		{
+			"@id":"Dimensions('CMBaratzaForecastMeasure')/Hierarchies('CMBaratzaForecastMeasure')/Elements('COGS FX Variance')"
+		},
+		{
+			"@id":"Dimensions('CMBaratzaForecastMeasure')/Hierarchies('CMBaratzaForecastMeasure')/Elements('Rebates')"
+		},
+		{
+			"@id":"Dimensions('CMBaratzaForecastMeasure')/Hierarchies('CMBaratzaForecastMeasure')/Elements('SKU Promo Costs')"
+		},
+		{
+			"@id":"Dimensions('CMBaratzaForecastMeasure')/Hierarchies('CMBaratzaForecastMeasure')/Elements('Gross Sales')"
+		}
+	]
+}

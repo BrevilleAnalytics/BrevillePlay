@@ -1,0 +1,10 @@
+{
+	"@type":"Subset",
+	"Name":"Cust3MthRRTemp",
+	"Elements":
+	[
+		{
+			"@id":"Dimensions('Currency')/Hierarchies('Currency')/Elements('Local Currency')"
+		}
+	]
+}

@@ -1,0 +1,13 @@
+{
+	"@type":"Dimension",
+	"Name":"sySubsetMaintenanceMeasure",
+	"AllLeavesHierarchyName":"",
+	"DefaultHierarchy":
+	{
+		"@id":"Dimensions('sySubsetMaintenanceMeasure')/Hierarchies('sySubsetMaintenanceMeasure')"
+	},
+	"Hierarchies@Code.links":
+	[
+		"sySubsetMaintenanceMeasure.hierarchies/sySubsetMaintenanceMeasure.json"
+	]
+}

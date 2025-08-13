@@ -1,0 +1,10 @@
+{
+	"@type":"Subset",
+	"Name":"test y",
+	"Elements":
+	[
+		{
+			"@id":"Dimensions('GLAccount')/Hierarchies('GLAccount')/Elements('Tax expense')"
+		}
+	]
+}

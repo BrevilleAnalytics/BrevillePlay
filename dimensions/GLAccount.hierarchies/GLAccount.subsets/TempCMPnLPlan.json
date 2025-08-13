@@ -1,0 +1,28 @@
+{
+	"@type":"Subset",
+	"Name":"TempCMPnLPlan",
+	"Elements":
+	[
+		{
+			"@id":"Dimensions('GLAccount')/Hierarchies('GLAccount')/Elements('Gross Sales CM')"
+		},
+		{
+			"@id":"Dimensions('GLAccount')/Hierarchies('GLAccount')/Elements('SKU Promo Costs CM')"
+		},
+		{
+			"@id":"Dimensions('GLAccount')/Hierarchies('GLAccount')/Elements('Rebates CM')"
+		},
+		{
+			"@id":"Dimensions('GLAccount')/Hierarchies('GLAccount')/Elements('COGS FX Variance CM')"
+		},
+		{
+			"@id":"Dimensions('GLAccount')/Hierarchies('GLAccount')/Elements('Cost of Goods Sold CM')"
+		},
+		{
+			"@id":"Dimensions('GLAccount')/Hierarchies('GLAccount')/Elements('Freight CM')"
+		},
+		{
+			"@id":"Dimensions('GLAccount')/Hierarchies('GLAccount')/Elements('Warranty CM')"
+		}
+	]
+}

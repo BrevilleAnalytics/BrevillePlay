@@ -1,0 +1,10 @@
+{
+	"@type":"Subset",
+	"Name":"TempLoadOHCorporate",
+	"Elements":
+	[
+		{
+			"@id":"Dimensions('OPXComponent')/Hierarchies('OPXComponent')/Elements('OPEX')"
+		}
+	]
+}

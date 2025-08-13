@@ -1,0 +1,10 @@
+{
+	"@type":"Subset",
+	"Name":"TempCMBHK",
+	"Elements":
+	[
+		{
+			"@id":"Dimensions('Version')/Hierarchies('Version')/Elements('Outlook')"
+		}
+	]
+}

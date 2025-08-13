@@ -1,0 +1,41 @@
+{
+	"@type":"Hierarchy",
+	"Name":"BSComponent",
+	"Elements":
+	[
+		{
+			"Name":"Total",
+			"Type":"Consolidated"
+		},
+		{
+			"Name":"Calculated",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"Overlays",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"Override",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"Reported Value",
+			"Type":"Numeric"
+		}
+	],
+	"Edges":
+	[
+		{
+			"ParentName":"Total",
+			"ComponentName":"Calculated",
+			"Weight":1
+		},
+		{
+			"ParentName":"Total",
+			"ComponentName":"Overlays",
+			"Weight":1
+		}
+	],
+	"Subsets@Code.links":[]
+}

@@ -1,0 +1,12 @@
+{
+	"@type":"Hierarchy",
+	"Name":"GLtoBSMappingMeasure",
+	"Elements":
+	[
+		{
+			"Name":"Map Account",
+			"Type":"String"
+		}
+	],
+	"Subsets@Code.links":[]
+}

@@ -1,0 +1,46 @@
+{
+	"@type":"Subset",
+	"Name":"Cust3MthRRTemp",
+	"Elements":
+	[
+		{
+			"@id":"Dimensions('MonthCustFcast')/Hierarchies('MonthCustFcast')/Elements('Financial Year')"
+		},
+		{
+			"@id":"Dimensions('MonthCustFcast')/Hierarchies('MonthCustFcast')/Elements('Jul')"
+		},
+		{
+			"@id":"Dimensions('MonthCustFcast')/Hierarchies('MonthCustFcast')/Elements('Aug')"
+		},
+		{
+			"@id":"Dimensions('MonthCustFcast')/Hierarchies('MonthCustFcast')/Elements('Sep')"
+		},
+		{
+			"@id":"Dimensions('MonthCustFcast')/Hierarchies('MonthCustFcast')/Elements('Oct')"
+		},
+		{
+			"@id":"Dimensions('MonthCustFcast')/Hierarchies('MonthCustFcast')/Elements('Nov')"
+		},
+		{
+			"@id":"Dimensions('MonthCustFcast')/Hierarchies('MonthCustFcast')/Elements('Dec')"
+		},
+		{
+			"@id":"Dimensions('MonthCustFcast')/Hierarchies('MonthCustFcast')/Elements('Jan')"
+		},
+		{
+			"@id":"Dimensions('MonthCustFcast')/Hierarchies('MonthCustFcast')/Elements('Feb')"
+		},
+		{
+			"@id":"Dimensions('MonthCustFcast')/Hierarchies('MonthCustFcast')/Elements('Mar')"
+		},
+		{
+			"@id":"Dimensions('MonthCustFcast')/Hierarchies('MonthCustFcast')/Elements('Apr')"
+		},
+		{
+			"@id":"Dimensions('MonthCustFcast')/Hierarchies('MonthCustFcast')/Elements('May')"
+		},
+		{
+			"@id":"Dimensions('MonthCustFcast')/Hierarchies('MonthCustFcast')/Elements('Jun')"
+		}
+	]
+}

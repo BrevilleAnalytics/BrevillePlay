@@ -1,0 +1,34 @@
+{
+	"@type":"Cube",
+	"Name":"BS Reporting",
+	"Rules@Code.link":"BS Reporting.rules",
+	"Dimensions":
+	[
+		{
+			"@id":"Dimensions('Version')"
+		},
+		{
+			"@id":"Dimensions('FiscalMonth')"
+		},
+		{
+			"@id":"Dimensions('Currency')"
+		},
+		{
+			"@id":"Dimensions('BusinessUnit')"
+		},
+		{
+			"@id":"Dimensions('GLAccount')"
+		},
+		{
+			"@id":"Dimensions('BSComponent')"
+		},
+		{
+			"@id":"Dimensions('BS Measure')"
+		}
+	],
+	"Views@Code.links":
+	[
+		"BS Reporting.views/Balance Sheet Report.json",
+		"BS Reporting.views/Default.json"
+	]
+}

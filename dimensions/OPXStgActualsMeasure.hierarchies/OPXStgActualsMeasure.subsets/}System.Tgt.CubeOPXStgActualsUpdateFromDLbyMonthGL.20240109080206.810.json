@@ -1,0 +1,10 @@
+{
+	"@type":"Subset",
+	"Name":"}System.Tgt.CubeOPXStgActualsUpdateFromDLbyMonthGL.20240109080206.810",
+	"Elements":
+	[
+		{
+			"@id":"Dimensions('OPXStgActualsMeasure')/Hierarchies('OPXStgActualsMeasure')/Elements('Amount')"
+		}
+	]
+}

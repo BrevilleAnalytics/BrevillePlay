@@ -1,0 +1,90 @@
+#region Prolog
+
+#****Begin: Generated Statements***
+#****End: Generated Statements****
+
+#------------------------------------------------------------------------------------------
+# Description: Swap Dimension Element Name with Alias
+# Parameters
+  # pDim
+  # pAlias
+
+#------------------------------------------------------------------------------------------
+# Modification History
+# V1,00 - 2021-05-06 - Mariusz Perz : initial draft
+#
+#
+#------------------------------------------------------------------------------------------
+#Region # Constants
+
+sTimeStamp = TIMST( now, '\Y\m\d\h\i\s' );
+sProcessName = GetProcessName();
+
+#EndRegion # Constants
+#------------------------------------------------------------------------------------------
+
+#------------------------------------------------------------------------------------------
+#Region # Parameter validation
+
+If( DimensionExists( pDim ) = 0 );
+  sMessage =  'Dimension does not exit,';
+  logoutput('info',sMessage);
+  ProcessQuit;
+EndIf;
+
+If( DIMIX( '}Dimensions', '}ElementAttributes_' | pDim ) = 0 );
+  sMessage =  'Alias  ' | pAlias | ' does not exit in ' | pDim | ' dimension';
+  logoutput('info',sMessage);
+  ProcessQuit;
+EndIf;
+
+#EndRegion # Parameter validation
+#------------------------------------------------------------------------------------------
+
+
+#------------------------------------------------------------------------------------------
+#Region # Process log
+
+ExecuteProcess( 'syProcessLogInitialise', 'psProcessName', sProcessName );
+
+#EndRegion # Process log
+#------------------------------------------------------------------------------------------
+
+
+#------------------------------------------------------------------------------------------
+#Region # Swap Alias
+
+SwapAliasWithPrincipalName( pDim, pAlias, 0 );
+
+#EndRegion # Swap Alias
+#------------------------------------------------------------------------------------------
+#endregion
+#region Metadata
+
+#****Begin: Generated Statements***
+#****End: Generated Statements****
+#endregion
+#region Data
+
+#****Begin: Generated Statements***
+#****End: Generated Statements****
+#endregion
+#region Epilog
+
+#****Begin: Generated Statements***
+#****End: Generated Statements****
+
+#------------------------------------------------------------------------------------------
+#Region # Process log
+
+sMessage =  'Dimension Alias Swap completed';
+logoutput('info',sMessage);
+ExecuteProcess( 'syProcessLogMessage',
+  'psProcessName', sProcessName,
+  'psLogLevel', 'INFO',
+  'psMessage', sMessage
+);
+
+#EndRegion # Process log
+#------------------------------------------------------------------------------------------
+#endregion

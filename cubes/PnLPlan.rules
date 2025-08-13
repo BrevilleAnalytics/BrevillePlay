@@ -1,0 +1,230 @@
+FEEDSTRINGS;
+SKIPCHECK;
+
+# Cube name: PnLPlan
+
+#===== Calculation
+# copy actual data to outlook version
+[ 'Outlook' ]  = N: 
+  If ( DB( 'BRAsFiscalMonth' , 'Actual' , ATTRS( 'GlobalTheatre', !GlobalTheatre , 'Theatre' ), !FiscalMonth , 'Actual Flag' ) = 1 
+                         , DB( 'PnLPlan', !GLAccount, !CostCentre, !BusinessUnit, !Segment, !OPXComponent, !Currency, 
+                               !FiscalMonth, 'Actual' , !GlobalTheatre , !PnLPlanMeasure  )
+                         , CONTINUE ) ;
+
+# copy actual data to working budget version
+[ 'Working Budget' ]  = N: 
+  If ( DB( 'BRAsFiscalMonth' , 'Actual' , ATTRS( 'GlobalTheatre', !GlobalTheatre , 'Theatre' ), !FiscalMonth , 'Actual Flag' ) = 1 
+                         , DB( 'PnLPlan', !GLAccount, !CostCentre, !BusinessUnit, !Segment, !OPXComponent, !Currency, 
+                               !FiscalMonth, 'Actual' , !GlobalTheatre , !PnLPlanMeasure  )
+                         , CONTINUE ) ;
+                         
+['GM%' ] = [GLAccount:'GLAccount':'Gross Margin'] \ [GLAccount:'GLAccount':'Net Sales'] ;
+
+['CM%'] = [GLAccount:'GLAccount':'Contribution Margin']\ [GLAccount:'GLAccount':'Net Sales'] ;
+
+['EBIT%'] = [GLAccount:'GLAccount':'EBIT']\ [GLAccount:'GLAccount':'Net Sales'] ;
+
+['GLAccount':'GLAccount':'Contribution Margin'] = C: ['GLAccount':'GLAccount':'Gross Margin'] - ['GLAccount':'GLAccount':'Freight'] - ['GLAccount':'GLAccount':'Warranty'];
+['GLAccount':'GLAccount':'Net Sales'] = C: ['GLAccount':'GLAccount':'Gross Sales'] - ['GLAccount':'GLAccount':'Settlement discounts and rebates'] - ['GLAccount':'GLAccount':'Promotions'] ;
+['GLAccount':'GLAccount':'Gross Margin'] = C: ['GLAccount':'GLAccount':'Net Sales']- ['GLAccount':'GLAccount':'COGS'] - ['GLAccount':'GLAccount':'COGS FX Variance'] ;
+['GLAccount':'GLAccount':'EBITDA'] = C: ['GLAccount':'GLAccount':'Contribution Margin'] - ['GLAccount':'GLAccount':'Overhead and other expenses'] -['GLAccount':'GLAccount':'Other Income']-['GLAccount':'GLAccount':'MARKETING EXPENSES'];
+['GLAccount':'GLAccount':'EBIT'] = C: ['GLAccount':'GLAccount':'EBITDA'] - ['GLAccount':'GLAccount':'Depreciation & Amortisation Expense'] ;
+['GLAccount':'GLAccount':'Profit Before Tax'] = C: ['GLAccount':'GLAccount':'EBIT'] - ['GLAccount':'GLAccount':'Other Finance Expenses'] - ['GLAccount':'GLAccount':'Net Interest Income/(Expense)'] - ['GLAccount':'GLAccount':'Below the Line'];
+['GLAccount':'GLAccount':'Profit After Tax'] = C: ['GLAccount':'GLAccount':'Profit Before Tax'] - ['GLAccount':'GLAccount':'Tax Expense'];
+['GLAccount':'GLAccount':'Contribution Margin'] = C: ['GLAccount':'GLAccount':'Gross Margin'] - ['GLAccount':'GLAccount':'Freight'] - ['GLAccount':'GLAccount':'Warranty'];
+['GLAccount':'GLAccount':'Net Sales'] = C: ['GLAccount':'GLAccount':'Gross Sales'] - ['GLAccount':'GLAccount':'Settlement discounts and rebates'] - ['GLAccount':'GLAccount':'Promotions'] ;
+['GLAccount':'GLAccount':'Gross Margin'] = C: ['GLAccount':'GLAccount':'Net Sales']- ['GLAccount':'GLAccount':'COGS'] - ['GLAccount':'GLAccount':'COGS FX Variance'] ;
+['GLAccount':'GLAccount':'EBITDA'] = C: ['GLAccount':'GLAccount':'Contribution Margin'] - ['GLAccount':'GLAccount':'Overhead and other expenses'] -['GLAccount':'GLAccount':'Other Income']-['GLAccount':'GLAccount':'MARKETING EXPENSES'];
+['GLAccount':'GLAccount':'EBIT'] = C: ['GLAccount':'GLAccount':'EBITDA'] - ['GLAccount':'GLAccount':'Depreciation & Amortisation Expense'] ;
+['GLAccount':'GLAccount':'Profit Before Tax'] = C: ['GLAccount':'GLAccount':'EBIT'] - ['GLAccount':'GLAccount':'Other Finance Expenses'] - ['GLAccount':'GLAccount':'Net Interest Income/(Expense)'] - ['GLAccount':'GLAccount':'Below the Line'];
+['GLAccount':'GLAccount':'Profit After Tax'] = C: ['GLAccount':'GLAccount':'Profit Before Tax'] - ['GLAccount':'GLAccount':'Tax Expense'];
+
+# 720110
+['GLAccount':'GLAccount':'720110', {'Outlook','Working Budget'}, 'CostCentre':'CostCentre':'8000', Segment:'Segment':'No Segment', 'OPXComponent':'OPEX', 'GlobalTheatre':'Global Functions', 'Amount' ] = N:
+  DB('BSStgStaging' ,!BusinessUnit, !Currency, !FiscalMonth, !Version, 'Reported Value', 'Interest Expense');
+
+# 720102
+['GLAccount':'GLAccount':'720102', {'Outlook','Working Budget'}, 'CostCentre':'CostCentre':'8000', Segment:'Segment':'No Segment', 'OPXComponent':'OPEX', 'GlobalTheatre':'Global Functions', 'Amount' ] = N:
+    DB('BSStgStaging' ,!BusinessUnit, !Currency, !FiscalMonth, !Version, 'Reported Value', 'Interest Fee');
+
+# 760101
+['GLAccount':'GLAccount':'760101', {'Outlook','Working Budget'}, 'CostCentre':'CostCentre':'8000', Segment:'Segment':'No Segment', 'OPXComponent':'OPEX', 'GlobalTheatre':'Global Functions', 'Amount' ] = N:
+    DB('BSStgStaging' ,!BusinessUnit, !Currency, !FiscalMonth, !Version, 'Reported Value', 'Tax Expense');
+
+# 730101
+['GLAccount':'GLAccount':'730101', {'Outlook','Working Budget'}, 'CostCentre':'CostCentre':'8000', Segment:'Segment':'No Segment', 'OPXComponent':'OPEX', 'GlobalTheatre':'Global Functions', 'Amount' ] = N:
+    DB('BSStgStaging' ,!BusinessUnit, !Currency, !FiscalMonth, !Version, 'Reported Value', 'Line Fee');
+
+# 750102
+['GLAccount':'GLAccount':'750102', {'Outlook','Working Budget'}, 'CostCentre':'CostCentre':'8000', Segment:'Segment':'No Segment', 'OPXComponent':'OPEX', 'GlobalTheatre':'Global Functions', 'Amount' ] = N:
+    DB('BSStgStaging' ,!BusinessUnit, !Currency, !FiscalMonth, !Version, 'Reported Value', 'Variable license expense - inter-company');
+
+
+
+FEEDERS ;
+
+['Actual'] => ['Outlook'] ; 
+['Actual'] => ['Working Budget'] ; 
+
+[GLAccount:'GLAccount':'Gross Sales'] => ['GM%'] ;
+[GLAccount:'GLAccount':'Gross Sales'] => ['CM%'] ;
+[GLAccount:'GLAccount':'Gross Sales'] => ['EBIT%'] ;
+
+#CPM 16/07/2024 - Feeder for BS Reporting cube
+['GLAccount':'GLAccount':'634054'] => 
+DB('BS Reporting', 'Outlook', !FiscalMonth, !Currency, !BusinessUnit, '101053', 'Calculated', 'Movement' ),
+DB('BS Reporting', 'Working Budget', !FiscalMonth, !Currency, !BusinessUnit, '101053', 'Calculated', 'Movement' );         
+
+        #CPM - 15/05/2024 - Change Feeders 
+        ['GLAccount':'GLAccount':'Settlement discounts and rebates'] => 
+        DB('BSStgStaging',!BusinessUnit,!Currency,!FiscalMonth,!Version, 'Calculated' ,'Settlement discounts and rebates');
+
+        #CPM - 15/05/2024 - Additional Feeder 
+        ['GLAccount':'GLAccount':'Promotions'] => 
+        DB('BSStgStaging',!BusinessUnit,!Currency,!FiscalMonth,!Version, 'Calculated' ,'Settlement discounts and rebates');
+
+['GLAccount':'GLAccount':'FREIGHT'] => 
+DB('BSStgStaging',!BusinessUnit,!Currency,!FiscalMonth,!Version, 'Calculated' ,'Freight');
+
+['GLAccount':'GLAccount':'Marketing expenses'] => 
+DB('BSStgStaging',!BusinessUnit,!Currency,!FiscalMonth,!Version, 'Calculated' ,'Marketing expenses');
+
+['GLAccount':'GLAccount':'Overhead and other expenses'] => 
+DB('BSStgStaging',!BusinessUnit,!Currency,!FiscalMonth,!Version, 'Calculated' ,'Overhead and other expenses');
+
+# VAT FEEDERS  
+['GLAccount':'GLAccount':'Overhead and other expenses','CostCentre':'Functions':'All Functions','Segment':'All Segment','OPXComponent':'Total',{'Outlook','Working Budget'},'GlobalTheatre':'All Theatre','Amount'] => 
+DB('BSStgStaging',!BusinessUnit,!Currency,!FiscalMonth,!Version, 'Calculated','Total overheads & marketing');
+
+['GLAccount':'GLAccount':'Capitalised product development','CostCentre':'Functions':'All Functions','Segment':'All Segment','OPXComponent':'Total',{'Outlook','Working Budget'},'GlobalTheatre':'All Theatre','Amount'] => 
+DB('BSStgStaging',!BusinessUnit,!Currency,!FiscalMonth,!Version, 'Calculated','Capitalised Development Costs');
+
+['GLAccount':'GLAccount':'Customer related expenses','CostCentre':'Functions':'All Functions','Segment':'All Segment','OPXComponent':'Total',{'Outlook','Working Budget'},'GlobalTheatre':'All Theatre','Amount'] => 
+DB('BSStgStaging',!BusinessUnit,!Currency,!FiscalMonth,!Version, 'Calculated','PDD');
+  
+['GLAccount':'GLAccount':'Depreciation & amortisation expense','CostCentre':'Functions':'All Functions','Segment':'All Segment','OPXComponent':'Total',{'Outlook','Working Budget'},'GlobalTheatre':'All Theatre','Amount'] => 
+DB('BSStgStaging',!BusinessUnit,!Currency,!FiscalMonth,!Version,'Calculated', 'Total PPE'),
+DB('BSStgStaging',!BusinessUnit,!Currency,!FiscalMonth,!Version,'Calculated', 'Total overheads & marketing');
+
+['GLAccount':'GLAccount':'Below the line'] =>   
+DB('BSStgStaging',!BusinessUnit,!Currency,!FiscalMonth,!Version, 'Calculated' ,'Other VLF');
+  
+['GLAccount':'GLAccount':'Tax expense'] => 
+DB('BSStgStaging',!BusinessUnit,!Currency,!FiscalMonth,!Version, 'Calculated' ,'Tax expense');
+
+['GLAccount':'GLAccount':'Tax expense'] => 
+DB('BSStgStaging',!BusinessUnit,!Currency,!FiscalMonth,!Version, 'Calculated' ,'Profit Before Tax');
+
+['GLAccount':'GLAccount':'Employee benefits expenses'] => 
+DB('BSStgStaging',!BusinessUnit,!Currency,!FiscalMonth,!Version, 'Calculated','Total employee benefits expense');
+
+['Outlook','GLAccount':'GLAccount':'Gross Sales'] => 
+DB('BSStgStaging',!BusinessUnit,!Currency,'Outlook',!Version, 'Calculated' ,'Add GROSS Sales (+GST)'),
+DB('BSStgStaging',!BusinessUnit,!Currency,'Outlook',!Version, 'Calculated' ,'Gross Sales'),
+DB('BSStgStaging',!BusinessUnit,!Currency,'Outlook',!Version, 'Calculated' ,'Gross Sales - VAT'),
+DB('BSStgStaging',!BusinessUnit,!Currency,'Outlook',!Version, 'Calculated' ,'Less Rebate Claims'),
+DB('BSStgStaging',!BusinessUnit,!Currency,'Outlook',!Version, 'Calculated' ,'VAT on Rebate Claims');
+
+['Working Budget','GLAccount':'GLAccount':'Gross Sales'] => 
+DB('BSStgStaging',!BusinessUnit,!Currency,'Working Budget',!Version, 'Calculated' ,'Add GROSS Sales (+GST)'),
+DB('BSStgStaging',!BusinessUnit,!Currency,'Working Budget',!Version, 'Calculated' ,'Gross Sales'),
+DB('BSStgStaging',!BusinessUnit,!Currency,'Working Budget',!Version, 'Calculated' ,'Gross Sales - VAT'),
+DB('BSStgStaging',!BusinessUnit,!Currency,'Working Budget',!Version, 'Calculated' ,'Less Rebate Claims'),
+DB('BSStgStaging',!BusinessUnit,!Currency,'Working Budget',!Version, 'Calculated' ,'VAT on Rebate Claims');
+
+['Outlook','ADJ','GLAccount':'GLAccount':'Gross Sales'] => 
+DB('BSStgStaging',!BusinessUnit,!Currency,'Outlook',!Version, 'Calculated' ,'Closing Trade Debtors');
+
+['Working Budget','ADJ','GLAccount':'GLAccount':'Gross Sales'] => 
+DB('BSStgStaging',!BusinessUnit,!Currency,'Working Budget',!Version, 'Calculated' ,'Closing Trade Debtors');  
+  
+#BSStgStaging - CAPEX
+['GLAccount':'GLAccount':'Depreciation & amortisation expense'] => 
+  DB('BSStgStaging',!BusinessUnit,!Currency,!FiscalMonth,!Version, 'Calculated','Plant & Equipment - Depn'),
+  DB('BSStgStaging',!BusinessUnit,!Currency,!FiscalMonth,!Version, 'Calculated','Tooling - Depn'),
+  DB('BSStgStaging',!BusinessUnit,!Currency,!FiscalMonth,!Version, 'Calculated','Intangible Assets - Development Costs - Depn') ,
+  DB('BSStgStaging',!BusinessUnit,!Currency,!FiscalMonth,!Version, 'Calculated','Intangible Assets - Other - Depn') ,
+  DB('BSStgStaging',!BusinessUnit,!Currency,!FiscalMonth,!Version, 'Calculated','Intangible Assets - Software - Depn') , 
+  DB('BSStgStaging',!BusinessUnit,!Currency,!FiscalMonth,!Version, 'Calculated','Right of use asset');
+
+
+['GLAccount':'GLAccount':'COGS - CM Module'] =>
+DB('BSStgStaging',!BusinessUnit,!Currency,!FiscalMonth,!Version, 'Calculated','COGS FX amortised to P&L');
+
+['GLAccount':'GLAccount':'COGS'] =>
+DB('BSStgStaging',!BusinessUnit,!Currency,!FiscalMonth,!Version, 'Calculated' ,'Less Cost of Sales (per Outlook)');
+
+['GLAccount':'GLAccount':'620102'] =>
+DB('BSStgStaging',!BusinessUnit,!Currency,!FiscalMonth,!Version, 'Calculated','Procurement fee income received (BAU)');
+
+['GLAccount':'GLAccount':'750102'] =>
+DB('BSStgStaging',!BusinessUnit,!Currency,!FiscalMonth,!Version, 'Calculated','Variable license fee payment (BAU)');
+
+['GLAccount':'GLAccount':'750110'] =>
+DB('BSStgStaging',!BusinessUnit,!Currency,!FiscalMonth,!Version, 'Calculated','Total for CC 6070 & CC 9800 - Charge BAU)');
+
+# Net Sales per Consol Outlook
+['GLAccount':'GLAccount':'Net Sales'] => 
+DB('BSStgStaging' ,!BusinessUnit, !Currency, !FiscalMonth, !Version, 'Calculated', 'Net Sales per Consol Outlook');
+['GLAccount':'GLAccount':'EBIT'] => 
+DB('BSStgStaging' ,!BusinessUnit, !Currency, !FiscalMonth, !Version, 'Calculated', 'EBIT per Outlook');
+
+['GLAccount':'GLAccount':'WARRANTY'] =>
+DB('BSStgStaging' ,!BusinessUnit, !Currency, !FiscalMonth, !Version, 'Calculated', 'Warranty Expense');
+
+#JR 02/04/2024 - Feeder for Tax Expense
+['GLAccount':'GLAccount':'Profit Before Tax']=>
+DB('BSStgStaging' ,!BusinessUnit, !Currency, !FiscalMonth, !Version, 'Calculated', 'Tax expense');
+
+#JR 04/04/2024 - Feeder for Profit After Tax
+['Actual', 'GLAccount':'GLAccount':'Profit After Tax']=>
+  DB('BS Reporting', 'Outlook', !FiscalMonth, !Currency, !BusinessUnit, 'Current Period Earnings', 'Calculated', 'Movement'),
+  DB('BS Reporting', 'Outlook', !FiscalMonth, !Currency, !BusinessUnit, 'Current Period Earnings', 'Calculated', 'Balance'),
+  DB('BS Reporting', 'Working Budget', !FiscalMonth, !Currency, !BusinessUnit, 'Current Period Earnings', 'Calculated', 'Movement'),
+  DB('BS Reporting', 'Working Budget', !FiscalMonth, !Currency, !BusinessUnit, 'Current Period Earnings', 'Calculated', 'Balance') ;   
+ 
+#JR 04/04/2024 - Feeder for Profit After Tax
+['Actual', {'400101','500102'}]=>
+  DB('BS Reporting', 'Outlook', !FiscalMonth, !Currency, !BusinessUnit, 'Current Period – Intercompany', 'Calculated', 'Movement'),
+  DB('BS Reporting', 'Outlook', !FiscalMonth, !Currency, !BusinessUnit, 'Current Period – Intercompany', 'Calculated', 'Balance'),
+  DB('BS Reporting', 'Working Budget', !FiscalMonth, !Currency, !BusinessUnit, 'Current Period – Intercompany', 'Calculated', 'Movement'),
+  DB('BS Reporting', 'Working Budget', !FiscalMonth, !Currency, !BusinessUnit, 'Current Period – Intercompany', 'Calculated', 'Balance') ;    
+  
+#JR 15/05/2024 - Feeder for Profit After Tax for Germany because of no other balance sheet values.  
+['Actual','BusinessUnit':'Region':'Germany', 'FiscalMonth':'FiscalMonth':'All FY', 'GLAccount':'GLAccount':'Profit After Tax']=>
+  DB('BS Reporting', 'Working Budget', !FiscalMonth, !Currency, 'Germany', 'Current Period Earnings', 'Calculated', 'Movement'),
+  DB('BS Reporting', 'Working Budget', !FiscalMonth, !Currency, 'Germany', 'Current Period Earnings', 'Calculated', 'Balance'),
+  DB('BS Reporting', 'Outlook', !FiscalMonth, !Currency, 'Germany', 'Current Period Earnings', 'Calculated', 'Movement'),
+  DB('BS Reporting', 'Outlook', !FiscalMonth, !Currency, 'Germany', 'Current Period Earnings', 'Calculated', 'Balance');
+
+#CPM 15/07/2024 - Accrued short-term incentives (bonuses) - BS
+[GLAccount:'GLAccount':'STI']=>
+DB('BS Reporting', !Version, !FiscalMonth, !Currency, !BusinessUnit, '202016', 'Calculated', 'Movement' );
+
+#CPM 15/07/2024 - Employee equity benefits reserve - BS
+[GLAccount:'GLAccount':'LTI']=>
+DB('BS Reporting', !Version, !FiscalMonth, !Currency, !BusinessUnit, '300401', 'Calculated', 'Movement' );
+
+#CPM 15/07/2024 - Current Period - 3 Way Adjustment
+  [{'720110','760101'}]=>
+  DB('BS Reporting', 'Outlook', !FiscalMonth, !Currency, !BusinessUnit, 'Current Period - 3 Way Adjustments', 'Calculated', 'Movement' ),
+  DB('BS Reporting', 'Working Budget', !FiscalMonth, !Currency, !BusinessUnit, 'Current Period - 3 Way Adjustments', 'Calculated', 'Movement' )  ;
+
+    
+#JR Feeder for Intercompany
+['Actual','GLAccount':'GLAccount':'Below the line']=>
+DB('BSStgStaging' ,!BusinessUnit, !Currency, !FiscalMonth, !Version, 'Calculated', 'Other VLF');
+
+[{'Overhead and other expenses','employee benefits expenses', 'Marketing expenses '}]=>
+DB('CF Reporting', !Version, !FiscalMonth, !Currency, !BusinessUnit, 'Calculated', 'Salaries and Wages' ),
+DB('CF Reporting', !Version, !FiscalMonth, !Currency, !BusinessUnit, 'Calculated', 'Marketing expenses' ),  
+DB('CF Reporting', !Version, !FiscalMonth, !Currency, !BusinessUnit, 'Calculated', 'Overhead and other expenses' );
+
+['630114']=>
+DB('CF Reporting', !Version, !FiscalMonth, !Currency, !BusinessUnit, 'Calculated', 'Less STI' );
+
+['630115']=>
+DB('CF Reporting', !Version, !FiscalMonth, !Currency, !BusinessUnit, 'Calculated', 'Less LTI' );
+
+[GLAccount:'GLAccount':'PDD']=>
+DB('CF Reporting', !Version, !FiscalMonth, !Currency, !BusinessUnit, 'Calculated', 'Less PDD' );

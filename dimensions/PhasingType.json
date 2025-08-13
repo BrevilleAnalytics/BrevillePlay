@@ -1,0 +1,13 @@
+{
+	"@type":"Dimension",
+	"Name":"PhasingType",
+	"AllLeavesHierarchyName":"",
+	"DefaultHierarchy":
+	{
+		"@id":"Dimensions('PhasingType')/Hierarchies('PhasingType')"
+	},
+	"Hierarchies@Code.links":
+	[
+		"PhasingType.hierarchies/PhasingType.json"
+	]
+}

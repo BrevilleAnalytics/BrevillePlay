@@ -1,0 +1,13 @@
+{
+	"@type":"Dimension",
+	"Name":"syProcessLogLineItem",
+	"AllLeavesHierarchyName":"",
+	"DefaultHierarchy":
+	{
+		"@id":"Dimensions('syProcessLogLineItem')/Hierarchies('syProcessLogLineItem')"
+	},
+	"Hierarchies@Code.links":
+	[
+		"syProcessLogLineItem.hierarchies/syProcessLogLineItem.json"
+	]
+}

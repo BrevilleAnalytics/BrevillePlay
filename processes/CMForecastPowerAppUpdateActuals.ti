@@ -1,0 +1,78 @@
+#region Prolog
+
+csProcess = GetProcessName( ) ;
+sTimestamp = TimSt( Now, '\Y\m\d\h\i\s' );
+sRandomInt = NumberToString( INT( RAND( ) * 1000 ));
+
+
+sUniqueName  =  csProcess |'.'| sTimestamp | '.' | sRandomInt;
+sSub_Tgt= '}System.Tgt.' | sUniqueName ;
+sCub_Tgt = 'CMForecastPowerApp2' ;
+sView_Tgt = 'TmpCMForecastPowerApp' ;
+
+
+# SQL query
+
+ sSQL = 'SET NOCOUNT ON; 
+SELECT [Account]
+      ,[CustomerNo]
+      ,[Theatre]
+      ,[BusinessUnit]
+      ,[Month_Name]
+      ,[Segment]
+      ,sum([Value]) as Value
+  FROM [dbo].[ActualCM]
+  group by
+  [Account]
+      ,[CustomerNo]
+      ,[Theatre]
+      ,[BusinessUnit]
+      ,[Segment]
+      ,[Month_Name]
+';
+ 
+		
+DNS_Server = 'brev-dev-syn-fpa';
+#CellGetS( 'syEnvironment', 'Breville', 'ODBC DSN for DL SQL'  );
+
+
+# Data Source
+
+ DataSourceType = 'ODBC' ;
+ DatasourceNameForServer = DNS_Server ;
+ DatasourceQuery = sSQL;
+
+sLogMessage ='';
+#endregion
+#region Data
+
+sCustomerNo  = vBusinessUnit|vCustomerNo;
+
+If (DIMIX( 'Customer', sCustomerNo  ) = 0  ) ;
+  sMessage = 'CustomerKey = ' |  sCustomerNo| ' does not exist' ;
+  If(SCAN(sMessage, sLogMessage) =0);
+         #ExecuteProcess('syProcessLogMessage','psProcessName',csProcess,'psLogLevel','INFO','psMessage',sMessage ) ;
+         sLogMessage = sLogMessage | sMessage;
+  Endif;
+   Itemskip;
+Endif;
+
+sPeriod = ATTRS( 'CalendarMonth', vMonth , 'FiscalMonth' );
+
+if ( vSegment @= '' ) ;
+  sSegment = 'No Segment' ;
+else ;
+  sSegment = vSegment ;
+endif ;
+
+if ( vAccount @= 'Gross Sales' );
+  CellIncrementN(vValue , sCub_Tgt , sCustomerNo,sSegment ,vBusinessUnit, sPeriod,vTheatre,'Local','GSActual');
+ElseIf (vAccount @= 'Rebates');
+  CellIncrementN(vValue , sCub_Tgt , sCustomerNo,sSegment ,vBusinessUnit, sPeriod,vTheatre,'Local','Rebates Actual');
+ElseIf (vAccount @= 'Freight');
+  CellIncrementN(vValue , sCub_Tgt , sCustomerNo,sSegment ,vBusinessUnit, sPeriod,vTheatre,'Local','Freight Actual');
+ElseIf (vAccount @= 'Warranty');
+  CellIncrementN(vValue , sCub_Tgt , sCustomerNo,sSegment ,vBusinessUnit, sPeriod,vTheatre,'Local','Warranty Actual');
+Endif;
+
+#endregion

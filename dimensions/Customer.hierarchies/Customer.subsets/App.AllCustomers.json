@@ -1,0 +1,5 @@
+{
+	"@type":"Subset",
+	"Name":"App.AllCustomers",
+	"Expression":"{{TM1FILTERBYLEVEL(TM1SUBSETALL([Customer].[Customer]) , 0)}}"
+}

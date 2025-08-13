@@ -1,0 +1,43 @@
+{
+	"@type":"Subset",
+	"Name":"App.BudgetComparsion",
+	"Elements":
+	[
+		{
+			"@id":"Dimensions('Version')/Hierarchies('Version')/Elements('Working Budget')"
+		},
+		{
+			"@id":"Dimensions('Version')/Hierarchies('Version')/Elements('Budget')"
+		},
+		{
+			"@id":"Dimensions('Version')/Hierarchies('Version')/Elements('Budgetv1')"
+		},
+		{
+			"@id":"Dimensions('Version')/Hierarchies('Version')/Elements('Budgetv2')"
+		},
+		{
+			"@id":"Dimensions('Version')/Hierarchies('Version')/Elements('Budgetv3')"
+		},
+		{
+			"@id":"Dimensions('Version')/Hierarchies('Version')/Elements('Budgetv4')"
+		},
+		{
+			"@id":"Dimensions('Version')/Hierarchies('Version')/Elements('Budgetv5')"
+		},
+		{
+			"@id":"Dimensions('Version')/Hierarchies('Version')/Elements('Budgetv6')"
+		},
+		{
+			"@id":"Dimensions('Version')/Hierarchies('Version')/Elements('Budgetv7')"
+		},
+		{
+			"@id":"Dimensions('Version')/Hierarchies('Version')/Elements('Budgetv8')"
+		},
+		{
+			"@id":"Dimensions('Version')/Hierarchies('Version')/Elements('Budgetv9')"
+		},
+		{
+			"@id":"Dimensions('Version')/Hierarchies('Version')/Elements('Budgetv10')"
+		}
+	]
+}

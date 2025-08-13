@@ -1,0 +1,49 @@
+#Region System
+FEEDSTRINGS;
+SKIPCHECK;
+#EndRegion
+
+# Cube name: BRAsVersion 
+# Description: to keep version assumption
+
+['Actual Month YYYYMMM'] = S: DIMNM( 'FiscalMonth' , DIMIX( 'FiscalMonth' , DB( 'BRAsVersion' , !Version , 'APAC Actual Month' ) ) ) ;
+
+['Actual Month -1 YYYYMMM'] = S : ATTRS ( 'FiscalMonth' , DB( 'BRAsVersion' , !Version , 'APAC Actual Month' ) , 'PrevPeriod' ) ;
+
+['Fiscal Year Numeric'] = N: Numbr(DIMNM( 'FiscalMonth' , DIMIX( 'FiscalMonth' , DB( 'BRAsVersion' , !Version , 'Fiscal Year' ) ) ) ) ;
+['Fiscal Year+1 Numeric']= N : DB ( 'BRAsVersion' , !Version , 'Fiscal Year Numeric') +1 ;
+
+# [ { 'APAC Outlook Month' , 'EMEA Outlook Month' , 'Americas Outlook Month' ,'Corporate Outlook Month' }] = S:  ATTRS ('CalendarMonth' , SUBST (Today (1) , 1 , 4 ) | FILL( '0', 3 - long ( SUBST (Today (1) , 6 , 2 ) ) ) | SUBST (Today (1) , 6 , 2 ) , 'FiscalNextMonthCaption' ) ;
+
+# [ {'APAC Outlook Month', 'EMEA Outlook Month' , 'Americas Outlook Month' ,'Corporate Outlook Month' }] = S:  ATTRS ('CalendarMonth' , SUBST (Today (1) , 1 , 4 ) | FILL( '0', 3 - long ( SUBST (Today (1) , 6 , 2 ) ) ) | SUBST (Today (1) , 6 , 2 ) , 'FiscalNextMonthCaption' ) ;
+
+[ { 'TAmericas Lock Outlook MonthCM' ,'TAPAC Lock Outlook MonthCM' ,'TEMEA Lock Outlook MonthCM' , 'TCorporate Lock Outlook MonthCM' } ] = S: ATTRS ('CalendarMonth' , SUBST (Today (1) , 1 , 4 ) | FILL( '0', 3 - long ( SUBST (Today (1) , 6 , 2 ) ) ) | SUBST (Today (1) , 6 , 2 ) , 'FiscalMonthCaption' ) ;
+
+['Last Year'] = S:  Str ( DB ( 'BRAsVersion' , !Version , 'Fiscal Year Numeric' ) -1, 4 , 0 ) ;
+['Budget Year']= S: Str ( DB ( 'BRAsVersion' , !Version , 'Fiscal Year Numeric') +1, 4 , 0 ) ;
+
+['Outlook Year']= S: Str ( DB ( 'BRAsVersion' , !Version ,'Fiscal Year Numeric'),4,0) ;
+
+['Actual Month MMM'] = s: SUBST( DB( 'BRAsVersion' , !Version , 'APAC Actual Month' ) , 7 , 3 ) ;
+
+['10th Working Day'] = S : SUBST ( ATTRS ( 'FiscalMonth'
+                           , ATTRS ('CalendarMonth' , TIMST ( NOW  + DB ( 'syEnvironment' , 'Breville' , 'AEST TimeZone' ) / 24 , '\Y0\m' ) , 'FiscalMonth' )
+                           , '10thWorkingDay' ) , 1, 4 )
+                           | '-'
+                           | SUBST ( ATTRS ( 'FiscalMonth'
+                           , ATTRS ('CalendarMonth' , TIMST ( NOW  + DB ( 'syEnvironment' , 'Breville' , 'AEST TimeZone' ) / 24 , '\Y0\m' ) , 'FiscalMonth' )
+                           , '10thWorkingDay' ) , 6, 2 )
+                           | '-'
+                           | SUBST ( ATTRS ( 'FiscalMonth'
+                           , ATTRS ('CalendarMonth' , TIMST ( NOW  + DB ( 'syEnvironment' , 'Breville' , 'AEST TimeZone' ) / 24 , '\Y0\m' ) , 'FiscalMonth' )
+                           , '10thWorkingDay' ) , 9, 2 );
+FEEDERS ;
+
+[ 'Actual' , 'Fiscal Year' ] =>  [ 'Actual' , 'Actual Month' ] ;
+[ 'Actual' , 'Fiscal Year' ] =>  [ 'Actual' , 'Fiscal Year' ] ;
+[ 'Actual' , 'Fiscal Year' ] =>  [ 'Actual' , 'Fiscal Year Numeric' ] ;
+[ 'Actual' , 'Fiscal Year' ] =>  [ 'Actual' , 'Actual Month YYYYMMM' ] ;
+[ 'Actual' , 'Fiscal Year' ] =>  [ 'Actual' , 'Actual Month -1 YYYYMMM' ] ;
+[ 'Actual' , 'Fiscal Year' ] =>  [ 'Actual' , 'Last Year' ] ;
+[ 'Actual' , 'Fiscal Year' ] =>  [ 'Actual' , 'Budget Year' ] ;
+[ 'Actual' , 'Fiscal Year' ] =>  [ 'Actual' , 'Outlook Year' ] ;

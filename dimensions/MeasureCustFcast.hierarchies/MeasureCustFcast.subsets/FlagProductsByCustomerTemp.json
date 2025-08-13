@@ -1,0 +1,13 @@
+{
+	"@type":"Subset",
+	"Name":"FlagProductsByCustomerTemp",
+	"Elements":
+	[
+		{
+			"@id":"Dimensions('MeasureCustFcast')/Hierarchies('MeasureCustFcast')/Elements('Report Flag')"
+		},
+		{
+			"@id":"Dimensions('MeasureCustFcast')/Hierarchies('MeasureCustFcast')/Elements('Shipped Units')"
+		}
+	]
+}

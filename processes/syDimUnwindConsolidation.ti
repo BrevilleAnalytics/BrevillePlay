@@ -1,0 +1,53 @@
+#region Prolog
+#****Begin: Generated Statements***
+#****End: Generated Statements****
+
+csProcess = GetProcessName( );
+csTimeStamp = TimSt( Now, '\Y\m\d\h\i\s' );
+cTempSubName = csProcess | csTimeStamp | NumberToString( INT( RAND( ) * 100000 ));
+
+vsTargetDimensionName = pDimensionName;
+
+# Check parameters
+IF (ELCOMPN(vsTargetDimensionName, pConsolidatedElement) = 0);
+#    ItemReject(pConsolidatedElement | ' has no children in ' | vsTargetDimensionName);
+
+ELSE;
+
+# create a dynamic subset to unwind 
+# Wrapping it in a Union to remove duplicate elements
+SubsetCreateByMDX(cTempSubName, '{UNION({DESCENDANTS([' | vsTargetDimensionName | '].[' | pConsolidatedElement | '])},{['| vsTargetDimensionName | '].[' | pConsolidatedElement  |']})}', 1);
+# To Lookup the elements in the subset, we'll create a long string of all the dimension indexes of the subset elements
+vsSubsetIndexesList = '';
+vnSubCount = SubsetGetSize(vsTargetDimensionName,cTempSubName);
+vni=1;
+WHILE (vni<=vnSubCount);
+	vsElementName = SubsetGetElementName(vsTargetDimensionName, cTempSubName , vni);
+    vsSubsetIndexesList = NumberToString(DIMIX(vsTargetDimensionName,vsElementName))| ',' | vsSubsetIndexesList;
+vni = vni + 1;
+END;
+
+vni=1;
+WHILE (vni<=vnSubCount);
+	vsElementName = SubsetGetElementName(vsTargetDimensionName, cTempSubName , vni);
+    IF ( ELCOMPN(vsTargetDimensionName, vsElementName)>0 );
+        vnChildCount = ELCOMPN(vsTargetDimensionName,vsElementName);
+        WHILE(vnChildCount > 0);
+            vsChildElement = ELCOMP(vsTargetDimensionName,vsElementName,vnChildCount);            	                                
+            IF (SCAN(NumbertoString(DIMIX(vsTargetDimensionName,vsChildElement)) | ',', vsSubsetIndexesList )>0);
+				DIMENSIONELEMENTCOMPONENTDELETE(vsTargetDimensionName, vsElementName, vsChildElement);
+            ENDIF;
+            vnChildCount = vnChildCount - 1;
+        END;
+    ELSE;
+        vni = vni+1;
+    ENDIF;
+
+END;
+
+ENDIF;
+#endregion
+#region Epilog
+#****Begin: Generated Statements***
+#****End: Generated Statements****
+#endregion

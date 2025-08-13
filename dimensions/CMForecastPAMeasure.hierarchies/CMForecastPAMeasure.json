@@ -1,0 +1,437 @@
+{
+	"@type":"Hierarchy",
+	"Name":"CMForecastPAMeasure",
+	"Elements":
+	[
+		{
+			"Name":"Rebates Adjusted OU",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"GS Total Not Released",
+			"Type":"Consolidated"
+		},
+		{
+			"Name":"GS Total",
+			"Type":"Consolidated"
+		},
+		{
+			"Name":"GS Actual",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"GS Released",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"GS Not Released",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"GS Adjusted",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"GS Adjusted OU",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"Rebates Total",
+			"Type":"Consolidated"
+		},
+		{
+			"Name":"Rebates Actual",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"Rebates Released",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"Rebates Total Not Released",
+			"Type":"Consolidated"
+		},
+		{
+			"Name":"Rebates Not Released",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"Rebates Adjusted",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"COGS Actual",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"COGS Released",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"COGS Adjusted",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"COGS Adjusted OU",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"Net Sales Total Not Released",
+			"Type":"Consolidated"
+		},
+		{
+			"Name":"COGS Total",
+			"Type":"Consolidated"
+		},
+		{
+			"Name":"COGS Not Released",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"Freight Total",
+			"Type":"Consolidated"
+		},
+		{
+			"Name":"Freight Actual",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"Freight Released",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"Freight Not Released",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"Freight Adjusted",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"Warranty Total",
+			"Type":"Consolidated"
+		},
+		{
+			"Name":"Warranty Actual",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"Warranty Released",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"Warranty Not Released",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"Warranty Adjusted",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"Net Sales Actual",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"Net Sales Released",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"Net Sales Not Released",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"Net Sales Adjusted",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"Net Sales Total",
+			"Type":"Consolidated"
+		},
+		{
+			"Name":"COGS Total Not Released",
+			"Type":"Consolidated"
+		},
+		{
+			"Name":"Freight Adjusted OU",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"Freight Total Not Released",
+			"Type":"Consolidated"
+		},
+		{
+			"Name":"Freight Adjusted Calc",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"Warranty Adjusted OU",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"Warranty Adjusted Calc",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"Warranty Total Not Released",
+			"Type":"Consolidated"
+		},
+		{
+			"Name":"CM Actual",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"CM Released",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"CM Adjusted",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"CM Not Released",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"CM Total",
+			"Type":"Consolidated"
+		},
+		{
+			"Name":"CM Total + Not Released",
+			"Type":"Consolidated"
+		},
+		{
+			"Name":"CM % Total + Not Released",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"CM % Not Released",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"CM  % Total",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"CM % Actual",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"CM  % Released",
+			"Type":"Numeric"
+		}
+	],
+	"Edges":
+	[
+		{
+			"ParentName":"GS Total Not Released",
+			"ComponentName":"GS Total",
+			"Weight":1
+		},
+		{
+			"ParentName":"GS Total Not Released",
+			"ComponentName":"GS Not Released",
+			"Weight":1
+		},
+		{
+			"ParentName":"GS Total",
+			"ComponentName":"GS Actual",
+			"Weight":1
+		},
+		{
+			"ParentName":"GS Total",
+			"ComponentName":"GS Released",
+			"Weight":1
+		},
+		{
+			"ParentName":"GS Total",
+			"ComponentName":"GS Adjusted",
+			"Weight":1
+		},
+		{
+			"ParentName":"GS Total",
+			"ComponentName":"GS Adjusted OU",
+			"Weight":1
+		},
+		{
+			"ParentName":"Rebates Total",
+			"ComponentName":"Rebates Actual",
+			"Weight":1
+		},
+		{
+			"ParentName":"Rebates Total",
+			"ComponentName":"Rebates Released",
+			"Weight":1
+		},
+		{
+			"ParentName":"Rebates Total",
+			"ComponentName":"Rebates Adjusted",
+			"Weight":1
+		},
+		{
+			"ParentName":"Rebates Total",
+			"ComponentName":"Rebates Adjusted OU",
+			"Weight":1
+		},
+		{
+			"ParentName":"Rebates Total Not Released",
+			"ComponentName":"Rebates Not Released",
+			"Weight":1
+		},
+		{
+			"ParentName":"Rebates Total Not Released",
+			"ComponentName":"Rebates Total",
+			"Weight":1
+		},
+		{
+			"ParentName":"Net Sales Total Not Released",
+			"ComponentName":"Net Sales Total",
+			"Weight":1
+		},
+		{
+			"ParentName":"Net Sales Total Not Released",
+			"ComponentName":"Net Sales Not Released",
+			"Weight":1
+		},
+		{
+			"ParentName":"COGS Total",
+			"ComponentName":"COGS Actual",
+			"Weight":1
+		},
+		{
+			"ParentName":"COGS Total",
+			"ComponentName":"COGS Released",
+			"Weight":1
+		},
+		{
+			"ParentName":"COGS Total",
+			"ComponentName":"COGS Adjusted",
+			"Weight":1
+		},
+		{
+			"ParentName":"COGS Total",
+			"ComponentName":"COGS Adjusted OU",
+			"Weight":1
+		},
+		{
+			"ParentName":"Freight Total",
+			"ComponentName":"Freight Actual",
+			"Weight":1
+		},
+		{
+			"ParentName":"Freight Total",
+			"ComponentName":"Freight Released",
+			"Weight":1
+		},
+		{
+			"ParentName":"Freight Total",
+			"ComponentName":"Freight Adjusted",
+			"Weight":1
+		},
+		{
+			"ParentName":"Freight Total",
+			"ComponentName":"Freight Adjusted OU",
+			"Weight":1
+		},
+		{
+			"ParentName":"Freight Total",
+			"ComponentName":"Freight Adjusted Calc",
+			"Weight":1
+		},
+		{
+			"ParentName":"Warranty Total",
+			"ComponentName":"Warranty Actual",
+			"Weight":1
+		},
+		{
+			"ParentName":"Warranty Total",
+			"ComponentName":"Warranty Released",
+			"Weight":1
+		},
+		{
+			"ParentName":"Warranty Total",
+			"ComponentName":"Warranty Adjusted",
+			"Weight":1
+		},
+		{
+			"ParentName":"Warranty Total",
+			"ComponentName":"Warranty Adjusted OU",
+			"Weight":1
+		},
+		{
+			"ParentName":"Warranty Total",
+			"ComponentName":"Warranty Adjusted Calc",
+			"Weight":1
+		},
+		{
+			"ParentName":"Net Sales Total",
+			"ComponentName":"Net Sales Actual",
+			"Weight":1
+		},
+		{
+			"ParentName":"Net Sales Total",
+			"ComponentName":"Net Sales Released",
+			"Weight":1
+		},
+		{
+			"ParentName":"Net Sales Total",
+			"ComponentName":"Net Sales Adjusted",
+			"Weight":1
+		},
+		{
+			"ParentName":"COGS Total Not Released",
+			"ComponentName":"COGS Total",
+			"Weight":1
+		},
+		{
+			"ParentName":"COGS Total Not Released",
+			"ComponentName":"COGS Not Released",
+			"Weight":1
+		},
+		{
+			"ParentName":"Freight Total Not Released",
+			"ComponentName":"Freight Total",
+			"Weight":1
+		},
+		{
+			"ParentName":"Freight Total Not Released",
+			"ComponentName":"Freight Not Released",
+			"Weight":1
+		},
+		{
+			"ParentName":"Warranty Total Not Released",
+			"ComponentName":"Warranty Total",
+			"Weight":1
+		},
+		{
+			"ParentName":"Warranty Total Not Released",
+			"ComponentName":"Warranty Not Released",
+			"Weight":1
+		},
+		{
+			"ParentName":"CM Total",
+			"ComponentName":"CM Actual",
+			"Weight":1
+		},
+		{
+			"ParentName":"CM Total",
+			"ComponentName":"CM Released",
+			"Weight":1
+		},
+		{
+			"ParentName":"CM Total",
+			"ComponentName":"CM Adjusted",
+			"Weight":1
+		},
+		{
+			"ParentName":"CM Total + Not Released",
+			"ComponentName":"CM Not Released",
+			"Weight":1
+		},
+		{
+			"ParentName":"CM Total + Not Released",
+			"ComponentName":"CM Total",
+			"Weight":1
+		}
+	],
+	"Subsets@Code.links":[]
+}

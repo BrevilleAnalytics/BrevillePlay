@@ -1,0 +1,18 @@
+{
+	"@type":"Cube",
+	"Name":"BS Interco Set Flag",
+	"Rules@Code.link":"BS Interco Set Flag.rules",
+	"Dimensions":
+	[
+		{
+			"@id":"Dimensions('From Business Unit')"
+		},
+		{
+			"@id":"Dimensions('To Business Unit')"
+		},
+		{
+			"@id":"Dimensions('BS Interco Transfer Measure')"
+		}
+	],
+	"Views@Code.links":[]
+}

@@ -1,0 +1,14 @@
+{
+	"@type":"Cube",
+	"Name":"BS Staging to GL Mapping",
+	"Dimensions":
+	[
+		{
+			"@id":"Dimensions('BSStgStagingMeasure')"
+		},
+		{
+			"@id":"Dimensions('BS Staging to GL Mapping Measure')"
+		}
+	],
+	"Views@Code.links":[]
+}

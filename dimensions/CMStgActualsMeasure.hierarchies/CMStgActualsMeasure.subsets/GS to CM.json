@@ -1,0 +1,49 @@
+{
+	"@type":"Subset",
+	"Name":"GS to CM",
+	"Elements":
+	[
+		{
+			"@id":"Dimensions('CMStgActualsMeasure')/Hierarchies('CMStgActualsMeasure')/Elements('Shipped Units')"
+		},
+		{
+			"@id":"Dimensions('CMStgActualsMeasure')/Hierarchies('CMStgActualsMeasure')/Elements('Returned Units')"
+		},
+		{
+			"@id":"Dimensions('CMStgActualsMeasure')/Hierarchies('CMStgActualsMeasure')/Elements('Net Shipments')"
+		},
+		{
+			"@id":"Dimensions('CMStgActualsMeasure')/Hierarchies('CMStgActualsMeasure')/Elements('Gross Sales')"
+		},
+		{
+			"@id":"Dimensions('CMStgActualsMeasure')/Hierarchies('CMStgActualsMeasure')/Elements('SKU Promo Costs')"
+		},
+		{
+			"@id":"Dimensions('CMStgActualsMeasure')/Hierarchies('CMStgActualsMeasure')/Elements('Gross Sales (incl. Promo Costs)')"
+		},
+		{
+			"@id":"Dimensions('CMStgActualsMeasure')/Hierarchies('CMStgActualsMeasure')/Elements('Rebates')"
+		},
+		{
+			"@id":"Dimensions('CMStgActualsMeasure')/Hierarchies('CMStgActualsMeasure')/Elements('Net Sales')"
+		},
+		{
+			"@id":"Dimensions('CMStgActualsMeasure')/Hierarchies('CMStgActualsMeasure')/Elements('Cost of Goods Sold')"
+		},
+		{
+			"@id":"Dimensions('CMStgActualsMeasure')/Hierarchies('CMStgActualsMeasure')/Elements('COGS FX Variance')"
+		},
+		{
+			"@id":"Dimensions('CMStgActualsMeasure')/Hierarchies('CMStgActualsMeasure')/Elements('Gross Margin')"
+		},
+		{
+			"@id":"Dimensions('CMStgActualsMeasure')/Hierarchies('CMStgActualsMeasure')/Elements('Warranty')"
+		},
+		{
+			"@id":"Dimensions('CMStgActualsMeasure')/Hierarchies('CMStgActualsMeasure')/Elements('Freight')"
+		},
+		{
+			"@id":"Dimensions('CMStgActualsMeasure')/Hierarchies('CMStgActualsMeasure')/Elements('Contribution Margin')"
+		}
+	]
+}

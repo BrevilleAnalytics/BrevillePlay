@@ -1,0 +1,13 @@
+{
+	"@type":"Subset",
+	"Name":"App.PlanningVersions",
+	"Elements":
+	[
+		{
+			"@id":"Dimensions('Version')/Hierarchies('Version')/Elements('Outlook')"
+		},
+		{
+			"@id":"Dimensions('Version')/Hierarchies('Version')/Elements('Working Budget')"
+		}
+	]
+}

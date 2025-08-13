@@ -1,0 +1,5 @@
+{
+	"@type":"Subset",
+	"Name":"Balance Sheet Reporting",
+	"Expression":"{DRILLDOWNMEMBER({[GLAccount].[GLAccount].[All BalanceSheet GLAccounts]} , {[GLAccount].[GLAccount].[All BalanceSheet GLAccounts]} , RECURSIVE)}"
+}

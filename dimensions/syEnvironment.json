@@ -1,0 +1,13 @@
+{
+	"@type":"Dimension",
+	"Name":"syEnvironment",
+	"AllLeavesHierarchyName":"",
+	"DefaultHierarchy":
+	{
+		"@id":"Dimensions('syEnvironment')/Hierarchies('syEnvironment')"
+	},
+	"Hierarchies@Code.links":
+	[
+		"syEnvironment.hierarchies/syEnvironment.json"
+	]
+}

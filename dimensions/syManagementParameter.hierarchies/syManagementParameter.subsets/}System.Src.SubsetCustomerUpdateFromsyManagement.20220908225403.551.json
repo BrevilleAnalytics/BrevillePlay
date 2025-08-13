@@ -1,0 +1,10 @@
+{
+	"@type":"Subset",
+	"Name":"}System.Src.SubsetCustomerUpdateFromsyManagement.20220908225403.551",
+	"Elements":
+	[
+		{
+			"@id":"Dimensions('syManagementParameter')/Hierarchies('syManagementParameter')/Elements('Customers')"
+		}
+	]
+}

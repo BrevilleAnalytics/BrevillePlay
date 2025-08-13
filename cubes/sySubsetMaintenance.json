@@ -1,0 +1,21 @@
+{
+	"@type":"Cube",
+	"Name":"sySubsetMaintenance",
+	"Rules@Code.link":"sySubsetMaintenance.rules",
+	"Dimensions":
+	[
+		{
+			"@id":"Dimensions('}Dimensions')"
+		},
+		{
+			"@id":"Dimensions('syLineItem')"
+		},
+		{
+			"@id":"Dimensions('sySubsetMaintenanceMeasure')"
+		}
+	],
+	"Views@Code.links":
+	[
+		"sySubsetMaintenance.views/Default.json"
+	]
+}

@@ -1,0 +1,13 @@
+FEEDSTRINGS ;
+SKIPCHECK ;
+#EndRegion
+
+# Cube name: CMLelitForecast
+# Description:
+
+
+['LY', 'LIT'] = N: 
+                DB( 'CMLelitForecast', !Product, !BusinessUnit, !Theatre, 'Actual', ATTRS( 'FiscalMonth', !FiscalMonth, 'PYPeriod' ), !Currency, !CMLelitForecastMeasure) ;
+
+['LY', 'BIT'] = N: 
+                DB( 'CMLelitForecast', !Product, !BusinessUnit, !Theatre, 'Actual', ATTRS( 'FiscalMonth', !FiscalMonth, 'PYPeriod' ), !Currency, !CMLelitForecastMeasure) ;

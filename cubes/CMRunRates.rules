@@ -1,0 +1,86 @@
+FEEDSTRINGS ;
+SKIPCHECK ;
+#EndRegion
+
+# Cube name: CMRunRates
+# Description:
+# V1.00 - 2022-08-18 - Jithu Varghese - CPM Group : initial version
+# V2.00 - 2022-08-26 - Jithu Varghese - CPM Group : Updated structure of CMRunRates Cube with segment
+
+  [ { '1Month' , '3Month' , '6Month' , '12Month' }, 'No FiscalMonth' , 'Net Shipments', 'Local Currency' ] =
+  [ 'Shipped Units' ] + [ 'Returned Units' ] ;
+
+  [ { '1Month' , '3Month' , '6Month' , '12Month' }, 'No FiscalMonth' , 'Baseline Return %' , 'Local Currency' ] = C:
+    ABS( [ 'Returned Units' ]  \ [ 'Shipped Units' ] ) ;
+
+  [ { '1Month' , '3Month' , '6Month' , '12Month' }, 'No FiscalMonth' , 'Average Selling Price' , 'Local Currency'] = C:
+    ABS ( [ 'Gross Sales' ]  \ [ 'Net Shipments' ] ) ;
+
+  [ { '1Month' , '3Month' , '6Month' , '12Month' }, 'No FiscalMonth' , 'Rebate %' , 'Local Currency' ] = C:
+    ABS ( [ 'Rebates' ]  \ [ 'Gross Sales' ] ) ;
+
+  [ { '1Month' , '3Month' , '6Month' , '12Month' } , 'No FiscalMonth' , 'COGS Unit Cost' , 'Local Currency' ] = C:
+     ABS ( [ 'Cost of Goods Sold' ]  \ [ 'Shipped Units' ] ) ;
+
+  [ { '1Month' , '3Month' , '6Month' , '12Month' } , 'No FiscalMonth' , 'Warranty Unit Cost' , 'Local Currency']  = C:
+    ABS ( [ 'Warranty' ]  \ [ 'Shipped Units' ] ) ;
+
+  [ { '1Month' , '3Month' , '6Month' , '12Month' } , 'No FiscalMonth' , 'Freight Unit Cost' , 'Local Currency' ] = C:
+     ABS ( [ 'Freight' ]  \ [ 'Shipped Units' ] ) ;
+
+  [ { '1Month' , '3Month' , '6Month' , '12Month' } , 'No FiscalMonth' , 'SKU Promo Cost Input' , 'Local Currency' ] = C:
+     ABS ( [ 'SKU Promo Costs' ]  \ [ 'Net Shipments'  ] ) ;
+     
+
+ [ 'RunRateSelection' , 'No FiscalMonth' , 'Local Currency' ] = N : 
+   if (DB('CMRunRates', !Product , !Segment , !BusinessUnit , !Theatre , !Version , 'No FiscalMonth' , !CMRatios , !Currency , 'Selection'  ) @= ''
+       , DB( 'CMRunRates', !Product , !Segment ,!BusinessUnit, !Theatre , !Version , 'No FiscalMonth' , !CMRatios , !Currency, DB( 'CMRatiosSeedDefault', !CMRatios, !Version , 'Global Run Rate' )  ) 
+       , CONTINUE ) ;
+       
+  [ 'RunRateSelection' , 'No FiscalMonth' , 'Local Currency' ] = N : 
+   if (DB('CMRunRates', !Product , !Segment , !BusinessUnit , !Theatre , !Version , 'No FiscalMonth' , !CMRatios , !Currency , 'Selection'  ) @= 'Last Month'
+       , DB( 'CMRunRates', !Product , !Segment , !BusinessUnit, !Theatre , !Version , 'No FiscalMonth' , !CMRatios , !Currency, 'Last Month' ) 
+       , CONTINUE ) ;
+
+  [ 'RunRateSelection' , 'No FiscalMonth' , 'Local Currency' ] = N : 
+   if (DB('CMRunRates', !Product , !Segment , !BusinessUnit , !Theatre , !Version , 'No FiscalMonth' , !CMRatios , !Currency , 'Selection'  ) @= 'Last 3 Months'
+       , DB( 'CMRunRates', !Product , !Segment , !BusinessUnit, !Theatre , !Version , 'No FiscalMonth' , !CMRatios , !Currency, 'Last 3 Months' ) 
+       , CONTINUE ) ;
+       
+   [ 'RunRateSelection' , 'No FiscalMonth' , 'Local Currency' ] = N : 
+   if (DB('CMRunRates', !Product , !Segment , !BusinessUnit , !Theatre , !Version , 'No FiscalMonth' , !CMRatios , !Currency , 'Selection'  ) @= 'Last 6 Months'
+       , DB( 'CMRunRates', !Product , !Segment , !BusinessUnit, !Theatre , !Version , 'No FiscalMonth' , !CMRatios , !Currency, '6Month' ) 
+       , CONTINUE ) ;
+       
+       
+   [ 'RunRateSelection' , 'No FiscalMonth' , 'Local Currency' ] = N : 
+   if (DB('CMRunRates', !Product , !Segment , !BusinessUnit , !Theatre , !Version , 'No FiscalMonth' , !CMRatios , !Currency , 'Selection'  ) @= 'Last 12 Months'
+       , DB( 'CMRunRates', !Product , !Segment , !BusinessUnit, !Theatre , !Version , 'No FiscalMonth' , !CMRatios , !Currency, 'Last 12 Months' ) 
+       , STET ) ;    
+      
+   [ 'Final' , 'No FiscalMonth' , 'Local Currency' ] = N :  
+   if (DB('CMRunRates', !Product , !Segment , !BusinessUnit , !Theatre , !Version , 'No FiscalMonth' , !CMRatios , !Currency , 'Override'  ) <> 0
+      , DB('CMRunRates', !Product , !Segment , !BusinessUnit , !Theatre , !Version , 'No FiscalMonth' , !CMRatios , !Currency , 'Override'  )
+      , DB('CMRunRates', !Product , !Segment , !BusinessUnit , !Theatre , !Version , 'No FiscalMonth' , !CMRatios , !Currency , 'RunRateSelection'  )
+      ) ;
+  
+   ['GroupSelection'] = S : 
+   DB( 'CMRatiosSeedDefault', !CMRatios, !Version , 'Global Run Rate' ) ;
+       
+FEEDERS ;
+
+[  'No FiscalMonth' , 'No Ratio', 'Flag' , 'Local Currency' ]  =>  [ 'Baseline Return %', 'RunRateSelection' , 'No FiscalMonth' , 'Local Currency' ] ,
+                                                                   [ 'Average Selling Price', 'RunRateSelection' , 'No FiscalMonth' , 'Local Currency' ] ,
+                                                                   [ 'Rebate %', 'RunRateSelection' , 'No FiscalMonth' , 'Local Currency' ] ,
+                                                                   [ 'COGS Unit Cost', 'RunRateSelection' , 'No FiscalMonth' , 'Local Currency' ] ,
+                                                                   [ 'Warranty Unit Cost', 'RunRateSelection' , 'No FiscalMonth' , 'Local Currency' ] ,
+                                                                   [ 'Freight Unit Cost', 'RunRateSelection' , 'No FiscalMonth' , 'Local Currency' ] ,
+                                                                   [ 'SKU Promo Cost Input', 'RunRateSelection' , 'No FiscalMonth' , 'Local Currency' ] ;
+
+[  'No FiscalMonth' , 'No Ratio', 'Flag' , 'Local Currency' ]  =>  [ 'Baseline Return %', 'Final' , 'No FiscalMonth' , 'Local Currency' ] ,
+                                                                   [ 'Average Selling Price', 'Final' , 'No FiscalMonth' , 'Local Currency' ] ,
+                                                                   [ 'Rebate %', 'Final' , 'No FiscalMonth' , 'Local Currency' ] ,
+                                                                   [ 'COGS Unit Cost', 'Final' , 'No FiscalMonth' , 'Local Currency' ] ,
+                                                                   [ 'Warranty Unit Cost', 'Final' , 'No FiscalMonth' , 'Local Currency' ] ,
+                                                                   [ 'Freight Unit Cost', 'Final' , 'No FiscalMonth' , 'Local Currency' ] ,
+                                                                   [ 'SKU Promo Cost Input', 'Final' , 'No FiscalMonth' , 'Local Currency' ] ;

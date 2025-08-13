@@ -1,0 +1,18 @@
+{
+	"@type":"Cube",
+	"Name":"MDMCC",
+	"Dimensions":
+	[
+		{
+			"@id":"Dimensions('CostCentre')"
+		},
+		{
+			"@id":"Dimensions('MDMCCMeasure')"
+		}
+	],
+	"Views@Code.links":
+	[
+		"MDMCC.views/App.CCFunctionsMapping.json",
+		"MDMCC.views/Default.json"
+	]
+}

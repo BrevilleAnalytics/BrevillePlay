@@ -1,0 +1,111 @@
+SKIPCHECK;
+
+# close off actual periods
+['To Business Unit Flag', 'Transfer Currency']=S:
+  IF ( DB( 'BRAsFiscalMonth' , 'Actual' , ATTRS( 'BusinessUnit', !To Business Unit , 'OPXTheatre' ), !FiscalMonth , 'Actual Flag' ) = 1,
+  '',
+  CONTINUE) ;
+
+# Disable ability to send to itself
+['To Business Unit Flag', 'Transfer Currency']=S:
+  IF ( !From Business Unit @= !To Business Unit,
+  '',
+  CONTINUE);
+
+# Only enable where transfer has been selected
+['Transfer $', 'Transfer Currency']=N:
+IF ( DB('BS Stock Transfer', !Version, !FiscalMonth, !Currency, !'From Business Unit', !'To Business Unit', 'To Business Unit Flag' ) @<>'Yes',
+  0, 
+  CONTINUE);
+ 
+#Convert Local to the TO BU currency 
+ ['Transfer $', 'Local Currency']=N:
+ #STET;
+  DB('BS Stock Transfer', !Version, !FiscalMonth, 'Transfer Currency', !'From Business Unit', !'To Business Unit', !'BS Stock Transfer Measure' ) * 
+  DB ('BRExchangeRate', !To Business Unit, !FiscalMonth, AttrS('BusinessUnit', !To Business Unit,'Currency') | '- Constant', 'Currency', 'FXRate' );
+
+#Convert Local to the TO BU currency
+ ['Transfer $']=N:
+ IF ( !Currency @<> 'Transfer Currency',
+ DB('BS Stock Transfer', !Version, !FiscalMonth, 'Transfer Currency', !'From Business Unit', !'To Business Unit', !'BS Stock Transfer Measure' ) \
+ DB ('BRExchangeRate', !From Business Unit, !FiscalMonth, !Currency, 'Currency', 'FXRate' ),STET);
+
+
+ 
+FEEDERS;
+
+['Transfer Currency', 'Transfer $']=>
+  ['EUR-Constant'],
+  ['EUR-Budget'],
+  ['USD-Constant'],
+  ['USD-Budget'],
+  ['AUD-Outlook'],
+  ['AUD-Budget'],
+  ['Constant'],
+  ['AUD-MonthEnd'],
+  ['Local']
+  ;
+
+['Transfer $']=>
+  DB('BSStgStaging', !From Business Unit, 'Local', !FiscalMonth, !Version, 'Calculated', 'Stock In' ),
+  DB('BSStgStaging', !From Business Unit, 'Local', !FiscalMonth, !Version, 'Calculated', 'Stock Out' ),
+  DB('BSStgStaging', !To Business Unit, 'Local', !FiscalMonth, !Version, 'Calculated', 'Stock In' ),
+  DB('BSStgStaging', !To Business Unit, 'Local', !FiscalMonth, !Version, 'Calculated', 'Stock Out' )
+  ;
+
+['Transfer $']=>
+  DB('BSStgStaging', !From Business Unit, 'AUD-Budget', !FiscalMonth, !Version, 'Calculated', 'Stock In' ),
+  DB('BSStgStaging', !From Business Unit, 'AUD-Budget', !FiscalMonth, !Version, 'Calculated', 'Stock Out' ),
+  DB('BSStgStaging', !To Business Unit, 'AUD-Budget', !FiscalMonth, !Version, 'Calculated', 'Stock In' ),
+  DB('BSStgStaging', !To Business Unit, 'AUD-Budget', !FiscalMonth, !Version, 'Calculated', 'Stock Out' )
+  ;
+
+['Transfer $']=>
+  DB('BSStgStaging', !From Business Unit, 'AUD-MonthEnd', !FiscalMonth, !Version, 'Calculated', 'Stock In' ),
+  DB('BSStgStaging', !From Business Unit, 'AUD-MonthEnd', !FiscalMonth, !Version, 'Calculated', 'Stock Out' ),
+  DB('BSStgStaging', !To Business Unit, 'AUD-MonthEnd', !FiscalMonth, !Version, 'Calculated', 'Stock In' ),
+  DB('BSStgStaging', !To Business Unit, 'AUD-MonthEnd', !FiscalMonth, !Version, 'Calculated', 'Stock Out' )
+  ;
+
+['Transfer $']=>
+  DB('BSStgStaging', !From Business Unit, 'AUD-Outlook', !FiscalMonth, !Version, 'Calculated', 'Stock In' ),
+  DB('BSStgStaging', !From Business Unit, 'AUD-Outlook', !FiscalMonth, !Version, 'Calculated', 'Stock Out' ),
+  DB('BSStgStaging', !To Business Unit, 'AUD-Outlook', !FiscalMonth, !Version, 'Calculated', 'Stock In' ),
+  DB('BSStgStaging', !To Business Unit, 'AUD-Outlook', !FiscalMonth, !Version, 'Calculated', 'Stock Out' )
+  ;
+
+['Transfer $']=>
+  DB('BSStgStaging', !From Business Unit, 'EUR-Constant', !FiscalMonth, !Version, 'Calculated', 'Stock In' ),
+  DB('BSStgStaging', !From Business Unit, 'EUR-Constant', !FiscalMonth, !Version, 'Calculated', 'Stock Out' ),
+  DB('BSStgStaging', !To Business Unit, 'EUR-Constant', !FiscalMonth, !Version, 'Calculated', 'Stock In' ),
+  DB('BSStgStaging', !To Business Unit, 'EUR-Constant', !FiscalMonth, !Version, 'Calculated', 'Stock Out' )
+  ;  
+  
+['Transfer $']=>
+  DB('BSStgStaging', !From Business Unit, 'EUR-Budget', !FiscalMonth, !Version, 'Calculated', 'Stock In' ),
+  DB('BSStgStaging', !From Business Unit, 'EUR-Budget', !FiscalMonth, !Version, 'Calculated', 'Stock Out' ),
+  DB('BSStgStaging', !To Business Unit, 'EUR-Budget', !FiscalMonth, !Version, 'Calculated', 'Stock In' ),
+  DB('BSStgStaging', !To Business Unit, 'EUR-Budget', !FiscalMonth, !Version, 'Calculated', 'Stock Out' )
+  ;  
+  
+['Transfer $']=>
+  DB('BSStgStaging', !From Business Unit, 'Constant', !FiscalMonth, !Version, 'Calculated', 'Stock In' ),
+  DB('BSStgStaging', !From Business Unit, 'Constant', !FiscalMonth, !Version, 'Calculated', 'Stock Out' ),
+  DB('BSStgStaging', !To Business Unit, 'Constant', !FiscalMonth, !Version, 'Calculated', 'Stock In' ),
+  DB('BSStgStaging', !To Business Unit, 'Constant', !FiscalMonth, !Version, 'Calculated', 'Stock Out' )
+  ;   
+  
+['Transfer $']=>
+  DB('BSStgStaging', !From Business Unit, 'USD-Constant', !FiscalMonth, !Version, 'Calculated', 'Stock In' ),
+  DB('BSStgStaging', !From Business Unit, 'USD-Constant', !FiscalMonth, !Version, 'Calculated', 'Stock Out' ),
+  DB('BSStgStaging', !To Business Unit, 'USD-Constant', !FiscalMonth, !Version, 'Calculated', 'Stock In' ),
+  DB('BSStgStaging', !To Business Unit, 'USD-Constant', !FiscalMonth, !Version, 'Calculated', 'Stock Out' )
+  ;     
+
+['Transfer $']=>
+  DB('BSStgStaging', !From Business Unit, 'USD-Budget', !FiscalMonth, !Version, 'Calculated', 'Stock In' ),
+  DB('BSStgStaging', !From Business Unit, 'USD-Budget', !FiscalMonth, !Version, 'Calculated', 'Stock Out' ),
+  DB('BSStgStaging', !To Business Unit, 'USD-Budget', !FiscalMonth, !Version, 'Calculated', 'Stock In' ),
+  DB('BSStgStaging', !To Business Unit, 'USD-Budget', !FiscalMonth, !Version, 'Calculated', 'Stock Out' )
+  ;   
+  

@@ -1,0 +1,21 @@
+#region Prolog
+MinorErrorLogMax = -1;
+OnMinorErrorDoItemSkip = 1;
+CurrentLogSetting = CubeGetLogChanges('CMForecast');
+CubeSetLogChanges('CMForecast', 0);
+NumRowsRead = 0;
+NumRowsProcessed = 0;
+SetInputCharacterSet('TM1CS_ISO_8859_1');
+#endregion
+#region Data
+NumRowsRead = NumRowsRead + 1;
+CellIncrementN(StringToNumberEx(vValue,'.',','),'CMForecast',vDim1,vDim2,vDim3,vDim4,vDim5,vDim6,vDim7,'Calculated',vDim9);
+NumRowsProcessed = NumRowsProcessed + 1;
+#endregion
+#region Epilog
+If (pResult @<> '');
+TextOutput(pResult, NumberToString(NumRowsRead), NumberToString(NumRowsProcessed));
+EndIf;
+CubeSaveData('CMForecast');
+CubeSetLogChanges('CMForecast', CurrentLogSetting);
+#endregion

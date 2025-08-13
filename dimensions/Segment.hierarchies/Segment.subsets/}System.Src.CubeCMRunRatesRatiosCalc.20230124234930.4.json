@@ -1,0 +1,16 @@
+{
+	"@type":"Subset",
+	"Name":"}System.Src.CubeCMRunRatesRatiosCalc.20230124234930.4",
+	"Elements":
+	[
+		{
+			"@id":"Dimensions('Segment')/Hierarchies('Segment')/Elements('Global')"
+		},
+		{
+			"@id":"Dimensions('Segment')/Hierarchies('Segment')/Elements('Distribution')"
+		},
+		{
+			"@id":"Dimensions('Segment')/Hierarchies('Segment')/Elements('No Segment')"
+		}
+	]
+}

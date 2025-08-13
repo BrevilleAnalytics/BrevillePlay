@@ -1,0 +1,13 @@
+{
+	"@type":"Subset",
+	"Name":"TempOHPnLPlan",
+	"Elements":
+	[
+		{
+			"@id":"Dimensions('OPXComponent')/Hierarchies('OPXComponent')/Elements('OPEX')"
+		},
+		{
+			"@id":"Dimensions('OPXComponent')/Hierarchies('OPXComponent')/Elements('OPEX ADJ')"
+		}
+	]
+}

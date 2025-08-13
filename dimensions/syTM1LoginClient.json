@@ -1,0 +1,13 @@
+{
+	"@type":"Dimension",
+	"Name":"syTM1LoginClient",
+	"AllLeavesHierarchyName":"",
+	"DefaultHierarchy":
+	{
+		"@id":"Dimensions('syTM1LoginClient')/Hierarchies('syTM1LoginClient')"
+	},
+	"Hierarchies@Code.links":
+	[
+		"syTM1LoginClient.hierarchies/syTM1LoginClient.json"
+	]
+}

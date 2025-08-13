@@ -1,0 +1,13 @@
+{
+	"@type":"Dimension",
+	"Name":"CapexType",
+	"AllLeavesHierarchyName":"",
+	"DefaultHierarchy":
+	{
+		"@id":"Dimensions('CapexType')/Hierarchies('CapexType')"
+	},
+	"Hierarchies@Code.links":
+	[
+		"CapexType.hierarchies/CapexType.json"
+	]
+}

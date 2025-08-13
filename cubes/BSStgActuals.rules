@@ -1,0 +1,299 @@
+#Region System
+FEEDSTRINGS;
+SKIPCHECK;
+#EndRegion
+
+# Cube name: BSStgActuals
+# Description: Staging cube to store actual data.
+
+
+#Currency Conversion Rules
+[Currency:'Currency':'AUD-Constant'] = N: ['Local']\ DB('BRExchangeRate', !BusinessUnit, !FiscalMonth,'Constant', 'Currency', 'FXRate' );
+['AUD-Budget'] = N: ['Local']\ DB('BRExchangeRate', !BusinessUnit, !FiscalMonth,'AUD-Budget', 'Currency', 'FXRate' );
+# ['AUD-MonthEnd'] = N: ['Local']\ DB('BRExchangeRate', !BusinessUnit, !FiscalMonth,'AUD-MonthEnd', 'Currency', 'FXRate' );
+# [Currency:'Currency':'AUD-Outlook'] = N: ['Local']\ DB('BRExchangeRate', !BusinessUnit, !FiscalMonth,'AUD-Outlook', 'Currency', 'FXRate' );
+
+
+['Reported Value', {'Movement', 'Balance'}] = N:
+  If (DB('BSStgActuals' ,!GLAccount, !BusinessUnit, !Currency, !FiscalMonth,'Override', !BSStgActualsMeasure) <> 0,
+  DB('BSStgActuals' ,!GLAccount, !BusinessUnit, !Currency, !FiscalMonth,'Override', !BSStgActualsMeasure),
+  DB('BSStgActuals' ,!GLAccount, !BusinessUnit, !Currency, !FiscalMonth,'Total', !BSStgActualsMeasure) );  
+ 
+FEEDERS ;
+ 
+#Region=== Internal Feeders 
+[{'Override','Total'}] => ['Reported Value']; 
+#EndRegion
+
+#Region BSStgStaging
+
+    #= BS Plant & Equipment
+    ['GLAccount':'GLAccount':'Plant & equipment - BS','Balance', 'Reported Value'] => 
+    DB('BSStgStaging',!BusinessUnit, !Currency, !FiscalMonth, 'Working Budget', 'Calculated', 'Plant & Equipment - OB'),
+    DB('BSStgStaging',!BusinessUnit, !Currency, !FiscalMonth, 'Outlook', 'Calculated', 'Plant & Equipment - OB');
+
+    ['GLAccount':'GLAccount':'Plant & equipment - BS','Movement', 'Reported Value'] => 
+    DB('BSStgStaging',!BusinessUnit, !Currency, !FiscalMonth, 'Working Budget', 'Calculated', 'Plant & Equipment - Additions'),
+    DB('BSStgStaging',!BusinessUnit, !Currency, !FiscalMonth, 'Outlook', 'Calculated', 'Plant & Equipment - Additions');
+
+    #= BS Tooling
+    ['GLAccount':'GLAccount':'Tooling - BS','Balance', 'Reported Value'] => 
+    DB('BSStgStaging',!BusinessUnit, !Currency, !FiscalMonth, 'Working Budget', 'Calculated', 'Tooling - OB'),
+    DB('BSStgStaging',!BusinessUnit, !Currency, !FiscalMonth, 'Outlook', 'Calculated', 'Tooling - OB');
+
+    ['GLAccount':'GLAccount':'Tooling - BS','Movement', 'Reported Value'] => 
+    DB('BSStgStaging',!BusinessUnit, !Currency, !FiscalMonth, 'Working Budget', 'Calculated', 'Tooling - Additions'),
+    DB('BSStgStaging',!BusinessUnit, !Currency, !FiscalMonth, 'Outlook', 'Calculated', 'Tooling - Additions');
+
+    #= BS Intangible Assets - Development Costs
+    ['GLAccount':'GLAccount':'Intangible assets - Development costs - BS','Balance', 'Reported Value'] => 
+    DB('BSStgStaging',!BusinessUnit, !Currency, !FiscalMonth, 'Working Budget', 'Calculated', 'Intangible assets - Development costs - OB'),
+    DB('BSStgStaging',!BusinessUnit, !Currency, !FiscalMonth, 'Outlook', 'Calculated', 'Intangible assets - Development costs - OB');
+
+    ['GLAccount':'GLAccount':'Intangible assets - Development costs - BS','Movement', 'Reported Value'] => 
+    DB('BSStgStaging',!BusinessUnit, !Currency, !FiscalMonth, 'Working Budget', 'Calculated', 'Intangible assets - Development costs - Additions'),
+    DB('BSStgStaging',!BusinessUnit, !Currency, !FiscalMonth, 'Outlook', 'Calculated', 'Intangible assets - Development costs - Additions');  
+
+    #= BS Intangible Assets - Goodwill
+    ['GLAccount':'GLAccount':'Intangible assets - Good will - BS','Balance', 'Reported Value'] => 
+    DB('BSStgStaging',!BusinessUnit, !Currency, !FiscalMonth, 'Working Budget', 'Calculated', 'Intangible assets - Goodwill - OB'),
+    DB('BSStgStaging',!BusinessUnit, !Currency, !FiscalMonth, 'Outlook', 'Calculated', 'Intangible assets - Goodwill - OB');
+
+    #= BS Intangible Assets - Other
+    ['GLAccount':'GLAccount':'Intangible assets - Other - BS','Balance', 'Reported Value'] => 
+    DB('BSStgStaging',!BusinessUnit, !Currency, !FiscalMonth, 'Working Budget', 'Calculated', 'Intangible assets - Other - OB'),
+    DB('BSStgStaging',!BusinessUnit, !Currency, !FiscalMonth, 'Outlook', 'Calculated', 'Intangible assets - Other - OB');
+
+    ['GLAccount':'GLAccount':'Computer software (gross carrying amount) - BS','Balance', 'Reported Value'] =>   
+    DB('BSStgStaging',!BusinessUnit, !Currency, !FiscalMonth, 'Working Budget', 'Calculated', 'Intangible assets - Software - OB'),
+    DB('BSStgStaging',!BusinessUnit, !Currency, !FiscalMonth, 'Working Budget', 'Calculated', 'Intangible assets - Software - CB'),  
+    DB('BSStgStaging',!BusinessUnit, !Currency, !FiscalMonth, 'Outlook', 'Calculated', 'Intangible assets - Software - OB'),
+    DB('BSStgStaging',!BusinessUnit, !Currency, !FiscalMonth, 'Outlook', 'Calculated', 'Intangible Accum Depn - Software - OB'),  
+    DB('BSStgStaging',!BusinessUnit, !Currency, !FiscalMonth, 'Outlook', 'Calculated', 'Intangible Accum Depn - Software - CB'),    
+    DB('BSStgStaging',!BusinessUnit, !Currency, !FiscalMonth, 'Working Budget', 'Calculated', 'Intangible assets - Software - Additions'),
+    DB('BSStgStaging',!BusinessUnit, !Currency, !FiscalMonth, 'Outlook', 'Calculated', 'Intangible Assets - Software - Additions');
+  
+
+#= BS Accrued Marketing
+['GLAccount':'GLAccount':'Accrued marketing - BS','Balance', 'Reported Value'] => 
+DB('BSStgStaging',!BusinessUnit, !Currency, !FiscalMonth, 'Working Budget', 'Calculated', 'Closing accrued marketing');
+['GLAccount':'GLAccount':'Accrued marketing - BS','Balance', 'Reported Value'] => 
+DB('BSStgStaging',!BusinessUnit, !Currency, !FiscalMonth, 'Outlook', 'Calculated', 'Closing accrued marketing');
+
+# = BS Customer Rebates
+['GLAccount':'GLAccount':'Accrued customer rebates & co-op - BS','Balance', 'Reported Value'] => 
+DB('BSStgStaging',!BusinessUnit, !Currency, !FiscalMonth, 'Working Budget', 'Calculated', 'Closing customer rebate accrual');
+['GLAccount':'GLAccount':'Accrued customer rebates & co-op - BS','Balance', 'Reported Value'] => 
+DB('BSStgStaging',!BusinessUnit, !Currency, !FiscalMonth, 'Outlook', 'Calculated', 'Closing customer rebate accrual');
+
+# = BS Warranty
+['GLAccount':'GLAccount':'PROVFWARR','Balance', 'Reported Value'] => 
+DB('BSStgStaging',!BusinessUnit, !Currency, !FiscalMonth, 'Working Budget', 'Calculated', 'Closing Provision');
+['GLAccount':'GLAccount':'PROVFWARR','Balance', 'Reported Value'] => 
+DB('BSStgStaging',!BusinessUnit, !Currency, !FiscalMonth, 'Outlook', 'Calculated', 'Closing Provision');
+
+# = BS Trade Payables
+['GLAccount':'GLAccount':'Trade payables - BS','Balance', 'Reported Value'] => 
+DB('BSStgStaging',!BusinessUnit, !Currency, !FiscalMonth, 'Working Budget', 'Calculated', 'Closing Trade Payables');
+['GLAccount':'GLAccount':'Trade payables - BS','Balance', 'Reported Value'] => 
+DB('BSStgStaging',!BusinessUnit, !Currency, !FiscalMonth, 'Outlook', 'Calculated', 'Closing Trade Payables');
+
+['GLAccount':'GLAccount':'Trade payables - GRNI - BS','Balance', 'Reported Value'] => 
+DB('BSStgStaging',!BusinessUnit, !Currency, !FiscalMonth, 'Working Budget', 'Calculated', 'Closing Trade Payables');
+['GLAccount':'GLAccount':'Trade payables - GRNI - BS','Balance', 'Reported Value'] => 
+DB('BSStgStaging',!BusinessUnit, !Currency, !FiscalMonth, 'Outlook', 'Calculated', 'Closing Trade Payables');
+
+['GLAccount':'GLAccount':'Trade payables - GRNI - BS','Balance', 'Reported Value'] => 
+DB('BSStgStaging',!BusinessUnit, !Currency, !FiscalMonth, 'Working Budget', 'Calculated', 'GRNI');
+['GLAccount':'GLAccount':'Trade payables - GRNI - BS','Balance', 'Reported Value'] => 
+DB('BSStgStaging',!BusinessUnit, !Currency, !FiscalMonth, 'Outlook', 'Calculated', 'GRNI');
+
+#= BS Trade Receivables
+['GLAccount':'GLAccount':'Trade receivables - BS', 'Reported Value'] => 
+DB('BSStgStaging',!BusinessUnit, !Currency, !FiscalMonth, 'Working Budget', 'Calculated', 'Closing Trade Debtors');
+['GLAccount':'GLAccount':'Trade receivables - BS', 'Reported Value'] => 
+DB('BSStgStaging',!BusinessUnit, !Currency, !FiscalMonth, 'Outlook', 'Calculated', 'Closing Trade Debtors');
+
+#= BS GST
+['GLAccount':'GLAccount':'G.S.T. / V.A.T. payables - BS','Reported Value'] => 
+DB('BSStgStaging',!BusinessUnit, !Currency, !FiscalMonth, 'Working Budget', 'Calculated', 'GST payable/(receivable)');
+['GLAccount':'GLAccount':'G.S.T. / V.A.T. payables - BS','Reported Value'] => 
+DB('BSStgStaging',!BusinessUnit, !Currency, !FiscalMonth, 'Outlook', 'Calculated', 'GST payable/(receivable)');
+
+['GLAccount':'GLAccount':'GST/VAT/QST receivable - BS','Reported Value'] => 
+DB('BSStgStaging',!BusinessUnit, !Currency, !FiscalMonth, 'Working Budget', 'Calculated', 'GST payable/(receivable)');
+['GLAccount':'GLAccount':'GST/VAT/QST receivable - BS','Reported Value'] => 
+DB('BSStgStaging',!BusinessUnit, !Currency, !FiscalMonth, 'Outlook', 'Calculated', 'GST payable/(receivable)');
+
+['GLAccount':'GLAccount':'111001','Reported Value'] => 
+DB('BSStgStaging',!BusinessUnit, !Currency, !FiscalMonth, 'Working Budget', 'Calculated', 'Plus NPD captialised added back');
+['GLAccount':'GLAccount':'111001','Reported Value'] => 
+DB('BSStgStaging',!BusinessUnit, !Currency, !FiscalMonth, 'Outlook', 'Calculated', 'Plus NPD captialised added back');
+
+#= BS Tax
+['GLAccount':'GLAccount':'207001','Reported Value'] => 
+DB('BSStgStaging',!BusinessUnit, !Currency, !FiscalMonth, 'Working Budget', 'Calculated', 'Closing Tax Payable/(receivable)');
+['GLAccount':'GLAccount':'207001','Reported Value'] => 
+DB('BSStgStaging',!BusinessUnit, !Currency, !FiscalMonth, 'Outlook', 'Calculated', 'Closing Tax Payable/(receivable)');
+
+['GLAccount':'GLAccount':'207002','Reported Value'] => 
+DB('BSStgStaging',!BusinessUnit, !Currency, !FiscalMonth, 'Working Budget', 'Calculated', 'WHT (Asset)/liability');
+['GLAccount':'GLAccount':'207002','Reported Value'] => 
+DB('BSStgStaging',!BusinessUnit, !Currency, !FiscalMonth, 'Outlook', 'Calculated', 'WHT (Asset)/liability');
+
+#= BS Inventory
+['GLAccount':'GLAccount':'COGS FX Variance','Reported Value'] => 
+DB('BSStgStaging',!BusinessUnit, !Currency, !FiscalMonth, 'Working Budget', 'Calculated', 'FX released to P&L (COGS)');
+['GLAccount':'GLAccount':'COGS FX Variance','Reported Value'] => 
+DB('BSStgStaging',!BusinessUnit, !Currency, !FiscalMonth, 'Outlook', 'Calculated', 'FX released to P&L (COGS)');
+
+['GLAccount':'GLAccount':'COGS FX Variance','Reported Value'] => 
+DB('BSStgStaging',!BusinessUnit, !Currency, !FiscalMonth, 'Working Budget', 'Calculated', 'COGS FX amortised to P&L');
+['GLAccount':'GLAccount':'COGS FX Variance','Reported Value'] => 
+DB('BSStgStaging',!BusinessUnit, !Currency, !FiscalMonth, 'Outlook', 'Calculated', 'COGS FX amortised to P&L');
+
+['GLAccount':'GLAccount':'Finished goods (at lower cost) - BS','Reported Value'] => 
+DB('BSStgStaging',!BusinessUnit, !Currency, !FiscalMonth, 'Working Budget', 'Calculated', 'Closing Inventory (ex provision)');
+['GLAccount':'GLAccount':'Finished goods (at lower cost) - BS','Reported Value'] => 
+DB('BSStgStaging',!BusinessUnit, !Currency, !FiscalMonth, 'Outlook', 'Calculated', 'Closing Inventory (ex provision)');
+
+['GLAccount':'GLAccount':'Goods in transit (at cost) - BS','Reported Value'] => 
+DB('BSStgStaging',!BusinessUnit, !Currency, !FiscalMonth, 'Working Budget', 'Calculated', 'Closing Inventory (ex provision)');
+['GLAccount':'GLAccount':'Goods in transit (at cost) - BS','Reported Value'] => 
+DB('BSStgStaging',!BusinessUnit, !Currency, !FiscalMonth, 'Outlook', 'Calculated', 'Closing Inventory (ex provision)');
+
+['GLAccount':'GLAccount':'Allowance for net realisable value - BS','Reported Value'] => 
+DB('BSStgStaging',!BusinessUnit, !Currency, !FiscalMonth, 'Working Budget', 'Calculated', 'Provision');
+['GLAccount':'GLAccount':'Allowance for net realisable value - BS','Reported Value'] => 
+DB('BSStgStaging',!BusinessUnit, !Currency, !FiscalMonth, 'Outlook', 'Calculated', 'Provision');
+
+['GLAccount':'GLAccount':'110104','Reported Value'] => 
+DB('BSStgStaging',!BusinessUnit, !Currency, !FiscalMonth, 'Outlook', 'Calculated', 'Fixed Asset Additions');
+['GLAccount':'GLAccount':'110104','Reported Value'] => 
+DB('BSStgStaging',!BusinessUnit, !Currency, !FiscalMonth, 'Working Budget', 'Calculated', 'Fixed Asset Additions');
+
+#= BS Lease
+['GLAccount':'GLAccount':'Right-of-use asset - BS'] => 
+DB('BSLease',!BusinessUnit, !Currency, 'BSComponent':'Total', !FiscalMonth, 'BSLeaseLocation':'Total', 'Working Budget', 'RoU Closing balance');
+['GLAccount':'GLAccount':'Right-of-use asset - BS'] => 
+DB('BSLease',!BusinessUnit, !Currency, 'BSComponent':'Total', !FiscalMonth, 'BSLeaseLocation':'Total', 'Outlook', 'RoU Closing balance');
+
+['GLAccount':'GLAccount':'Lease liabilities (current) - BS'] => 
+DB('BSLease',!BusinessUnit, !Currency, 'BSComponent':'Total', !FiscalMonth, 'BSLeaseLocation':'Total', 'Working Budget', 'Lease Liability - Current Closing balance'),
+DB('BSLease',!BusinessUnit, !Currency, 'BSComponent':'Total', !FiscalMonth, 'BSLeaseLocation':'Total', 'Outlook', 'Lease Liability - Current Closing balance'),  
+DB('BSStgStaging', !BusinessUnit, !Currency, !FiscalMonth, 'Outlook', !BSComponent, 'C/Fwd Liability' ),
+DB('BSStgStaging', !BusinessUnit, !Currency, !FiscalMonth, 'Working budget', !BSComponent, 'C/Fwd Liability' );
+
+['GLAccount':'GLAccount':'Lease liabilities (non-current) - BS'] => 
+DB('BSLease',!BusinessUnit, !Currency, 'BSComponent':'Total', !FiscalMonth, 'BSLeaseLocation':'Total', 'Working Budget', 'Lease Liability - Non-current Closing balance');
+['GLAccount':'GLAccount':'Lease liabilities (non-current) - BS'] => 
+DB('BSLease',!BusinessUnit, !Currency, 'BSComponent':'Total', !FiscalMonth, 'BSLeaseLocation':'Total', 'Outlook', 'Lease Liability - Non-current Closing balance');
+
+#= BSStgStaging
+['GLAccount':'GLAccount':'Right-of-use asset - BS','BSComponent':'Reported Value', 'Balance'] => DB('BSStgStaging' ,!BusinessUnit, !Currency, !FiscalMonth, 'Outlook', 'Calculated', 'RoU Closing balance');
+['GLAccount':'GLAccount':'Right-of-use asset - BS','BSComponent':'Reported Value', 'Balance'] => DB('BSStgStaging' ,!BusinessUnit, !Currency, !FiscalMonth, 'Working Budget', 'Calculated', 'RoU Closing balance');
+['GLAccount':'GLAccount':'Lease liabilities (current) - BS','BSComponent':'Reported Value', 'Balance'] => DB('BSStgStaging' ,!BusinessUnit, !Currency, !FiscalMonth, 'Outlook', 'Calculated', 'Lease Liability - Current Closing balance');
+['GLAccount':'GLAccount':'Lease liabilities (current) - BS','BSComponent':'Reported Value', 'Balance'] => DB('BSStgStaging' ,!BusinessUnit, !Currency, !FiscalMonth, 'Working Budget', 'Calculated', 'Lease Liability - Current Closing balance');
+['GLAccount':'GLAccount':'Lease liabilities (non-current) - BS','BSComponent':'Reported Value', 'Balance'] => DB('BSStgStaging' ,!BusinessUnit, !Currency, !FiscalMonth, 'Outlook', 'Calculated', 'Lease Liability - Non-current Closing balance');
+['GLAccount':'GLAccount':'Lease liabilities (non-current) - BS','BSComponent':'Reported Value', 'Balance'] => DB('BSStgStaging' ,!BusinessUnit, !Currency, !FiscalMonth, 'Working Budget', 'Calculated', 'Lease Liability - Non-current Closing balance');
+['GLAccount':'GLAccount':'202005','BSComponent':'Reported Value', 'Balance'] => DB('BSStgStaging' ,!BusinessUnit, !Currency, !FiscalMonth, 'Outlook', 'Calculated', 'Accrued Marketing');
+['GLAccount':'GLAccount':'202005','BSComponent':'Reported Value', 'Balance'] => DB('BSStgStaging' ,!BusinessUnit, !Currency, !FiscalMonth, 'Working Budget', 'Calculated', 'Accrued Marketing');
+
+['GLAccount':'GLAccount':'111001','BSComponent':'Reported Value', 'Balance'] => 
+  DB('BSStgStaging' ,!BusinessUnit, !Currency, !FiscalMonth,  'Outlook','Calculated', 'Plus NPD captialised added back'),
+  DB('BSStgStaging' ,!BusinessUnit, !Currency, !FiscalMonth,  'Working Budget','Calculated', 'Plus NPD captialised added back')  ;
+
+['GLAccount':'GLAccount':'300703','BSComponent':'Reported Value', 'Movement'] => DB('BSStgStaging' ,!BusinessUnit, !Currency, !FiscalMonth,  'Outlook','Calculated', 'Dividends paid');
+['GLAccount':'GLAccount':'300703','BSComponent':'Reported Value', 'Movement'] => DB('BSStgStaging' ,!BusinessUnit, !Currency, !FiscalMonth,  'Working Budget','Calculated', 'Dividends paid');
+['GLAccount':'GLAccount':'300704','BSComponent':'Reported Value', 'Movement'] => DB('BSStgStaging' ,!BusinessUnit, !Currency, !FiscalMonth,  'Outlook','Calculated', 'Dividends paid (inter-company)');
+['GLAccount':'GLAccount':'300704','BSComponent':'Reported Value', 'Movement'] => DB('BSStgStaging' ,!BusinessUnit, !Currency, !FiscalMonth,  'Working Budget','Calculated', 'Dividends paid (inter-company)');
+
+[GLAccount:'GLAccount':'Intercompany Accounts - BS','BSComponent':'Reported Value', 'Balance'] => 
+  DB('BSStgStaging' ,!BusinessUnit, !Currency, !FiscalMonth,  'Outlook','Calculated', 'Opening Balance - VLF'),
+  DB('BSStgStaging' ,!BusinessUnit, !Currency, !FiscalMonth,  'Working Budget','Calculated', 'Opening Balance - VLF'),
+  DB('BSStgStaging' ,!BusinessUnit, !Currency, !FiscalMonth,  'Outlook','Calculated', 'Closing Balance - VLF'),
+  DB('BSStgStaging' ,!BusinessUnit, !Currency, !FiscalMonth,  'Working Budget','Calculated', 'Closing Balance - VLF');
+  
+#EndRegion
+
+#Region BS Reporting
+
+['Balance', 'Calculated', 'FiscalMonth':'FiscalMonth':'All FY', 'GLAccount':'GLAccount':'All BalanceSheet GLAccounts', 'Local', 'BusinessUnit':'BusinessUnit':'All Business Unit']=>
+  DB('BS Reporting','Working Budget', !FiscalMonth, !Currency, !BusinessUnit, !GLAccount, 'Calculated', 'Balance' ),
+  DB('BS Reporting','Working Budget', !FiscalMonth, !Currency, !BusinessUnit, !GLAccount, 'Calculated', 'Movement' ),
+  DB('BS Reporting','Outlook', !FiscalMonth, !Currency, !BusinessUnit, !GLAccount, 'Calculated', 'Balance' ),
+  DB('BS Reporting','Outlook', !FiscalMonth, !Currency, !BusinessUnit, !GLAccount, 'Calculated', 'Movement' )
+  ;
+
+['Movement', 'Calculated', 'FiscalMonth':'FiscalMonth':'All FY', 'GLAccount':'GLAccount':'All BalanceSheet GLAccounts', 'Local', 'BusinessUnit':'BusinessUnit':'All Business Unit']=> 
+  DB('BS Reporting','Working Budget', !FiscalMonth, !Currency, !BusinessUnit, !GLAccount, 'Calculated', 'Balance' ),
+  DB('BS Reporting','Working Budget', !FiscalMonth, !Currency, !BusinessUnit, !GLAccount, 'Calculated', 'Movement' ),
+  DB('BS Reporting','Outlook', !FiscalMonth, !Currency, !BusinessUnit, !GLAccount, 'Calculated', 'Balance' ),
+  DB('BS Reporting','Outlook', !FiscalMonth, !Currency, !BusinessUnit, !GLAccount, 'Calculated', 'Movement' )
+  ;  
+
+['Balance', 'Calculated', 'FiscalMonth':'FiscalMonth':'All FY', 'GLAccount':'GLAccount':'Gross Sales', 'Local', 'BusinessUnit':'BusinessUnit':'All Business Unit']=>
+  DB('BS Reporting','Working Budget', !FiscalMonth, !Currency, !BusinessUnit, 'Current Period – Intercompany', 'Calculated', 'Balance' ),
+  DB('BS Reporting','Working Budget', !FiscalMonth, !Currency, !BusinessUnit, 'Current Period – Intercompany', 'Calculated', 'Movement' ),
+  DB('BS Reporting','Outlook', !FiscalMonth, !Currency, !BusinessUnit, 'Current Period – Intercompany', 'Calculated', 'Balance' ),
+  DB('BS Reporting','Outlook', !FiscalMonth, !Currency, !BusinessUnit, 'Current Period – Intercompany', 'Calculated', 'Movement' )
+  ;
+
+['Balance', 'Calculated'] =>
+  DB('BS Reporting','Outlook', !FiscalMonth, !Currency, !BusinessUnit, !GLAccount, !BSComponent, 'Balance'),
+  DB('BS Reporting','Outlook', !FiscalMonth, !Currency, !BusinessUnit, !GLAccount, !BSComponent, 'Movement'),
+  DB('BS Reporting','Working Budget', !FiscalMonth, !Currency, !BusinessUnit, !GLAccount, !BSComponent, 'Balance'),
+  DB('BS Reporting','Working Budget', !FiscalMonth, !Currency, !BusinessUnit, !GLAccount, !BSComponent, 'Movement')
+  ; 
+
+['Movement', 'Calculated'] =>
+  DB('BS Reporting','Outlook', !FiscalMonth, !Currency, !BusinessUnit, !GLAccount, !BSComponent, 'Balance'),
+  DB('BS Reporting','Outlook', !FiscalMonth, !Currency, !BusinessUnit, !GLAccount, !BSComponent, 'Movement'),
+  DB('BS Reporting','Working Budget', !FiscalMonth, !Currency, !BusinessUnit, !GLAccount, !BSComponent, 'Balance'),
+  DB('BS Reporting','Working Budget', !FiscalMonth, !Currency, !BusinessUnit, !GLAccount, !BSComponent, 'Movement')
+  ;  
+
+#EndRegion
+
+#Region CF Reporting
+['Balance', 'Calculated','GLAccount':'GLAccount':'Cash and cash equivalents - BS']=>
+  DB('CF Reporting', 'Outlook', !FiscalMonth, !Currency, !BusinessUnit, !BSComponent, 'Opening Balance - Cash at Bank' ),
+  DB('CF Reporting', 'Working Budget', !FiscalMonth, !Currency, !BusinessUnit, !BSComponent, 'Opening Balance - Cash at Bank' ),
+  DB('CF Reporting', 'Outlook', !FiscalMonth, !Currency, !BusinessUnit, !BSComponent, 'Total Closing Cash' ),
+  DB('CF Reporting', 'Working Budget', !FiscalMonth, !Currency, !BusinessUnit, !BSComponent, 'Total Closing Cash' );
+
+['Balance', 'Calculated','GLAccount':'GLAccount':'Borrowings (current) - BS']=>
+  DB('CF Reporting', 'Outlook', !FiscalMonth, !Currency, !BusinessUnit, !BSComponent, 'Closing Balance' ),
+  DB('CF Reporting', 'Working Budget', !FiscalMonth, !Currency, !BusinessUnit, !BSComponent, 'Closing Balance' );
+
+['Balance', 'Calculated','GLAccount':'GLAccount':'Borrowings (non-current) - BS']=>
+  DB('CF Reporting', 'Outlook', !FiscalMonth, !Currency, !BusinessUnit, !BSComponent, 'Closing Balance' ),
+  DB('CF Reporting', 'Working Budget', !FiscalMonth, !Currency, !BusinessUnit, !BSComponent, 'Closing Balance' );
+#EndRegion
+
+#Region BS Lease
+
+['Balance', 'GLAccount':'GLAccount':'Right-of-use asset - BS', 'Calculated']=>
+  DB('BSLease', !BusinessUnit, !Currency, !BSComponent, 'Total', !FiscalMonth, 'Outlook', 'RoU Closing balance' ),
+  DB('BSLease', !BusinessUnit, !Currency, !BSComponent, 'Total', !FiscalMonth, 'Working Budget', 'RoU Closing balance' );  
+
+['Balance', 'GLAccount':'GLAccount':'Lease liabilities (current) - BS', 'Calculated']=>
+  DB('BSLease', !BusinessUnit, !Currency, !BSComponent, 'Total', !FiscalMonth, 'Outlook', 'Lease Liability - Current Closing balance' ),
+  DB('BSLease', !BusinessUnit, !Currency, !BSComponent, 'Total', !FiscalMonth, 'Working Budget', 'Lease Liability - Current Closing balance' );  
+
+#EndRegion
+
+#Region BS Interco Transfer
+
+['Balance', 'GLAccount':'GLAccount':'Intercompany - BS', 'Reported Value']=>
+  DB('BS Interco Transfer', 'Working Budget', !FiscalMonth, 'Transfer Currency', !BusinessUnit, !BusinessUnit, 'Opening Balance' ),
+  DB('BS Interco Transfer', 'Outlook', !FiscalMonth, 'Transfer Currency', !BusinessUnit, !BusinessUnit, 'Opening Balance' );
+
+#EndRegion
+
+#Region Currency Conversion Feeder
+
+['Local Currency'] => ['AUD-Constant'],['AUD-Budget'],['AUD-MonthEnd'],['AUD-Outlook'];
+
+#EndRegion
+

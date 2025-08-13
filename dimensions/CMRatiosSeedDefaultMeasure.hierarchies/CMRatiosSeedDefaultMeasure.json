@@ -1,0 +1,12 @@
+{
+	"@type":"Hierarchy",
+	"Name":"CMRatiosSeedDefaultMeasure",
+	"Elements":
+	[
+		{
+			"Name":"Global Run Rate",
+			"Type":"String"
+		}
+	],
+	"Subsets@Code.links":[]
+}

@@ -1,0 +1,39 @@
+{
+	"@type":"Process",
+	"Name":"DimBRProductUpdatefromDL_Test",
+	"HasSecurityAccess":false,
+	"Code@Code.link":"DimBRProductUpdatefromDL_Test.ti",
+	"UIData":"_ParameterConstraints=e30=€",
+	"DataSource":
+	{
+		"Type":"ODBC",
+		"dataSourceNameForClient":"dev-aea-asyn-abi-fpa-ibm",
+		"dataSourceNameForServer":"dev-aea-asyn-abi-fpa-ibm",
+		"password":"nHM6yEC[JODYZ>n4TQ2wb>Kn1wJtCZrYS0?`M[YenOhF4y1UQBr]MR0?7A`yIgfY7ED:ag;Hc@aD714Ei;>lFv0tas4Fm^p;IE1^YmLFKv2bo1h6Sj`@ArC<\\a`p\\9\\\\_gWlMQ^m<i0\\AFKcrL\\9l>dXvMJ@wRu\\L\\q2kfBB7fg1BpQI4RZxptyYe@?Rdw@=5sdvZKG`",
+		"query":"select * from dbo.DimProduct",
+		"userName":"sql_fpa_ibm_dev_readonly",
+		"usesUnicode":true
+	},
+	"Parameters":
+	[
+		{
+			"Name":"psProcessReference",
+			"Prompt":"",
+			"Value":"",
+			"Type":"String"
+		},
+		{
+			"Name":"pssyProcessLog",
+			"Prompt":"To enable or disable Process Log - Y/N",
+			"Value":"",
+			"Type":"String"
+		},
+		{
+			"Name":"psTITracker",
+			"Prompt":"To enable or disable syTI Tracker - Y/N",
+			"Value":"",
+			"Type":"String"
+		}
+	],
+	"Variables":[]
+}

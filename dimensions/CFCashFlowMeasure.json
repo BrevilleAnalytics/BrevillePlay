@@ -1,0 +1,13 @@
+{
+	"@type":"Dimension",
+	"Name":"CFCashFlowMeasure",
+	"AllLeavesHierarchyName":"",
+	"DefaultHierarchy":
+	{
+		"@id":"Dimensions('CFCashFlowMeasure')/Hierarchies('CFCashFlowMeasure')"
+	},
+	"Hierarchies@Code.links":
+	[
+		"CFCashFlowMeasure.hierarchies/CFCashFlowMeasure.json"
+	]
+}

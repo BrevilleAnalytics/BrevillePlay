@@ -1,0 +1,13 @@
+{
+	"@type":"Subset",
+	"Name":"App.BaratzaCustomers",
+	"Elements":
+	[
+		{
+			"@id":"Dimensions('Customer')/Hierarchies('Customer')/Elements('BUSCUS31270')"
+		},
+		{
+			"@id":"Dimensions('Customer')/Hierarchies('Customer')/Elements('BUSCUS31271')"
+		}
+	]
+}

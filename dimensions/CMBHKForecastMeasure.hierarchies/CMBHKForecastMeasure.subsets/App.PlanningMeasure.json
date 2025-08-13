@@ -1,0 +1,22 @@
+{
+	"@type":"Subset",
+	"Name":"App.PlanningMeasure",
+	"Elements":
+	[
+		{
+			"@id":"Dimensions('CMBHKForecastMeasure')/Hierarchies('CMBHKForecastMeasure')/Elements('Gross Sales')"
+		},
+		{
+			"@id":"Dimensions('CMBHKForecastMeasure')/Hierarchies('CMBHKForecastMeasure')/Elements('Net Sales %')"
+		},
+		{
+			"@id":"Dimensions('CMBHKForecastMeasure')/Hierarchies('CMBHKForecastMeasure')/Elements('Rebates')"
+		},
+		{
+			"@id":"Dimensions('CMBHKForecastMeasure')/Hierarchies('CMBHKForecastMeasure')/Elements('CM %')"
+		},
+		{
+			"@id":"Dimensions('CMBHKForecastMeasure')/Hierarchies('CMBHKForecastMeasure')/Elements('Cost of Goods Sold')"
+		}
+	]
+}

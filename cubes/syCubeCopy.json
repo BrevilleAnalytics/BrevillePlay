@@ -1,0 +1,27 @@
+{
+	"@type":"Cube",
+	"Name":"syCubeCopy",
+	"Rules@Code.link":"syCubeCopy.rules",
+	"Dimensions":
+	[
+		{
+			"@id":"Dimensions('syCubeCopyTemplate')"
+		},
+		{
+			"@id":"Dimensions('syCubeCopyCubeList')"
+		},
+		{
+			"@id":"Dimensions('syCubeCopyMeasure')"
+		}
+	],
+	"Views@Code.links":
+	[
+		"syCubeCopy.views/App.BudgetSnapshot.json",
+		"syCubeCopy.views/App.BudgetSnapshotwithFilter.json",
+		"syCubeCopy.views/App.CopyBudgetToOutlook.json",
+		"syCubeCopy.views/App.CopyBudgetToOutlookwithFilter.json",
+		"syCubeCopy.views/App.OutlookSnapshot.json",
+		"syCubeCopy.views/App.OutlookSnapshotwithFilter.json",
+		"syCubeCopy.views/Default.json"
+	]
+}

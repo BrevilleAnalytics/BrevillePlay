@@ -1,0 +1,73 @@
+{
+	"@type":"Subset",
+	"Name":"App.MgmtReporting",
+	"Elements":
+	[
+		{
+			"@id":"Dimensions('GLAccount')/Hierarchies('Management Reporting')/Elements('Profit After Tax')"
+		},
+		{
+			"@id":"Dimensions('GLAccount')/Hierarchies('Management Reporting')/Elements('Tax expense')"
+		},
+		{
+			"@id":"Dimensions('GLAccount')/Hierarchies('Management Reporting')/Elements('Profit Before Tax')"
+		},
+		{
+			"@id":"Dimensions('GLAccount')/Hierarchies('Management Reporting')/Elements('Below the line')"
+		},
+		{
+			"@id":"Dimensions('GLAccount')/Hierarchies('Management Reporting')/Elements('Net interest income/(expense)')"
+		},
+		{
+			"@id":"Dimensions('GLAccount')/Hierarchies('Management Reporting')/Elements('Other finance expenses')"
+		},
+		{
+			"@id":"Dimensions('GLAccount')/Hierarchies('Management Reporting')/Elements('EBIT')"
+		},
+		{
+			"@id":"Dimensions('GLAccount')/Hierarchies('Management Reporting')/Elements('Depreciation & amortisation expense')"
+		},
+		{
+			"@id":"Dimensions('GLAccount')/Hierarchies('Management Reporting')/Elements('EBITDA')"
+		},
+		{
+			"@id":"Dimensions('GLAccount')/Hierarchies('Management Reporting')/Elements('Marketing expenses')"
+		},
+		{
+			"@id":"Dimensions('GLAccount')/Hierarchies('Management Reporting')/Elements('Other Income')"
+		},
+		{
+			"@id":"Dimensions('GLAccount')/Hierarchies('Management Reporting')/Elements('Overhead and other expenses')"
+		},
+		{
+			"@id":"Dimensions('GLAccount')/Hierarchies('Management Reporting')/Elements('Contribution Margin')"
+		},
+		{
+			"@id":"Dimensions('GLAccount')/Hierarchies('Management Reporting')/Elements('Freight')"
+		},
+		{
+			"@id":"Dimensions('GLAccount')/Hierarchies('Management Reporting')/Elements('Warranty')"
+		},
+		{
+			"@id":"Dimensions('GLAccount')/Hierarchies('Management Reporting')/Elements('Gross Margin')"
+		},
+		{
+			"@id":"Dimensions('GLAccount')/Hierarchies('Management Reporting')/Elements('COGS')"
+		},
+		{
+			"@id":"Dimensions('GLAccount')/Hierarchies('Management Reporting')/Elements('COGS FX Variance')"
+		},
+		{
+			"@id":"Dimensions('GLAccount')/Hierarchies('Management Reporting')/Elements('Net Sales')"
+		},
+		{
+			"@id":"Dimensions('GLAccount')/Hierarchies('Management Reporting')/Elements('Promotions')"
+		},
+		{
+			"@id":"Dimensions('GLAccount')/Hierarchies('Management Reporting')/Elements('Settlement discounts and rebates')"
+		},
+		{
+			"@id":"Dimensions('GLAccount')/Hierarchies('Management Reporting')/Elements('Gross Sales')"
+		}
+	]
+}

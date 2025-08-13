@@ -1,0 +1,22 @@
+#Region System
+FEEDSTRINGS;
+SKIPCHECK;
+#EndRegion
+
+# Cube name: GlobalEBIT
+
+
+#===== Calculation
+# copy actual data to outlook version
+[ 'Outlook' ]  = N: If ( DB( 'BRAsFiscalMonth' , 'Actual' , ATTRS( 'GlobalTheatre', !GlobalTheatre , 'Theatre' ), !FiscalMonth , 'Actual Flag' ) = 1 
+                         , DB( 'GlobalEBIT', !EBITAccount, !BusinessUnit, !Segment, !Currency, !FiscalMonth, 'Actual' , !GlobalTheatre, !GlobalEBITMeasure   )
+                         , CONTINUE ) ;
+[ 'GM%' ] = ['Gross Margin'] \ ['Net Sales'] ;
+
+['CM%'] = ['Contribution Margin']\ ['Net Sales'] ;
+
+FEEDERS ;
+
+['Actual'] => ['Outlook'] ; 
+['Gross Sales'] => ['GM%'] ;
+['Gross Sales'] => ['CM%'] ;

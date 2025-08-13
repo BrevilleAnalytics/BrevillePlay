@@ -1,0 +1,5 @@
+{
+	"@type":"Subset",
+	"Name":"DomOverheadDepreciation",
+	"Expression":"{Descendants([GLAccount].[GLAccount].[Overhead and other expenses]), Descendants([GLAccount].[GLAccount].[Depreciation & Amortisation Expense])}"
+}

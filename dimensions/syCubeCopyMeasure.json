@@ -1,0 +1,13 @@
+{
+	"@type":"Dimension",
+	"Name":"syCubeCopyMeasure",
+	"AllLeavesHierarchyName":"",
+	"DefaultHierarchy":
+	{
+		"@id":"Dimensions('syCubeCopyMeasure')/Hierarchies('syCubeCopyMeasure')"
+	},
+	"Hierarchies@Code.links":
+	[
+		"syCubeCopyMeasure.hierarchies/syCubeCopyMeasure.json"
+	]
+}

@@ -1,0 +1,13 @@
+{
+	"@type":"Dimension",
+	"Name":"BRLineItem",
+	"AllLeavesHierarchyName":"",
+	"DefaultHierarchy":
+	{
+		"@id":"Dimensions('BRLineItem')/Hierarchies('BRLineItem')"
+	},
+	"Hierarchies@Code.links":
+	[
+		"BRLineItem.hierarchies/BRLineItem.json"
+	]
+}

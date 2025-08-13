@@ -1,0 +1,31 @@
+{
+	"@type":"Subset",
+	"Name":"TempCMStgActuals",
+	"Elements":
+	[
+		{
+			"@id":"Dimensions('CMStgActualsMeasure')/Hierarchies('CMStgActualsMeasure')/Elements('Gross Sales')"
+		},
+		{
+			"@id":"Dimensions('CMStgActualsMeasure')/Hierarchies('CMStgActualsMeasure')/Elements('Shipped Units')"
+		},
+		{
+			"@id":"Dimensions('CMStgActualsMeasure')/Hierarchies('CMStgActualsMeasure')/Elements('Returned Units')"
+		},
+		{
+			"@id":"Dimensions('CMStgActualsMeasure')/Hierarchies('CMStgActualsMeasure')/Elements('Rebates')"
+		},
+		{
+			"@id":"Dimensions('CMStgActualsMeasure')/Hierarchies('CMStgActualsMeasure')/Elements('Cost of Goods Sold')"
+		},
+		{
+			"@id":"Dimensions('CMStgActualsMeasure')/Hierarchies('CMStgActualsMeasure')/Elements('Warranty')"
+		},
+		{
+			"@id":"Dimensions('CMStgActualsMeasure')/Hierarchies('CMStgActualsMeasure')/Elements('Freight')"
+		},
+		{
+			"@id":"Dimensions('CMStgActualsMeasure')/Hierarchies('CMStgActualsMeasure')/Elements('SKU Promo Costs')"
+		}
+	]
+}

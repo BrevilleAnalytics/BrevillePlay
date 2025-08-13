@@ -1,0 +1,13 @@
+{
+	"@type":"Process",
+	"Name":"sySecurityOverlayCreateCMForecastPnLPlan",
+	"HasSecurityAccess":false,
+	"Code@Code.link":"sySecurityOverlayCreateCMForecastPnLPlan.ti",
+	"UIData":"_ParameterConstraints=e30=€",
+	"DataSource":
+	{
+		"Type":"None"
+	},
+	"Parameters":[],
+	"Variables":[]
+}

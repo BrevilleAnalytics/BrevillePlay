@@ -1,0 +1,5 @@
+{
+	"@type":"Subset",
+	"Name":"App.NonRegionalCCs",
+	"Expression":"{FILTER(TM1FILTERBYLEVEL(TM1SUBSETALL([CostCentre].[CostCentre]) , 0) , ([CostCentre].[CostCentre].CURRENTMEMBER.PROPERTIES(\"Regional\") <> \"Regional\"))}"
+}

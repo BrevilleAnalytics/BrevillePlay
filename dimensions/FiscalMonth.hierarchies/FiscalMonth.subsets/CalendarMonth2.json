@@ -1,0 +1,5 @@
+{
+	"@type":"Subset",
+	"Name":"CalendarMonth2",
+	"Expression":"{ORDER(EXCEPT(TM1FILTERBYLEVEL(TM1SUBSETALL([FiscalMonth].[FiscalMonth]) , 0) , {[FiscalMonth].[FiscalMonth].[No FiscalMonth],[FiscalMonth].[FiscalMonth].[Comment]}) , [FiscalMonth].[FiscalMonth].CURRENTMEMBER.PROPERTIES(\"MEMBER_NAME\") , BASC)}"
+}

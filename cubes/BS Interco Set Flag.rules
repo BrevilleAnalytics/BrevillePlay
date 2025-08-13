@@ -1,0 +1,13 @@
+SKIPCHECK;
+
+['Interco Flag']=N:
+  IF ( !From Business Unit @= !To Business Unit,
+  0,
+  CONTINUE); 
+
+
+FEEDERS;
+
+['Interco Flag']=>
+  DB('BS Interco Transfer', 'Working Budget', 'FiscalMonth':'All FY', 'Transfer Currency', !'From Business Unit', !'To Business Unit', 'Closing Balance' ),
+  DB('BS Interco Transfer', 'Outlook', 'FiscalMonth':'All FY', 'Transfer Currency', !'From Business Unit', !'To Business Unit', 'Closing Balance' );

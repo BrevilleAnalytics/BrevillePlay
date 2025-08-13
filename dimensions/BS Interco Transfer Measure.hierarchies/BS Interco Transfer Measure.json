@@ -1,0 +1,154 @@
+{
+	"@type":"Hierarchy",
+	"Name":"BS Interco Transfer Measure",
+	"Elements":
+	[
+		{
+			"Name":"Cash receipt (20% of PM VLF)",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"Cash receipt (80% of CM VLF)",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"VLF for CM Booked (excl WHT)",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"Procument Charge Booked",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"Procument Charge Paid (PM)",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"China Service Fee Booked",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"China Service Fee Payment (PM)",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"Charge NZ for stock sent",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"Cash reciept for stock sent",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"Interco with Thebe - Recapitalisation",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"Letlit payment",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"BTL balancing adjustment",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"Remit DI sales to NZ from PM",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"DI Sales - Cash receipted on behalf of NZ for CM",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"Interco Flag",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"Closing Balance",
+			"Type":"Consolidated"
+		},
+		{
+			"Name":"Opening Balance",
+			"Type":"Numeric"
+		}
+	],
+	"Edges":
+	[
+		{
+			"ParentName":"Closing Balance",
+			"ComponentName":"Opening Balance",
+			"Weight":1
+		},
+		{
+			"ParentName":"Closing Balance",
+			"ComponentName":"Cash receipt (20% of PM VLF)",
+			"Weight":1
+		},
+		{
+			"ParentName":"Closing Balance",
+			"ComponentName":"Cash receipt (80% of CM VLF)",
+			"Weight":1
+		},
+		{
+			"ParentName":"Closing Balance",
+			"ComponentName":"VLF for CM Booked (excl WHT)",
+			"Weight":1
+		},
+		{
+			"ParentName":"Closing Balance",
+			"ComponentName":"Procument Charge Booked",
+			"Weight":1
+		},
+		{
+			"ParentName":"Closing Balance",
+			"ComponentName":"Procument Charge Paid (PM)",
+			"Weight":1
+		},
+		{
+			"ParentName":"Closing Balance",
+			"ComponentName":"China Service Fee Booked",
+			"Weight":1
+		},
+		{
+			"ParentName":"Closing Balance",
+			"ComponentName":"China Service Fee Payment (PM)",
+			"Weight":1
+		},
+		{
+			"ParentName":"Closing Balance",
+			"ComponentName":"Charge NZ for stock sent",
+			"Weight":1
+		},
+		{
+			"ParentName":"Closing Balance",
+			"ComponentName":"Cash reciept for stock sent",
+			"Weight":1
+		},
+		{
+			"ParentName":"Closing Balance",
+			"ComponentName":"Interco with Thebe - Recapitalisation",
+			"Weight":1
+		},
+		{
+			"ParentName":"Closing Balance",
+			"ComponentName":"Letlit payment",
+			"Weight":1
+		},
+		{
+			"ParentName":"Closing Balance",
+			"ComponentName":"BTL balancing adjustment",
+			"Weight":1
+		},
+		{
+			"ParentName":"Closing Balance",
+			"ComponentName":"Remit DI sales to NZ from PM",
+			"Weight":1
+		},
+		{
+			"ParentName":"Closing Balance",
+			"ComponentName":"DI Sales - Cash receipted on behalf of NZ for CM",
+			"Weight":1
+		}
+	],
+	"Subsets@Code.links":[]
+}

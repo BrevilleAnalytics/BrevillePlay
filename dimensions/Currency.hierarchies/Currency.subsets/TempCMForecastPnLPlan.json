@@ -1,0 +1,10 @@
+{
+	"@type":"Subset",
+	"Name":"TempCMForecastPnLPlan",
+	"Elements":
+	[
+		{
+			"@id":"Dimensions('Currency')/Hierarchies('Currency')/Elements('Local Currency')"
+		}
+	]
+}

@@ -1,0 +1,13 @@
+{
+	"@type":"Process",
+	"Name":"SaveDataAll",
+	"HasSecurityAccess":false,
+	"Code@Code.link":"SaveDataAll.ti",
+	"UIData":"_ParameterConstraints=e30=€",
+	"DataSource":
+	{
+		"Type":"None"
+	},
+	"Parameters":[],
+	"Variables":[]
+}

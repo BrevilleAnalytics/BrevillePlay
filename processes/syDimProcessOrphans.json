@@ -1,0 +1,39 @@
+{
+	"@type":"Process",
+	"Name":"syDimProcessOrphans",
+	"HasSecurityAccess":false,
+	"Code@Code.link":"syDimProcessOrphans.ti",
+	"UIData":"CubeAction=1511€DataAction=1503€CubeLogChanges=0€",
+	"DataSource":
+	{
+		"Type":"None"
+	},
+	"Parameters":
+	[
+		{
+			"Name":"pDimName",
+			"Prompt":"Dim Name",
+			"Value":"",
+			"Type":"String"
+		},
+		{
+			"Name":"pOrphanBucket",
+			"Prompt":"Orphan Bucket Name",
+			"Value":"",
+			"Type":"String"
+		},
+		{
+			"Name":"pDeleteEmptyConsols",
+			"Prompt":"Delete Empty Consolidations (Y=Yes)",
+			"Value":"",
+			"Type":"String"
+		},
+		{
+			"Name":"pProcessNameForLogging",
+			"Prompt":"Process Name For Logging",
+			"Value":"",
+			"Type":"String"
+		}
+	],
+	"Variables":[]
+}

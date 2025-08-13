@@ -1,0 +1,10 @@
+{
+	"@type":"Subset",
+	"Name":"TempCMRunRatesMonthly",
+	"Elements":
+	[
+		{
+			"@id":"Dimensions('CMRunRatesMeasure')/Hierarchies('CMRunRatesMeasure')/Elements('Final')"
+		}
+	]
+}

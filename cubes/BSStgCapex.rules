@@ -1,0 +1,27 @@
+FEEDSTRINGS;
+SKIPCHECK;
+
+# Cube name: BSStgCapex
+# Description: Manual Input cube for capex and depreciation phasing.
+
+['Reported Value'] = N:If (DB('BSStgCapex', !BusinessUnit, !Currency, 'Override', !GLAccount,!FiscalMonth, !Version, !BSStgCapexMeasure) <> 0,
+       DB('BSStgCapex', !BusinessUnit, !Currency, 'Override', !GLAccount,!FiscalMonth, !Version, !BSStgCapexMeasure),
+       DB('BSStgCapex', !BusinessUnit, !Currency, 'Total', !GLAccount,!FiscalMonth, !Version, !BSStgCapexMeasure) ); 
+
+FEEDERS ;
+ 
+#=== Internal Feeders
+
+['BSComponent':{'Override','Total'}] => ['BSComponent':'Reported Value'];
+
+#=== External Feeders
+
+[GLAccount:'GLAccount':'All GLAccount', 'Reported Value', {'Outlook','Working Budget'}]=>
+  DB('BSStgStaging', !BusinessUnit, !Currency, !FiscalMonth, !Version, 'Calculated', 'Plant & Equipment - Additions' ),
+  DB('BSStgStaging', !BusinessUnit, !Currency, !FiscalMonth, !Version, 'Calculated', 'Tooling - Additions' ),
+  DB('BSStgStaging', !BusinessUnit, !Currency, !FiscalMonth, !Version, 'Calculated', 'Intangible Assets - Development Costs - Additions' ),
+  DB('BSStgStaging', !BusinessUnit, !Currency, !FiscalMonth, !Version, 'Calculated', 'Intangible Assets - Other - Additions' ),  
+  DB('BSStgStaging', !BusinessUnit, !Currency, !FiscalMonth, !Version, 'Calculated', 'Intangible Assets - Software - Additions' ),
+  DB('BSStgStaging', !BusinessUnit, !Currency, !FiscalMonth, !Version, 'Calculated', 'Plus NPD captialised added back'),
+  DB('BSStgStaging', !BusinessUnit, !Currency, !FiscalMonth, !Version, 'Calculated', 'Fixed Asset Additions'),  
+  DB('BSStgStaging', !BusinessUnit, !Currency, !FiscalMonth, !Version, 'Calculated', 'GST - Paid on additions');

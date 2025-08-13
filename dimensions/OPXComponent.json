@@ -1,0 +1,13 @@
+{
+	"@type":"Dimension",
+	"Name":"OPXComponent",
+	"AllLeavesHierarchyName":"",
+	"DefaultHierarchy":
+	{
+		"@id":"Dimensions('OPXComponent')/Hierarchies('OPXComponent')"
+	},
+	"Hierarchies@Code.links":
+	[
+		"OPXComponent.hierarchies/OPXComponent.json"
+	]
+}

@@ -1,0 +1,97 @@
+{
+	"@type":"Cube",
+	"Name":"PnLPlan",
+	"Rules@Code.link":"PnLPlan.rules",
+	"DrillthroughRules@Code.link":"PnLPlan.drillthrough.rules",
+	"Dimensions":
+	[
+		{
+			"@id":"Dimensions('GLAccount')"
+		},
+		{
+			"@id":"Dimensions('CostCentre')"
+		},
+		{
+			"@id":"Dimensions('BusinessUnit')"
+		},
+		{
+			"@id":"Dimensions('Segment')"
+		},
+		{
+			"@id":"Dimensions('OPXComponent')"
+		},
+		{
+			"@id":"Dimensions('Currency')"
+		},
+		{
+			"@id":"Dimensions('FiscalMonth')"
+		},
+		{
+			"@id":"Dimensions('Version')"
+		},
+		{
+			"@id":"Dimensions('GlobalTheatre')"
+		},
+		{
+			"@id":"Dimensions('PnLPlanMeasure')"
+		}
+	],
+	"Views@Code.links":
+	[
+		"PnLPlan.views/PL Standard View.json",
+		"PnLPlan.views/TempCMPnLPlan.json",
+		"PnLPlan.views/TempCorporateMktgPnLPlan.json",
+		"PnLPlan.views/TempOHPnLPlan.json",
+		"PnLPlan.views/TempOtherIncomePnLPlan.json",
+		"PnLPlan.views/TempPnLLocalCurrency.json",
+		"PnLPlan.views/TempRMktgPnLPlan.json",
+		"PnLPlan.views/AmericasDefault.json",
+		"PnLPlan.views/APACDefault.json",
+		"PnLPlan.views/App.PlanningDE.json",
+		"PnLPlan.views/App.PLReporting.json",
+		"PnLPlan.views/App.PLReportingAlt.json",
+		"PnLPlan.views/Default.json",
+		"PnLPlan.views/DefaultTraining.json",
+		"PnLPlan.views/DomTest3.json",
+		"PnLPlan.views/Drill Through to Transaction.json",
+		"PnLPlan.views/EMEADefault.json",
+		"PnLPlan.views/JJ_QA.json",
+		"PnLPlan.views/Marketing & Overheads MTDYTD.json",
+		"PnLPlan.views/Marketing Expenses by Country.json",
+		"PnLPlan.views/Marketing Expenses MTDYTD.json",
+		"PnLPlan.views/Overheads - Accrual CC by Month.json",
+		"PnLPlan.views/Overheads - Detailed Cost Type by Country.json",
+		"PnLPlan.views/Overheads - Detailed Cost Type MTDYTD.json",
+		"PnLPlan.views/Overheads - Summary Cost Type by Country.json",
+		"PnLPlan.views/Overheads - Summary Cost Type MTDYTD.json",
+		"PnLPlan.views/Overheads by CC by Country.json",
+		"PnLPlan.views/Overheads by CC MTDYTD.json",
+		"PnLPlan.views/Overheads by Country ex Accruals.json",
+		"PnLPlan.views/Overheads by GL.json",
+		"PnLPlan.views/Overheads by GL - Accrual Cost Centres.json",
+		"PnLPlan.views/Overheads by GL - Accruals by Month.json",
+		"PnLPlan.views/Overheads by GL by Country.json",
+		"PnLPlan.views/Overheads by GL by Country 180123.json",
+		"PnLPlan.views/Overheads by GL by Country ex Accruals.json",
+		"PnLPlan.views/Overheads by GL ex Accruals MTDYTD.json",
+		"PnLPlan.views/PlanningTest.json",
+		"PnLPlan.views/PL FPA.json",
+		"PnLPlan.views/Security - Test Permissions.json",
+		"PnLPlan.views/terst 2.json",
+		"PnLPlan.views/Test.json",
+		"PnLPlan.views/Test Drill Through.json",
+		"PnLPlan.views/test Ian.json",
+		"PnLPlan.views/test yang.json",
+		"PnLPlan.views/TM - Global Product Actuals.json",
+		"PnLPlan.views/TM - Marketing Overheads Full GL.json",
+		"PnLPlan.views/TM FY24 Budget Build.json",
+		"PnLPlan.views/TM Global Product Overheads.json",
+		"PnLPlan.views/TM Leasing Expenses.json",
+		"PnLPlan.views/TM Overheads FPA.json",
+		"PnLPlan.views/TM Tech Services Act vs Bud.json",
+		"PnLPlan.views/TM Tech Services Act vs Bud Monthly.json",
+		"PnLPlan.views/TM Test View.json",
+		"PnLPlan.views/WFP Testing JJ.json",
+		"PnLPlan.views/z_TIDataSourceView_DoNotChange.json"
+	]
+}

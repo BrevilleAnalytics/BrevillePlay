@@ -1,0 +1,50 @@
+#region Prolog
+#****Begin: Generated Statements***
+#****End: Generated Statements****
+
+######################################################################
+# Process to add a new single Group
+
+
+
+#~~~~~~~~~ Init ~~~~~~~~~~~~~~~~~~~~
+# Process Logging
+csProcess = GetProcessName( ) ;
+If( psProcessReference @<> '' ) ;
+   csProcessReference = psProcessReference ;
+Else ; 
+   csProcessReference = GetProcessName() | '_' | TimSt( Now(), '\Y\m\d_\h\i\s', 1)  ;
+   ExecuteProcess('syProcessLogInitialise','psProcessName',csProcess);
+EndIf ;
+#ExecuteProcess('syProcessLogMessage','psProcessName',csProcess,'psLogLevel','INFO','psMessage','Starting Process ' | csProcess | ' Version=' | psVersion | ' Year=' | psYear ) ;
+ExecuteProcess('syProcessLogMessage','psProcessName', psProcessReference  , 'psLogLevel','INFO','psMessage','Starting Process ' | csProcess ) ;
+
+
+#~~~~~~~~~ Process Function  ~~~~~~~~~~~~~~~~~~~~
+
+
+AddGroup(pGroupName);
+
+ExecuteProcess('syProcessLogMessage','psProcessName',psProcessReference , 'psLogLevel','INFO','psMessage','Added Group: ' | pGroupName | ' by Process:'  | csProcess ) ;
+#endregion
+#region Metadata
+
+#****Begin: Generated Statements***
+#****End: Generated Statements****
+#endregion
+#region Data
+
+#****Begin: Generated Statements***
+#****End: Generated Statements****
+#endregion
+#region Epilog
+#****Begin: Generated Statements***
+#****End: Generated Statements****
+
+
+
+
+
+# Finish log
+ExecuteProcess('syProcessLogMessage','psProcessName', psProcessReference  ,'psLogLevel','INFO','psMessage','Finished process ' |  csProcess ) ;
+#endregion

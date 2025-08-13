@@ -1,0 +1,13 @@
+{
+	"@type":"Process",
+	"Name":"syCellSecurityCreateCMStgActuals",
+	"HasSecurityAccess":false,
+	"Code@Code.link":"syCellSecurityCreateCMStgActuals.ti",
+	"UIData":"_ParameterConstraints=e30=€",
+	"DataSource":
+	{
+		"Type":"None"
+	},
+	"Parameters":[],
+	"Variables":[]
+}

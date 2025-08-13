@@ -1,0 +1,29 @@
+{
+	"@type":"Cube",
+	"Name":"CMStgForecast",
+	"Dimensions":
+	[
+		{
+			"@id":"Dimensions('Product')"
+		},
+		{
+			"@id":"Dimensions('Segment')"
+		},
+		{
+			"@id":"Dimensions('BusinessUnit')"
+		},
+		{
+			"@id":"Dimensions('Version')"
+		},
+		{
+			"@id":"Dimensions('FiscalWeek')"
+		},
+		{
+			"@id":"Dimensions('Currency')"
+		},
+		{
+			"@id":"Dimensions('CMStgForecastMeasure')"
+		}
+	],
+	"Views@Code.links":[]
+}

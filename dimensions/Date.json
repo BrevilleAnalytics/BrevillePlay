@@ -1,0 +1,13 @@
+{
+	"@type":"Dimension",
+	"Name":"Date",
+	"AllLeavesHierarchyName":"",
+	"DefaultHierarchy":
+	{
+		"@id":"Dimensions('Date')/Hierarchies('Date')"
+	},
+	"Hierarchies@Code.links":
+	[
+		"Date.hierarchies/Date.json"
+	]
+}

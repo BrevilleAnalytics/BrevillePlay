@@ -1,0 +1,5 @@
+{
+	"@type":"Subset",
+	"Name":"All CustomerCustFcast",
+	"Expression":"{DRILLDOWNMEMBER({[CustomerCustFcast].[CustomerCustFcast].[All CustomerCustFcast]} , {[CustomerCustFcast].[CustomerCustFcast].[All CustomerCustFcast]} , RECURSIVE)}"
+}

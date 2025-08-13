@@ -1,0 +1,133 @@
+#region Prolog
+#****Begin: Generated Statements***
+#****End: Generated Statements****
+
+# Create temp cubeview for clearing prior data
+#Variables
+vCub_Tgt = 'CustomerForecast' ;
+vView_Tgt = 'CustClearSelloutData' ;
+vSub_Tgt = 'CustClearSelloutData' ;
+pTemp = 1 ; 
+
+IF( ViewExists( vCub_Tgt , vView_Tgt ) = 1 ) ; 
+ ViewDestroy ( vCub_Tgt, vView_Tgt ) ;
+ENDIF;
+ViewCreate( vCub_Tgt, vView_Tgt , pTemp ) ;
+
+i_TabDim = 1 ;
+While ( TabDim ( vCub_Tgt , i_TabDim ) @<> '' ) ;
+   sDim = TabDim ( vCub_Tgt , i_TabDim ) ;
+
+  If( sDim @= 'ProductCustFcast' ) ;
+      sMDX = '{TM1FILTERBYLEVEL ( {TM1SUBSETALL ( ['|sDim|'] ) } , 0 ) }' ;
+  ElseIf( sDim @= 'CustomerCustFcast' ) ;
+      sMDX = '{TM1FILTERBYLEVEL ( {TM1SUBSETALL ( ['|sDim|'] ) } , 0 ) }' ;    
+  ElseIf( sDim @= 'BusinessUnit' ) ;
+      sMDX = '{TM1FILTERBYLEVEL ( {TM1SUBSETALL ( ['|sDim|'] ) } , 0 ) }' ;
+  ElseIf( sDim @= 'Theatre' ) ;
+      sMDX = '{TM1FILTERBYLEVEL ( {TM1SUBSETALL ( ['|sDim|'] ) } , 0 ) }' ;
+  ElseIf( sDim @= 'VersionCustFcast' ) ;
+      sMDX = '{ [' | sDim | '].[' | sDim | '].[Sellout LY],
+                [' | sDim | '].[' | sDim | '].[Sellout TY] }' ;
+  ElseIf( sDim @= 'MonthCustFcast' ) ;
+      sMDX = '{TM1FILTERBYLEVEL ( {TM1SUBSETALL ( ['|sDim|'] ) } , 0 ) }' ;
+  ElseIf( sDim @= 'Currency' ) ;
+      sMDX = '{ [' | sDim | '].[' | sDim | '].[Local Currency] }' ; 
+  ElseIf( sDim @= 'MeasureCustFcast' ) ;
+       sMDX = '{TM1FILTERBYLEVEL ( {TM1SUBSETALL ( ['|sDim|'] ) } , 0 ) }'  ;
+  Else ;
+      sMDX = '{TM1FILTERBYLEVEL ( {TM1SUBSETALL ( ['|sDim|'] ) } , 0 ) }' ;
+  EndIf ;
+
+   SubsetCreateByMDX ( vSub_Tgt , sMDX ,sDim, pTemp ) ;
+   SubsetMDXSet (sDim , vSub_Tgt , '' ) ;
+   ViewSubsetAssign (vCub_Tgt , vView_Tgt , sDim , vSub_Tgt ) ;
+
+i_TabDim = i_TabDim + 1 ;
+End ;
+
+#------ View zero out old data before reloading
+ViewZeroOut(vCub_Tgt, vView_Tgt);
+
+
+#ODBC SQL Statement to update historical CM sales data by month cube CMStgActuals from Azure DataLake
+#----------------------------------------------------------------------------------------------------------------------------
+ DataSourceType = 'ODBC';
+
+
+# SQL query
+
+ sSQL = 'SET NOCOUNT ON ; 
+SELECT  [YearPartition]
+      ,[MonthPartition]
+      ,[MonthEnding]
+      ,[CalendarMonth]
+      ,[FY]
+      ,[RetailerName]
+      ,[ItemCode]
+      ,[HierarchyBrand]
+      ,[BusinessUnit]
+      ,[StatsGroup]
+      ,[Theatre]
+      ,[SelloutQty]
+  FROM stg.[ActualSelloutDataEDW]';
+#  FROM [ActualCM] WHERE [Month_Name] = ''' |sCurrentMonth| ''' ' ;
+						
+DNS_Server = CellGetS( 'syEnvironment', 'Breville', 'ODBC DSN for DL'  );
+
+# Data Source
+
+ DataSourceType = 'ODBC' ;
+ DatasourceNameForServer = DNS_Server ;
+ DatasourceQuery = sSQL;
+ 
+
+#endregion
+#region Metadata
+#****Begin: Generated Statements***
+#****End: Generated Statements****
+#endregion
+#region Data
+#****Begin: Generated Statements***
+#****End: Generated Statements****
+#Put data from the view assigned to the process into the Customer Forecast cube using attributes for StatsGroup (to match CustomerCustFcast Dimension)
+
+sCub_Tgt = 'CustomerForecast' ;
+
+#Lookup Calendar month to get Fiscal Month
+#sPeriod = ATTRS( 'CalendarMonth', vCalendarMonth , 'FiscalMonth' );
+
+If (vFY = 2023);
+vVersion = 'Sellout TY';
+elseif (vFY = 2022);
+vVersion = 'Sellout LY';
+elseif (vFY = 2021);
+vVersion = 'Sellout 2 Years Prior';
+else;
+ItemSkip;
+endif;
+
+#~~~~~~~~~ set validation ~~~~~~~~~~
+#~~~ check if element exists
+# Product
+sDim = 'ProductCustFcast' ;
+sItemCode = vItemCode ;
+If (DIMIX( sDim, sItemCode  ) = 0  );
+#sItemCode = 'SPARES_Unallocated'
+#else;
+#sItemCode = vitemCode;
+ Itemskip;
+Endif;
+
+#CellIncrementN(vSelloutQty, sCub_Tgt , vItemCode, vStatsGroup, vBusinessUnit, vTheatre, 'Sellout TY', sPeriod, 'Local', 'Shipped Units');
+
+#Put data from the view assigned to the process into the Customer Forecast cube at Prior Year on VersionCustFcast Dimension using fiscal month attribute NYPeriod)
+
+#CellIncrementN(Value, vCub_Tgt, Product, vSG, BusinessUnit, Theatre, 'Prior Year', AttrS('FiscalMonth',FiscalMonth,'NYPeriod'), 'Local', CMStgActualsMeasure);
+CellIncrementN(vSelloutQty, sCub_Tgt , vItemCode, vStatsGroup, vBusinessUnit, vTheatre, vVersion, vCalendarMonth, 'Local', 'Shipped Units');
+
+#endregion
+#region Epilog
+#****Begin: Generated Statements***
+#****End: Generated Statements****
+#endregion

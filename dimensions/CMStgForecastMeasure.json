@@ -1,0 +1,13 @@
+{
+	"@type":"Dimension",
+	"Name":"CMStgForecastMeasure",
+	"AllLeavesHierarchyName":"",
+	"DefaultHierarchy":
+	{
+		"@id":"Dimensions('CMStgForecastMeasure')/Hierarchies('CMStgForecastMeasure')"
+	},
+	"Hierarchies@Code.links":
+	[
+		"CMStgForecastMeasure.hierarchies/CMStgForecastMeasure.json"
+	]
+}

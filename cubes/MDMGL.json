@@ -1,0 +1,19 @@
+{
+	"@type":"Cube",
+	"Name":"MDMGL",
+	"Rules@Code.link":"MDMGL.rules",
+	"Dimensions":
+	[
+		{
+			"@id":"Dimensions('GLAccount')"
+		},
+		{
+			"@id":"Dimensions('MDMGLMeasure')"
+		}
+	],
+	"Views@Code.links":
+	[
+		"MDMGL.views/App.ManagementReportingMapping.json",
+		"MDMGL.views/Default.json"
+	]
+}

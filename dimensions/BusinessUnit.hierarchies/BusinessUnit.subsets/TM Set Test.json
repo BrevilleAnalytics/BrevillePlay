@@ -1,0 +1,10 @@
+{
+	"@type":"Subset",
+	"Name":"TM Set Test",
+	"Elements":
+	[
+		{
+			"@id":"Dimensions('BusinessUnit')/Hierarchies('BusinessUnit')/Elements('All Region')"
+		}
+	]
+}

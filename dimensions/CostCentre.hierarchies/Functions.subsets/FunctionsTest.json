@@ -1,0 +1,5 @@
+{
+	"@type":"Subset",
+	"Name":"FunctionsTest",
+	"Expression":"{DRILLDOWNMEMBER({[CostCentre].[Functions].[Global]} , {[CostCentre].[Functions].[Global]} , RECURSIVE),[CostCentre].[Functions].[Regional]}"
+}

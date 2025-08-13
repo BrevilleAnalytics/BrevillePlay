@@ -1,0 +1,13 @@
+{
+	"@type":"Dimension",
+	"Name":"syLineItem",
+	"AllLeavesHierarchyName":"",
+	"DefaultHierarchy":
+	{
+		"@id":"Dimensions('syLineItem')/Hierarchies('syLineItem')"
+	},
+	"Hierarchies@Code.links":
+	[
+		"syLineItem.hierarchies/syLineItem.json"
+	]
+}

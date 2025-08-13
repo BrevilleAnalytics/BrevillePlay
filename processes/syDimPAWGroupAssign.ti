@@ -1,0 +1,94 @@
+#region Prolog
+#****Begin: Generated Statements***
+#****End: Generated Statements****
+#****Begin: Generated Statements***
+#****End: Generated Statements****
+
+#~~~~~~~~~ Process Description ~~~~~~~~~~~~~~~~
+# Description: assign client to PAW Group
+#
+# Modification History
+# V1.00 - 2021-10-12 - Jithu Varghese - CPM Group: intial Draft
+# parameters
+# ps_ProcessReference (for process logging)
+
+
+#~~~~~~~~~ Init 
+# Process Logging
+csProcess = GetProcessName( ) ;
+If( psProcessReference @<> '' ) ;
+   csProcessReference = psProcessReference ;
+Else ; 
+   csProcessReference = GetProcessName() | '_' | TimSt( Now(), '\Y\m\d_\h\i\s', 1)  ;
+EndIf ;
+
+# General
+sTimestamp = TimSt( Now, '\Y\m\d\h\i\s' );
+sRandomInt = NumberToString( INT( RAND( ) * 1000 ));
+sUniqueName  =  csProcess |'.'| sTimestamp | '.' | sRandomInt;
+sSub_Src = '}System.Src.' | sUniqueName ;
+sView_Src = '}System.Src.' | sUniqueName ;
+sSub_Tgt = '}System.Tgt.' | sUniqueName ;
+sView_Tgt = '}System.Tgt.' | sUniqueName ;
+
+# constant
+sCub_Src = 'syCostCenterSecurity';
+
+sDim_CC = 'HCCostCenter';
+sDim_Measure = 'syCostCenterSecurityMeasure';
+
+sElMeasure = 'Access Right' ;
+sModuleWriteGroup = 'HCEdit' ;
+
+# Debug
+csDebugFile = CellGetS('syEnvironment', 'Breville', 'Temp Folder') | '\' | csProcessReference | '.txt';
+
+# ~~~~~~~~~~ Setup Source  
+# create temp cubeview
+ViewCreate(sCub_Src, sView_Src,1);
+
+# create subsets and assign it to the view
+iTabDim = 1 ;
+While( TabDim( sCub_Src, iTabDim ) @<> '' ) ;
+   sDim = TabDim( sCub_Src, iTabDim ) ;
+
+   If( sDim @= sDim_CC ) ;
+      sMDX = '{ TM1SUBSETALL( [' | sDim | '] )}';
+   ElseIf( sDim @= sDim_Measure ) ;
+      sMDX = '{[ ' | sDim | ' ].['| sElMeasure |'] } ' ;
+   Else;
+      sMDX = '{TM1FILTERBYLEVEL({ TM1SUBSETALL( [' | sDim | '] )},0)}';
+   EndIf ;
+
+   SubsetCreateByMDX( sSub_Src, sMDX,1) ;
+   ViewSubsetAssign( sCub_Src, sView_Src, sDim, sSub_Src ) ;
+   iTabDim = iTabDim + 1 ;
+End;
+
+
+ViewExtractSkipZeroesSet( sCub_Src, sView_Src, 1 ) ;
+ViewExtractSkipCalcsSet( sCub_Src, sView_Src, 1) ;
+ViewExtractSkipRuleValuesSet( sCub_Src, sView_Src, 1) ;
+
+# Assign Datasource
+DataSourceType = 'VIEW' ;
+DataSourceNameForServer = sCub_Src ;
+DataSourceCubeview = sView_Src ;
+
+
+#endregion
+#region Metadata
+#****Begin: Generated Statements***
+#****End: Generated Statements****
+#endregion
+#region Data
+#****Begin: Generated Statements***
+#****End: Generated Statements****
+
+AssignClientToGroup(vsUser, sModuleWriteGroup);
+
+#endregion
+#region Epilog
+#****Begin: Generated Statements***
+#****End: Generated Statements****
+#endregion

@@ -1,0 +1,13 @@
+{
+	"@type":"Subset",
+	"Name":"App.GlobalPlus",
+	"Elements":
+	[
+		{
+			"@id":"Dimensions('Segment')/Hierarchies('Segment')/Elements('Global')"
+		},
+		{
+			"@id":"Dimensions('Segment')/Hierarchies('Segment')/Elements('No Segment')"
+		}
+	]
+}

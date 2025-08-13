@@ -1,0 +1,13 @@
+{
+	"@type":"Subset",
+	"Name":"Stock Transfer",
+	"Elements":
+	[
+		{
+			"@id":"Dimensions('BSStgStagingMeasure')/Hierarchies('BSStgStagingMeasure')/Elements('Stock In')"
+		},
+		{
+			"@id":"Dimensions('BSStgStagingMeasure')/Hierarchies('BSStgStagingMeasure')/Elements('Stock Out')"
+		}
+	]
+}

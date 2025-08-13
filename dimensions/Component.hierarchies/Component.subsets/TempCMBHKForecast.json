@@ -1,0 +1,10 @@
+{
+	"@type":"Subset",
+	"Name":"TempCMBHKForecast",
+	"Elements":
+	[
+		{
+			"@id":"Dimensions('Component')/Hierarchies('Component')/Elements('Calculated')"
+		}
+	]
+}

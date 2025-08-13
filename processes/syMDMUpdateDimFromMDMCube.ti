@@ -1,0 +1,331 @@
+#region Prolog
+
+#****Begin: Generated Statements***
+#****End: Generated Statements****
+
+######################################################################
+# Update Specified Dimension from the MDM cube
+######################################################################
+# Last Updated By; 
+# V00 Dev gsoo@woolworths.com.au Aug 2021  - 1st  created
+######################################################################
+ 
+# Variables
+sProcess = GetProcessName();
+sTimestamp = TimSt( Now, '\Y\m\d\h\i\s' );
+sRandomInt = NumberToString( INT( RAND( ) * 1000 ));
+sView  = '}SYSTEM.' | sProcess | '.Source.' | sTimestamp | '.' | sRandomInt;
+sSub = sView;
+sParam = 'psDimension: ''' | psDimension | ''' | psUnwind: ''' | psUnwind | ''' | psVersion: ''' | psVersion | '''';
+nError = 0;
+nRecords = 0;
+nTemp = 1;
+
+sServer = 'BigW' ;
+sCub = 'syMDM';
+sDimMDMDim = 'syMDMDimension';
+
+# Process Logging - Initialise
+ExecuteProcess('syProcessLogInitialise','psProcessName', sProcess);
+ExecuteProcess('syProcessLogMessage','psProcessName',sProcess,'psLogLevel','INFO','psMessage','Starting Process ''' | sProcess | '''. ' | sParam) ;
+
+# Debug
+csDebugFile = CellGetS('syControl', sServer, 'Temp Folder') | '\' | sProcess | '.txt';
+
+# Update all MDM Dimensions if psDimension is not defined
+If( Long( psDimension) > 0);
+  nDim = 1;
+  nDimMax = 1;
+  sDim = psDimension;
+Else;
+  nDim = 1;
+  nDimMax = DimSiz( sDimMDMDim);
+  sDim = DimNm( sDimMDMDim, nDim);
+EndIf;
+
+While( nDim <= nDimMax);
+
+  # Only process leafs in syMDMDimension
+  If( Ellev( sDimMDMDim, sDim) = 0);
+    # Create Dimension
+    If( DimensionExists( sDim) = 0);
+      DimensionCreate( sDim);
+      AttrInsert( sDim, '', 'Caption', 'A');
+      sMsg = '''' | sDim | ''' dimension has been created.';
+      LogOutput( 'INFO', sMsg);
+    EndIf;
+
+    # Unwind Dimension
+    If( Upper( psUnwind) @= 'Y');
+
+      sMsg = 'Unwinding dimension ''' | sDim | '''';
+      LogOutput( 'INFO', sMsg);
+
+      i = 1;
+      iMax = DimSiz( sDim);
+      While( i <= iMax);
+            sEl = DimNm( sDim, i);
+            nComp = ElCompN( sDim, sEl);
+            While( nComp > 0);
+              sComp = ElComp( sDim, sEl, nComp);
+              DimensionElementComponentDelete( sDim, sEl, sComp);
+              nComp = nComp - 1;
+            End;
+            i = i + 1;
+      End;
+    EndIf;
+  EndIf;
+
+  nDim = nDim + 1;
+  sDim= DimNm( sDimMDMDim, nDim);
+End;
+
+
+i = 1;
+      iMax = DimSiz( psDimension);
+nMax=0;
+      While( i <= iMax);
+            sEl = DimNm( psDimension, i) ;
+            # extract only child 6-digit code by removing psServer and child 2-char prefix code
+            sCode=SUBST(sEl, Long (psServer)+2+1,6);
+            sStrt=SUBST(DimensionElementPrincipalName( psDimension, sEl ) ,1,Long (psServer));
+           if(  sStrt @= psServer);
+            if( stringtoNumber(sCode) > nMax ) ;
+                nMax=NUMBR(sCode);
+             Endif;
+          Endif;           
+      i = i + 1;
+      End;
+
+# 20211214
+#-- remove the hierarchy before update
+If ( psDimension @= 'BigWAccount' ) ;
+sHierName = 'BPCExport' ;
+   If(HierarchyExists(psDimension, sHierName) <> 0);
+	HierarchyDestroy(psDimension, sHierName);
+   Endif;
+Endif;
+
+#--- Add Top Node Element 
+sElTopNode = CellGetS (sCub, psVersion, psDimension, '1', 'Element Name' ) ;
+DimensionElementInsert(psDimension, '', sElTopNode, 'C');
+
+#--- Add attribute
+If ( psDimension @= 'BigWAccount' ) ;
+   sAttrDefaultPC = 'Default Profit Center';
+   AttrInsert(psDimension, '', sAttrDefaultPC, 'S');
+   sAttrSignVar = 'Sign for Variance' ;
+   AttrInsert(psDimension, '', sAttrSignVar, 'S');
+Endif; 
+
+
+## Prepare Source View
+ViewCreate( sCub, sView, 1 ) ;
+
+# Version
+sDim = 'BigWVersion';
+  sMDX = '{ [' | sDim | '].[' | sDim | '].[' | psVersion | '] }';
+SubsetCreateByMDX( sSub, sMDX, 1 ) ;
+ViewSubsetAssign( sCub, sView, sDim, sSub) ;
+
+# syMDMDimension
+sDim = 'syMDMDimension';
+If( Long( psDimension) > 0);
+  sMDX = '{ [' | sDim | '].[' | sDim | '].[' | psDimension | '] }';
+Else;
+  sMDX = '{TM1FILTERBYLEVEL( {TM1SUBSETALL( [' | sDim | '] )}, 0)}' ;
+EndIf;
+SubsetCreateByMDX( sSub, sMDX, 1 ) ;
+ViewSubsetAssign( sCub, sView, sDim, sSub) ;
+
+# syLine
+sDim = 'syLineItem';
+sMDX = '{TM1FILTERBYLEVEL( {TM1SUBSETALL( [' | sDim | '] )}, 0)}' ;
+SubsetCreateByMDX( sSub, sMDX, 1 ) ;
+ViewSubsetAssign( sCub, sView, sDim, sSub) ;
+
+# syMDMMeasure
+sDim = 'syMDMMeasure';
+sMDX = '{ [' | sDim | '].[' | sDim | '].[Child Name] }';
+SubsetCreateByMDX( sSub, sMDX, 1 ) ;
+ViewSubsetAssign( sCub, sView, sDim, sSub) ;
+
+# View Parameters
+ViewExtractSkipZeroesSet( sCub, sView, 1 ) ;
+ViewExtractSkipCalcsSet( sCub, sView, 0) ;
+ViewExtractSkipRuleValuesSet( sCub, sView, 1) ;
+
+DataSourceType = 'VIEW' ;
+DataSourceNameForServer = sCub;
+DataSourceCubeview = sView;
+
+
+
+# Sort Order
+CellPutS ('BYHIERARCHY' , '}DimensionProperties',  psDimension, 'SORTELEMENTSTYPE' ) ;
+#endregion
+#region Metadata
+
+#****Begin: Generated Statements***
+#****End: Generated Statements****
+
+sRemove = CellGetS( sCub, vVersion, vDimension, vLine, 'Remove');
+sElCode = CellGetS( sCub, vVersion, vDimension, vLine, 'Element Code');
+sChildName =CellGetS( sCub, vVersion, vDimension, vLine, 'Child Name');
+sChildCode =CellGetS( sCub, vVersion, vDimension, vLine, 'Child Code');
+sChildPrefixCode =CellGetS( sCub, vVersion, vDimension, vLine, 'Child 2-Char Prefix Code');
+sChildPrefix='';
+
+# Element Type - Default to Numeric
+#sElType = CellGetS( sCub, vVersion, vDimension, vLine, 'Element Type');
+#If( sElType @= 'Consolidation');
+#   sElTypeShort = 'C';
+#ElseIf( sElType @= 'String');
+#   sElTypeShort = 'S';
+#Else;
+   sElTypeShort = 'N';
+#EndIf;
+
+
+# Remove Element
+If( sRemove @= 'Y');
+   sElDel = 'Deleted Category' ;
+   If ( Dimix( vDimension, sElDel) = 0);
+      DimensionElementInsert( vDimension, '', sElDel, 'C');
+   Endif ;
+
+  If( Dimix( vDimension, vElement) > 0);
+      DimensionElementComponentAdd( vDimension, 'Deleted Category', sChildCode,0 );
+      sMsg = '''' | vElement | ''' has been deleted from the ''' | vDimension | ''' dimension.';  
+      LogOutput( 'INFO', sMsg);
+  EndIf;
+
+# Add Element
+Else;
+
+   If( Long( sChildName) > 0 & Long( sChildCode) = 0);
+   nMax = nMax +1;
+   # Child 6-digit Code
+   nLength = 6;
+   sChildDigitCode = NumbertoString(nMax);
+   sChildDigitCode = Fill( '0', nLength - Long( sChildDigitCode)) | sChildDigitCode;
+
+      If( sChildPrefixCode @<> '');
+         sChildPrefix= psServer|sChildPrefixCode;
+      Else;
+         sChildPrefix='';
+         sChildDigitCode=sChildName;
+     Endif;
+
+      sChildDigitCode = sChildPrefix | sChildDigitCode;
+      If( Dimix( vDimension, sChildDigitCode) = 0 );
+         DimensionElementInsert( vDimension, '', sChildDigitCode, sElTypeShort);   
+         sMsg = '''' | sChildDigitCode | ''' has been added to the ''' | vDimension | ''' dimension.';
+         LogOutput( 'INFO', sMsg);
+         CellPutS(sChildDigitCode, sCub, vVersion, vDimension, vLine, 'Child Code');
+      EndIf;       
+
+    
+
+   Endif;
+
+Endif;
+
+# Process Hierarchy in Data tab to ensure all elements have been created in the Metadata tab first.
+
+
+nRecords = nRecords + 1;
+
+#endregion
+#region Data
+
+#****Begin: Generated Statements***
+#****End: Generated Statements****
+
+# Update Dimension Hierarchy
+sChildCode =CellGetS( sCub, vVersion, vDimension, vLine, 'Child Code');
+sElCode = CellGetS( sCub, vVersion, vDimension, vLine, 'Element Code');
+sRemove = CellGetS( sCub, vVersion, vDimension, vLine, 'Remove');
+sDefaultPC = CellGetS( sCub, vVersion, vDimension, vLine, 'Default Profit Center');
+sSignVar = CellGetS( sCub, vVersion, vDimension, vLine, 'Sign for Variance');
+
+If( Long( sChildCode) > 0);
+
+  # Validate Child
+  If( Dimix( vDimension, sChildCode) = 0);
+    sMsg = '''' | sChildCode | ''' cannot be added to ''' | vElement | ''' as it does not exist in the ''' | vDimension | ''' dimension.';
+    LogOutput( 'ERROR', sMsg);
+    nError = nError + 1;
+ElseIF( sRemove @= 'Y');
+
+DimensionElementComponentAdd( vDimension, 'Deleted Category', sChildCode,0 );
+
+  # Add Child to Parent
+  Else;
+
+    # Element Weight - default to 1 if blank
+    sWeight =CellGetS( sCub, vVersion, vDimension, vLine, 'Child Weight');
+    nWeight = If( Long( sWeight) > 0, StringToNumber( sWeight), 1);
+    If( ElIsComp( vDimension, sElCode , sChildCode) = 0);
+     DimensionElementComponentAddDirect( vDimension, sElCode , sChildCode, nWeight);
+     #ASCIIOUTPUT( 'Test.csv', vElement, sChild);
+    Else;
+
+      # Re-insert element if the weight has changed
+      nWeightCurrent = ElWeight( vDimension, sElCode , sChildCode);
+      If( nWeight <> nWeightCurrent);
+         DimensionElementComponentDeleteDirect( vDimension, sElCode , sChildCode);
+         DimensionElementComponentAddDirect( vDimension, sElCode , sChildCode, nWeight);
+      EndIf;
+    EndIf;
+
+  EndIf;
+EndIf;
+
+# Assign Caption Override
+sCaption = CellGetS( sCub, vVersion, vDimension, vLine, 'Element Name');
+If( Long( sCaption) > 0);
+  AttrPutS( sCaption, vDimension, sElCode, 'Caption');
+EndIf;
+
+sChildCaption = CellGetS( sCub, vVersion, vDimension, vLine, 'Child Name');
+If( Long(sChildCaption) > 0);
+  AttrPutS( sChildCaption, vDimension, sChildCode, 'Caption');
+EndIf;
+
+# Remove caption for removed items
+If( sRemove @<> '');
+   If( Long(sChildCaption) > 0);
+#     AttrPutS( '', vDimension, sChildCode, 'Caption');
+   EndIf;
+Endif ;
+
+# Put Attribute
+If ( psDimension @= 'BigWAccount' ) ;
+   If( sChildCode @<> '');
+     AttrPutS( sDefaultPC, vDimension, sChildCode, sAttrDefaultPC);
+     AttrPutS( sSignVar, vDimension, sChildCode, sAttrSignVar);
+   Endif;
+
+Endif;
+#endregion
+#region Epilog
+
+#****Begin: Generated Statements***
+#****End: Generated Statements****
+
+# Sort Order
+#CellPutS ('BYHIERARCHY' , '}DimensionProperties',  psDimension, 'SORTELEMENTSTYPE' ) ;
+DimensionSortOrder ( psDimension, 'ByInput', '' , 'ByHierarchy' , '' );
+
+# Update feeders
+sCube = 'BigWMapAccount' ;
+ExecuteProcess('syCubeProcessFeeders','pCube', sCube  );
+
+# Update Account element security
+ExecuteProcess('sySecurityDimensionSecurityUpdate','psProcessReference', sProcess, 'pDimensionName', psDimension ) ;
+
+# Process Logging - Completion
+ExecuteProcess('syProcessLogMessage','psProcessName',sProcess,'psLogLevel','INFO','psMessage','Finishing Process ' | sProcess | ', Records #: ' | NumberToString( nRecords) | '. Errors #:' | NumberToString(nError) ) ;
+
+#endregion

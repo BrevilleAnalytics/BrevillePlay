@@ -1,0 +1,277 @@
+#region Prolog
+
+DimName = 'FiscalMonthJJ';
+firstfriday = 18445;
+# Init All roots
+DimensionElementInsertDirect (DimName, '', 'No FiscalMonth','N');
+DimensionElementInsertDirect (DimName, '', 'All FY','C');
+DimensionElementInsertDirect (DimName, '', 'All Years','C');
+DimensionElementInsertDirect (DimName, '', 'YTD','C');
+DimensionElementInsertDirect (DimName, '', 'YTG','C');
+
+# Init All Attributes
+
+#AttrInsert(DimName, '', 'FirstDayOfMonth', 'S');
+#AttrInsert(DimName, '', 'LastDayOfMonth', 'S');
+AttrInsert(DimName, '', 'LastWeekOfMonth', 'A');
+AttrInsert(DimName, '', 'Caption', 'A');
+AttrInsert(DimName, '', 'CalendarMonthCaption', 'A');
+AttrInsert(DimName, '', 'PeriodIndex', 'A');
+AttrInsert(DimName, '', 'NYPeriod', 'S');
+AttrInsert(DimName, '', 'NextPeriod', 'S');
+AttrInsert(DimName, '', 'PrevPeriod', 'S');
+AttrInsert(DimName, '', 'PYPeriodCaption', 'S');
+AttrInsert(DimName, '', 'HY', 'S');
+AttrInsert(DimName, '', 'Quarter', 'S');
+AttrInsert(DimName, '', 'Year', 'S');
+AttrInsert(DimName, '', 'Short_Text', 'S');
+# Init Global Variables
+StringGlobalVariable('MonthName');
+StringGlobalVariable('MonthNameLong');
+MonthName = 'Blank';
+MonthNameLong = 'Blank';
+
+year = StartYear;
+while (year <= Endyear);
+  str_year = NumberToString(year);
+  
+  # Create Root Elements eg FY2016 and link with 'All Years'
+  yearlast2 = 'FY'|NumberToString(mod(year,100));
+  DimensionElementInsertDirect (DimName, '', yearlast2,'C');
+  DimensionElementComponentAddDirect(DimName, 'All Years',yearlast2, 1);
+
+  # Create Root Elemens eg 2016 and link with 'ALL FY'
+  DimensionElementInsertDirect (DimName, '', str_year,'C');
+  DimensionElementComponentAddDirect(DimName, 'All FY',NumberToString(year), 1);
+  # Create a caption for 2016 as F2016
+  AttrPutS('F'|str_year, DimName,str_year,'Caption');
+  
+  # Set Attribute NYPeriod 
+  AttrPutS(NumberToString(year+1), DimName,str_year,'NextPeriod');
+  AttrPutS(NumberToString(year-1), DimName,str_year,'PrevPeriod');
+  
+  # Set Attribute PYPeriodCaption
+  AttrPutS('F'|NumberToString(mod(year-1,100)), DimName,str_year,'PYPeriodCaption');
+  
+  # Set Year
+  AttrPutS(str_year, DimName,str_year,'Year');
+  
+  # Set Short_Text
+  AttrPutS('F'|NumberToString(mod(year-1,100)), DimName,str_year,'Short_Text');
+  
+  # Create Root Elements 2016H1 and 2016H2
+  DimensionElementInsertDirect (DimName, '', str_year|'H1','C');
+  DimensionElementInsertDirect (DimName, '', str_year|'H2','C');
+  
+  # Link 2016H1 and 2016H2 to 2016
+  DimensionElementComponentAddDirect(DimName,  str_year,str_year|'H1', 1);
+  DimensionElementComponentAddDirect(DimName,  str_year,str_year|'H2', 1);
+  
+  # Define Caption of 2016H1 to F2016-H1
+  AttrPutS('F'|str_year|'-H1', DimName,str_year|'H1','Caption');
+  AttrPutS('F'|str_year|'-H2', DimName,str_year|'H2','Caption');
+  
+  # Set Attribute NextPeriod 
+  AttrPutS(str_year|'H2', DimName,str_year|'H1','NextPeriod');
+  AttrPutS(NumberToString(year+1)|'H1', DimName,str_year|'H2','NextPeriod');
+  
+  AttrPutS(NumberToString(year-1)|'H2', DimName,str_year|'H1','PrevPeriod');
+  AttrPutS(str_year|'H1', DimName,str_year|'H2','PrevPeriod');
+  # Set Attribute PYPeriodCaption
+  AttrPutS('F'|NumberToString(mod(year-1,100))|'-H1', DimName,str_year|'H1','PYPeriodCaption');
+  AttrPutS('F'|NumberToString(mod(year-1,100))|'-H2', DimName,str_year|'H2','PYPeriodCaption');
+  
+  # Set Attribute HY
+  AttrPutS(str_year|'H1', DimName,str_year|'H1','HY');
+  AttrPutS(str_year|'H2', DimName,str_year|'H2','HY');
+  
+  # Set Attribute Year
+  AttrPutS(str_year, DimName,str_year|'H1','Year');
+  AttrPutS(str_year, DimName,str_year|'H2','Year');
+  
+  # Set Short_Text
+  AttrPutS('H1', DimName,str_year|'H1','Short_Text');
+  AttrPutS('H2', DimName,str_year|'H2','Short_Text');
+  
+  # Looping through four quater
+  q = 1;
+  while (q <= 4);
+    str_q = str_year|'Q'|NumberToString(q);
+    # Create Rool Element 2016Q1 or 2016Q2 ... etc
+    DimensionElementInsertDirect (DimName, '', str_q,'C');
+    # Assign 2016Q1 caption as F2016-Q1
+    AttrPutS('F'|str_year|'-Q'|NumberToString(q), DimName,str_q,'Caption');
+    
+    # Set Attribute NYPeriod
+    str_nyperiod = NumberToString(If(q=4,year+1,year))|'Q'|NumberToString(If(q=4,1,q+1));
+    AttrPutS(str_nyperiod, DimName,str_q,'NextPeriod');
+    
+    str_pyperiod = NumberToString(If(q=1,year-1,year))|'Q'|NumberToString(If(q=1,4,q-1));
+    AttrPutS(str_pyperiod, DimName,str_q,'PrevPeriod');
+    
+    # Set Attribute PYPeriodCaption
+    AttrPutS('F'|NumberToString(mod(year-1,100))|'-Q'|NumberToString(q), DimName,str_q,'PYPeriodCaption');
+    # Set 2016Q1 parent as 2016H1 and 2016Q3 to 2016H2
+    half = int((q-1)/2)+1;
+    str_h = str_year|'H'|NumberToString(half);
+    DimensionElementComponentAddDirect(DimName, str_h,str_q, 1);
+    
+    # Set Attribute HY
+    AttrPutS(str_h, DimName,str_q,'HY');
+    
+    # Set Attribute HY
+    AttrPutS(str_q, DimName,str_q,'Quarter');
+    
+    # Set Attribute Year
+    AttrPutS(str_year, DimName,str_q,'Year');
+    
+    # Set Short_Text
+    AttrPutS('Q'|NumberToString(q), DimName,str_q,'Short_Text');
+    
+    
+    #Update counter
+    q = q + 1;
+  end;
+  
+  # Loop though each month
+  m = 1;
+  while (m <= 12);
+    str_m = if(m < 10,str_year|'00'|NumberToString(m),
+              str_year|'0'|NumberToString(m));
+    # Create leaf node like 2016001
+    DimensionElementInsertDirect (DimName, '', str_m,'N');
+    
+    
+    
+    # Set leaf node 2016001 to parent 2016Q1
+    q = int((m - 1)/3) + 1;
+    str_q = str_year|'Q'|NumberToString(q);
+    DimensionElementComponentAddDirect(DimName, str_q,str_m, 1);
+    
+    
+    # Set leaf node to 2016001 to parent FY16
+    DimensionElementComponentAddDirect(DimName, yearlast2,str_m, 1);
+    
+    # Set Attribute FirstDayofMonth
+    calendaryear = if(m<7,year-1,year);
+    firstdate = NumberToString(calendaryear)|'-'|NumberToString(mod(m+5,12)+1)|'-'|'01';
+    firstdateno = NumberToString(dayno(firstdate));
+    #AttrPutS(firstdateno, DimName,str_m,'FirstDayOfMonth');
+    
+    #Set Attribute Last Day of the Month
+    firstnextmonth = NumberToString(if(m<6,year-1,year))|'-'|NumberToString(mod(m+6,12)+1)|'-'|'01';
+    lastdateno = dayno(firstnextmonth)-1;
+    #AttrPutS(NumberToString(lastdateno), DimName,str_m,'LastDayOfMonth');
+    
+    #Set Attribute Last Week Of Month
+    lastfriday = lastdateno - mod(lastdateno - firstfriday,7);
+    lastfridaydate = DATE(lastfriday,1);
+    AttrPutS(lastfridaydate, DimName,str_m,'LastWeekOfMonth');
+    
+    #Set Attribute Caption Attribute
+    ExecuteProcess('GetMonthName', 'MonthNo', Month(lastfridaydate));
+    AttrPutS('F'|str_year|'-'|MonthName, DimName,str_m,'Caption');
+    
+    #Set Attribute CalendarMonthCaption
+    AttrPutS(MonthName|'-'|NumberToString( Mod(calendaryear,100)), DimName,str_m,'CalendarMonthCaption');
+    
+    # Set Attribute HY
+    half = int((q-1)/2)+1;
+    str_h = str_year|'H'|NumberToString(half);
+    AttrPutS(str_h, DimName,str_m,'HY');
+    
+  
+    
+    #Set Attribute PeriodIndex
+    periodIndex = NumberToString((year - FirstYear)*12 + m);
+    i = 0;
+    while(long(periodIndex) < 10);
+    periodIndex = '0'|periodIndex;
+    i = i+1;
+    end;
+    AttrPutS(periodIndex,DimName,str_m,'PeriodIndex');
+    
+    #Set Attribute NYPeriod
+    nyperiod = if(m < 10,NumberToString( year+1 )|'00'|NumberToString(m),
+                  NumberToString( year+1 )|'0'|NumberToString(m));
+    AttrPutS(nyperiod,DimName,str_m,'NYPeriod');
+    
+    # Set Attribute NextPeriod
+    nextperiodyear = NumberToString(if(m < 12,year,year + 1));
+    nextperiodmonth = if(m<12,m+1,1);
+    nextperiod = if(nextperiodmonth < 10,nextperiodyear|'00'|NumberToString(nextperiodmonth),
+              nextperiodyear|'0'|NumberToString(nextperiodmonth));
+    AttrPutS(nextperiod,DimName,str_m,'NextPeriod');
+    
+    # Set Attribute PrevPeriod
+    prevperiodyear = NumberToString(if(m = 1,year-1,year));
+    prevperiodmonth = if(m=1,12,m-1);
+    prevperiod = if(prevperiodmonth < 10,prevperiodyear|'00'|NumberToString(prevperiodmonth),
+              prevperiodyear|'0'|NumberToString(prevperiodmonth));
+    AttrPutS(prevperiod,DimName,str_m,'PrevPeriod');
+    
+    # Set Attribute PYPeriodCaption
+    AttrPutS('F'|NumberToString(mod(year-1,100))|'-'|MonthName, DimName,str_m,'PYPeriodCaption');
+    
+     # Set Attribute HY
+    AttrPutS(str_q, DimName,str_m,'Quarter');
+    
+    # Set Attribute Year
+    AttrPutS(str_year, DimName,str_m,'Year');
+    
+    ###
+    # Create Consilidated node YTD 2016001
+    str_ytd = 'YTD '|str_m;
+    DimensionElementInsertDirect (DimName, '', str_ytd,'C');
+    
+    # Add leaf node 2016001 -> 'YTD 2016001'
+    DimensionElementComponentAddDirect(DimName, str_ytd,str_m, 1);
+    
+    # Create an Attribute Caption for C "YTD 2016001"
+    AttrPutS('YTD F'|str_year|'-'|MonthName, DimName,str_ytd,'Caption');
+    
+    # Set Attribute PYPeriodCaption
+    AttrPutS('YTD F'|NumberToString(mod(year-1,100))|'-'|MonthName, DimName,str_ytd,'PYPeriodCaption');
+    
+    # Create Consolidated node YTG 2016001
+    str_ytg = 'YTG '|str_m;
+    DimensionElementInsertDirect (DimName, '', str_ytg,'C');
+    
+    # Set Attribute PYPeriodCaption
+    AttrPutS('YTG F'|NumberToString(mod(year-1,100))|'-'|MonthName, DimName,str_ytg,'PYPeriodCaption');
+    
+   
+    
+    m = m + 1;
+  end;
+  m = 1;
+  while (m <= 12);
+    # Add Child Node 2016001 to 2016002 and 2016002 to 2016003 and 2016012 to YTD
+    str_m = if(m < 10,NumberToString(year)|'00'|NumberToString(m),
+              NumberToString(year)|'0'|NumberToString(m));
+    str_ytd = 'YTD '|str_m;
+    parent_m = m + 1;
+    str_parent_m = if(parent_m < 10,NumberToString(year)|'00'|NumberToString(parent_m),
+    NumberToString(year)|'0'|NumberToString(parent_m));
+    str_parent_ytd = if(m < 12,'YTD '|str_parent_m,'YTD');
+    DimensionElementComponentAddDirect(DimName, str_parent_ytd,str_ytd, 1);
+   
+    ###
+    str_ytg = 'YTG '|str_m;
+    if (m < 12);
+      child_ytg = if(m + 1< 10,str_year|'00'|NumberToString(m+1),
+              str_year|'0'|NumberToString(m+1));
+      DimensionElementComponentAddDirect(DimName, str_ytg,child_ytg, 1);
+    endif;    
+    
+    parent_ytg = if(m - 1< 10,str_year|'00'|NumberToString(m-1),
+              str_year|'0'|NumberToString(m-1));
+    parent_ytg = if(m = 1,'YTG','YTG '|parent_ytg);
+    DimensionElementComponentAddDirect(DimName, parent_ytg,str_ytg, 1);
+    
+    m = m + 1;
+  end;
+  
+  year = year + 1;
+end;
+#endregion

@@ -1,0 +1,16 @@
+{
+	"@type":"Subset",
+	"Name":"AusDom",
+	"Elements":
+	[
+		{
+			"@id":"Dimensions('BusinessUnit')/Hierarchies('Region')/Elements('Australia')"
+		},
+		{
+			"@id":"Dimensions('BusinessUnit')/Hierarchies('Region')/Elements('Canada')"
+		},
+		{
+			"@id":"Dimensions('BusinessUnit')/Hierarchies('Region')/Elements('China')"
+		}
+	]
+}

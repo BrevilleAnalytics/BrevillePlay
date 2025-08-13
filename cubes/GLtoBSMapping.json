@@ -1,0 +1,17 @@
+{
+	"@type":"Cube",
+	"Name":"GLtoBSMapping",
+	"Dimensions":
+	[
+		{
+			"@id":"Dimensions('GLAccount')"
+		},
+		{
+			"@id":"Dimensions('GLtoBSMappingMeasure')"
+		}
+	],
+	"Views@Code.links":
+	[
+		"GLtoBSMapping.views/App.GLtoBSMapping.json"
+	]
+}

@@ -1,0 +1,475 @@
+{
+	"@type":"Hierarchy",
+	"Name":"BRIndex",
+	"Elements":
+	[
+		{
+			"Name":"0000",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"All Indexes",
+			"Type":"Consolidated"
+		},
+		{
+			"Name":"0001",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"0002",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"0003",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"0004",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"0005",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"0006",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"0007",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"0008",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"0009",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"0010",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"0011",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"0012",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"0013",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"0014",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"0015",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"0016",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"0017",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"0018",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"0019",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"0020",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"0021",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"0022",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"0023",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"0024",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"0025",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"0026",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"0027",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"0028",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"0029",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"0030",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"0031",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"0032",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"0033",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"0034",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"0035",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"0036",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"0037",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"0038",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"0039",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"0040",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"0041",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"0042",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"0043",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"0044",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"0045",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"0046",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"0047",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"0048",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"0049",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"0050",
+			"Type":"Numeric"
+		}
+	],
+	"Edges":
+	[
+		{
+			"ParentName":"All Indexes",
+			"ComponentName":"0001",
+			"Weight":1
+		},
+		{
+			"ParentName":"All Indexes",
+			"ComponentName":"0002",
+			"Weight":1
+		},
+		{
+			"ParentName":"All Indexes",
+			"ComponentName":"0003",
+			"Weight":1
+		},
+		{
+			"ParentName":"All Indexes",
+			"ComponentName":"0004",
+			"Weight":1
+		},
+		{
+			"ParentName":"All Indexes",
+			"ComponentName":"0005",
+			"Weight":1
+		},
+		{
+			"ParentName":"All Indexes",
+			"ComponentName":"0006",
+			"Weight":1
+		},
+		{
+			"ParentName":"All Indexes",
+			"ComponentName":"0007",
+			"Weight":1
+		},
+		{
+			"ParentName":"All Indexes",
+			"ComponentName":"0008",
+			"Weight":1
+		},
+		{
+			"ParentName":"All Indexes",
+			"ComponentName":"0009",
+			"Weight":1
+		},
+		{
+			"ParentName":"All Indexes",
+			"ComponentName":"0010",
+			"Weight":1
+		},
+		{
+			"ParentName":"All Indexes",
+			"ComponentName":"0011",
+			"Weight":1
+		},
+		{
+			"ParentName":"All Indexes",
+			"ComponentName":"0012",
+			"Weight":1
+		},
+		{
+			"ParentName":"All Indexes",
+			"ComponentName":"0013",
+			"Weight":1
+		},
+		{
+			"ParentName":"All Indexes",
+			"ComponentName":"0014",
+			"Weight":1
+		},
+		{
+			"ParentName":"All Indexes",
+			"ComponentName":"0015",
+			"Weight":1
+		},
+		{
+			"ParentName":"All Indexes",
+			"ComponentName":"0016",
+			"Weight":1
+		},
+		{
+			"ParentName":"All Indexes",
+			"ComponentName":"0017",
+			"Weight":1
+		},
+		{
+			"ParentName":"All Indexes",
+			"ComponentName":"0018",
+			"Weight":1
+		},
+		{
+			"ParentName":"All Indexes",
+			"ComponentName":"0019",
+			"Weight":1
+		},
+		{
+			"ParentName":"All Indexes",
+			"ComponentName":"0020",
+			"Weight":1
+		},
+		{
+			"ParentName":"All Indexes",
+			"ComponentName":"0021",
+			"Weight":1
+		},
+		{
+			"ParentName":"All Indexes",
+			"ComponentName":"0022",
+			"Weight":1
+		},
+		{
+			"ParentName":"All Indexes",
+			"ComponentName":"0023",
+			"Weight":1
+		},
+		{
+			"ParentName":"All Indexes",
+			"ComponentName":"0024",
+			"Weight":1
+		},
+		{
+			"ParentName":"All Indexes",
+			"ComponentName":"0025",
+			"Weight":1
+		},
+		{
+			"ParentName":"All Indexes",
+			"ComponentName":"0026",
+			"Weight":1
+		},
+		{
+			"ParentName":"All Indexes",
+			"ComponentName":"0027",
+			"Weight":1
+		},
+		{
+			"ParentName":"All Indexes",
+			"ComponentName":"0028",
+			"Weight":1
+		},
+		{
+			"ParentName":"All Indexes",
+			"ComponentName":"0029",
+			"Weight":1
+		},
+		{
+			"ParentName":"All Indexes",
+			"ComponentName":"0030",
+			"Weight":1
+		},
+		{
+			"ParentName":"All Indexes",
+			"ComponentName":"0031",
+			"Weight":1
+		},
+		{
+			"ParentName":"All Indexes",
+			"ComponentName":"0032",
+			"Weight":1
+		},
+		{
+			"ParentName":"All Indexes",
+			"ComponentName":"0033",
+			"Weight":1
+		},
+		{
+			"ParentName":"All Indexes",
+			"ComponentName":"0034",
+			"Weight":1
+		},
+		{
+			"ParentName":"All Indexes",
+			"ComponentName":"0035",
+			"Weight":1
+		},
+		{
+			"ParentName":"All Indexes",
+			"ComponentName":"0036",
+			"Weight":1
+		},
+		{
+			"ParentName":"All Indexes",
+			"ComponentName":"0037",
+			"Weight":1
+		},
+		{
+			"ParentName":"All Indexes",
+			"ComponentName":"0038",
+			"Weight":1
+		},
+		{
+			"ParentName":"All Indexes",
+			"ComponentName":"0039",
+			"Weight":1
+		},
+		{
+			"ParentName":"All Indexes",
+			"ComponentName":"0040",
+			"Weight":1
+		},
+		{
+			"ParentName":"All Indexes",
+			"ComponentName":"0041",
+			"Weight":1
+		},
+		{
+			"ParentName":"All Indexes",
+			"ComponentName":"0042",
+			"Weight":1
+		},
+		{
+			"ParentName":"All Indexes",
+			"ComponentName":"0043",
+			"Weight":1
+		},
+		{
+			"ParentName":"All Indexes",
+			"ComponentName":"0044",
+			"Weight":1
+		},
+		{
+			"ParentName":"All Indexes",
+			"ComponentName":"0045",
+			"Weight":1
+		},
+		{
+			"ParentName":"All Indexes",
+			"ComponentName":"0046",
+			"Weight":1
+		},
+		{
+			"ParentName":"All Indexes",
+			"ComponentName":"0047",
+			"Weight":1
+		},
+		{
+			"ParentName":"All Indexes",
+			"ComponentName":"0048",
+			"Weight":1
+		},
+		{
+			"ParentName":"All Indexes",
+			"ComponentName":"0049",
+			"Weight":1
+		},
+		{
+			"ParentName":"All Indexes",
+			"ComponentName":"0050",
+			"Weight":1
+		}
+	],
+	"Subsets@Code.links":
+	[
+		"BRIndex.subsets/}System.Src.SubsetCustomerUpdateFromsyManagement.20220908225403.551.json",
+		"BRIndex.subsets/}System.Src.SubsetCustomerUpdateFromsyManagement.20220908225457.16.json",
+		"BRIndex.subsets/}System.Src.SubsetCustomerUpdateFromsyManagement.20220908225655.949.json",
+		"BRIndex.subsets/}System.Src.SubsetCustomerUpdateFromsyManagement.20220908225814.301.json"
+	]
+}

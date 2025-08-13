@@ -1,0 +1,22 @@
+{
+	"@type":"Subset",
+	"Name":"Default",
+	"Elements":
+	[
+		{
+			"@id":"Dimensions('Version')/Hierarchies('Version')/Elements('Working Budget')"
+		},
+		{
+			"@id":"Dimensions('Version')/Hierarchies('Version')/Elements('Outlook')"
+		},
+		{
+			"@id":"Dimensions('Version')/Hierarchies('Version')/Elements('Budget')"
+		},
+		{
+			"@id":"Dimensions('Version')/Hierarchies('Version')/Elements('Actual')"
+		},
+		{
+			"@id":"Dimensions('Version')/Hierarchies('Version')/Elements('FCST 3+9')"
+		}
+	]
+}

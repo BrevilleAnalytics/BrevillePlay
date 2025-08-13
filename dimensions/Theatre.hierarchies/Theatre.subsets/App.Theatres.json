@@ -1,0 +1,5 @@
+{
+	"@type":"Subset",
+	"Name":"App.Theatres",
+	"Expression":"{{TM1FILTERBYLEVEL(TM1SUBSETALL([Theatre].[Theatre]) , 0)}}"
+}

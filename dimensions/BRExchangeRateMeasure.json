@@ -1,0 +1,13 @@
+{
+	"@type":"Dimension",
+	"Name":"BRExchangeRateMeasure",
+	"AllLeavesHierarchyName":"",
+	"DefaultHierarchy":
+	{
+		"@id":"Dimensions('BRExchangeRateMeasure')/Hierarchies('BRExchangeRateMeasure')"
+	},
+	"Hierarchies@Code.links":
+	[
+		"BRExchangeRateMeasure.hierarchies/BRExchangeRateMeasure.json"
+	]
+}

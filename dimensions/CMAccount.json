@@ -1,0 +1,13 @@
+{
+	"@type":"Dimension",
+	"Name":"CMAccount",
+	"AllLeavesHierarchyName":"",
+	"DefaultHierarchy":
+	{
+		"@id":"Dimensions('CMAccount')/Hierarchies('CMAccount')"
+	},
+	"Hierarchies@Code.links":
+	[
+		"CMAccount.hierarchies/CMAccount.json"
+	]
+}

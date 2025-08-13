@@ -1,0 +1,13 @@
+{
+	"@type":"Dimension",
+	"Name":"syTITrackerMeasure",
+	"AllLeavesHierarchyName":"",
+	"DefaultHierarchy":
+	{
+		"@id":"Dimensions('syTITrackerMeasure')/Hierarchies('syTITrackerMeasure')"
+	},
+	"Hierarchies@Code.links":
+	[
+		"syTITrackerMeasure.hierarchies/syTITrackerMeasure.json"
+	]
+}

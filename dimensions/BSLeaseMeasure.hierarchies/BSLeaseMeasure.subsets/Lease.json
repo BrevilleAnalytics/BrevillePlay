@@ -1,0 +1,55 @@
+{
+	"@type":"Subset",
+	"Name":"Lease",
+	"Elements":
+	[
+		{
+			"@id":"Dimensions('BSLeaseMeasure')/Hierarchies('BSLeaseMeasure')/Elements('RoU Opening balance')"
+		},
+		{
+			"@id":"Dimensions('BSLeaseMeasure')/Hierarchies('BSLeaseMeasure')/Elements('Depreciation')"
+		},
+		{
+			"@id":"Dimensions('BSLeaseMeasure')/Hierarchies('BSLeaseMeasure')/Elements('RoU Closing balance')"
+		},
+		{
+			"@id":"Dimensions('BSLeaseMeasure')/Hierarchies('BSLeaseMeasure')/Elements('--Lease Liability--')"
+		},
+		{
+			"@id":"Dimensions('BSLeaseMeasure')/Hierarchies('BSLeaseMeasure')/Elements('Lease Liability - Current')"
+		},
+		{
+			"@id":"Dimensions('BSLeaseMeasure')/Hierarchies('BSLeaseMeasure')/Elements('Lease Liability - Current Opening balance')"
+		},
+		{
+			"@id":"Dimensions('BSLeaseMeasure')/Hierarchies('BSLeaseMeasure')/Elements('Interest Expense')"
+		},
+		{
+			"@id":"Dimensions('BSLeaseMeasure')/Hierarchies('BSLeaseMeasure')/Elements('Lease Repayment (-)')"
+		},
+		{
+			"@id":"Dimensions('BSLeaseMeasure')/Hierarchies('BSLeaseMeasure')/Elements('Reclass non-current portion')"
+		},
+		{
+			"@id":"Dimensions('BSLeaseMeasure')/Hierarchies('BSLeaseMeasure')/Elements('Lease Liability - Current Closing balance')"
+		},
+		{
+			"@id":"Dimensions('BSLeaseMeasure')/Hierarchies('BSLeaseMeasure')/Elements('Lease Liability - Non-current')"
+		},
+		{
+			"@id":"Dimensions('BSLeaseMeasure')/Hierarchies('BSLeaseMeasure')/Elements('Lease Liability - Non-current Opening balance')"
+		},
+		{
+			"@id":"Dimensions('BSLeaseMeasure')/Hierarchies('BSLeaseMeasure')/Elements('Reclass non-current portion (-)')"
+		},
+		{
+			"@id":"Dimensions('BSLeaseMeasure')/Hierarchies('BSLeaseMeasure')/Elements('Lease Liability - Non-current Closing balance')"
+		},
+		{
+			"@id":"Dimensions('BSLeaseMeasure')/Hierarchies('BSLeaseMeasure')/Elements('Total lease liability')"
+		},
+		{
+			"@id":"Dimensions('BSLeaseMeasure')/Hierarchies('BSLeaseMeasure')/Elements('Check to leases summary')"
+		}
+	]
+}

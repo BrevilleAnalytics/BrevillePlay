@@ -1,0 +1,13 @@
+{
+	"@type":"Dimension",
+	"Name":"BS Stock Transfer Measure",
+	"AllLeavesHierarchyName":"",
+	"DefaultHierarchy":
+	{
+		"@id":"Dimensions('BS Stock Transfer Measure')/Hierarchies('BS Stock Transfer Measure')"
+	},
+	"Hierarchies@Code.links":
+	[
+		"BS Stock Transfer Measure.hierarchies/BS Stock Transfer Measure.json"
+	]
+}

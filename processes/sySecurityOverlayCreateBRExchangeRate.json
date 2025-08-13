@@ -1,0 +1,13 @@
+{
+	"@type":"Process",
+	"Name":"sySecurityOverlayCreateBRExchangeRate",
+	"HasSecurityAccess":false,
+	"Code@Code.link":"sySecurityOverlayCreateBRExchangeRate.ti",
+	"UIData":"_ParameterConstraints=e30=€",
+	"DataSource":
+	{
+		"Type":"None"
+	},
+	"Parameters":[],
+	"Variables":[]
+}

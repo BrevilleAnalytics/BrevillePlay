@@ -1,0 +1,13 @@
+{
+	"@type":"Dimension",
+	"Name":"VangaurdPurchaseMeasures",
+	"AllLeavesHierarchyName":"",
+	"DefaultHierarchy":
+	{
+		"@id":"Dimensions('VangaurdPurchaseMeasures')/Hierarchies('VangaurdPurchaseMeasures')"
+	},
+	"Hierarchies@Code.links":
+	[
+		"VangaurdPurchaseMeasures.hierarchies/VangaurdPurchaseMeasures.json"
+	]
+}

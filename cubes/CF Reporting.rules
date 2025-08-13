@@ -1,0 +1,279 @@
+FEEDSTRINGS;
+SKIPCHECK;
+
+# Cube name: CF Reporting
+# Description: Cashflow cube which pulls balancesheet 
+
+#Region Borrowings - copy from BS Reporting
+# [ {'Outlook','Working Budget'} , 'Closing balance - Borrowings', 'Calculated' ] = N:
+#   IF ( DB( 'BRAsFiscalMonth' , 'Actual' , ATTRS( 'BusinessUnit', !BusinessUnit , 'OPXTheatre' ), !FiscalMonth , 'Actual Flag' ) = 1,
+#      DB('BS Reporting', !version, !FiscalMonth, !Currency, !BusinessUnit, 'Cash advance facilities (current) - BS', !BSComponent, 'Balance' ),
+#      CONTINUE);
+
+#Region Override capability
+['Reported Value'] = N:
+  If (DB('CF Reporting', !Version, !FiscalMonth, !Currency, !BusinessUnit, 'Override', !CFCashFlowMeasure ) <> 0,
+     DB('CF Reporting', !Version, !FiscalMonth, !Currency, !BusinessUnit, 'Override', !CFCashFlowMeasure ),
+     DB('CF Reporting', !Version, !FiscalMonth, !Currency, !BusinessUnit, 'Total', !CFCashFlowMeasure ));
+#EndRegion
+
+#Region Borrowings
+[ {'Outlook','Working Budget'} , 'Closing balance - Borrowings' ] = N:
+  IF ( DB( 'BRAsFiscalMonth' , 'Actual' , ATTRS( 'BusinessUnit', !BusinessUnit , 'OPXTheatre' ), !FiscalMonth , 'Actual Flag' ) <> 1,
+     DB('CF Reporting', !Version, !FiscalMonth, !Currency, !BusinessUnit, 'Reported Value', 'Opening Balance - Borrowings' )+ 
+     DB('CF Reporting', !Version, !FiscalMonth, !Currency, !BusinessUnit, 'Reported Value', 'Drawdown' )-
+     DB('CF Reporting', !Version, !FiscalMonth, !Currency, !BusinessUnit, 'Reported Value', 'Reclass' ) +
+     # DB('CF Reporting', !Version, !FiscalMonth, !Currency, !BusinessUnit, 'Reported Value', 'Repayment'),0); 
+     DB('CF Reporting', !Version, !FiscalMonth, !Currency, !BusinessUnit, 'Reported Value', 'Repayment'),
+     DB('BS Reporting', !Version, !FiscalMonth, !Currency, !BusinessUnit, 'Cash advance facilities (current) - BS', 'Reported Value', 'Balance' ));
+
+[ {'Outlook','Working Budget'} , 'Opening balance - Borrowings' ] = N:
+     DB('CF Reporting', !Version, AttrS('FiscalMonth',!FiscalMonth,'PrevPeriod'), !Currency, !BusinessUnit, 'Reported Value', 'Closing Balance - Borrowings' );
+#EndRegion
+
+#Region Borrowings (non-current) 
+[ {'Outlook','Working Budget'} , 'Closing Balance - Borrowings (non-current)' ] = N:
+  IF ( DB( 'BRAsFiscalMonth' , 'Actual' , ATTRS( 'BusinessUnit', !BusinessUnit , 'OPXTheatre' ), !FiscalMonth , 'Actual Flag' ) <> 1,
+     DB('CF Reporting', !Version, !FiscalMonth, !Currency, !BusinessUnit, 'Reported Value', 'Opening Balance - Borrowings (non-current)' )+ 
+     # DB('CF Reporting', !Version, !FiscalMonth, !Currency, !BusinessUnit, 'Reported Value', 'Reclass' ),0); 
+     DB('CF Reporting', !Version, !FiscalMonth, !Currency, !BusinessUnit, 'Reported Value', 'Reclass' ), 
+     DB('BS Reporting', !Version, !FiscalMonth, !Currency, !BusinessUnit, 'Cash advance facilities (non-current) - BS', 'Reported Value', 'Balance' ));  
+
+[ {'Outlook','Working Budget'} , 'Opening Balance - Borrowings (non-current)' ] = N:
+     DB('CF Reporting', !Version, AttrS('FiscalMonth',!FiscalMonth,'PrevPeriod'), !Currency, !BusinessUnit, 'Reported Value', 'Closing Balance - Borrowings (non-current)' );
+#EndRegion
+
+#Region LESS STI, Less LTI, Less PDD
+[ {'Outlook','Working Budget'}  , 'Less STI','Calculated' ] = N:
+  IF ( DB( 'BRAsFiscalMonth' , 'Actual' , ATTRS( 'BusinessUnit', !BusinessUnit , 'OPXTheatre' ), !FiscalMonth , 'Actual Flag' ) <> 1,
+    DB('PnLPlan', 'GLAccount':'630114', 'Functions':'All Functions', !BusinessUnit, 'Segment':'All Segment', 'OPXComponent':'Total', !Currency, !FiscalMonth, !Version, 'GlobalTheatre':'All Theatre', 'Amount' ),0);
+
+[ {'Outlook','Working Budget'}  , 'Less LTI','Calculated' ] = N:
+  IF ( DB( 'BRAsFiscalMonth' , 'Actual' , ATTRS( 'BusinessUnit', !BusinessUnit , 'OPXTheatre' ), !FiscalMonth , 'Actual Flag' ) <> 1,
+    DB('PnLPlan', 'GLAccount':'630115', 'Functions':'All Functions', !BusinessUnit, 'Segment':'All Segment', 'OPXComponent':'Total', !Currency, !FiscalMonth, !Version, 'GlobalTheatre':'All Theatre', 'Amount' ),0);
+
+[ {'Outlook','Working Budget'}  , 'Less PDD','Calculated' ] = N:
+  IF ( DB( 'BRAsFiscalMonth' , 'Actual' , ATTRS( 'BusinessUnit', !BusinessUnit , 'OPXTheatre' ), !FiscalMonth , 'Actual Flag' ) <> 1,
+    DB('PnLPlan', 'GLAccount':'PDD', 'Functions':'All Functions', !BusinessUnit, 'Segment':'All Segment', 'OPXComponent':'Total', !Currency, !FiscalMonth, !Version, 'GlobalTheatre':'All Theatre', 'Amount' ),0);
+#EndRegion
+
+#== Actuals : Opening Balance - Cash at Bank from balancesheet cube
+
+[ {'Outlook','Working Budget'} , 'Opening Balance - Cash at Bank','Calculated' ] = N:
+  IF ( DB( 'BRAsFiscalMonth' , 'Actual' , ATTRS( 'BusinessUnit', !BusinessUnit , 'OPXTheatre' ), !FiscalMonth , 'Actual Flag' ) = 1,
+    DB( 'BSStgActuals', 'Cash at bank - BS', !BusinessUnit, !Currency, !FiscalMonth, !BSComponent, 'Balance' ),
+    DB('CF Reporting', !Version, AttrS('FiscalMonth',!FiscalMonth,'PrevPeriod'), !Currency, !BusinessUnit, !BSComponent, 'Closing Balance' )) ;
+
+[ {'Outlook','Working Budget'} , 'Total Closing Cash','Calculated' ] =N: 
+  IF ( DB( 'BRAsFiscalMonth' , 'Actual' , ATTRS( 'BusinessUnit', !BusinessUnit , 'OPXTheatre' ), !FiscalMonth , 'Actual Flag' ) = 1,
+    DB( 'BSStgActuals', 'Cash at bank - BS' ,!BusinessUnit, !Currency,!FiscalMonth, !BSComponent, 'Balance' ),
+    CONTINUE) ;
+             
+[ {'Outlook','Working Budget'}  , 'Closing balance','Calculated' ] = N:
+  IF ( DB( 'BRAsFiscalMonth' , 'Actual' , ATTRS( 'BusinessUnit', !BusinessUnit , 'OPXTheatre' ), !FiscalMonth , 'Actual Flag' ) = 1,
+    DB( 'BSStgActuals', 'Borrowings - BS' ,!BusinessUnit, !Currency,!FiscalMonth, !BSComponent, 'Balance' ) + ['Drawdown'] + ['Repayment'],
+    CONTINUE) ;
+             
+# [ {'Outlook','Working Budget'}  , 'Opening balance','Calculated' ] = N:
+#   IF ( DB( 'BRAsFiscalMonth' , 'Actual' , ATTRS( 'BusinessUnit', !BusinessUnit , 'OPXTheatre' ), !FiscalMonth , 'Actual Flag' ) = 1,
+#     DB('CF Reporting', 'Actual', ATTRS( 'FiscalMonth', !FiscalMonth , 'PrevPeriod' ), !Currency, !BusinessUnit, !BSComponent, !CFCashFlowMeasure ),
+#     CONTINUE);
+
+#Region China Service Fee Payment - From BS Interco Model
+
+  [ {'Outlook','Working Budget'}, 'Other 1 - (Cash)', 'Calculated' ] = N:
+    IF ( DB( 'BRAsFiscalMonth' , 'Actual' , ATTRS( 'BusinessUnit', !BusinessUnit , 'OPXTheatre' ), !FiscalMonth , 'Actual Flag' ) <> 1,
+         DB('BSStgStaging', !BusinessUnit, !Currency, !FiscalMonth, !Version, !BSComponent, 'Other 1 - (Cash)' )*-1,0);
+
+            # [ {'Outlook','Working Budget'}, 'China Service Fee Payment', 'Calculated', 'Local Currency' ] = N:
+            #   IF ( DB( 'BRAsFiscalMonth' , 'Actual' , ATTRS( 'BusinessUnit', !BusinessUnit , 'OPXTheatre' ), !FiscalMonth , 'Actual Flag' ) <> 1,
+            #   DB('BSStgStaging', !BusinessUnit, !Currency, !FiscalMonth, !Version, !BSComponent, 'Recharges from China' )
+            #   #  DB('BS Interco Transfer', !Version, !FiscalMonth, 'Transfer Currency', 'All Region', !BusinessUnit, 'China Service Fee Payment (PM)' )
+            #   ,CONTINUE);
+
+  [ {'Outlook','Working Budget'}, 'China Service Fee Payment', 'Calculated', 'Local Currency', 'BCN' ] = N:
+    IF ( DB( 'BRAsFiscalMonth' , 'Actual' , ATTRS( 'BusinessUnit', !BusinessUnit , 'OPXTheatre' ), !FiscalMonth , 'Actual Flag' ) <> 1,
+    DB('BSStgStaging', !BusinessUnit, !Currency, !FiscalMonth, !Version, !BSComponent, 'Other 1 - (Invoiced)' )*-1
+    #  DB('BS Interco Transfer', !Version, !FiscalMonth, 'Transfer Currency', 'All Region', !BusinessUnit, 'China Service Fee Payment (PM)' )
+    ,CONTINUE);
+
+  [ {'Outlook','Working Budget'}, 'China Service Fee Payment', 'Calculated', 'BCN' ] = N:
+    IF ( DB( 'BRAsFiscalMonth' , 'Actual' , ATTRS( 'BusinessUnit', !BusinessUnit , 'OPXTheatre' ), !FiscalMonth , 'Actual Flag' ) <> 1,
+        DB('BSStgStaging', !BusinessUnit, !Currency, !FiscalMonth, !Version, !BSComponent, 'Recharges from China' )
+      #DB('BS Interco Transfer', !Version, !FiscalMonth, !Currency, 'All Region', !BusinessUnit, 'China Service Fee Payment (PM)' )
+    ,CONTINUE);
+#EndRegion
+
+#Region Procurment Fee Payment - From BS Interco Model
+  # [ {'Outlook','Working Budget'}, 'Procument Fee payment', 'Calculated', 'Local Currency' ] = N:
+  #   IF ( DB( 'BRAsFiscalMonth' , 'Actual' , ATTRS( 'BusinessUnit', !BusinessUnit , 'OPXTheatre' ), !FiscalMonth , 'Actual Flag' ) <> 1,
+  #          DB('BSStgStaging', !BusinessUnit, !Currency, !FiscalMonth, !Version, !BSComponent, 'HK Procurement Fee' )
+  #   #  DB('BS Interco Transfer', !Version, !FiscalMonth, 'Transfer Currency', 'All Region', !BusinessUnit, 'Procument Charge Paid (PM)' )
+  #   ,CONTINUE);
+
+  # [ {'Outlook','Working Budget'}, 'Procument Fee payment', 'Calculated' ] = N:
+  #   IF ( DB( 'BRAsFiscalMonth' , 'Actual' , ATTRS( 'BusinessUnit', !BusinessUnit , 'OPXTheatre' ), !FiscalMonth , 'Actual Flag' ) <> 1,
+  #        DB('BSStgStaging', !BusinessUnit, !Currency, !FiscalMonth, !Version, !BSComponent, 'HK Procurement Fee' )
+  #    # DB('BS Interco Transfer', !Version, !FiscalMonth, !Currency, 'All Region', !BusinessUnit, 'Procument Charge Paid (PM)' )
+  #   ,CONTINUE);
+#EndRegion
+
+#Region Lelit VLF (Cash)
+  # [ {'Outlook','Working Budget'}, 'Lelit VLF - (Cash)', 'Calculated', 'Local Currency' ] = N:
+  #   IF ( DB( 'BRAsFiscalMonth' , 'Actual' , ATTRS( 'BusinessUnit', !BusinessUnit , 'OPXTheatre' ), !FiscalMonth , 'Actual Flag' ) <> 1,
+  #          DB('BSStgStaging', !BusinessUnit, !Currency, !FiscalMonth, !Version, !BSComponent, 'Lelit VLF - (Cash)' )*-1,0);
+
+  [ {'Outlook','Working Budget'}, 'Lelit VLF - (Cash)', 'Calculated' ] = N:
+    IF ( DB( 'BRAsFiscalMonth' , 'Actual' , ATTRS( 'BusinessUnit', !BusinessUnit , 'OPXTheatre' ), !FiscalMonth , 'Actual Flag' ) <> 1,
+         DB('BSStgStaging', !BusinessUnit, !Currency, !FiscalMonth, !Version, !BSComponent, 'Lelit VLF - (Cash)' )*-1,0);
+
+#EndRegion
+
+#Region drawndown facility & replay facility
+  [ {'Outlook','Working Budget'}, 'Drawdown facility', 'Calculated' ] = N: 
+    IF ( DB( 'BRAsFiscalMonth' , 'Actual' , ATTRS( 'BusinessUnit', !BusinessUnit , 'OPXTheatre' ), !FiscalMonth , 'Actual Flag' ) <> 1,
+      DB('CF Reporting', !Version, !FiscalMonth, !Currency, !BusinessUnit, 'Reported Value', 'Drawdown' ),STET);
+
+  [ {'Outlook','Working Budget'}, 'repay facility', 'Calculated' ] = N:
+    IF ( DB( 'BRAsFiscalMonth' , 'Actual' , ATTRS( 'BusinessUnit', !BusinessUnit , 'OPXTheatre' ), !FiscalMonth , 'Actual Flag' ) <> 1,    
+      DB('CF Reporting', !Version, !FiscalMonth, !Currency, !BusinessUnit, 'Reported Value', 'Repayment' ),STET);
+
+#EndRegion
+
+#Region Net VLF Cash
+[ {'Outlook','Working Budget'}  , CFCashFlowMeasure:'CFCashFlowMeasure':'Net VLF - (Cash','Calculated' ] = N:
+  IF ( DB( 'BRAsFiscalMonth' , 'Actual' , ATTRS( 'BusinessUnit', !BusinessUnit , 'OPXTheatre' ), !FiscalMonth , 'Actual Flag' ) <> 1,
+    -DB('BSStgStaging', !BusinessUnit, !Currency, !FiscalMonth, !Version, 'Reported Value', 'BSStgStagingMeasure':'Net VLF' ),0);  
+#EndRegion
+
+#Region Overhead and other expenses
+[ {'Outlook','Working Budget'}  , 'Overhead and other expenses','Calculated' ] = N:
+  IF ( DB( 'BRAsFiscalMonth' , 'Actual' , ATTRS( 'BusinessUnit', !BusinessUnit , 'OPXTheatre' ), !FiscalMonth , 'Actual Flag' ) <> 1,
+    -DB('PnLPlan', 'GLAccount':'Overhead and other expenses', 'Functions':'All Functions', !BusinessUnit, 'Segment':'All Segment', 'OPXComponent':'Total', !Currency, !FiscalMonth, !Version, 'GlobalTheatre':'All Theatre', 'Amount' )+
+    DB('PnLPlan', 'GLAccount':'Employee benefits expenses', 'Functions':'All Functions', !BusinessUnit, 'Segment':'All Segment', 'OPXComponent':'Total', !Currency, !FiscalMonth, !Version, 'GlobalTheatre':'All Theatre', 'Amount' ),0);  
+#EndRegion
+
+#Region stock payments
+[ {'Outlook','Working Budget'}  , 'stock payments','Calculated' ] = N:
+  IF ( DB( 'BRAsFiscalMonth' , 'Actual' , ATTRS( 'BusinessUnit', !BusinessUnit , 'OPXTheatre' ), !FiscalMonth , 'Actual Flag' ) <> 1,
+DB('BSStgStaging', !BusinessUnit, !Currency, !FiscalMonth, !Version, 'Reported Value', 'Payments - purchases' ),0);  
+#EndRegion
+
+#Region lease repayment
+[ {'Outlook','Working Budget'}  , 'lease repayments','Calculated' ] = N:
+  IF ( DB( 'BRAsFiscalMonth' , 'Actual' , ATTRS( 'BusinessUnit', !BusinessUnit , 'OPXTheatre' ), !FiscalMonth , 'Actual Flag' ) <> 1,
+DB('BSStgStaging', !BusinessUnit, !Currency, !FiscalMonth, !Version, 'Reported Value', 'Lease Repayment' ),0);  
+#EndRegion
+
+#Region GST paid on overheads
+[ {'Outlook','Working Budget'}  , CFCashFlowMeasure:'CFCashFlowMeasure':'GST Paid on overheads','Calculated' ] = N:
+  IF ( DB( 'BRAsFiscalMonth' , 'Actual' , ATTRS( 'BusinessUnit', !BusinessUnit , 'OPXTheatre' ), !FiscalMonth , 'Actual Flag' ) <> 1,
+-DB('BSStgStaging', !BusinessUnit, !Currency, !FiscalMonth, !Version, 'Reported Value', 'GST on Overheads' ),0);  
+#EndRegion
+
+#Region GST paid on additions
+[ {'Outlook','Working Budget'}  , CFCashFlowMeasure:'CFCashFlowMeasure':'GST - Paid on additions','Calculated' ] = N:
+  IF ( DB( 'BRAsFiscalMonth' , 'Actual' , ATTRS( 'BusinessUnit', !BusinessUnit , 'OPXTheatre' ), !FiscalMonth , 'Actual Flag' ) <> 1,
+DB('BSStgStaging', !BusinessUnit, !Currency, !FiscalMonth, !Version, 'Reported Value', 'GST - Paid on additions' ),0);  
+#EndRegion
+
+#Region VAT Remitted
+[ {'Outlook','Working Budget'}  , CFCashFlowMeasure:'CFCashFlowMeasure':'VAT - Remitted','Calculated' ] = N:
+  IF ( DB( 'BRAsFiscalMonth' , 'Actual' , ATTRS( 'BusinessUnit', !BusinessUnit , 'OPXTheatre' ), !FiscalMonth , 'Actual Flag' ) <> 1,
+DB('BSStgStaging', !BusinessUnit, !Currency, !FiscalMonth, !Version, 'Reported Value', 'Remitted' ),0);  
+#EndRegion
+
+#Region WHT Tax Payment
+[ {'Outlook','Working Budget'}  , CFCashFlowMeasure:'CFCashFlowMeasure':'WHT Tax payment','Calculated' ] = N:
+  IF ( DB( 'BRAsFiscalMonth' , 'Actual' , ATTRS( 'BusinessUnit', !BusinessUnit , 'OPXTheatre' ), !FiscalMonth , 'Actual Flag' ) <> 1,
+DB('BSStgStaging', !BusinessUnit, !Currency, !FiscalMonth, !Version, 'Reported Value', 'WHT Tax paid' ),0);  
+#EndRegion
+
+#Region warranty claims
+[ {'Outlook','Working Budget'}  , CFCashFlowMeasure:'CFCashFlowMeasure':'Warranty claims','Calculated' ] = N:
+  IF ( DB( 'BRAsFiscalMonth' , 'Actual' , ATTRS( 'BusinessUnit', !BusinessUnit , 'OPXTheatre' ), !FiscalMonth , 'Actual Flag' ) <> 1,
+DB('BSStgStaging', !BusinessUnit, !Currency, !FiscalMonth, !Version, 'Reported Value', 'Warranty claims' ),0);  
+#EndRegion
+
+#Region Pull Outlook and Budget from BSStgStaging cube for forecast periods
+[ {'Outlook','Working Budget'}, 'Calculated' ] = N:
+  IF ( DB( 'BRAsFiscalMonth' , 'Actual' , ATTRS( 'BusinessUnit', !BusinessUnit , 'OPXTheatre' ), !FiscalMonth , 'Actual Flag' ) <> 1,
+    IF ( DB('CF Mapping', !CFCashFlowMeasure, 'BS Staging Ref' ) @<>'',
+      -DB('BSStgStaging', !BusinessUnit, !Currency, !FiscalMonth, !Version, 'Reported Value', DB('CF Mapping', !CFCashFlowMeasure, 'BS Staging Ref' ) ),
+      -DB('PnLPlan', DB('CF Mapping', !CFCashFlowMeasure, 'PL Ref' ), 'Functions':'All Functions', !BusinessUnit, 'Segment':'All Segment', 'OPXComponent':'Total', !Currency, !FiscalMonth, !Version, 'GlobalTheatre':'All Theatre', 'Amount' )),
+  
+  # -DB('BSStgStaging', !BusinessUnit, !Currency, !FiscalMonth, !Version, 'Reported Value', 
+      # DB('CF Mapping', !CFCashFlowMeasure, 'PL Ref' ) )),
+  CONTINUE);
+#EndRegion             
+             
+FEEDERS; 
+
+  #Region Override 
+
+[{'Override','Total'}]=>
+  ['Reported Value'];
+  
+['Calculated']=>
+  ['Total'];  
+
+# ['Total']=>
+#   ['Reported Value'];
+
+#EndRegion
+
+['Closing balance', 'Local Currency','Reported Value']=>
+  DB('BS Reporting', !Version, !FiscalMonth, !Currency, !BusinessUnit, '100110', 'Calculated', 'Movement' ),
+  DB('BS Reporting', !Version, !FiscalMonth, !Currency, !BusinessUnit, '100110', 'Calculated', 'Balance' );
+
+['Opening Balance - Borrowings', 'Reported Value'] => 
+  ['Closing balance - Borrowings'];
+  
+['Drawdown', 'Reported Value'] => 
+  ['Closing balance - Borrowings']; 
+  
+['Repayment', 'Reported Value'] => 
+  ['Closing balance - Borrowings']; 
+
+['Reclass', 'Reported Value'] => 
+  ['Closing balance - Borrowings'],['Closing Balance - Borrowings (non-current)'];  
+
+['Closing Balance - Borrowings', 'Reported Value'] => 
+  ['Opening Balance - Borrowings'],
+  DB('BS Reporting', !Version, !FiscalMonth, !Currency, !BusinessUnit, '200110', 'Calculated', 'Movement' ); 
+
+['Closing Balance - Borrowings (non-current)', 'Reported Value'] => 
+  ['Opening Balance - Borrowings (non-current)'];  
+
+#= BS Interest Fee
+# ['Closing Balance - Borrowings', {'Outlook','Working Budget'}, 'Reported Value'] => 
+#   DB('BSStgStaging' ,!BusinessUnit, !Currency, !FiscalMonth, !Version, 'Calculated', 'Interest Fee'); 
+
+#= BS Borrowings
+[ {'Outlook','Working Budget'}, 'Opening Balance - Borrowings', 'Reported Value' ] =>
+    DB('BSStgStaging', !BusinessUnit, !Currency, !FiscalMonth, !Version, !BSComponent, 'Opening Balance - Borrowings' );
+	
+[ {'Outlook','Working Budget'}, 'Drawdown', 'Reported Value' ] => 
+    DB('BSStgStaging', !BusinessUnit, !Currency, !FiscalMonth, !Version, !BSComponent, 'Drawdown' );
+	
+[ {'Outlook','Working Budget'}, 'Repayment', 'Reported Value' ] =>
+    DB('BSStgStaging', !BusinessUnit, !Currency, !FiscalMonth, !Version, !BSComponent, 'Repayment' );
+	
+[ {'Outlook','Working Budget'}, 'Closing Balance - Borrowings', 'Reported Value' ] =>
+    DB('BSStgStaging', !BusinessUnit, !Currency, !FiscalMonth, !Version, !BSComponent, 'Closing Balance - Borrowings' );
+
+#= BS Borrowings (non-current)
+[ {'Outlook','Working Budget'}, 'Opening Balance - Borrowings (non-current)', 'Reported Value' ] =>
+    DB('BSStgStaging', !BusinessUnit, !Currency, !FiscalMonth, !Version, !BSComponent, 'Opening Balance - Borrowings (non-current)' );
+	
+[ {'Outlook','Working Budget'}, 'Reclass', 'Reported Value' ] => 
+    DB('BSStgStaging', !BusinessUnit, !Currency, !FiscalMonth, !Version, !BSComponent, 'Reclass' );
+	
+[ {'Outlook','Working Budget'}, 'Closing Balance - Borrowings (non-current)', 'Reported Value' ] =>
+    DB('BSStgStaging', !BusinessUnit, !Currency, !FiscalMonth, !Version, !BSComponent, 'Closing Balance - Borrowings (non-current)' );
+
+[{'Outlook','Working Budget'},'Closing Balance - Borrowings', 'Reported Value'] => 
+  DB('BS Reporting', !Version, !FiscalMonth, !Currency, !BusinessUnit, '200185', 'Calculated', 'Balance' );
+
+[{'Outlook','Working Budget'},'Closing Balance - Borrowings (non-current)', 'Reported Value'] => 
+  DB('BS Reporting', !Version, !FiscalMonth, !Currency, !BusinessUnit, '210101', 'Calculated', 'Balance' );

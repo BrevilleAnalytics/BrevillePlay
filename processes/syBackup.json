@@ -1,0 +1,21 @@
+{
+	"@type":"Process",
+	"Name":"syBackup",
+	"HasSecurityAccess":false,
+	"Code@Code.link":"syBackup.ti",
+	"UIData":"_ParameterConstraints=e30=€",
+	"DataSource":
+	{
+		"Type":"None"
+	},
+	"Parameters":
+	[
+		{
+			"Name":"psServer",
+			"Prompt":"",
+			"Value":"Breville",
+			"Type":"String"
+		}
+	],
+	"Variables":[]
+}

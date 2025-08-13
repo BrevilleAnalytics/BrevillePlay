@@ -1,0 +1,153 @@
+#region Prolog
+#****Begin: Generated Statements***
+#****End: Generated Statements****
+
+
+#------------------------------------------------------------------------
+#Region # Process Summary
+# This process collects status of all processes executed as part of a chore 
+# and sends email notification in case of any of process finished with errors
+
+
+#------------------------------------------------------------------------
+#<Changes History>
+
+#<Changes History\>
+
+#<Execute Method>
+# as part of each chore
+#<Execute Method\>
+
+#<Processes Executed>
+# syEmailSend
+#<Processes Executed\>
+
+#<Estimated Run Time>
+# ~5 sec
+#<Estimated Run Time\>
+
+#EndRegion # Process Summary
+#------------------------------------------------------------------------
+
+#------------------------------------------------------------------------
+#Region # Variables
+
+If( SCAN( 'R*', TM1User ) > 0 );
+  sTM1User = 'syProcessLog';
+Else;
+  sTM1User = TM1User();
+EndIf;
+
+sCubeControl = 'syEnvironment';
+sCubeProcessLog = 'syProcessLog';
+sLogDirectory = GetProcessErrorFileDirectory;
+sLogFiles = '';
+sErrorString = '';
+nError = 0;
+nMinorError = 0;
+
+sEmailOverride = CellGetS( sCubeControl, psServer, 'Email To Address Override' );
+sEmailTechSupport = CellGetS( sCubeControl, psServer, 'Email To Technical Support' );
+If( sEmailOverride @<> '' );
+  sEmailRecipient = sEmailOverride;
+Else;
+  sEmailRecipient = sEmailTechSupport;
+EndIf;
+
+sTextTab = '&nbsp;&nbsp;&nbsp;&nbsp';
+sEmailSubjectInfo =	'CHORE- ' | psProcessName | ' Completed Successfully';
+sEmailSubjectMinorError = 'CHORE- ' | psProcessName | ' Completed with Minor Errors';
+sEmailSubjectError = 'CHORE FAILURE- ' | psProcessName | ' Completed with Errors';
+
+sEmailBodyHeaderSection = '=======================================================';
+sEmailBodySection = '------------------------------------------------------------------------------------------';
+sEmailBodyHeader1 = sTextTab | 'CHORE: ' | '<b>' | psProcessName | '</b> </BR></BR>';
+sEmailBodyHeader2 = sTextTab | 'STATUS' | '&nbsp;&nbsp;&nbsp|' | sTextTab | 'TI PROCESS NAME COMPLETED WITH ERRORS </BR>';
+sEmailBody = sEmailBodyHeader1 | sEmailBodyHeaderSection | '</BR>' | sEmailBodyHeader2 | sEmailBodyHeaderSection | ' </BR></BR>';
+
+#EndRegion # Variables
+#------------------------------------------------------------------------
+
+#------------------------------------------------------------------------
+#Region # Email Recipient
+If( sEmailRecipient @= '' );
+  sMessage = 'Email Recipient missing.';
+  LogOutPut( 'error', sMessage );
+  ProcessBreak;
+EndIf;
+
+#EndRegion # Email Recipient
+#------------------------------------------------------------------------
+
+#------------------------------------------------------------------------
+#Region # Email Body
+
+sLogLevel = CellGetS( sCubeProcessLog, sTM1User, psProcessName, '1', 'Log Level' );
+
+nLineItem = 1;
+While( sLogLevel @<> '' );
+  If( UPPER( sLogLevel ) @<> 'INFO' & SCAN( sLogLevel, UPPER( psLogLevel ) ) > 0 );
+    sProcessErrorLog = CellGetS( sCubeProcessLog, sTM1User, psProcessName, NumberToString( nLineItem ), 'Error Reference' );
+    If( SCAN( 'TM1ProcessError', sProcessErrorLog ) > 0 );
+      If( sLogFiles @= '' );
+        sLogFiles = sLogDirectory | sProcessErrorLog;
+      Else;
+        sLogFiles = sLogFiles | ',' | sLogDirectory | sProcessErrorLog;
+      EndIf;
+      sErrorProcessName = SUBST( sProcessErrorLog, 41, LONG( sProcessErrorLog ) - 44 );
+      nError = nError + 1;
+    Else;
+      sErrorProcessName = sProcessErrorLog;
+    EndIf;
+    If( sErrorProcessName @<> '' & SCAN( sLogLevel | sErrorProcessName, sErrorString ) = 0 );
+      sEmailBody = sEmailBody | sTextTab | sLogLevel | sTextTab | '|' | sTextTab | sErrorProcessName | '</BR>';
+      sErrorString = sErrorString | sLogLevel | sErrorProcessName | '|';
+      nMinorError = nMinorError + 1;
+    EndIf;
+  EndIf;
+nLineItem = nLineItem + 1;
+sLogLevel = CellGetS( sCubeProcessLog, sTM1User, psProcessName, NumberToString( nLineItem ), 'Log Level' );
+End; 
+
+sEmailBody = sEmailBody | ' </BR>' | sEmailBodySection;
+
+#EndRegion # Email Body
+#------------------------------------------------------------------------
+
+#------------------------------------------------------------------------
+#Region # Send Email Notification
+
+If( UPPER( psAttachLogFiles ) @<> 'Y' );
+ sLogFiles = '';
+EndIf;
+
+If( nError > 0 % nMinorError > 0 );
+    If( nError = 0 );
+      sEmailSubjectError = sEmailSubjectMinorError;
+    EndIf;
+    ExecuteProcess( 'syEmailSend',
+      'psServer', 'Group Productivity',
+      'psTo', sEmailRecipient,
+      'psSubject', sEmailSubjectError,
+      'psBody', sEmailBody,
+      'psAttachFile', sLogFiles
+     );
+Else;
+    If( SCAN( 'INFO', UPPER( psLogLevel )  ) > 0 );
+      ExecuteProcess( 'syEmailSend',
+        'psServer', 'Group Productivity',
+        'psTo', sEmailRecipient,
+        'psSubject', sEmailSubjectInfo,
+        'psBody', ' ',
+        'psAttachFile', ''
+       );
+    EndIf;
+EndIf;
+
+#EndRegion # Send Email Notification
+#------------------------------------------------------------------------
+#endregion
+#region Epilog
+#****Begin: Generated Statements***
+#****End: Generated Statements****
+#endregion

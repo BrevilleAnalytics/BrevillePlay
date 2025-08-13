@@ -1,0 +1,5 @@
+{
+	"@type":"Subset",
+	"Name":"picklist.GlobalTheatre",
+	"Expression":"{TM1FILTERBYLEVEL(TM1SUBSETALL([GlobalTheatre].[GlobalTheatre]) , 0)}"
+}

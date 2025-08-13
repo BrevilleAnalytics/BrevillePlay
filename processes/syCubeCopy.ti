@@ -1,0 +1,154 @@
+#region Prolog
+#****Begin: Generated Statements***
+#****End: Generated Statements****
+
+
+
+#~~~~~~~~~ Process Description ~~~~~~~~~~~~~~~~
+# Description: Master version copy process, loop through syCubeCopy and run copies for each cube mentioned there
+#
+
+# Modification History
+# v1 - 10-07-2022 - Jithu Varghese : initial draft
+# v1 - 10-10-2022 - Jithu Varghese : Updates to clear Theatre and Business Unit after each run
+#~~~~~~~~~   ~~~~~~~~~~~~~~~~
+
+
+#~~~~~~~~~ Init ~~~~~~~~~~~~~~~~
+# Process Logging
+sProcessName = GetProcessName( );
+If( psProcessNameForLogging @<> '' ) ;
+   sProcessName = psProcessNameForLogging ;
+Else ; 
+   ExecuteProcess('syProcessLogInitialise','psProcessname',sProcessName);
+EndIf ;
+
+# validate template selected
+if (dimix('syCubeCopyTemplate', psTemplate)=0);
+	sMessage = 'Invalid copy template provided ' | psTemplate |' aborting';
+    ExecuteProcess('syProcessLogMessage','psProcessName', sProcessName, 'psLogLevel','ERROR','psMessage',sMessage);
+    logoutput('error',sMessage);
+	ProcessQuit;
+endif;
+
+# General
+sRandomStr = NumberToString(INT(Rand() * 10000));
+sUniqueName = GetProcessName() | '_' | TimSt( Now(), '\Y\m\d_\h\i\s', 1)  | '_' | sRandomStr;
+nLocalDateFormatter = NewDateFormatter('en-AU', 'Australia/Sydney', 'serial', 'full', 'datetime');
+sDateFormat = 'yyyy-MM-dd HH:mm:ss';
+sMessage = 'Starting cube copy';
+ExecuteProcess('syProcessLogMessage','psProcessName', sProcessName, 'psLogLevel','INFO','psMessage',sMessage);
+csDebugFile = CellGetS( 'syEnvironment' , psServer , 'Log Folder') | '\' | sUniqueName | '.txt';
+nErrorCount = 0;
+nCubeCopied = 0;
+sDimVersion = 'Version';
+
+# Loop through cubes on sysCubeCopy list
+i = 1;
+while (i <= DimSiz('syCubeCopyCubeList'));
+	sCubeName = DimNm('syCubeCopyCubeList',i);
+    if (dimix('}Cubes', sCubeName) <> 0);
+    	sVersionFrom = DimensionElementPrincipalName( 'Version', CellGetS('syCubeCopy',psTemplate,sCubeName,'Version From') ) ;
+		sVersionTo = DimensionElementPrincipalName( 'Version', CellGetS('syCubeCopy',psTemplate,sCubeName,'Version To') ) ;
+        sFilter = CellGetS('syCubeCopy',psTemplate,sCubeName,'Filter Result');
+		#~~~~~~~~~ Version validation ~~~~~~~~~~~~~~~~
+		sCopyCube = 'Yes';
+    	if (CellGetS('syCubeCopy',psTemplate,sCubeName,'Copy') @='' % CellGetS('syCubeCopy',psTemplate,sCubeName,'Copy')@='No');
+            sReason= 'Not selected for copying';
+            sCopyCube = 'No';
+		elseif (sVersionTo @= '' % sVersionFrom @='');
+            sReason= 'No version selected for cube ' | sCubeName | ' skipping';
+            sCopyCube = 'No';
+        elseif (dimix(sDimVersion ,sVersionTo) = 0 % dimix(sDimVersion ,sVersionFrom) = 0);
+        	sReason= 'Versions selected for cube ' | sCubeName | ' do not exist in version dimension, skipping';
+            sCopyCube = 'No';
+            
+       	#TODO: Should we check version assumptions i.e. can we copy to a 'locked' snapshot?
+        
+		endif;
+        if (sCopyCube @= 'No');
+        	AsciiOutput(csDebugFile,sReason);
+         	CellPutS(FormatDate(Now, sDateFormat, nLocalDateFormatter)| ' : ' |sReason | ' Run by : ' | TM1User() , 'syCubeCopy', psTemplate, sCubeName,'Status');
+            ExecuteProcess('syProcessLogMessage','psProcessName', sProcessName, 'psLogLevel','INFO','psMessage',sReason);
+        else;
+        	nSuppressRules = IF(CellGetS('syCubeCopy',psTemplate,sCubeName,'Copy Rule Values')@='Yes', 0, 1);
+			nSuppressConsols = IF(CellGetS('syCubeCopy',psTemplate,sCubeName,'Copy Consolidated Values')@='Yes', 0, 1);
+			nIncludeDescendants =  IF(CellGetS('syCubeCopy',psTemplate,sCubeName,'Include Descendants')@='Yes', 1, 0);
+			sMessage = 'Copying cube ' | sCubeName | ' from version ' | sVersionFrom | ' to version ' | sVersionTo | if (sFilter @<> '',' with filter ' | sFilter , '');
+            AsciiOutput(csDebugFile,sMessage);
+            ExecuteProcess('syProcessLogMessage','psProcessName', sProcessName, 'psLogLevel','INFO','psMessage',sMessage);
+            nCubeStartTime = NOW;
+            sCubeCopied = 'No';
+            # cube copy logic here
+            # can do async copy, but need a flag file and all the rest, let's start easy
+			vnReturnCode = ExecuteProcess(
+            				'syCubeCopyData',
+                            'pCube', sCubeName,
+                            'pDimension', sDimVersion,  
+                            'pSourceElement', sVersionFrom,   
+                            'pTargetElement',sVersionTo,  
+                            'pFilter', sFilter, 
+                            'pSuppressConsol', nSuppressConsols,
+                            'pSuppressRules', nSuppressRules, 
+                            'pIncludeDescendants', nIncludeDescendants,
+                            'psProcessNameForLogging', sProcessName); 
+                            
+         if ( CellIsUpdateable( 'syCubeCopy', psTemplate , sCubeName , 'Theatre' ) = 1 ) ;
+              CellPutS( '' , 'syCubeCopy', psTemplate , sCubeName , 'Theatre' ) ;
+         endif ;
+         
+         if ( CellIsUpdateable( 'syCubeCopy', psTemplate , sCubeName , 'Business Unit' ) = 1 ) ;
+         CellPutS( '' , 'syCubeCopy', psTemplate , sCubeName , 'Business Unit' ) ;
+         endif ;
+            
+			# we'd be checking a flag file here instead if we wanted to go async
+            If(vnReturnCode =ProcessExitNormal());
+            	sCubeCopied = 'Yes';
+            endif;
+            
+            if (sCubeCopied @= 'Yes');
+	            nElapsedSeconds=ROUND ((NOW - nCubeStartTime) / 0.000011574074074074);
+    	        sMessage =  'Copied cube ' | sCubeName | ' from version ' | sVersionFrom | ' to version ' |  sVersionTo |  if (sFilter @<> '',' with filter ' | sFilter , '')| ' in ' | NumberToString(nElapsedSeconds) | ' s.';
+                logoutput('info',sMessage);
+     			ExecuteProcess('syProcessLogMessage','psProcessName', sProcessName, 'psLogLevel','INFO','psMessage',sMessage);
+				AsciiOutput(csDebugFile,sMessage);
+                CellPutS(FormatDate(Now, sDateFormat, nLocalDateFormatter)| ': Copied OK. Run by : ' | TM1User() , 'syCubeCopy', psTemplate, sCubeName,'Status');
+
+
+                nCubeCopied = nCubeCopied + 1; 
+        		# reset copy flag
+        		If (psRemoveCopyFlag @= 'Yes' & CellIsUpdateable('syCubeCopy',psTemplate, sCubeName, 'Copy') = 1);
+					CellPutS('', 'syCubeCopy' , psTemplate,sCubeName,'Copy');
+                else;
+                	sAllCubesSetUp = 'Yes';
+                endif;
+	       else;
+           		sMessage =  'Failed to copy cube ' | sCubeName | ' from version ' | sVersionFrom | ' to version ' |  sVersionTo |  if (sFilter @<> '',' with filter ' | sFilter , '') | ' in ' | NumberToString(nElapsedSeconds) | ' s.';
+                logoutput('error',sMessage);
+     			ExecuteProcess('syProcessLogMessage','psProcessName', sProcessName, 'psLogLevel','ERROR','psMessage',sMessage);
+				AsciiOutput(csDebugFile,sMessage);
+                CellPutS(FormatDate(Now, sDateFormat, nLocalDateFormatter)| ': Error during copy. Run by :  ' | TM1User() , 'syCubeCopy', psTemplate, sCubeName,'Status');
+                nErrorCount = nErrorCount + 1;
+           endif;     
+        endif;
+	endif;
+	i = i + 1;
+end;
+
+
+# Reset published flag if it's setup on All cubes
+IF ( psRemoveCopyFlag @= 'Yes' & sAllCubesSetUp @= 'Yes');
+	CellPutS('', 'syCubeCopy', psTemplate, 'All Cubes','Copy');
+ENDIF;
+
+
+
+sMessage = 'Finished cube copy, copied ' | NumberToString(nCubeCopied) | ' cubes' | if (nErrorCount <> 0, ' with ' | NumberToString(nErrorCount) | ' errors', '');
+ExecuteProcess('syProcessLogMessage','psProcessName', sProcessName, 'psLogLevel','INFO','psMessage',sMessage);
+AsciiOutput(csDebugFile,sMessage);
+
+#endregion
+#region Epilog
+#****Begin: Generated Statements***
+#****End: Generated Statements****
+#endregion

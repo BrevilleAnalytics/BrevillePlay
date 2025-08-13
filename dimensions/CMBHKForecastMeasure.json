@@ -1,0 +1,13 @@
+{
+	"@type":"Dimension",
+	"Name":"CMBHKForecastMeasure",
+	"AllLeavesHierarchyName":"",
+	"DefaultHierarchy":
+	{
+		"@id":"Dimensions('CMBHKForecastMeasure')/Hierarchies('CMBHKForecastMeasure')"
+	},
+	"Hierarchies@Code.links":
+	[
+		"CMBHKForecastMeasure.hierarchies/CMBHKForecastMeasure.json"
+	]
+}

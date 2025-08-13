@@ -1,0 +1,224 @@
+#region Prolog
+#****Begin: Generated Statements***
+#****End: Generated Statements****
+sFolderLogError = CellGetS ( 'syControl' , 'HDCNT' , 'Temp Folder' ) ;
+sFilePath = '\' ;
+sFileLogError = 'CltClone.txt' ;
+sPathFile = sFolderLogError | sFilePath | sFileLogError ;
+sPathFileLogError = sFolderLogError | sFilePath | sFileLogError ;
+
+#Region # TI Information
+#<Purpose>
+# The syClientClone dimension to use in the syCostCenterSecurity cube and be able to consolidate in 'All syClient'
+#<Purpose\>
+
+#<Author>
+# Greg Leonhart/Jithu Varghese/Alain Olivier 12/2021
+#<Author\>
+
+#<Last Modified>
+# August 2021
+
+#<Last Modified\>
+
+
+#<Parameters>
+# pDebug = 0; Perform TM1 functions; Don't output data
+# pDebug = 1; Perform TM1 functions; Output data
+# pDebug = 2; Don't perform TM1 functions; Output data
+#<Parameters\>
+
+#<Execute Method>
+# Executed by the nightly SyMaintenance chore
+#<Execute Method\>
+
+#<Processes Executed>
+# Standard sys logging / bedrock processes are called from this process
+#<Processes Executed\>
+
+#<Execute Schedule>
+# Nightly or On demand
+#<Execute Schedule\>
+
+#<Estimated Run Time>
+# < 5 seconds
+#<Estimated Run Time\>
+
+#<Parallel Interaction Lock>
+# Yes. Metadata changes.
+#<Parallel Interaction Lock\>
+
+#End Region #TI Information
+
+# This will ensure the MetaData runs and completes before the Data.
+
+#-----------------------------------------------------------------------------------------------------------------------------------------------------------------------
+#Region # Constants
+nStartTime = NOW ;
+sUser = TM1User();
+IF ( DIMIX ( '}Clients', sUser ) > 0 );
+	sUserName = NUMBERTOSTRING ( DIMIX ( '}Clients', sUser ) );
+ELSEIF ( DIMIX ( '}Chores', TRIM ( SUBST ( sUser, 3, 255 ) ) ) > 0 );
+	sUserName= TRIM ( SUBST ( sUser, 3, 255 ) );
+ELSE;
+	sUserName = 'Unknown';
+ENDIF;
+
+#End Region # Constants
+
+#-----------------------------------------------------------------------------------------------------------------------------------------------------------------------
+#Region # Debugging setup
+sDebugFile = CellGetS('syControl', 'HDCNT', 'Temp Folder') | '\' | GetProcessName| '.txt';
+#End Region # Debugging setup
+
+#-----------------------------------------------------------------------------------------------------------------------------------------------------------------------
+#Region # Variables
+nRecordCountData = 0;
+nRecordCountMetadata = 0;
+
+NumericGlobalVariable( 'PrologMinorErrorCount' );
+NumericGlobalVariable( 'MetaDataMinorErrorCount' );
+NumericGlobalVariable( 'DataMinorErrorCount' );
+sSystemMessage = '';
+
+#End Region # Variables
+
+ExecuteProcess('syTITracker',
+  'pProcessName', GetProcessName,
+  'pTime', nStartTime,
+  'pStatus', 1,
+
+  'pTM1User', sUserName,
+  'pSystemMessage', sSystemMessage,
+  'pRecordCount', nRecordCountData + nRecordCountMetadata,
+  'pPrologMinorErrorCount', PrologMinorErrorCount,
+  'pMetaDataMinorErrorCount', MetaDataMinorErrorCount,
+  'pDataMinorErrorCount', DataMinorErrorCount,
+  'pDebug', pDebug );
+
+#----------------------------------------------------------------------------------------------------------
+#Region # Process control
+# Check to see whether the process is configured to proceed or whether the process should end
+sMonth = TIMST ( nStartTime, '\m' );
+sDay = TIMST ( nStartTime, '\d' );
+sHour = TIMST ( nStartTime, '\h' );
+
+#nRunBoolean = CellGetN ( 'SYS_Process_Info', GetProcessName, 'Run Process Flag', sMonth, sDay, sHour, 'Value' );
+nRunBoolean =1;
+IF ( nRunBoolean = 1 );
+	#CONTINUE
+ELSE;
+	sSystemMessage = 'Process is not scheduled in the SYS_Process_Info cube to run.';
+#	PROCESSBREAK;
+ENDIF;
+
+#End Region # Process control
+
+
+#----------------------------------------------------------------------------------------------------------
+#Region # Cube Logging
+#IF ( pDebug <= 1 );
+# N/A
+#ENDIF;
+#End Region # Cube Logging
+
+#----------------------------------------------------------------------------------------------------------
+#Region # Build the dimension by looping through }Clients and then }Processes
+
+# If ( DimensionExists ( 'syClientClone') = 0 ) ;
+#    DimensionCreate ( 'syClientClone') ;
+#    ElementAttrInsert ( 'syClientClone' , '', '' , 'UserName', 'N' ) ;
+#    ElementAttrInsert ( 'syClientClone' , '', 'UserName' , 'Email', 'N' ) ;
+# EndIf ;
+
+IF ( DIMIX ( 'syClientClone', 'All syClient' ) = 0 ) ;
+   DIMENSIONELEMENTINSERT( 'syClientClone', 'All syClient', 'All syClient', 'C' ) ;
+ENDIF;
+
+i = 1;
+nDimSiz = DIMSIZ ( '}Clients' ) ;
+WHILE ( i <= nDimSiz ) ;
+
+   sClient = DIMNM ( '}Clients', i ) ;
+   If ( sClient @<> 'syProcessLog' ) ;
+
+# ASCIIOutput ( sPathFileLogError , '1-' | NumberToString ( i ) , '}Clients: ' | sClient ) ;
+
+      IF ( DIMIX ( 'syClientClone', sClient ) = 0 );
+         DimensionElementInsertDirect ( 'syClientClone' , '' , sClient , 'N' ) ;
+         DimensionElementComponentAddDirect ( 'syClientClone', 'All syClient', sClient  , 1 ) ;
+      ENDIF;
+      
+   ENDIF;
+
+i = i + 1 ;
+END ;
+
+IF ( DIMIX ( 'syClientClone', 'Unknown' ) = 0 );
+   DimensionElementInsertDirect ( 'syClientClone', '', 'Unknown', 'N' );
+   DimensionElementComponentAddDirect ( 'syClientClone', 'All syClient', 'Unknown', 1 );
+ENDIF;
+
+
+#End Region # Build the dimension by looping through }Clients and then }Processes
+#endregion
+#region Epilog
+#****Begin: Generated Statements***
+#****End: Generated Statements****
+
+    AttrDelete( 'syClientClone' , 'UserName' );
+    AttrDelete( 'syClientClone' , 'EmailID' );
+    AttrInsert( 'syClientClone' , '', 'UserName', 'A' );
+    AttrInsert( 'syClientClone' , 'UserName', 'EmailID' , 'A' );
+    
+i = 1;
+nDimSiz = DIMSIZ ( '}Clients' ) ;
+WHILE ( i <= nDimSiz ) ;
+
+   sClient = DIMNM ( '}Clients', i ) ;
+   If ( sClient @<> 'syProcessLog' & sClient @<> 'Admin' ) ;
+        
+      ATTRPutS ( ATTRS ( '}Clients' , sClient , 'UserName' ) , 'syClientClone' , sClient , 'UserName' ) ;
+      ATTRPutS ( ATTRS ( '}Clients' , sClient , 'EmailID' ) , 'syClientClone' , sClient , 'EmailID' ) ;
+      
+   ENDIF;
+
+i = i + 1 ;
+END ;
+
+
+#----------------------------------------------------------------------------------------------------------
+#Region # TI Tracker
+# Check for minor errors
+IF ( sSystemMessage @= '' );
+  IF ( DataMinorErrorCount = 0 & PrologMinorErrorCount = 0 & MetaDataMinorErrorCount = 0 );
+    sSystemMessage = 'Successful';
+  ELSE;
+    IF ( DataMinorErrorCount <> 0 );
+      sSystemMessage = NumberToString ( DataMinorErrorCount ) | ' data error/s; ';
+    ENDIF;
+    IF ( PrologMinorErrorCount <> 0 );
+      sSystemMessage =NumberToString ( PrologMinorErrorCount ) | ' prolog error/s; ';
+    ENDIF;
+    IF ( MetaDataMinorErrorCount <> 0 );
+      sSystemMessage = NumberToString ( MetaDataMinorErrorCount ) | ' metadata error/s';
+    ENDIF;
+        sSystemMessage= sSystemMessage | ' Check settings or contact the adminstrator if the error/s persists';
+  ENDIF;
+ENDIF;
+
+	ExecuteProcess('syTITracker',
+	  'pProcessName', GetProcessName,
+	  'pTime', nStartTime,
+	  'pStatus', 0,
+
+	  'pTM1User', sUserName,
+	  'pSystemMessage', sSystemMessage,
+	  'pRecordCount', nRecordCountData + nRecordCountMetadata,
+	  'pPrologMinorErrorCount', PrologMinorErrorCount,
+	  'pMetaDataMinorErrorCount', MetaDataMinorErrorCount,
+	  'pDataMinorErrorCount', DataMinorErrorCount,
+	  'pDebug', pDebug );
+
+#End Region # TI Tracker
+#endregion

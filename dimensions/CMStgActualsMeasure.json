@@ -1,0 +1,13 @@
+{
+	"@type":"Dimension",
+	"Name":"CMStgActualsMeasure",
+	"AllLeavesHierarchyName":"",
+	"DefaultHierarchy":
+	{
+		"@id":"Dimensions('CMStgActualsMeasure')/Hierarchies('CMStgActualsMeasure')"
+	},
+	"Hierarchies@Code.links":
+	[
+		"CMStgActualsMeasure.hierarchies/CMStgActualsMeasure.json"
+	]
+}

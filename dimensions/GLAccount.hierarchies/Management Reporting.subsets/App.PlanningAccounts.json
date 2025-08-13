@@ -1,0 +1,5 @@
+{
+	"@type":"Subset",
+	"Name":"App.PlanningAccounts",
+	"Expression":"{[GLAccount].[Management Reporting].[Depreciation & amortisation expense],DRILLDOWNMEMBER({[GLAccount].[Management Reporting].[Marketing expenses]} , {[GLAccount].[Management Reporting].[Marketing expenses]} , RECURSIVE),DRILLDOWNMEMBER({[GLAccount].[Management Reporting].[Overhead and other expenses]} , {[GLAccount].[Management Reporting].[Overhead and other expenses]} , RECURSIVE),[GLAccount].[Management Reporting].[Other Income],[GLAccount].[Management Reporting].[Other finance expenses],[GLAccount].[Management Reporting].[Tax expense],[GLAccount].[Management Reporting].[Below the line]}"
+}

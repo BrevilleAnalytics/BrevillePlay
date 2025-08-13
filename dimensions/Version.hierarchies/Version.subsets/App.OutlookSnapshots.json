@@ -1,0 +1,5 @@
+{
+	"@type":"Subset",
+	"Name":"App.OutlookSnapshots",
+	"Expression":"{EXCEPT(DISTINCT({[Version].[Version].[Outlook Snapshot Versions],DESCENDANTS([Version].[Version].[Outlook Snapshot Versions] , 99 , LEAVES)}) , {[Version].[Version].[Outlook Snapshot Versions]})}"
+}

@@ -1,0 +1,42 @@
+#Region System
+FEEDSTRINGS;
+SKIPCHECK;
+#EndRegion
+
+# Cube name: BSInterCoAssump
+# Description: to holds assumption data for Interco
+
+# Only Calc at N Level
+[{'Net Sales Rate','WHT Rate','CM Split','PM Split'}]=C:
+0;
+
+['PM Split'] =N:
+  1 - ['CM Split'];
+
+FEEDERS ;
+
+#== Internal Feeders
+['CM Split'] => ['PM Split'];
+
+#== External Feeders
+#= BS InterCo
+['Net Sales Rate'] => 
+DB('BSStgStaging',!BusinessUnit, !Version, '3 % of Net Sales');
+
+['CM Split'] => 
+DB('BSStgStaging',!BusinessUnit, !Version, '80% of VLF prepaid');
+
+['WHT Rate'] => 
+DB('BSStgStaging',!BusinessUnit, !Version, 'WHT Rate');
+
+['WHT Rate'] => 
+DB('BSStgStaging',!BusinessUnit, !Version, 'Cash Payment');
+
+['PM Split'] => 
+DB('BSStgStaging',!BusinessUnit, !Version, '20% of VLF prepaid');
+
+['WHT Rate'] => 
+DB('BSStgStaging',!BusinessUnit, !Version, 'Payment before chargebacks');
+
+['WHT Rate'] => 
+DB('BSStgStaging',!BusinessUnit, !Version, 'Total WHT');

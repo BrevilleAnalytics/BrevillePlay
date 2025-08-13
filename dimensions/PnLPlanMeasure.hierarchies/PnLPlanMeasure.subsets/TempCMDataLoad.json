@@ -1,0 +1,10 @@
+{
+	"@type":"Subset",
+	"Name":"TempCMDataLoad",
+	"Elements":
+	[
+		{
+			"@id":"Dimensions('PnLPlanMeasure')/Hierarchies('PnLPlanMeasure')/Elements('Amount')"
+		}
+	]
+}

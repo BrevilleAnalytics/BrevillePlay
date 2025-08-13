@@ -1,0 +1,5 @@
+{
+	"@type":"Subset",
+	"Name":"DomChildrenOverheadDepreciationMarketing",
+	"Expression":"{[GLAccount].[GLAccount].[Overhead and other expenses], ([GLAccount].[GLAccount].[Overhead and other expenses].Children), [GLAccount].[GLAccount].[Depreciation & Amortisation Expense], ([GLAccount].[GLAccount].[Depreciation & Amortisation Expense].Children),[GLAccount].[GLAccount].[Marketing Expenses], ([GLAccount].[GLAccount].[Marketing Expenses].Children)}"
+}

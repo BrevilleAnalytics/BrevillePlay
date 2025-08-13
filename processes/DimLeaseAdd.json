@@ -1,0 +1,21 @@
+{
+	"@type":"Process",
+	"Name":"DimLeaseAdd",
+	"HasSecurityAccess":false,
+	"Code@Code.link":"DimLeaseAdd.ti",
+	"UIData":"_ParameterConstraints=e30=€",
+	"DataSource":
+	{
+		"Type":"None"
+	},
+	"Parameters":
+	[
+		{
+			"Name":"pLeaseDesc",
+			"Prompt":"Enter Lease Description",
+			"Value":"",
+			"Type":"String"
+		}
+	],
+	"Variables":[]
+}

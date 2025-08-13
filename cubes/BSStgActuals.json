@@ -1,0 +1,33 @@
+{
+	"@type":"Cube",
+	"Name":"BSStgActuals",
+	"Rules@Code.link":"BSStgActuals.rules",
+	"Dimensions":
+	[
+		{
+			"@id":"Dimensions('GLAccount')"
+		},
+		{
+			"@id":"Dimensions('BusinessUnit')"
+		},
+		{
+			"@id":"Dimensions('Currency')"
+		},
+		{
+			"@id":"Dimensions('FiscalMonth')"
+		},
+		{
+			"@id":"Dimensions('BSComponent')"
+		},
+		{
+			"@id":"Dimensions('BSStgActualsMeasure')"
+		}
+	],
+	"Views@Code.links":
+	[
+		"BSStgActuals.views/BS Actuals.json",
+		"BSStgActuals.views/BS Testing - IF 1.json",
+		"BSStgActuals.views/Default.json",
+		"BSStgActuals.views/Ian View.json"
+	]
+}

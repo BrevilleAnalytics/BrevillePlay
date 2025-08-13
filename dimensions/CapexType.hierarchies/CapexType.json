@@ -1,0 +1,231 @@
+{
+	"@type":"Hierarchy",
+	"Name":"CapexType",
+	"Elements":
+	[
+		{
+			"Name":"TOTAL",
+			"Type":"Consolidated"
+		},
+		{
+			"Name":"PPE additions",
+			"Type":"Consolidated"
+		},
+		{
+			"Name":"Store in Store",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"IT Hardware",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"Store in Store 2",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"Engineering equipment",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"Leasehold Improvements",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"Office, furniture & fittings",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"Plant & equipment",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"Tooling additions",
+			"Type":"Consolidated"
+		},
+		{
+			"Name":"Tooling",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"First time Tooling",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"Re-tooling",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"NDP additions",
+			"Type":"Consolidated"
+		},
+		{
+			"Name":"Capitalised Project Expenses",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"Capitalised Project Salaries",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"Additional Capitalisation Digital platform",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"Computer Software- Other",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"Computer Software- Lelit",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"Software additions",
+			"Type":"Consolidated"
+		},
+		{
+			"Name":"Existing PPE",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"Existing NDP",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"Existing Software",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"Other Intangible amort",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"Bal Figure",
+			"Type":"Numeric"
+		}
+	],
+	"Edges":
+	[
+		{
+			"ParentName":"TOTAL",
+			"ComponentName":"PPE additions",
+			"Weight":1
+		},
+		{
+			"ParentName":"TOTAL",
+			"ComponentName":"Tooling additions",
+			"Weight":1
+		},
+		{
+			"ParentName":"TOTAL",
+			"ComponentName":"NDP additions",
+			"Weight":1
+		},
+		{
+			"ParentName":"TOTAL",
+			"ComponentName":"Software additions",
+			"Weight":1
+		},
+		{
+			"ParentName":"TOTAL",
+			"ComponentName":"Existing PPE",
+			"Weight":1
+		},
+		{
+			"ParentName":"TOTAL",
+			"ComponentName":"Existing NDP",
+			"Weight":1
+		},
+		{
+			"ParentName":"TOTAL",
+			"ComponentName":"Existing Software",
+			"Weight":1
+		},
+		{
+			"ParentName":"TOTAL",
+			"ComponentName":"Other Intangible amort",
+			"Weight":1
+		},
+		{
+			"ParentName":"TOTAL",
+			"ComponentName":"Bal Figure",
+			"Weight":1
+		},
+		{
+			"ParentName":"PPE additions",
+			"ComponentName":"Store in Store",
+			"Weight":1
+		},
+		{
+			"ParentName":"PPE additions",
+			"ComponentName":"IT Hardware",
+			"Weight":1
+		},
+		{
+			"ParentName":"PPE additions",
+			"ComponentName":"Store in Store 2",
+			"Weight":1
+		},
+		{
+			"ParentName":"PPE additions",
+			"ComponentName":"Engineering equipment",
+			"Weight":1
+		},
+		{
+			"ParentName":"PPE additions",
+			"ComponentName":"Leasehold Improvements",
+			"Weight":1
+		},
+		{
+			"ParentName":"PPE additions",
+			"ComponentName":"Office, furniture & fittings",
+			"Weight":1
+		},
+		{
+			"ParentName":"PPE additions",
+			"ComponentName":"Plant & equipment",
+			"Weight":1
+		},
+		{
+			"ParentName":"Tooling additions",
+			"ComponentName":"Tooling",
+			"Weight":1
+		},
+		{
+			"ParentName":"Tooling additions",
+			"ComponentName":"First time Tooling",
+			"Weight":1
+		},
+		{
+			"ParentName":"Tooling additions",
+			"ComponentName":"Re-tooling",
+			"Weight":1
+		},
+		{
+			"ParentName":"NDP additions",
+			"ComponentName":"Capitalised Project Expenses",
+			"Weight":1
+		},
+		{
+			"ParentName":"NDP additions",
+			"ComponentName":"Capitalised Project Salaries",
+			"Weight":1
+		},
+		{
+			"ParentName":"NDP additions",
+			"ComponentName":"Additional Capitalisation Digital platform",
+			"Weight":1
+		},
+		{
+			"ParentName":"Software additions",
+			"ComponentName":"Computer Software- Other",
+			"Weight":1
+		},
+		{
+			"ParentName":"Software additions",
+			"ComponentName":"Computer Software- Lelit",
+			"Weight":1
+		}
+	],
+	"Subsets@Code.links":[]
+}

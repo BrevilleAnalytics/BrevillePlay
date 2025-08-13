@@ -1,0 +1,5 @@
+{
+	"@type":"Subset",
+	"Name":"CaptionUpdate",
+	"Expression":"{DISTINCT(DESCENDANTS([FiscalMonth].[FiscalMonth].[All FY])),{DRILLDOWNMEMBER({[FiscalMonth].[FiscalMonth].[YTD]}, {[FiscalMonth].[FiscalMonth].[YTD]}, RECURSIVE)},{DRILLDOWNMEMBER({[FiscalMonth].[FiscalMonth].[YTG]}, {[FiscalMonth].[FiscalMonth].[YTG]}, RECURSIVE)}}"
+}

@@ -1,0 +1,5 @@
+{
+	"@type":"Subset",
+	"Name":"Overheads - Summary Cost Type",
+	"Expression":"{[GLAccount].[GLAccount].[Overhead and other expenses],DRILLDOWNMEMBER({[GLAccount].[GLAccount].[Employee benefits expenses]} , {[GLAccount].[GLAccount].[Employee benefits expenses]} , RECURSIVE),[GLAccount].[GLAccount].[Product development expenses],[GLAccount].[GLAccount].[Premises, lease & utilities],[GLAccount].[GLAccount].[Customer related expenses],[GLAccount].[GLAccount].[Professional fees],[GLAccount].[GLAccount].[Telecommunications],DRILLDOWNMEMBER({[GLAccount].[GLAccount].[IT expenses]} , {[GLAccount].[GLAccount].[IT expenses]} , RECURSIVE),[GLAccount].[GLAccount].[Other general administrative],[GLAccount].[GLAccount].[Net FX gain/(loss)],[GLAccount].[GLAccount].[Corporate expenses],DRILLDOWNMEMBER({[GLAccount].[GLAccount].[Depreciation & amortisation expense]} , {[GLAccount].[GLAccount].[Depreciation & amortisation expense]} , RECURSIVE)}"
+}

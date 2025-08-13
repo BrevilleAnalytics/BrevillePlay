@@ -1,0 +1,107 @@
+{
+	"@type":"Hierarchy",
+	"Name":"GlobalTheatre",
+	"Elements":
+	[
+		{
+			"Name":"All Regions",
+			"Type":"Consolidated"
+		},
+		{
+			"Name":"All Theatre",
+			"Type":"Consolidated"
+		},
+		{
+			"Name":"APAC",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"Americas",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"EMEA",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"Corporate",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"Global",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"Global Functions Adjustments",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"All Global Functions",
+			"Type":"Consolidated"
+		},
+		{
+			"Name":"Corporate Adjustments",
+			"Type":"Numeric"
+		}
+	],
+	"Edges":
+	[
+		{
+			"ParentName":"All Regions",
+			"ComponentName":"APAC",
+			"Weight":1
+		},
+		{
+			"ParentName":"All Regions",
+			"ComponentName":"Americas",
+			"Weight":1
+		},
+		{
+			"ParentName":"All Regions",
+			"ComponentName":"EMEA",
+			"Weight":1
+		},
+		{
+			"ParentName":"All Regions",
+			"ComponentName":"Corporate",
+			"Weight":1
+		},
+		{
+			"ParentName":"All Theatre",
+			"ComponentName":"All Regions",
+			"Weight":1
+		},
+		{
+			"ParentName":"All Theatre",
+			"ComponentName":"All Global Functions",
+			"Weight":1
+		},
+		{
+			"ParentName":"All Theatre",
+			"ComponentName":"Corporate Adjustments",
+			"Weight":1
+		},
+		{
+			"ParentName":"All Global Functions",
+			"ComponentName":"Global",
+			"Weight":1
+		},
+		{
+			"ParentName":"All Global Functions",
+			"ComponentName":"Global Functions Adjustments",
+			"Weight":1
+		}
+	],
+	"Subsets@Code.links":
+	[
+		"GlobalTheatre.subsets/App.AllTheatres.json",
+		"GlobalTheatre.subsets/picklist.GlobalTheatre.json",
+		"GlobalTheatre.subsets/TempCMPnLPlan.json",
+		"GlobalTheatre.subsets/TempCorporateMktgPnLPlan.json",
+		"GlobalTheatre.subsets/TempOHPnLPlan.json",
+		"GlobalTheatre.subsets/TempOtherIncomePnLPlan.json",
+		"GlobalTheatre.subsets/TempPnLEBITCalc.json",
+		"GlobalTheatre.subsets/TempPnLLocalCurrency.json",
+		"GlobalTheatre.subsets/TempRMktgPnLPlan.json"
+	]
+}

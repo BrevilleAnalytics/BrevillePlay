@@ -1,0 +1,13 @@
+{
+	"@type":"Dimension",
+	"Name":"MeasureCustFcast",
+	"AllLeavesHierarchyName":"",
+	"DefaultHierarchy":
+	{
+		"@id":"Dimensions('MeasureCustFcast')/Hierarchies('MeasureCustFcast')"
+	},
+	"Hierarchies@Code.links":
+	[
+		"MeasureCustFcast.hierarchies/MeasureCustFcast.json"
+	]
+}

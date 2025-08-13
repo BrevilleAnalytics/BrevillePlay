@@ -1,0 +1,13 @@
+{
+	"@type":"Subset",
+	"Name":"Test",
+	"Elements":
+	[
+		{
+			"@id":"Dimensions('FiscalMonth')/Hierarchies('FiscalMonth')/Elements('All FY')"
+		},
+		{
+			"@id":"Dimensions('FiscalMonth')/Hierarchies('FiscalMonth')/Elements('YTD')"
+		}
+	]
+}

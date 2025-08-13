@@ -1,0 +1,33 @@
+{
+	"@type":"Process",
+	"Name":"SyViewZeroOut",
+	"HasSecurityAccess":true,
+	"Code@Code.link":"SyViewZeroOut.ti",
+	"UIData":"CubeAction=1511€DataAction=1503€CubeLogChanges=0€_ParameterConstraints=e30€",
+	"DataSource":
+	{
+		"Type":"None"
+	},
+	"Parameters":
+	[
+		{
+			"Name":"pCube",
+			"Prompt":"Cube?",
+			"Value":"Cube",
+			"Type":"String"
+		},
+		{
+			"Name":"pDimString",
+			"Prompt":"Dimension String?",
+			"Value":"D1:E1|D2:E1",
+			"Type":"String"
+		},
+		{
+			"Name":"pViewName",
+			"Prompt":"Name of View",
+			"Value":"",
+			"Type":"String"
+		}
+	],
+	"Variables":[]
+}

@@ -1,0 +1,13 @@
+{
+	"@type":"Subset",
+	"Name":"AusDom2",
+	"Elements":
+	[
+		{
+			"@id":"Dimensions('BusinessUnit')/Hierarchies('BusinessUnit')/Elements('ADJ')"
+		},
+		{
+			"@id":"Dimensions('BusinessUnit')/Hierarchies('BusinessUnit')/Elements('ATO')"
+		}
+	]
+}

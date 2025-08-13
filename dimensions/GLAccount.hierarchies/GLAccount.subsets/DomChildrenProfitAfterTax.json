@@ -1,0 +1,5 @@
+{
+	"@type":"Subset",
+	"Name":"DomChildrenProfitAfterTax",
+	"Expression":"{[GLAccount].[GLAccount].[Profit After Tax], ([GLAccount].[GLAccount].[Profit After Tax].Children)}"
+}

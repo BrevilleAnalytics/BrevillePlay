@@ -1,0 +1,68 @@
+{
+	"@type":"Hierarchy",
+	"Name":"MDMCCMeasure",
+	"Elements":
+	[
+		{
+			"Name":"Parent Level 1",
+			"Type":"String"
+		},
+		{
+			"Name":"Parent Level 2",
+			"Type":"String"
+		},
+		{
+			"Name":"Parent Level 3",
+			"Type":"String"
+		},
+		{
+			"Name":"Parent Level 4",
+			"Type":"String"
+		},
+		{
+			"Name":"EBIT Parent Level 1",
+			"Type":"String"
+		},
+		{
+			"Name":"EBIT Parent Level 2",
+			"Type":"String"
+		},
+		{
+			"Name":"EBIT Parent Level 3",
+			"Type":"String"
+		},
+		{
+			"Name":"EBIT Parent Level 4",
+			"Type":"String"
+		},
+		{
+			"Name":"Child Code",
+			"Type":"String"
+		},
+		{
+			"Name":"Child Weight",
+			"Type":"String"
+		},
+		{
+			"Name":"Caption",
+			"Type":"String"
+		},
+		{
+			"Name":"Remove",
+			"Type":"String"
+		},
+		{
+			"Name":"Validation Message",
+			"Type":"String"
+		},
+		{
+			"Name":"Visible",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"Regional",
+			"Type":"String"
+		}
+	],
+	"Subsets@Code.links":[]
+}

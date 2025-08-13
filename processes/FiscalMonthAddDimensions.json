@@ -1,0 +1,33 @@
+{
+	"@type":"Process",
+	"Name":"FiscalMonthAddDimensions",
+	"HasSecurityAccess":false,
+	"Code@Code.link":"FiscalMonthAddDimensions.ti",
+	"UIData":"_ParameterConstraints=e30=€",
+	"DataSource":
+	{
+		"Type":"None"
+	},
+	"Parameters":
+	[
+		{
+			"Name":"StartYear",
+			"Prompt":"",
+			"Value":2016,
+			"Type":"Numeric"
+		},
+		{
+			"Name":"EndYear",
+			"Prompt":"",
+			"Value":2017,
+			"Type":"Numeric"
+		},
+		{
+			"Name":"FirstYear",
+			"Prompt":"",
+			"Value":2016,
+			"Type":"Numeric"
+		}
+	],
+	"Variables":[]
+}

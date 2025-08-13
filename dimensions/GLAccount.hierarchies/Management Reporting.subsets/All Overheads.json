@@ -1,0 +1,5 @@
+{
+	"@type":"Subset",
+	"Name":"All Overheads",
+	"Expression":"{EXCEPT(DISTINCT({[GLAccount].[Management Reporting].[Overhead and other expenses],DESCENDANTS([GLAccount].[Management Reporting].[Overhead and other expenses] , 99 , LEAVES)}) , {[GLAccount].[Management Reporting].[Overhead and other expenses]}),EXCEPT(DISTINCT({[GLAccount].[Management Reporting].[Depreciation & amortisation expense],DESCENDANTS([GLAccount].[Management Reporting].[Depreciation & amortisation expense] , 99 , LEAVES)}) , {[GLAccount].[Management Reporting].[Depreciation & amortisation expense]})}"
+}

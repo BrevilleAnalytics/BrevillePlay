@@ -1,0 +1,13 @@
+{
+	"@type":"Dimension",
+	"Name":"BS Interco Transfer Measure",
+	"AllLeavesHierarchyName":"",
+	"DefaultHierarchy":
+	{
+		"@id":"Dimensions('BS Interco Transfer Measure')/Hierarchies('BS Interco Transfer Measure')"
+	},
+	"Hierarchies@Code.links":
+	[
+		"BS Interco Transfer Measure.hierarchies/BS Interco Transfer Measure.json"
+	]
+}

@@ -1,0 +1,21 @@
+{
+	"@type":"Process",
+	"Name":"GetMonthName",
+	"HasSecurityAccess":false,
+	"Code@Code.link":"GetMonthName.ti",
+	"UIData":"_ParameterConstraints=e30=€",
+	"DataSource":
+	{
+		"Type":"None"
+	},
+	"Parameters":
+	[
+		{
+			"Name":"MonthNo",
+			"Prompt":"",
+			"Value":0,
+			"Type":"Numeric"
+		}
+	],
+	"Variables":[]
+}

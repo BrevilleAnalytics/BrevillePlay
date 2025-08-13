@@ -1,0 +1,10 @@
+{
+	"@type":"Subset",
+	"Name":"TempCMForecastOM",
+	"Elements":
+	[
+		{
+			"@id":"Dimensions('CMForecastMeasure')/Hierarchies('CMForecastMeasure')/Elements('Shipped Units')"
+		}
+	]
+}

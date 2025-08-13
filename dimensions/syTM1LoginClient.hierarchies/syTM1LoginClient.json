@@ -1,0 +1,42 @@
+{
+	"@type":"Hierarchy",
+	"Name":"syTM1LoginClient",
+	"Elements":
+	[
+		{
+			"Name":"All Clients",
+			"Type":"Consolidated"
+		},
+		{
+			"Name":"Planning Analytics/Daniel Grahame",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"Planning Analytics/Jerry Jose",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"Planning Analytics/Jithu Varghese",
+			"Type":"Numeric"
+		}
+	],
+	"Edges":
+	[
+		{
+			"ParentName":"All Clients",
+			"ComponentName":"Planning Analytics/Daniel Grahame",
+			"Weight":1
+		},
+		{
+			"ParentName":"All Clients",
+			"ComponentName":"Planning Analytics/Jerry Jose",
+			"Weight":1
+		},
+		{
+			"ParentName":"All Clients",
+			"ComponentName":"Planning Analytics/Jithu Varghese",
+			"Weight":1
+		}
+	],
+	"Subsets@Code.links":[]
+}

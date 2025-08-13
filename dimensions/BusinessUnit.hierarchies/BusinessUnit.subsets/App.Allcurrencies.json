@@ -1,0 +1,5 @@
+{
+	"@type":"Subset",
+	"Name":"App.Allcurrencies",
+	"Expression":"{{TM1FILTERBYLEVEL(TM1SUBSETALL([BusinessUnit].[BusinessUnit]) , 0)}}"
+}

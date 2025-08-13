@@ -1,0 +1,13 @@
+{
+	"@type":"Dimension",
+	"Name":"BRAsFiscalMonthMeasure",
+	"AllLeavesHierarchyName":"",
+	"DefaultHierarchy":
+	{
+		"@id":"Dimensions('BRAsFiscalMonthMeasure')/Hierarchies('BRAsFiscalMonthMeasure')"
+	},
+	"Hierarchies@Code.links":
+	[
+		"BRAsFiscalMonthMeasure.hierarchies/BRAsFiscalMonthMeasure.json"
+	]
+}

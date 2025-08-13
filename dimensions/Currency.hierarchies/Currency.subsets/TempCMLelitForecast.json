@@ -1,0 +1,10 @@
+{
+	"@type":"Subset",
+	"Name":"TempCMLelitForecast",
+	"Elements":
+	[
+		{
+			"@id":"Dimensions('Currency')/Hierarchies('Currency')/Elements('Local Currency')"
+		}
+	]
+}

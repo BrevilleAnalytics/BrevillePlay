@@ -1,0 +1,13 @@
+{
+	"@type":"Dimension",
+	"Name":"syMinute",
+	"AllLeavesHierarchyName":"",
+	"DefaultHierarchy":
+	{
+		"@id":"Dimensions('syMinute')/Hierarchies('syMinute')"
+	},
+	"Hierarchies@Code.links":
+	[
+		"syMinute.hierarchies/syMinute.json"
+	]
+}

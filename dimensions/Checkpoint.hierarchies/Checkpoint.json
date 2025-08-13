@@ -1,0 +1,283 @@
+{
+	"@type":"Hierarchy",
+	"Name":"Checkpoint",
+	"Elements":
+	[
+		{
+			"Name":"Base",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"All Checkpoints",
+			"Type":"Consolidated"
+		},
+		{
+			"Name":"2023-10-12",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"2023-10-16",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"2023-10-17",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"2023-10-18",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"2023-10-19",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"2023-10-24",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"2023-10-26",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"2023-10-31",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"2023-11-01",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"2023-11-02",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"2023-11-07",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"2023-11-09",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"2023-11-10",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"2023-11-14",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"2023-11-15",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"2023-11-23",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"2023-11-24",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"2023-11-29",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"2023-11-30",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"2023-12-05",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"2023-12-14",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"2024-01-30",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"2024-02-19",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"2024-02-28",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"2024-04-05",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"2024-04-23",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"2024-04-30",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"2025-07-18",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"2025-07-21",
+			"Type":"Numeric"
+		}
+	],
+	"Edges":
+	[
+		{
+			"ParentName":"All Checkpoints",
+			"ComponentName":"2023-10-12",
+			"Weight":1
+		},
+		{
+			"ParentName":"All Checkpoints",
+			"ComponentName":"2023-10-16",
+			"Weight":1
+		},
+		{
+			"ParentName":"All Checkpoints",
+			"ComponentName":"2023-10-17",
+			"Weight":1
+		},
+		{
+			"ParentName":"All Checkpoints",
+			"ComponentName":"2023-10-18",
+			"Weight":1
+		},
+		{
+			"ParentName":"All Checkpoints",
+			"ComponentName":"2023-10-19",
+			"Weight":1
+		},
+		{
+			"ParentName":"All Checkpoints",
+			"ComponentName":"2023-10-24",
+			"Weight":1
+		},
+		{
+			"ParentName":"All Checkpoints",
+			"ComponentName":"2023-10-26",
+			"Weight":1
+		},
+		{
+			"ParentName":"All Checkpoints",
+			"ComponentName":"2023-10-31",
+			"Weight":1
+		},
+		{
+			"ParentName":"All Checkpoints",
+			"ComponentName":"2023-11-01",
+			"Weight":1
+		},
+		{
+			"ParentName":"All Checkpoints",
+			"ComponentName":"2023-11-02",
+			"Weight":1
+		},
+		{
+			"ParentName":"All Checkpoints",
+			"ComponentName":"2023-11-07",
+			"Weight":1
+		},
+		{
+			"ParentName":"All Checkpoints",
+			"ComponentName":"2023-11-09",
+			"Weight":1
+		},
+		{
+			"ParentName":"All Checkpoints",
+			"ComponentName":"2023-11-10",
+			"Weight":1
+		},
+		{
+			"ParentName":"All Checkpoints",
+			"ComponentName":"2023-11-14",
+			"Weight":1
+		},
+		{
+			"ParentName":"All Checkpoints",
+			"ComponentName":"2023-11-15",
+			"Weight":1
+		},
+		{
+			"ParentName":"All Checkpoints",
+			"ComponentName":"2023-11-23",
+			"Weight":1
+		},
+		{
+			"ParentName":"All Checkpoints",
+			"ComponentName":"2023-11-24",
+			"Weight":1
+		},
+		{
+			"ParentName":"All Checkpoints",
+			"ComponentName":"2023-11-29",
+			"Weight":1
+		},
+		{
+			"ParentName":"All Checkpoints",
+			"ComponentName":"2023-11-30",
+			"Weight":1
+		},
+		{
+			"ParentName":"All Checkpoints",
+			"ComponentName":"2023-12-05",
+			"Weight":1
+		},
+		{
+			"ParentName":"All Checkpoints",
+			"ComponentName":"2023-12-14",
+			"Weight":1
+		},
+		{
+			"ParentName":"All Checkpoints",
+			"ComponentName":"2024-01-30",
+			"Weight":1
+		},
+		{
+			"ParentName":"All Checkpoints",
+			"ComponentName":"2024-02-19",
+			"Weight":1
+		},
+		{
+			"ParentName":"All Checkpoints",
+			"ComponentName":"2024-02-28",
+			"Weight":1
+		},
+		{
+			"ParentName":"All Checkpoints",
+			"ComponentName":"2024-04-05",
+			"Weight":1
+		},
+		{
+			"ParentName":"All Checkpoints",
+			"ComponentName":"2024-04-23",
+			"Weight":1
+		},
+		{
+			"ParentName":"All Checkpoints",
+			"ComponentName":"2024-04-30",
+			"Weight":1
+		},
+		{
+			"ParentName":"All Checkpoints",
+			"ComponentName":"2025-07-18",
+			"Weight":1
+		},
+		{
+			"ParentName":"All Checkpoints",
+			"ComponentName":"2025-07-21",
+			"Weight":1
+		}
+	],
+	"Subsets@Code.links":
+	[
+		"Checkpoint.subsets/App.AllCheckpoints.json"
+	]
+}

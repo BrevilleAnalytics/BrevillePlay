@@ -1,0 +1,13 @@
+{
+	"@type":"Dimension",
+	"Name":"BSStgCapexMeasure",
+	"AllLeavesHierarchyName":"",
+	"DefaultHierarchy":
+	{
+		"@id":"Dimensions('BSStgCapexMeasure')/Hierarchies('BSStgCapexMeasure')"
+	},
+	"Hierarchies@Code.links":
+	[
+		"BSStgCapexMeasure.hierarchies/BSStgCapexMeasure.json"
+	]
+}

@@ -1,0 +1,10 @@
+{
+	"@type":"Subset",
+	"Name":"TempCMRepActuals",
+	"Elements":
+	[
+		{
+			"@id":"Dimensions('Version')/Hierarchies('Version')/Elements('Actual')"
+		}
+	]
+}

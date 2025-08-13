@@ -1,0 +1,15 @@
+{
+	"@type":"Dimension",
+	"Name":"GLAccount",
+	"AllLeavesHierarchyName":"Leaves",
+	"DefaultHierarchy":
+	{
+		"@id":"Dimensions('GLAccount')/Hierarchies('GLAccount')"
+	},
+	"Hierarchies@Code.links":
+	[
+		"GLAccount.hierarchies/GLAccount.json",
+		"GLAccount.hierarchies/ASX Reporting.json",
+		"GLAccount.hierarchies/Management Reporting.json"
+	]
+}

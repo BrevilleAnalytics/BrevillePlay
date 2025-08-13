@@ -1,0 +1,956 @@
+{
+	"@type":"Hierarchy",
+	"Name":"CustomerCustFcast",
+	"Elements":
+	[
+		{
+			"Name":"All CustomerCustFcast",
+			"Type":"Consolidated"
+		},
+		{
+			"Name":"ACCOM",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"ALSO",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"Amacom",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"AMZN",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"AO",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"APAC",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"ARB",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"AZ",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"BBB",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"BBY",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"Beaumex",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"BETTA",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"BIGW",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"BINGL",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"BLMD",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"BNNGS",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"BORK",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"Boulanger",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"BOYU",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"BRISC",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"BTU",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"C&B",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"Cntrl.EU",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"Costco",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"CTC",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"Currys",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"Databox",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"DAVJ",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"Digitec G.",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"DIST",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"Distribut.",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"DISTRIBUTI",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"DTC",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"ELECTRA",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"ELPL",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"EMEA",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"EMPORIUM",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"EPICURE",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"FARMR",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"FAROUK",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"FAST",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"Findis",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"FLASH",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"FNAC Darty",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"FOSCHINI",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"Fust",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"GASTROBACK",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"GOODG",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"GRANDEVEST",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"HARVN",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"HLI",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"HMO",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"HOT",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"IAJ",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"INDEP",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"Interdisc.",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"INTL",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"JBHI",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"JLEWIS",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"KOHL",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"Lakeland",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"LONDG",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"LOYAL",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"LVPL",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"MACYS",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"Metro",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"MEX",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"MYER",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"NAT",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"NES",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"NOELL",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"No Stats Group",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"OTHER",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"OTTO",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"Phorma",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"PSD",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"PSI",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"PT Inti",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"RE",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"RefrbSales",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"REPAIR",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"River",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"SHUN",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"SLT",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"SOLIS",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"SpareP.CUS",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"SPEC",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"SUBS",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"TARGT",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"TBAY",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"TGT",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"TJX",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"TRAMONTINA",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"TVSP",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"UK&Irel.",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"Unallocated",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"UNI",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"WINNG",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"Witt",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"WMRT",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"WOOLW",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"WSM",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"XCITE",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"YEO",
+			"Type":"Numeric"
+		}
+	],
+	"Edges":
+	[
+		{
+			"ParentName":"All CustomerCustFcast",
+			"ComponentName":"ACCOM",
+			"Weight":1
+		},
+		{
+			"ParentName":"All CustomerCustFcast",
+			"ComponentName":"ALSO",
+			"Weight":1
+		},
+		{
+			"ParentName":"All CustomerCustFcast",
+			"ComponentName":"Amacom",
+			"Weight":1
+		},
+		{
+			"ParentName":"All CustomerCustFcast",
+			"ComponentName":"AMZN",
+			"Weight":1
+		},
+		{
+			"ParentName":"All CustomerCustFcast",
+			"ComponentName":"AO",
+			"Weight":1
+		},
+		{
+			"ParentName":"All CustomerCustFcast",
+			"ComponentName":"APAC",
+			"Weight":1
+		},
+		{
+			"ParentName":"All CustomerCustFcast",
+			"ComponentName":"ARB",
+			"Weight":1
+		},
+		{
+			"ParentName":"All CustomerCustFcast",
+			"ComponentName":"AZ",
+			"Weight":1
+		},
+		{
+			"ParentName":"All CustomerCustFcast",
+			"ComponentName":"BBB",
+			"Weight":1
+		},
+		{
+			"ParentName":"All CustomerCustFcast",
+			"ComponentName":"BBY",
+			"Weight":1
+		},
+		{
+			"ParentName":"All CustomerCustFcast",
+			"ComponentName":"Beaumex",
+			"Weight":1
+		},
+		{
+			"ParentName":"All CustomerCustFcast",
+			"ComponentName":"BETTA",
+			"Weight":1
+		},
+		{
+			"ParentName":"All CustomerCustFcast",
+			"ComponentName":"BIGW",
+			"Weight":1
+		},
+		{
+			"ParentName":"All CustomerCustFcast",
+			"ComponentName":"BINGL",
+			"Weight":1
+		},
+		{
+			"ParentName":"All CustomerCustFcast",
+			"ComponentName":"BLMD",
+			"Weight":1
+		},
+		{
+			"ParentName":"All CustomerCustFcast",
+			"ComponentName":"BNNGS",
+			"Weight":1
+		},
+		{
+			"ParentName":"All CustomerCustFcast",
+			"ComponentName":"BORK",
+			"Weight":1
+		},
+		{
+			"ParentName":"All CustomerCustFcast",
+			"ComponentName":"Boulanger",
+			"Weight":1
+		},
+		{
+			"ParentName":"All CustomerCustFcast",
+			"ComponentName":"BOYU",
+			"Weight":1
+		},
+		{
+			"ParentName":"All CustomerCustFcast",
+			"ComponentName":"BRISC",
+			"Weight":1
+		},
+		{
+			"ParentName":"All CustomerCustFcast",
+			"ComponentName":"BTU",
+			"Weight":1
+		},
+		{
+			"ParentName":"All CustomerCustFcast",
+			"ComponentName":"C&B",
+			"Weight":1
+		},
+		{
+			"ParentName":"All CustomerCustFcast",
+			"ComponentName":"Cntrl.EU",
+			"Weight":1
+		},
+		{
+			"ParentName":"All CustomerCustFcast",
+			"ComponentName":"Costco",
+			"Weight":1
+		},
+		{
+			"ParentName":"All CustomerCustFcast",
+			"ComponentName":"CTC",
+			"Weight":1
+		},
+		{
+			"ParentName":"All CustomerCustFcast",
+			"ComponentName":"Currys",
+			"Weight":1
+		},
+		{
+			"ParentName":"All CustomerCustFcast",
+			"ComponentName":"Databox",
+			"Weight":1
+		},
+		{
+			"ParentName":"All CustomerCustFcast",
+			"ComponentName":"DAVJ",
+			"Weight":1
+		},
+		{
+			"ParentName":"All CustomerCustFcast",
+			"ComponentName":"Digitec G.",
+			"Weight":1
+		},
+		{
+			"ParentName":"All CustomerCustFcast",
+			"ComponentName":"DIST",
+			"Weight":1
+		},
+		{
+			"ParentName":"All CustomerCustFcast",
+			"ComponentName":"Distribut.",
+			"Weight":1
+		},
+		{
+			"ParentName":"All CustomerCustFcast",
+			"ComponentName":"DISTRIBUTI",
+			"Weight":1
+		},
+		{
+			"ParentName":"All CustomerCustFcast",
+			"ComponentName":"DTC",
+			"Weight":1
+		},
+		{
+			"ParentName":"All CustomerCustFcast",
+			"ComponentName":"ELECTRA",
+			"Weight":1
+		},
+		{
+			"ParentName":"All CustomerCustFcast",
+			"ComponentName":"ELPL",
+			"Weight":1
+		},
+		{
+			"ParentName":"All CustomerCustFcast",
+			"ComponentName":"EMEA",
+			"Weight":1
+		},
+		{
+			"ParentName":"All CustomerCustFcast",
+			"ComponentName":"EMPORIUM",
+			"Weight":1
+		},
+		{
+			"ParentName":"All CustomerCustFcast",
+			"ComponentName":"EPICURE",
+			"Weight":1
+		},
+		{
+			"ParentName":"All CustomerCustFcast",
+			"ComponentName":"FARMR",
+			"Weight":1
+		},
+		{
+			"ParentName":"All CustomerCustFcast",
+			"ComponentName":"FAROUK",
+			"Weight":1
+		},
+		{
+			"ParentName":"All CustomerCustFcast",
+			"ComponentName":"FAST",
+			"Weight":1
+		},
+		{
+			"ParentName":"All CustomerCustFcast",
+			"ComponentName":"Findis",
+			"Weight":1
+		},
+		{
+			"ParentName":"All CustomerCustFcast",
+			"ComponentName":"FLASH",
+			"Weight":1
+		},
+		{
+			"ParentName":"All CustomerCustFcast",
+			"ComponentName":"FNAC Darty",
+			"Weight":1
+		},
+		{
+			"ParentName":"All CustomerCustFcast",
+			"ComponentName":"FOSCHINI",
+			"Weight":1
+		},
+		{
+			"ParentName":"All CustomerCustFcast",
+			"ComponentName":"Fust",
+			"Weight":1
+		},
+		{
+			"ParentName":"All CustomerCustFcast",
+			"ComponentName":"GASTROBACK",
+			"Weight":1
+		},
+		{
+			"ParentName":"All CustomerCustFcast",
+			"ComponentName":"GOODG",
+			"Weight":1
+		},
+		{
+			"ParentName":"All CustomerCustFcast",
+			"ComponentName":"GRANDEVEST",
+			"Weight":1
+		},
+		{
+			"ParentName":"All CustomerCustFcast",
+			"ComponentName":"HARVN",
+			"Weight":1
+		},
+		{
+			"ParentName":"All CustomerCustFcast",
+			"ComponentName":"HLI",
+			"Weight":1
+		},
+		{
+			"ParentName":"All CustomerCustFcast",
+			"ComponentName":"HMO",
+			"Weight":1
+		},
+		{
+			"ParentName":"All CustomerCustFcast",
+			"ComponentName":"HOT",
+			"Weight":1
+		},
+		{
+			"ParentName":"All CustomerCustFcast",
+			"ComponentName":"IAJ",
+			"Weight":1
+		},
+		{
+			"ParentName":"All CustomerCustFcast",
+			"ComponentName":"INDEP",
+			"Weight":1
+		},
+		{
+			"ParentName":"All CustomerCustFcast",
+			"ComponentName":"Interdisc.",
+			"Weight":1
+		},
+		{
+			"ParentName":"All CustomerCustFcast",
+			"ComponentName":"INTL",
+			"Weight":1
+		},
+		{
+			"ParentName":"All CustomerCustFcast",
+			"ComponentName":"JBHI",
+			"Weight":1
+		},
+		{
+			"ParentName":"All CustomerCustFcast",
+			"ComponentName":"JLEWIS",
+			"Weight":1
+		},
+		{
+			"ParentName":"All CustomerCustFcast",
+			"ComponentName":"KOHL",
+			"Weight":1
+		},
+		{
+			"ParentName":"All CustomerCustFcast",
+			"ComponentName":"Lakeland",
+			"Weight":1
+		},
+		{
+			"ParentName":"All CustomerCustFcast",
+			"ComponentName":"LONDG",
+			"Weight":1
+		},
+		{
+			"ParentName":"All CustomerCustFcast",
+			"ComponentName":"LOYAL",
+			"Weight":1
+		},
+		{
+			"ParentName":"All CustomerCustFcast",
+			"ComponentName":"LVPL",
+			"Weight":1
+		},
+		{
+			"ParentName":"All CustomerCustFcast",
+			"ComponentName":"MACYS",
+			"Weight":1
+		},
+		{
+			"ParentName":"All CustomerCustFcast",
+			"ComponentName":"Metro",
+			"Weight":1
+		},
+		{
+			"ParentName":"All CustomerCustFcast",
+			"ComponentName":"MEX",
+			"Weight":1
+		},
+		{
+			"ParentName":"All CustomerCustFcast",
+			"ComponentName":"MYER",
+			"Weight":1
+		},
+		{
+			"ParentName":"All CustomerCustFcast",
+			"ComponentName":"NAT",
+			"Weight":1
+		},
+		{
+			"ParentName":"All CustomerCustFcast",
+			"ComponentName":"NES",
+			"Weight":1
+		},
+		{
+			"ParentName":"All CustomerCustFcast",
+			"ComponentName":"NOELL",
+			"Weight":1
+		},
+		{
+			"ParentName":"All CustomerCustFcast",
+			"ComponentName":"No Stats Group",
+			"Weight":1
+		},
+		{
+			"ParentName":"All CustomerCustFcast",
+			"ComponentName":"OTHER",
+			"Weight":1
+		},
+		{
+			"ParentName":"All CustomerCustFcast",
+			"ComponentName":"OTTO",
+			"Weight":1
+		},
+		{
+			"ParentName":"All CustomerCustFcast",
+			"ComponentName":"Phorma",
+			"Weight":1
+		},
+		{
+			"ParentName":"All CustomerCustFcast",
+			"ComponentName":"PSD",
+			"Weight":1
+		},
+		{
+			"ParentName":"All CustomerCustFcast",
+			"ComponentName":"PSI",
+			"Weight":1
+		},
+		{
+			"ParentName":"All CustomerCustFcast",
+			"ComponentName":"PT Inti",
+			"Weight":1
+		},
+		{
+			"ParentName":"All CustomerCustFcast",
+			"ComponentName":"RE",
+			"Weight":1
+		},
+		{
+			"ParentName":"All CustomerCustFcast",
+			"ComponentName":"RefrbSales",
+			"Weight":1
+		},
+		{
+			"ParentName":"All CustomerCustFcast",
+			"ComponentName":"REPAIR",
+			"Weight":1
+		},
+		{
+			"ParentName":"All CustomerCustFcast",
+			"ComponentName":"River",
+			"Weight":1
+		},
+		{
+			"ParentName":"All CustomerCustFcast",
+			"ComponentName":"SHUN",
+			"Weight":1
+		},
+		{
+			"ParentName":"All CustomerCustFcast",
+			"ComponentName":"SLT",
+			"Weight":1
+		},
+		{
+			"ParentName":"All CustomerCustFcast",
+			"ComponentName":"SOLIS",
+			"Weight":1
+		},
+		{
+			"ParentName":"All CustomerCustFcast",
+			"ComponentName":"SpareP.CUS",
+			"Weight":1
+		},
+		{
+			"ParentName":"All CustomerCustFcast",
+			"ComponentName":"SPEC",
+			"Weight":1
+		},
+		{
+			"ParentName":"All CustomerCustFcast",
+			"ComponentName":"SUBS",
+			"Weight":1
+		},
+		{
+			"ParentName":"All CustomerCustFcast",
+			"ComponentName":"TARGT",
+			"Weight":1
+		},
+		{
+			"ParentName":"All CustomerCustFcast",
+			"ComponentName":"TBAY",
+			"Weight":1
+		},
+		{
+			"ParentName":"All CustomerCustFcast",
+			"ComponentName":"TGT",
+			"Weight":1
+		},
+		{
+			"ParentName":"All CustomerCustFcast",
+			"ComponentName":"TJX",
+			"Weight":1
+		},
+		{
+			"ParentName":"All CustomerCustFcast",
+			"ComponentName":"TRAMONTINA",
+			"Weight":1
+		},
+		{
+			"ParentName":"All CustomerCustFcast",
+			"ComponentName":"TVSP",
+			"Weight":1
+		},
+		{
+			"ParentName":"All CustomerCustFcast",
+			"ComponentName":"UK&Irel.",
+			"Weight":1
+		},
+		{
+			"ParentName":"All CustomerCustFcast",
+			"ComponentName":"Unallocated",
+			"Weight":1
+		},
+		{
+			"ParentName":"All CustomerCustFcast",
+			"ComponentName":"UNI",
+			"Weight":1
+		},
+		{
+			"ParentName":"All CustomerCustFcast",
+			"ComponentName":"WINNG",
+			"Weight":1
+		},
+		{
+			"ParentName":"All CustomerCustFcast",
+			"ComponentName":"Witt",
+			"Weight":1
+		},
+		{
+			"ParentName":"All CustomerCustFcast",
+			"ComponentName":"WMRT",
+			"Weight":1
+		},
+		{
+			"ParentName":"All CustomerCustFcast",
+			"ComponentName":"WOOLW",
+			"Weight":1
+		},
+		{
+			"ParentName":"All CustomerCustFcast",
+			"ComponentName":"WSM",
+			"Weight":1
+		},
+		{
+			"ParentName":"All CustomerCustFcast",
+			"ComponentName":"XCITE",
+			"Weight":1
+		},
+		{
+			"ParentName":"All CustomerCustFcast",
+			"ComponentName":"YEO",
+			"Weight":1
+		}
+	],
+	"Subsets@Code.links":
+	[
+		"CustomerCustFcast.subsets/All CustomerCustFcast.json",
+		"CustomerCustFcast.subsets/Cust3MthRRTemp.json",
+		"CustomerCustFcast.subsets/FlagProductsByCustomerTemp.json"
+	]
+}

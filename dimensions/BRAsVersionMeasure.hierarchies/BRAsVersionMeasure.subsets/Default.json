@@ -1,0 +1,5 @@
+{
+	"@type":"Subset",
+	"Name":"Default",
+	"Expression":"{EXCEPT([BRAsVersionMeasure].[BRAsVersionMeasure].MEMBERS , {[BRAsVersionMeasure].[BRAsVersionMeasure].[Actual Month],[BRAsVersionMeasure].[BRAsVersionMeasure].[TAPAC Lock Outlook MonthCM],[BRAsVersionMeasure].[BRAsVersionMeasure].[TAmericas Lock Outlook MonthCM],[BRAsVersionMeasure].[BRAsVersionMeasure].[TEMEA Lock Outlook MonthCM],[BRAsVersionMeasure].[BRAsVersionMeasure].[TCorporate Lock Outlook MonthCM],[BRAsVersionMeasure].[BRAsVersionMeasure].[Actual Month YYYYMMM],[BRAsVersionMeasure].[BRAsVersionMeasure].[Actual Month -1 YYYYMMM]})}"
+}

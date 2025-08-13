@@ -1,0 +1,10 @@
+{
+	"@type":"Subset",
+	"Name":"TempPnLOtherIncomeData",
+	"Elements":
+	[
+		{
+			"@id":"Dimensions('GlobalEBITMeasure')/Hierarchies('GlobalEBITMeasure')/Elements('Amount')"
+		}
+	]
+}

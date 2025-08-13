@@ -1,0 +1,13 @@
+{
+	"@type":"Dimension",
+	"Name":"Fiscal Month Test2",
+	"AllLeavesHierarchyName":"",
+	"DefaultHierarchy":
+	{
+		"@id":"Dimensions('Fiscal Month Test2')/Hierarchies('Fiscal Month Test2')"
+	},
+	"Hierarchies@Code.links":
+	[
+		"Fiscal Month Test2.hierarchies/Fiscal Month Test2.json"
+	]
+}

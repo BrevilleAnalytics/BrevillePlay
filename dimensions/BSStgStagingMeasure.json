@@ -1,0 +1,13 @@
+{
+	"@type":"Dimension",
+	"Name":"BSStgStagingMeasure",
+	"AllLeavesHierarchyName":"",
+	"DefaultHierarchy":
+	{
+		"@id":"Dimensions('BSStgStagingMeasure')/Hierarchies('BSStgStagingMeasure')"
+	},
+	"Hierarchies@Code.links":
+	[
+		"BSStgStagingMeasure.hierarchies/BSStgStagingMeasure.json"
+	]
+}

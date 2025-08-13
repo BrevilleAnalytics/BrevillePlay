@@ -1,0 +1,5 @@
+{
+	"@type":"Subset",
+	"Name":"Default",
+	"Expression":"{{[CostCentre].[CostCentre].Levels(0).MEMBERS}}"
+}

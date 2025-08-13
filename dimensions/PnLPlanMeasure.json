@@ -1,0 +1,13 @@
+{
+	"@type":"Dimension",
+	"Name":"PnLPlanMeasure",
+	"AllLeavesHierarchyName":"",
+	"DefaultHierarchy":
+	{
+		"@id":"Dimensions('PnLPlanMeasure')/Hierarchies('PnLPlanMeasure')"
+	},
+	"Hierarchies@Code.links":
+	[
+		"PnLPlanMeasure.hierarchies/PnLPlanMeasure.json"
+	]
+}

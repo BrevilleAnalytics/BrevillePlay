@@ -1,0 +1,13 @@
+{
+	"@type":"Subset",
+	"Name":"Junk",
+	"Elements":
+	[
+		{
+			"@id":"Dimensions('GLAccount')/Hierarchies('GLAccount')/Elements('EBITDA')"
+		},
+		{
+			"@id":"Dimensions('GLAccount')/Hierarchies('GLAccount')/Elements('Net interest income/(expense)')"
+		}
+	]
+}

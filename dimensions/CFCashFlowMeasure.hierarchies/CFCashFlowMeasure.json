@@ -1,0 +1,598 @@
+{
+	"@type":"Hierarchy",
+	"Name":"CFCashFlowMeasure",
+	"Elements":
+	[
+		{
+			"Name":"Opening Balance - Cash at Bank",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"Receipts",
+			"Type":"Consolidated"
+		},
+		{
+			"Name":"Trade receivable receipts",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"DI sales received on behalf on NZ",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"Cash received for stock sent to NZ",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"Drawdown facility",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"Payments",
+			"Type":"Consolidated"
+		},
+		{
+			"Name":"Repay facility",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"China Service Fee Payment",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"Procument Fee payment",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"GST Paid on overheads",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"GST - Paid on additions",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"STI payment",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"Stock payments",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"Add back FX on COGs (BPL paying at FEC rate or spot)",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"Net GST",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"Income tax payment",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"Dividend income/(payment)",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"CAPEX-PPE",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"CAPEX-Non-NPD- Intangibles",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"CAPEX- Tooling for Projects",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"Freight",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"Warranty claims",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"Net outflow for finance costs",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"DI sales remitted to NZ",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"COGS FX impact",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"Lelit payment",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"LTI share purchase",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"Plug to balance Balance Sheet",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"Total Closing Cash",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"Variance",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"Borrowings",
+			"Type":"Consolidated"
+		},
+		{
+			"Name":"Drawdown",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"Repayment",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"Closing balance",
+			"Type":"Consolidated"
+		},
+		{
+			"Name":"Feeder",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"Borrowings (non-current)",
+			"Type":"Consolidated"
+		},
+		{
+			"Name":"All Measures",
+			"Type":"Consolidated"
+		},
+		{
+			"Name":"Marketing expenses",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"Overhead and other expenses",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"CAPEX-Software",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"CAPEX-Other",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"CAPEX-Development Costs",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"Unused",
+			"Type":"Consolidated"
+		},
+		{
+			"Name":"CF - Other 1",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"CF - Other 2",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"CF - Other 3",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"CF - Other 4",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"CF - Other 5",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"Salaries and Wages",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"Lease Repayments",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"VAT - Remitted",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"WHT Tax payment",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"Net VLF - (Cash",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"Opening Balance - Borrowings",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"Closing balance - Borrowings",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"Lelit VLF - (Cash)",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"Baratza VLF - (Cash)",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"Other 1 - (Cash)",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"Other 2 - (Cash)",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"Less STI",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"Less LTI",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"Less PDD",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"Opening Balance - Borrowings (non-current)",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"Reclass",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"Closing Balance - Borrowings (non-current)",
+			"Type":"Numeric"
+		}
+	],
+	"Edges":
+	[
+		{
+			"ParentName":"Receipts",
+			"ComponentName":"Trade receivable receipts",
+			"Weight":1
+		},
+		{
+			"ParentName":"Receipts",
+			"ComponentName":"Net VLF - (Cash",
+			"Weight":1
+		},
+		{
+			"ParentName":"Receipts",
+			"ComponentName":"DI sales received on behalf on NZ",
+			"Weight":1
+		},
+		{
+			"ParentName":"Receipts",
+			"ComponentName":"Cash received for stock sent to NZ",
+			"Weight":1
+		},
+		{
+			"ParentName":"Receipts",
+			"ComponentName":"Drawdown facility",
+			"Weight":1
+		},
+		{
+			"ParentName":"Payments",
+			"ComponentName":"Stock payments",
+			"Weight":1
+		},
+		{
+			"ParentName":"Payments",
+			"ComponentName":"Repay facility",
+			"Weight":1
+		},
+		{
+			"ParentName":"Payments",
+			"ComponentName":"Lelit VLF - (Cash)",
+			"Weight":1
+		},
+		{
+			"ParentName":"Payments",
+			"ComponentName":"Baratza VLF - (Cash)",
+			"Weight":1
+		},
+		{
+			"ParentName":"Payments",
+			"ComponentName":"Other 1 - (Cash)",
+			"Weight":1
+		},
+		{
+			"ParentName":"Payments",
+			"ComponentName":"Other 2 - (Cash)",
+			"Weight":1
+		},
+		{
+			"ParentName":"Payments",
+			"ComponentName":"Marketing expenses",
+			"Weight":1
+		},
+		{
+			"ParentName":"Payments",
+			"ComponentName":"Overhead and other expenses",
+			"Weight":1
+		},
+		{
+			"ParentName":"Payments",
+			"ComponentName":"Salaries and Wages",
+			"Weight":1
+		},
+		{
+			"ParentName":"Payments",
+			"ComponentName":"Less STI",
+			"Weight":1
+		},
+		{
+			"ParentName":"Payments",
+			"ComponentName":"Less LTI",
+			"Weight":1
+		},
+		{
+			"ParentName":"Payments",
+			"ComponentName":"Less PDD",
+			"Weight":1
+		},
+		{
+			"ParentName":"Payments",
+			"ComponentName":"CAPEX-Software",
+			"Weight":1
+		},
+		{
+			"ParentName":"Payments",
+			"ComponentName":"CAPEX-Other",
+			"Weight":1
+		},
+		{
+			"ParentName":"Payments",
+			"ComponentName":"CAPEX-Development Costs",
+			"Weight":1
+		},
+		{
+			"ParentName":"Payments",
+			"ComponentName":"CAPEX-PPE",
+			"Weight":1
+		},
+		{
+			"ParentName":"Payments",
+			"ComponentName":"CAPEX- Tooling for Projects",
+			"Weight":1
+		},
+		{
+			"ParentName":"Payments",
+			"ComponentName":"Lease Repayments",
+			"Weight":1
+		},
+		{
+			"ParentName":"Payments",
+			"ComponentName":"Warranty claims",
+			"Weight":1
+		},
+		{
+			"ParentName":"Payments",
+			"ComponentName":"Freight",
+			"Weight":1
+		},
+		{
+			"ParentName":"Payments",
+			"ComponentName":"GST Paid on overheads",
+			"Weight":1
+		},
+		{
+			"ParentName":"Payments",
+			"ComponentName":"GST - Paid on additions",
+			"Weight":1
+		},
+		{
+			"ParentName":"Payments",
+			"ComponentName":"VAT - Remitted",
+			"Weight":1
+		},
+		{
+			"ParentName":"Payments",
+			"ComponentName":"WHT Tax payment",
+			"Weight":1
+		},
+		{
+			"ParentName":"Payments",
+			"ComponentName":"China Service Fee Payment",
+			"Weight":1
+		},
+		{
+			"ParentName":"Payments",
+			"ComponentName":"Procument Fee payment",
+			"Weight":1
+		},
+		{
+			"ParentName":"Payments",
+			"ComponentName":"Add back FX on COGs (BPL paying at FEC rate or spot)",
+			"Weight":1
+		},
+		{
+			"ParentName":"Payments",
+			"ComponentName":"Net GST",
+			"Weight":1
+		},
+		{
+			"ParentName":"Payments",
+			"ComponentName":"Income tax payment",
+			"Weight":1
+		},
+		{
+			"ParentName":"Payments",
+			"ComponentName":"Dividend income/(payment)",
+			"Weight":1
+		},
+		{
+			"ParentName":"Payments",
+			"ComponentName":"Net outflow for finance costs",
+			"Weight":1
+		},
+		{
+			"ParentName":"Payments",
+			"ComponentName":"DI sales remitted to NZ",
+			"Weight":1
+		},
+		{
+			"ParentName":"Payments",
+			"ComponentName":"COGS FX impact",
+			"Weight":1
+		},
+		{
+			"ParentName":"Payments",
+			"ComponentName":"Lelit payment",
+			"Weight":1
+		},
+		{
+			"ParentName":"Payments",
+			"ComponentName":"LTI share purchase",
+			"Weight":1
+		},
+		{
+			"ParentName":"Borrowings",
+			"ComponentName":"Opening Balance - Borrowings",
+			"Weight":0
+		},
+		{
+			"ParentName":"Borrowings",
+			"ComponentName":"Drawdown",
+			"Weight":0
+		},
+		{
+			"ParentName":"Borrowings",
+			"ComponentName":"Repayment",
+			"Weight":0
+		},
+		{
+			"ParentName":"Borrowings",
+			"ComponentName":"Reclass",
+			"Weight":0
+		},
+		{
+			"ParentName":"Borrowings",
+			"ComponentName":"Closing balance - Borrowings",
+			"Weight":0
+		},
+		{
+			"ParentName":"Closing balance",
+			"ComponentName":"Opening Balance - Cash at Bank",
+			"Weight":1
+		},
+		{
+			"ParentName":"Closing balance",
+			"ComponentName":"Receipts",
+			"Weight":1
+		},
+		{
+			"ParentName":"Closing balance",
+			"ComponentName":"Payments",
+			"Weight":1
+		},
+		{
+			"ParentName":"Closing balance",
+			"ComponentName":"CF - Other 1",
+			"Weight":1
+		},
+		{
+			"ParentName":"Closing balance",
+			"ComponentName":"CF - Other 2",
+			"Weight":1
+		},
+		{
+			"ParentName":"Closing balance",
+			"ComponentName":"CF - Other 3",
+			"Weight":1
+		},
+		{
+			"ParentName":"Closing balance",
+			"ComponentName":"CF - Other 4",
+			"Weight":1
+		},
+		{
+			"ParentName":"Closing balance",
+			"ComponentName":"CF - Other 5",
+			"Weight":1
+		},
+		{
+			"ParentName":"Closing balance",
+			"ComponentName":"Plug to balance Balance Sheet",
+			"Weight":-1
+		},
+		{
+			"ParentName":"Closing balance",
+			"ComponentName":"Unused",
+			"Weight":0
+		},
+		{
+			"ParentName":"Borrowings (non-current)",
+			"ComponentName":"Opening Balance - Borrowings (non-current)",
+			"Weight":0
+		},
+		{
+			"ParentName":"Borrowings (non-current)",
+			"ComponentName":"Reclass",
+			"Weight":0
+		},
+		{
+			"ParentName":"Borrowings (non-current)",
+			"ComponentName":"Closing Balance - Borrowings (non-current)",
+			"Weight":0
+		},
+		{
+			"ParentName":"All Measures",
+			"ComponentName":"Closing balance",
+			"Weight":0
+		},
+		{
+			"ParentName":"Unused",
+			"ComponentName":"STI payment",
+			"Weight":0
+		},
+		{
+			"ParentName":"Unused",
+			"ComponentName":"Feeder",
+			"Weight":0
+		},
+		{
+			"ParentName":"Unused",
+			"ComponentName":"CAPEX-Non-NPD- Intangibles",
+			"Weight":0
+		},
+		{
+			"ParentName":"Unused",
+			"ComponentName":"Total Closing Cash",
+			"Weight":0
+		},
+		{
+			"ParentName":"Unused",
+			"ComponentName":"Variance",
+			"Weight":0
+		}
+	],
+	"Subsets@Code.links":
+	[
+		"CFCashFlowMeasure.subsets/App.CFMeasures.json"
+	]
+}

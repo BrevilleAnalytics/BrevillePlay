@@ -1,0 +1,2 @@
+SkipCheck;
+[] = C: ConsolidatedCountUnique (2, 'syTM1LoginClient', 'syTM1Login', !syTM1LoginClient, !syTM1LoginTime);

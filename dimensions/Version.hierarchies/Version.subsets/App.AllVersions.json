@@ -1,0 +1,5 @@
+{
+	"@type":"Subset",
+	"Name":"App.AllVersions",
+	"Expression":"{EXCEPT(TM1FILTERBYLEVEL(TM1SUBSETALL([Version].[Version]) , 0) , {[Version].[Version].[LY],[Version].[Version].[Actual],[Version].[Version].[Currency]})}"
+}

@@ -1,0 +1,13 @@
+{
+	"@type":"Process",
+	"Name":"JS_AddInteractiveUser",
+	"HasSecurityAccess":false,
+	"Code@Code.link":"JS_AddInteractiveUser.ti",
+	"UIData":"_ParameterConstraints=e30=€",
+	"DataSource":
+	{
+		"Type":"None"
+	},
+	"Parameters":[],
+	"Variables":[]
+}

@@ -1,0 +1,20 @@
+FEEDSTRINGS ;
+SKIPCHECK ;
+#EndRegion
+
+# Cube name: CMBHKForecast
+# Description:
+# V1.00 - 2022-09-08 - Jithu Varghese - CPM Group : initial version
+
+
+['LY', 'BHK'] = N: 
+                DB( 'CMBHKForecast', !Customer, !Product, !BusinessUnit, !Theatre, 'Actual', ATTRS( 'FiscalMonth', !FiscalMonth, 'PYPeriod' ), !Currency, !CMBHKForecastMeasure  ) ;
+
+[ 'Outlook', 'Rebates' , 'BHK' ] = ['Gross Sales'] *  ( 1 - ['Net Sales %'] );
+[ 'Outlook', 'Cost of Goods Sold' , 'BHK' ] = ( ['Gross Sales'] *  ( 1 - ['CM %'] ) ) - ( ['Gross Sales'] *  ( 1 - ['Net Sales %'] ) ) ;
+                      
+FEEDERS ;
+
+['Actual' , 'BHK' ] => ['LY', 'BHK'] ;
+[ 'Outlook', 'Gross Sales' , 'BHK' ] => [ 'Outlook', 'Rebates' , 'BHK' ] ;
+[ 'Outlook', 'Gross Sales' , 'BHK' ] => [ 'Outlook', 'Cost of Goods Sold' , 'BHK' ] ;

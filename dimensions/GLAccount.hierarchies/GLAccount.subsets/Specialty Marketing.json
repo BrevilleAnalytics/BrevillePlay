@@ -1,0 +1,5 @@
+{
+	"@type":"Subset",
+	"Name":"Specialty Marketing",
+	"Expression":"{DRILLDOWNMEMBER({[GLAccount].[GLAccount].[Corporate Marketing - Specialty]} , {[GLAccount].[GLAccount].[Corporate Marketing - Specialty],[GLAccount].[GLAccount].[Marketing Specialty BTL],[GLAccount].[GLAccount].[Marketing Specialty ATL]} , RECURSIVE)}"
+}

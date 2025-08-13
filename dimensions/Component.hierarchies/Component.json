@@ -1,0 +1,40 @@
+{
+	"@type":"Hierarchy",
+	"Name":"Component",
+	"Elements":
+	[
+		{
+			"Name":"Total Amount",
+			"Type":"Consolidated"
+		},
+		{
+			"Name":"Calculated",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"Overlays",
+			"Type":"Numeric"
+		}
+	],
+	"Edges":
+	[
+		{
+			"ParentName":"Total Amount",
+			"ComponentName":"Calculated",
+			"Weight":1
+		},
+		{
+			"ParentName":"Total Amount",
+			"ComponentName":"Overlays",
+			"Weight":1
+		}
+	],
+	"Subsets@Code.links":
+	[
+		"Component.subsets/TempCMBHKForecast.json",
+		"Component.subsets/TempCMForecastOM.json",
+		"Component.subsets/TempCMForecastRatios.json",
+		"Component.subsets/TempCMLelitForecast.json",
+		"Component.subsets/TempCMRatiosCalc.json"
+	]
+}

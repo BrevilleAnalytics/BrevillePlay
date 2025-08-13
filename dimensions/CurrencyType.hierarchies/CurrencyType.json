@@ -1,0 +1,36 @@
+{
+	"@type":"Hierarchy",
+	"Name":"CurrencyType",
+	"Elements":
+	[
+		{
+			"Name":"EUR-Constant",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"Local",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"AUD-MonthEnd",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"Constant",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"AUD-Budget",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"USD-Constant",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"Outlook",
+			"Type":"Numeric"
+		}
+	],
+	"Subsets@Code.links":[]
+}

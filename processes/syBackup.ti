@@ -1,0 +1,47 @@
+#region Prolog
+#****Begin: Generated Statements***
+#****End: Generated Statements****
+
+# Backup data / log and any folders we're interested in
+# Remove old files based on the retention periods
+
+SaveDataAll();
+#endregion
+#region Epilog
+#****Begin: Generated Statements***
+#****End: Generated Statements****
+
+# Using 7za instead of powershell due to 2GB file limitation in Compress-Archive cmdlet
+# https://docs.microsoft.com/en-us/powershell/module/microsoft.powershell.archive/compress-archive?view=powershell-7.1
+
+
+sControlCube = 'syEnvironment';
+s7zExec = CellGetS(sControlCube, psServer,'7z location');
+sBackupFolder = CellGetS(sControlCube, psServer, 'Backup Folder') | '\';
+sDataFolder = CellGetS(sControlCube, psServer, 'Data Folder');
+sLogFolder = CellGetS(sControlCube, psServer,'Log Folder') |'\';
+sTempFolder = CellGetS(sControlCube, psServer,'Temp Folder');
+
+sLogRetention = NumberToString(CellGetN(sControlCube, psServer,'Log Retention days'));
+sBackupRetention = NumberToString(CellGetN(sControlCube, psServer,'Backup Retention days'));
+#sExportRetention = NumberToString(CellGetN(sControlCube, psServer,'Export Retention days'));
+sTempRetention = NumberToString(CellGetN(sControlCube, psServer,'Temp Retention days'));
+
+sFileName = psServer|'.Data.' | TIMST( NOW(), '\Y\m\d.\h\i', 1) | '.7z';
+sArgs = ' a -t7z ';
+sCommand = s7zExec | sArgs | '"' | sBackupFolder | sFileName | '" "' | sDataFolder |  '" -mx3';
+EXECUTECOMMAND(sCommand,0);
+
+# Remove old backups 
+vsRemoveBackupsCommand = 'cmd /c PushD "'|sBackupFolder |'" & Forfiles -s -m "*.7z" -d "-'|sBackupRetention|'" -c "cmd /c del /q @path" & PopD';
+ExecuteCommand(vsRemoveBackupsCommand,0);
+
+# Remove old logs
+vsRemoveLogsCommand = 'cmd /c PushD "'| sLogFolder |'" & Forfiles -s -m "*.log" -d "-'|sLogRetention| '" -c "cmd /c del /q @path" & PopD';
+ExecuteCommand(vsRemoveLogsCommand,1);
+
+
+# Remove old temp files
+vsRemoveRightsCommand = 'cmd /c PushD "'| sTempFolder |'" & Forfiles -s -m "*.*" -d "-' | sTempRetention | '" -c "cmd /c del /q @path" & PopD';
+ExecuteCommand(vsRemoveRightsCommand,1);
+#endregion

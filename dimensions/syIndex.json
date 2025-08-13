@@ -1,0 +1,13 @@
+{
+	"@type":"Dimension",
+	"Name":"syIndex",
+	"AllLeavesHierarchyName":"",
+	"DefaultHierarchy":
+	{
+		"@id":"Dimensions('syIndex')/Hierarchies('syIndex')"
+	},
+	"Hierarchies@Code.links":
+	[
+		"syIndex.hierarchies/syIndex.json"
+	]
+}

@@ -1,0 +1,20 @@
+{
+	"@type":"Hierarchy",
+	"Name":"VangaurdPurchaseMeasures",
+	"Elements":
+	[
+		{
+			"Name":"Units",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"COGS",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"PurchaseAmount",
+			"Type":"Numeric"
+		}
+	],
+	"Subsets@Code.links":[]
+}

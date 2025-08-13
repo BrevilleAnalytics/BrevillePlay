@@ -1,0 +1,13 @@
+{
+	"@type":"Subset",
+	"Name":"Dividend Payment",
+	"Elements":
+	[
+		{
+			"@id":"Dimensions('BSStgStagingMeasure')/Hierarchies('BSStgStagingMeasure')/Elements('Dividends paid')"
+		},
+		{
+			"@id":"Dimensions('BSStgStagingMeasure')/Hierarchies('BSStgStagingMeasure')/Elements('Dividends paid (inter-company)')"
+		}
+	]
+}

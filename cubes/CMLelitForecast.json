@@ -1,0 +1,34 @@
+{
+	"@type":"Cube",
+	"Name":"CMLelitForecast",
+	"Rules@Code.link":"CMLelitForecast.rules",
+	"Dimensions":
+	[
+		{
+			"@id":"Dimensions('Product')"
+		},
+		{
+			"@id":"Dimensions('BusinessUnit')"
+		},
+		{
+			"@id":"Dimensions('Theatre')"
+		},
+		{
+			"@id":"Dimensions('Version')"
+		},
+		{
+			"@id":"Dimensions('FiscalMonth')"
+		},
+		{
+			"@id":"Dimensions('Currency')"
+		},
+		{
+			"@id":"Dimensions('CMLelitForecastMeasure')"
+		}
+	],
+	"Views@Code.links":
+	[
+		"CMLelitForecast.views/Default.json",
+		"CMLelitForecast.views/Input by SKU.json"
+	]
+}

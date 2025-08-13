@@ -1,0 +1,33 @@
+{
+	"@type":"Cube",
+	"Name":"VanguardPurchases",
+	"Rules@Code.link":"VanguardPurchases.rules",
+	"Dimensions":
+	[
+		{
+			"@id":"Dimensions('Product')"
+		},
+		{
+			"@id":"Dimensions('FiscalMonth')"
+		},
+		{
+			"@id":"Dimensions('BusinessUnit')"
+		},
+		{
+			"@id":"Dimensions('Currency')"
+		},
+		{
+			"@id":"Dimensions('Version')"
+		},
+		{
+			"@id":"Dimensions('Checkpoint')"
+		},
+		{
+			"@id":"Dimensions('CMStgForecastMeasure')"
+		}
+	],
+	"Views@Code.links":
+	[
+		"VanguardPurchases.views/COGS per Unit Overrides.json"
+	]
+}

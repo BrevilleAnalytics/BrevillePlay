@@ -1,0 +1,10 @@
+{
+	"@type":"Subset",
+	"Name":"FY20",
+	"Elements":
+	[
+		{
+			"@id":"Dimensions('FiscalMonth')/Hierarchies('FiscalMonth')/Elements('2020')"
+		}
+	]
+}

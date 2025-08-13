@@ -1,0 +1,1084 @@
+#region Prolog
+#****Begin: Generated Statements***
+#****End: Generated Statements****
+#****Begin: Generated Statements***
+#****End: Generated Statements****
+
+#Region Process Summary
+
+#<Process Description>
+# This process creates the Management Reporting Hierarchy in GLAccount Dimension using MDMGL cube
+
+#<Changes Log>
+# V1 - 05/08/2022 - Jithu Varghese - CPM Group - First draft
+# V1 - 02/11/2022 - Jithu Varghese - CPM Group - Update to include alternative hierarchy within Main dimension Hierarchy
+#<Maintenance Log\>
+
+#<Execute Method>
+# Daily Schedule
+#<Execute Method\>
+
+#<Processes Executed>
+# syProcessLogInitialise
+# syProcessLogMessage
+# syTITracker
+#<Processes Executed\>
+
+#<Execute Schedule>
+# Scheduled daily
+#<Execute Schedule\>
+
+#<Estimated Run Time>
+# ~3 secs
+#<Estimated Run Time\>
+
+#EndRegion
+
+#Region Debugging 
+
+# Debug Flie Reference
+  sDebugFile = CellGetS( 'syEnvironment', 'Breville', 'Temp Folder') | '\' | GetProcessName() | '.txt';
+#EndRegion
+
+#Region System Variables 
+
+ IF ( psTITracker @= '' ) ;
+  psTITracker =  CellGetS ( 'syEnvironment', 'Breville', 'psyProcessLog' ) ;
+
+ ENDIF ;
+ 
+  sServer = 'Breville' ;
+  sUser = TM1User();
+  nStartTime = NOW;
+  sSystemMessage = '';
+  nRecordCountData = 0;
+  nRecordCountMetadata = 0;
+  NumericGlobalVariable( 'PrologMinorErrorCount' );
+  NumericGlobalVariable( 'MetaDataMinorErrorCount' );
+  NumericGlobalVariable( 'DataMinorErrorCount' );
+  nErrors = 0 ;
+
+IF ( DIMIX ( '}Clients', sUser ) > 0 );
+	sUserName = NUMBERTOSTRING ( DIMIX ( '}Clients', sUser ) );
+ELSEIF ( DIMIX ( '}Chores', TRIM ( SUBST ( sUser, 3, 255 ) ) ) > 0 );
+	sUserName= TRIM ( SUBST ( sUser, 3, 255 ) );
+ELSE;
+	sUserName = 'Unknown';
+ENDIF;
+#EndRegion
+
+#Region Logging 
+
+
+## Process Logging - 1
+csProcess = GetProcessName( ) ;
+If( psProcessReference @<> '' ) ;
+   csProcessReference = psProcessReference ;
+Else ; 
+   csProcessReference = csProcess ;
+   ExecuteProcess('syProcessLogInitialise' , 'psProcessName' , csProcessReference);
+EndIf ;
+ExecuteProcess('syProcessLogMessage' , 'psProcessName' , csProcessReference , 'psLogLevel' , 'INFO' , 'psMessage' , 'Starting Process ' | csProcess  ) ;
+
+## TI Tracker Process Logging - 2
+IF( psTITracker @= 'Y' );
+	ExecuteProcess('syTITracker',
+	  'pProcessName', GetProcessName,
+	  'pTime', nStartTime ,
+	  'pStatus', 1,
+	  'pTM1User', sUserName,
+	  'pSystemMessage', sSystemMessage,
+	  'pRecordCount', nRecordCountData + nRecordCountMetadata,
+	  'pPrologMinorErrorCount', PrologMinorErrorCount,
+	  'pMetaDataMinorErrorCount', MetaDataMinorErrorCount,
+	  'pDataMinorErrorCount', DataMinorErrorCount,
+	  'pDebug', 1 );
+ENDIF;
+
+#EndRegion
+
+#Region Process Constants and Variables 
+
+# Region: General
+
+sProcess = GetProcessName();
+sTimestamp = TimSt( Now, '\Y\m\d\h\i\s' );
+sRandomInt = NumberToString( INT( RAND( ) * 1000 ));
+sUniqueName  =  sProcess |'.'| sTimestamp | '.' | sRandomInt;
+
+sSub_Tgt= '}System.Tgt.' | sUniqueName ;
+
+sMonth = TIMST ( nStartTime, '\m' );
+sDay = TIMST ( nStartTime, '\d' );
+sHour = TIMST ( nStartTime, '\h' );
+
+#EndRegion 
+
+#Region Build dimension 
+    #Create a target dimension
+    
+    # constant
+    sDimName_Tgt = 'GLAccount';
+    sHierName_Tgt = 'Management Reporting';
+    sHierName_Tgt1 = 'BalanceSheet GLAccounts';
+    sHierName_Main = 'GLAccount';
+    
+    If(DimensionExists( sDimName_Tgt  ) = 0 ) ;
+       DimensionCreate( sDimName_Tgt  ) ;
+    Endif;
+#EndRegion
+
+#Region Management Reporting - Create target dimension hieararchy
+    # If(HierarchyExists(sDimName_Tgt, sHierName_Tgt) = 0);
+    #    HierarchyCreate(sDimName_Tgt, sHierName_Tgt);
+    #  Else;
+    #     HierarchyDeleteAllElements(sDimName_Tgt, sHierName_Tgt);
+    # Endif;
+#EndRegion;
+
+#Region Balance Sheet - Create target dimension hieararchy
+# If(HierarchyExists(sDimName_Tgt, sHierName_Tgt1) = 0);
+#    HierarchyCreate(sDimName_Tgt, sHierName_Tgt1);
+# Else;
+#    HierarchyDeleteAllElements(sDimName_Tgt, sHierName_Tgt1);
+# Endif;
+#EndRegion
+
+#Region - add Current Period Earnings to Retained Earnings - BS
+    HierarchyElementInsert( sDimName_Tgt, sHierName_Main, '', 'Current Period Earnings', 'N' );
+    HierarchyElementComponentAdd( sDimName_Tgt, sHierName_Main, 'Retained earnings - BS', 'Current Period Earnings', 1 );
+#EndRegion
+
+#Region Create Top Hierarchies
+     sElTopParent = 'All ' | sHierName_Tgt  ;
+     sElTopParent1 = 'All ' | sHierName_Tgt1  ;
+
+        #sElTopParentHierarchy1 = 'All BalanceSheet GLAccounts';
+
+    # Management Reporting
+        # HierarchyElementInsert ( sDimName_Tgt, sHierName_Tgt, '',sElTopParent, 'C');
+         HierarchyElementInsert ( sDimName_Tgt, sHierName_Main, '',sElTopParent, 'C');
+
+    # Balance Sheet GLAccounts
+        # HierarchyElementInsert ( sDimName_Tgt, sHierName_Tgt1, '',sElTopParent1, 'C');
+         HierarchyElementInsert ( sDimName_Tgt, sHierName_Main, '',sElTopParent1, 'C');
+
+        #HierarchyElementInsert ( sDimName_Tgt, sHierName_Main, '',sElTopParentHierarchy1, 'C');
+
+    #DimensionSortOrder
+        # HierarchySortOrder( sDimName_Tgt,  sHierName_Tgt,  'ByName', 'Ascending','ByHierarchy', 'Ascending'); 
+        # HierarchySortOrder( sDimName_Tgt,  sHierName_Tgt1,  'ByName', 'Ascending','ByHierarchy', 'Ascending'); 
+
+    #Add % calculations
+        # HierarchyElementInsert ( sDimName_Tgt , sHierName_Tgt , '' , 'CM%' , 'N' ) ;
+        # HierarchyElementInsert ( sDimName_Tgt , sHierName_Tgt , '' , 'GM%' , 'N' ) ;
+        # HierarchyElementInsert ( sDimName_Tgt , sHierName_Tgt , '' , 'EBIT%' , 'N' ) ;
+        
+        HierarchyElementInsert ( sDimName_Tgt , sHierName_Main , '' , 'CM%' , 'N' ) ;
+        HierarchyElementInsert ( sDimName_Tgt , sHierName_Main , '' , 'GM%' , 'N' ) ;
+        HierarchyElementInsert ( sDimName_Tgt , sHierName_Main , '' , 'EBIT%' , 'N' ) ;
+        
+        # HierarchyElementComponentAdd ( sDimName_Tgt , sHierName_Tgt , sElTopParent , 'CM%' , 0 ) ;
+        # HierarchyElementComponentAdd ( sDimName_Tgt , sHierName_Tgt , sElTopParent , 'GM%' , 0 ) ;
+        # HierarchyElementComponentAdd ( sDimName_Tgt , sHierName_Tgt , sElTopParent , 'EBIT%' , 0 ) ;
+        
+        # HierarchyElementComponentAdd ( sDimName_Tgt , sHierName_Main , sElTopParent , 'CM%' , 0 ) ;
+        # HierarchyElementComponentAdd ( sDimName_Tgt , sHierName_Main , sElTopParent , 'GM%' , 0 ) ;
+        # HierarchyElementComponentAdd ( sDimName_Tgt , sHierName_Main , sElTopParent , 'EBIT%' , 0 ) ;
+
+
+    # Create attributes
+        ElementAttrInsert(sDimName_Tgt, sHierName_Main, '', 'Caption', 'S');
+        ElementAttrInsert(sDimName_Tgt, sHierName_Main, '', 'CodeCaption', 'A');
+        ElementAttrInsert(sDimName_Tgt, sHierName_Main, '', 'ExpenseClassify', 'S');
+        
+        ElementAttrInsert(sDimName_Tgt, sHierName_Main, '', 'Caption', 'S');
+        ElementAttrInsert(sDimName_Tgt, sHierName_Main, '', 'CodeCaption', 'A');
+#EndRegion
+
+# Process Variables
+
+# General
+    sTimestamp = TimSt( Now, '\Y\m\d\h\i\s' );
+    sRandomInt = NumberToString( INT( RAND( ) * 1000 ));
+    sUniqueName  =  csProcess |'.'| sTimestamp | '.' | sRandomInt;
+    sSub_Src = '}System.Src.' | sUniqueName ;
+    sView_Src = '}System.Src.' | sUniqueName ;
+    sSub_Tgt = '}System.Tgt.' | sUniqueName ;
+    sView_Tgt = '}System.Tgt.' | sUniqueName ;
+
+# Constants
+    sSub_Tgt= '}System.Tgt.' | sUniqueName ;
+    sCub_Src = 'MDMGL' ;
+
+# Create temp cubeview
+    IF( ViewExists( sCub_Src , sView_Src) = 1 ) ; 
+        ViewDestroy ( sCub_Src, sView_Src ) ;
+    ENDIF;
+        ViewCreate( sCub_Src, sView_Src, 1 ) ;
+
+# Create temp subsets and assign it to the view
+
+    i_TabDim = 1 ;
+    While ( TabDim ( sCub_Src , i_TabDim ) @<> '' ) ;
+       sDim = TabDim ( sCub_Src , i_TabDim ) ;
+    
+       If( sDim @= 'GLAccount' ) ;
+          sMDX = '{TM1FILTERBYLEVEL ( {TM1SUBSETALL ( ['|sDim|'] ) } , 0 ) }' ;
+       ElseIf( sDim @= 'MDMGLMeasure' ) ;
+          sMDX = '{ [' | sDim | '].[' | sDim | '].[Parent Level 1] }' ;
+       Else ;
+          sMDX = '{TM1FILTERBYLEVEL ( {TM1SUBSETALL ( ['|sDim|'] ) } , 0 ) }' ;
+       EndIf ;
+    
+       SubsetCreateByMDX ( sSub_Src , sMDX , 1 ) ;
+       SubsetMDXSet (sDim , sSub_Src , '' ) ;
+       ViewSubsetAssign ( sCub_Src , sView_Src , sDim , sSub_Src ) ;
+    
+    i_TabDim = i_TabDim + 1 ;
+    End ;
+    
+    ViewExtractSkipZeroesSet( sCub_Src, sView_Src, 0 ) ;
+    ViewExtractSkipCalcsSet( sCub_Src, sView_Src, 1) ;
+    ViewExtractSkipRuleValuesSet( sCub_Src, sView_Src, 0) ;
+
+# Assign Datasource
+    DataSourceType = 'VIEW' ;
+    DataSourceNameForServer = sCub_Src ;
+    DataSourceCubeview = sView_Src ;
+#endregion
+#region Metadata
+    #****Begin: Generated Statements***
+#****End: Generated Statements****
+sElName = vGL ;
+sElWeight = StringToNumber( CellGetS(sCub_Src, vGL, 'Child Weight' ) );
+sElBalanceSheetFlag = CellGetS(sCub_Src, vGL, 'BalanceSheetFlag' )   ;
+
+#Region - Management Reporting - Get Parents
+if(sElBalanceSheetFlag @<> 'Y');
+    sElParent10 = CellGetS(sCub_Src, vGL, 'Parent Level 10' )  ;
+    sElParent9 = CellGetS(sCub_Src, vGL, 'Parent Level 9' )  ;
+    sElParent8 = CellGetS(sCub_Src, vGL, 'Parent Level 8' )  ;
+    sElParent7 = CellGetS(sCub_Src, vGL, 'Parent Level 7' )  ;
+    sElParent6 = CellGetS(sCub_Src, vGL, 'Parent Level 6' )  ;
+    sElParent5 = CellGetS(sCub_Src, vGL, 'Parent Level 5' )  ;
+    sElParent4 = CellGetS(sCub_Src, vGL, 'Parent Level 4' )  ;
+    sElParent3 = CellGetS(sCub_Src, vGL, 'Parent Level 3' )  ;
+    sElParent2 = CellGetS(sCub_Src, vGL, 'Parent Level 2' )  ;
+    sElParent1 = CellGetS(sCub_Src, vGL, 'Parent Level 1' )  ;
+endif;
+
+sExpClassify = CellGetS(sCub_Src, vGL, 'Expense Classify' )  ;
+#EndRegion
+
+#Region - Management Reporting - Add leaf element
+    if ( sElBalanceSheetFlag @<> 'Y' &  sElParent1 @<> '')  ;
+        HierarchyElementInsert ( sDimName_Tgt, sHierName_Main, '', vGL , 'N');
+        # HierarchyElementInsert ( sDimName_Tgt, sHierName_Tgt, '', vGL , 'N');
+    endif ;
+#EndRegion
+
+#Region - Management Reporting - Add C levels  element
+if ( sElBalanceSheetFlag @<> 'Y');
+    if ( sElParent10 @<> '' & ElementIndex ( sDimName_Tgt, sHierName_Tgt , sElParent10) = 0  ) ;
+        # HierarchyElementInsert ( sDimName_Tgt, sHierName_Tgt, '', sElParent10, 'C');
+        HierarchyElementInsert ( sDimName_Tgt, sHierName_Main, '', sElParent10, 'C');
+    endif ;  
+    
+    if ( sElParent9 @<> '' & ElementIndex ( sDimName_Tgt, sHierName_Tgt , sElParent9) = 0  ) ;
+        # HierarchyElementInsert ( sDimName_Tgt, sHierName_Tgt, '', sElParent9, 'C'); 
+        HierarchyElementInsert ( sDimName_Tgt, sHierName_Main, '', sElParent9, 'C');
+    endif ;           
+    
+    if ( sElParent8 @<> '' & ElementIndex ( sDimName_Tgt, sHierName_Tgt , sElParent8) = 0  ) ;
+        # HierarchyElementInsert ( sDimName_Tgt, sHierName_Tgt, '', sElParent8, 'C');    
+        HierarchyElementInsert ( sDimName_Tgt, sHierName_Main, '', sElParent8, 'C'); 
+    endif ;   
+    
+    if ( sElParent7 @<> '' & ElementIndex ( sDimName_Tgt, sHierName_Tgt , sElParent7) = 0  ) ;
+        # HierarchyElementInsert ( sDimName_Tgt, sHierName_Tgt, '', sElParent7, 'C');   
+        HierarchyElementInsert ( sDimName_Tgt, sHierName_Main, '', sElParent7, 'C');
+    endif ;     
+    
+    if ( sElParent6 @<> '' & ElementIndex ( sDimName_Tgt, sHierName_Tgt , sElParent6) = 0  ) ;
+        # HierarchyElementInsert ( sDimName_Tgt, sHierName_Tgt, '', sElParent6, 'C');
+        HierarchyElementInsert ( sDimName_Tgt, sHierName_Main, '', sElParent6, 'C');
+    endif ;
+    
+    if ( sElParent5 @<> '' & ElementIndex ( sDimName_Tgt, sHierName_Tgt , sElParent5) = 0  ) ;
+        # HierarchyElementInsert ( sDimName_Tgt, sHierName_Tgt, '', sElParent5, 'C');
+        HierarchyElementInsert ( sDimName_Tgt, sHierName_Main, '', sElParent5, 'C');
+    endif ;
+    
+    if ( sElParent4 @<> '' & ElementIndex ( sDimName_Tgt, sHierName_Tgt , sElParent4) = 0  ) ;
+        # HierarchyElementInsert ( sDimName_Tgt, sHierName_Tgt, '', sElParent4, 'C');
+        HierarchyElementInsert ( sDimName_Tgt, sHierName_Main, '', sElParent4, 'C');
+    endif ;
+    
+    if ( sElParent3 @<> '' & ElementIndex ( sDimName_Tgt, sHierName_Tgt , sElParent3) = 0  ) ;
+        # HierarchyElementInsert ( sDimName_Tgt, sHierName_Tgt, '', sElParent3, 'C');
+        HierarchyElementInsert ( sDimName_Tgt, sHierName_Main, '', sElParent3, 'C');
+    endif;
+    
+    if ( sElParent2 @<> '' & ElementIndex ( sDimName_Tgt , sHierName_Tgt , sElParent2 ) = 0  ) ;
+        # HierarchyElementInsert ( sDimName_Tgt , sHierName_Tgt , '', sElParent2 , 'C' );
+        HierarchyElementInsert ( sDimName_Tgt , sHierName_Main , '', sElParent2 , 'C' );
+    endif;
+    
+    if ( sElParent1 @<> '' & ElementIndex ( sDimName_Tgt , sHierName_Tgt , sElParent1) = 0  ) ;
+        # HierarchyElementInsert ( sDimName_Tgt , sHierName_Tgt , '', sElParent1, 'C');
+        HierarchyElementInsert ( sDimName_Tgt , sHierName_Main , '', sElParent1, 'C');
+    endif;
+endif;
+#EndRegion
+
+#Region - Management Reporting - Add C levels hierarchy
+if ( sElBalanceSheetFlag @<> 'Y');
+    if ( sElParent1 @<> '' ) ;
+      #-- Add a hierarchy dependency: based on the assumption is that every element wil have a level 1
+     # HierarchyElementComponentAdd ( sDimName_Tgt , sHierName_Tgt , sElParent1, vGL , sElWeight );
+     HierarchyElementComponentAdd ( sDimName_Tgt , sHierName_Main , sElParent1, vGL , sElWeight );
+     
+     elseif ( sElParent2 @<> '' ) ;
+
+        # HierarchyElementComponentAdd ( sDimName_Tgt, sHierName_Tgt , sElParent2, sElParent1, sElWeight );
+        HierarchyElementComponentAdd ( sDimName_Tgt, sHierName_Main , sElParent2, sElParent1, sElWeight );
+           
+     elseif ( sElParent3 @<> '' ) ;
+
+        # HierarchyElementComponentAdd ( sDimName_Tgt, sHierName_Tgt , sElParent3, sElParent2, sElWeight );
+        HierarchyElementComponentAdd ( sDimName_Tgt, sHierName_Main , sElParent3, sElParent2, sElWeight );
+        
+     elseif ( sElParent4 @<> '' ) ;
+
+        # HierarchyElementComponentAdd ( sDimName_Tgt, sHierName_Tgt , sElParent4, sElParent3, sElWeight ) ; 
+        HierarchyElementComponentAdd ( sDimName_Tgt, sHierName_Main , sElParent4, sElParent3, sElWeight ) ; 
+        
+     elseif ( sElParent5 @<> '' ) ;
+
+        # HierarchyElementComponentAdd ( sDimName_Tgt, sHierName_Tgt , sElParent5, sElParent4, sElWeight ) ;  
+        HierarchyElementComponentAdd ( sDimName_Tgt, sHierName_Main , sElParent5, sElParent4, sElWeight ) ;
+        
+     elseif ( sElParent6 @<> '' ) ;
+
+        # HierarchyElementComponentAdd ( sDimName_Tgt, sHierName_Tgt , sElParent6, sElParent5, sElWeight ) ;
+        HierarchyElementComponentAdd ( sDimName_Tgt, sHierName_Main , sElParent6, sElParent5, sElWeight ) ;
+
+     elseif ( sElParent7 @<> '' ) ;
+
+        # HierarchyElementComponentAdd ( sDimName_Tgt, sHierName_Tgt , sElParent7, sElParent6, sElWeight ) ; 
+        HierarchyElementComponentAdd ( sDimName_Tgt, sHierName_Main , sElParent7, sElParent6, sElWeight ) ; 
+        
+     elseif ( sElParent8 @<> '' ) ;
+
+        # HierarchyElementComponentAdd ( sDimName_Tgt, sHierName_Tgt , sElParent8, sElParent7, sElWeight ) ; 
+        HierarchyElementComponentAdd ( sDimName_Tgt, sHierName_Main , sElParent8, sElParent7, sElWeight ) ; 
+     elseif ( sElParent9 @<> '' ) ;
+
+        # HierarchyElementComponentAdd ( sDimName_Tgt, sHierName_Tgt , sElParent9, sElParent8, sElWeight ) ; 
+        HierarchyElementComponentAdd ( sDimName_Tgt, sHierName_Main , sElParent9, sElParent8, sElWeight ) ;
+        
+     elseif ( sElParent10 @<> '' ) ;
+
+        # HierarchyElementComponentAdd ( sDimName_Tgt, sHierName_Tgt , sElParent10, sElParent9, sElWeight ) ; 
+        HierarchyElementComponentAdd ( sDimName_Tgt, sHierName_Main , sElParent10, sElParent9, sElWeight ) ;
+
+    endif ;            
+endif;
+#EndRegion
+
+#Region - Balance Sheet - Get Parents
+    if(sElBalanceSheetFlag @= 'Y');
+    
+        if(CellGetS(sCub_Src, vGL, 'Parent Level 10') @<> '');
+            sElParentBS10 = CellGetS(sCub_Src, vGL, 'Parent Level 10') | ' - BS'  ;
+        Endif;
+        if(CellGetS(sCub_Src, vGL, 'Parent Level 9') @<> '');
+            sElParentBS9 = CellGetS(sCub_Src, vGL, 'Parent Level 9' ) | ' - BS'  ;
+        endif;
+        if(CellGetS(sCub_Src, vGL, 'Parent Level 8') @<> '');
+            sElParentBS8 = CellGetS(sCub_Src, vGL, 'Parent Level 8' ) | ' - BS'  ;
+        endif;
+        if(CellGetS(sCub_Src, vGL, 'Parent Level 7') @<> '');
+            sElParentBS7 = CellGetS(sCub_Src, vGL, 'Parent Level 7' ) | ' - BS'  ;
+        Endif;
+        if(CellGetS(sCub_Src, vGL, 'Parent Level 6') @<> '');
+            sElParentBS6 = CellGetS(sCub_Src, vGL, 'Parent Level 6' ) | ' - BS'  ;
+        Endif;
+        if(CellGetS(sCub_Src, vGL, 'Parent Level 5') @<> '');
+            sElParentBS5 = CellGetS(sCub_Src, vGL, 'Parent Level 5' ) | ' - BS'  ;
+        Endif;
+        if(CellGetS(sCub_Src, vGL, 'Parent Level 4') @<> '');
+            sElParentBS4 = CellGetS(sCub_Src, vGL, 'Parent Level 4' ) | ' - BS'  ;
+        Endif;
+        if(CellGetS(sCub_Src, vGL, 'Parent Level 3') @<> '');
+            sElParentBS3 = CellGetS(sCub_Src, vGL, 'Parent Level 3' ) | ' - BS'  ;
+        Endif;
+        if(CellGetS(sCub_Src, vGL, 'Parent Level 2') @<> '');
+            sElParentBS2 = CellGetS(sCub_Src, vGL, 'Parent Level 2' ) | ' - BS'  ;
+        Endif;
+        if(CellGetS(sCub_Src, vGL, 'Parent Level 1') @<> '');
+            sElParentBS1 = CellGetS(sCub_Src, vGL, 'Parent Level 1' ) | ' - BS'  ;
+        Endif;
+    endif;
+#EndRegion
+
+#Region - Balance Sheet - Add leaf element
+    if ( sElBalanceSheetFlag @= 'Y' &  sElParentBS1 @<> '')  ;
+        HierarchyElementInsert ( sDimName_Tgt, sHierName_Main, '', vGL , 'N');
+        # HierarchyElementInsert ( sDimName_Tgt, sHierName_Tgt1, '', vGL , 'N');
+    endif ;
+#EndRegion
+
+        #Region - Add C levels  element - Balance Sheet (original)
+        # if ( sElBalanceSheetFlag @= 'Y');
+        #      if ( sElParentBS10 @<> '' & ElementIndex ( sDimName_Tgt, sHierName_Main , sElParentBS10) = 0  ) ;
+        #          HierarchyElementInsert ( sDimName_Tgt, sHierName_Main, '', sElParentBS10, 'C');
+        #      endif ;  
+             
+        #      if ( sElParentBS9 @<> '' & ElementIndex ( sDimName_Tgt, sHierName_Main , sElParentBS9) = 0  ) ;
+        #          HierarchyElementInsert ( sDimName_Tgt, sHierName_Main, '', sElParentBS9, 'C');
+        #      endif ;           
+             
+        #      if ( sElParentBS8 @<> '' & ElementIndex ( sDimName_Tgt, sHierName_Main , sElParentBS8) = 0  ) ;
+        #          HierarchyElementInsert ( sDimName_Tgt, sHierName_Main, '', sElParentBS8, 'C'); 
+        #      endif ;   
+             
+        #      if ( sElParentBS7 @<> '' & ElementIndex ( sDimName_Tgt, sHierName_Main , sElParentBS7)= 0  ) ;
+        #          HierarchyElementInsert ( sDimName_Tgt, sHierName_Main, '', sElParentBS7, 'C');
+        #      endif ;     
+             
+        #      if ( sElParentBS6 @<> '' & ElementIndex ( sDimName_Tgt, sHierName_Main , sElParentBS6)= 0  ) ;
+        #          HierarchyElementInsert ( sDimName_Tgt, sHierName_Main, '', sElParentBS6, 'C');
+        #      endif ;
+             
+        #      if ( sElParentBS5 @<> '' & ElementIndex ( sDimName_Tgt, sHierName_Main , sElParentBS5)= 0  ) ;
+        #          HierarchyElementInsert ( sDimName_Tgt, sHierName_Main, '', sElParentBS5, 'C');
+        #      endif ;
+             
+        #      if ( sElParentBS4 @<> '' & ElementIndex ( sDimName_Tgt, sHierName_Main , sElParentBS4)= 0  ) ;
+        #          HierarchyElementInsert ( sDimName_Tgt, sHierName_Main, '', sElParentBS4, 'C');
+        #      endif ;
+            
+        #      if ( sElParentBS3 @<> '' & ElementIndex ( sDimName_Tgt, sHierName_Main , sElParentBS3)= 0  ) ;
+        #          HierarchyElementInsert ( sDimName_Tgt, sHierName_Main, '', sElParentBS3, 'C');
+        #      endif;
+             
+        #      if ( sElParentBS2 @<> '' & ElementIndex ( sDimName_Tgt , sHierName_Main , sElParentBS2) = 0  ) ;
+        #          HierarchyElementInsert ( sDimName_Tgt , sHierName_Main , '', sElParentBS2 , 'C' );
+        #      endif;
+             
+        #      if ( sElParentBS1 @<> '' & ElementIndex ( sDimName_Tgt , sHierName_Main , sElParentBS1)= 0  ) ;
+        #          HierarchyElementInsert ( sDimName_Tgt , sHierName_Main , '', sElParentBS1, 'C');
+        #      endif;
+        #  endif;
+        #EndRegion
+
+#Region - Balance Sheet - Add C levels  element
+if ( sElBalanceSheetFlag @= 'Y');
+     if ( sElParentBS10 @<> '' & ElementIndex ( sDimName_Tgt, sHierName_Tgt1 , sElParentBS10) = 0  ) ;
+         # HierarchyElementInsert ( sDimName_Tgt, sHierName_Tgt1, '', sElParentBS10, 'C');         
+         HierarchyElementInsert ( sDimName_Tgt, sHierName_Main, '', sElParentBS10, 'C');
+     endif ;  
+     
+     if ( sElParentBS9 @<> '' & ElementIndex ( sDimName_Tgt, sHierName_Tgt1 , sElParentBS9) = 0  ) ;
+         # HierarchyElementInsert ( sDimName_Tgt, sHierName_Tgt1, '', sElParentBS9, 'C');  
+         HierarchyElementInsert ( sDimName_Tgt, sHierName_Main, '', sElParentBS9, 'C');
+     endif ;           
+     
+     if ( sElParentBS8 @<> '' & ElementIndex ( sDimName_Tgt, sHierName_Tgt1 , sElParentBS8) = 0  ) ;
+         # HierarchyElementInsert ( sDimName_Tgt, sHierName_Tgt1, '', sElParentBS8, 'C');           
+         HierarchyElementInsert ( sDimName_Tgt, sHierName_Main, '', sElParentBS8, 'C'); 
+     endif ;   
+     
+     if ( sElParentBS7 @<> '' & ElementIndex ( sDimName_Tgt, sHierName_Tgt1 , sElParentBS7)= 0  ) ;
+         # HierarchyElementInsert ( sDimName_Tgt, sHierName_Tgt1, '', sElParentBS7, 'C');           
+         HierarchyElementInsert ( sDimName_Tgt, sHierName_Main, '', sElParentBS7, 'C');
+     endif ;     
+     
+     if ( sElParentBS6 @<> '' & ElementIndex ( sDimName_Tgt, sHierName_Tgt1 , sElParentBS6)= 0  ) ;
+         # HierarchyElementInsert ( sDimName_Tgt, sHierName_Tgt1, '', sElParentBS6, 'C');           
+         HierarchyElementInsert ( sDimName_Tgt, sHierName_Main, '', sElParentBS6, 'C');
+     endif ;
+     
+     if ( sElParentBS5 @<> '' & ElementIndex ( sDimName_Tgt, sHierName_Tgt1 , sElParentBS5)= 0  ) ;
+         # HierarchyElementInsert ( sDimName_Tgt, sHierName_Tgt1, '', sElParentBS5, 'C');  
+         HierarchyElementInsert ( sDimName_Tgt, sHierName_Main, '', sElParentBS5, 'C');
+     endif ;
+     
+     if ( sElParentBS4 @<> '' & ElementIndex ( sDimName_Tgt, sHierName_Tgt1 , sElParentBS4)= 0  ) ;
+         # HierarchyElementInsert ( sDimName_Tgt, sHierName_Tgt1, '', sElParentBS4, 'C');  
+         HierarchyElementInsert ( sDimName_Tgt, sHierName_Main, '', sElParentBS4, 'C');
+     endif ;
+    
+     if ( sElParentBS3 @<> '' & ElementIndex ( sDimName_Tgt, sHierName_Tgt1 , sElParentBS3)= 0  ) ;
+         # HierarchyElementInsert ( sDimName_Tgt, sHierName_Tgt1, '', sElParentBS3, 'C');  
+         HierarchyElementInsert ( sDimName_Tgt, sHierName_Main, '', sElParentBS3, 'C');
+     endif;
+     
+     if ( sElParentBS2 @<> '' & ElementIndex ( sDimName_Tgt , sHierName_Tgt1 , sElParentBS2) = 0  ) ;
+         # HierarchyElementInsert ( sDimName_Tgt, sHierName_Tgt1, '', sElParentBS2, 'C');  
+         HierarchyElementInsert ( sDimName_Tgt , sHierName_Main , '', sElParentBS2 , 'C' );
+     endif;
+     
+     if ( sElParentBS1 @<> '' & ElementIndex ( sDimName_Tgt , sHierName_Tgt1 , sElParentBS1)= 0  ) ;
+         # HierarchyElementInsert ( sDimName_Tgt, sHierName_Tgt1, '', sElParentBS1, 'C');  
+         HierarchyElementInsert ( sDimName_Tgt , sHierName_Main , '', sElParentBS1, 'C');
+     endif;
+ endif;
+#EndRegion
+
+        #Region - Add C levels  hierarchy - Balance Sheet (original)
+        if ( sElBalanceSheetFlag @= 'Y' ) ;
+         
+            if ( sElParentBS1 @<> '' ) ;
+            
+              #-- Add a hierarchy dependency: based on the assumption is that every element will have a level 1
+              HierarchyElementComponentAdd ( sDimName_Tgt , sHierName_Main , sElParentBS1, vGL , sElWeight );
+                    
+             elseif ( sElParentBS2 @<> '') ;
+        
+              HierarchyElementComponentAdd ( sDimName_Tgt , sHierName_Main , sElParentBS2, sElParentBS1 , sElWeight );   
+                   
+             elseif ( sElParentBS3 @<> '') ;
+        
+                HierarchyElementComponentAdd ( sDimName_Tgt, sHierName_Main , sElParentBS3, sElParentBS2, sElWeight );
+                
+             elseif ( sElParentBS4 @<> '' ) ;
+        
+                HierarchyElementComponentAdd ( sDimName_Tgt, sHierName_Main , sElParentBS4, sElParentBS3, sElWeight ) ; 
+                
+             elseif ( sElParentBS5 @<> '' ) ;
+        
+                HierarchyElementComponentAdd ( sDimName_Tgt, sHierName_Main , sElParentBS5, sElParentBS4, sElWeight ) ;
+                
+             elseif ( sElParentBS6 @<> ''  ) ;
+        
+                HierarchyElementComponentAdd ( sDimName_Tgt, sHierName_Main , sElParentBS6, sElParentBS5, sElWeight ) ;
+        
+             elseif ( sElParentBS7 @<> '') ;
+        
+                HierarchyElementComponentAdd ( sDimName_Tgt, sHierName_Main , sElParentBS7, sElParentBS6, sElWeight ) ; 
+                
+             elseif ( sElParentBS8 @<> '') ;
+        
+                HierarchyElementComponentAdd ( sDimName_Tgt, sHierName_Main , sElParentBS8, sElParentBS7, sElWeight ) ; 
+             elseif ( sElParentBS9 @<> '' ) ;
+        
+                HierarchyElementComponentAdd ( sDimName_Tgt, sHierName_Main , sElParentBS9, sElParentBS8, sElWeight ) ;
+                
+             elseif ( sElParentBS10 @<> '' ) ;
+        
+                HierarchyElementComponentAdd ( sDimName_Tgt, sHierName_Main , sElParentBS10, sElParentBS9, sElWeight ) ;
+        
+             endif ;
+        
+        endif;            
+        #EndRegion
+
+#Region - Balance Sheet - Add C levels hierarchy
+if ( sElBalanceSheetFlag @= 'Y' ) ;
+ 
+    if ( sElParentBS1 @<> '' ) ;
+    
+        #-- Add a hierarchy dependency: based on the assumption is that every element will have a level 1
+        # HierarchyElementComponentAdd ( sDimName_Tgt , sHierName_Tgt1 , sElParentBS1, vGL , sElWeight );
+        HierarchyElementComponentAdd ( sDimName_Tgt , sHierName_Main , sElParentBS1, vGL , sElWeight );
+            
+     elseif ( sElParentBS2 @<> '') ;
+
+        sWeight = StringToNumber (CellGetS (sCub_Src, sElParentBS1,'Child Weight'));
+        # HierarchyElementComponentAdd ( sDimName_Tgt , sHierName_Tgt1 , sElParentBS2, sElParentBS1 , sWeight );
+        HierarchyElementComponentAdd ( sDimName_Tgt , sHierName_Main , sElParentBS2, sElParentBS1 , sWeight );   
+           
+     elseif ( sElParentBS3 @<> '') ;
+
+        sWeight = StringToNumber (CellGetS (sCub_Src, sElParentBS2,'Child Weight'));        
+        # HierarchyElementComponentAdd ( sDimName_Tgt , sHierName_Tgt1 , sElParentBS3, sElParentBS2 , sWeight );        
+        HierarchyElementComponentAdd ( sDimName_Tgt, sHierName_Main , sElParentBS3, sElParentBS2, sWeight );
+        
+     elseif ( sElParentBS4 @<> '' ) ;
+
+        sWeight = StringToNumber (CellGetS (sCub_Src, sElParentBS3,'Child Weight'));        
+        # HierarchyElementComponentAdd ( sDimName_Tgt , sHierName_Tgt1 , sElParentBS4, sElParentBS3 , sWeight );             
+        HierarchyElementComponentAdd ( sDimName_Tgt, sHierName_Main , sElParentBS4, sElParentBS3, sWeight ) ; 
+        
+     elseif ( sElParentBS5 @<> '' ) ;
+
+        sWeight = StringToNumber (CellGetS (sCub_Src, sElParentBS4,'Child Weight'));        
+        # HierarchyElementComponentAdd ( sDimName_Tgt , sHierName_Tgt1 , sElParentBS5, sElParentBS4 , sWeight );             
+        HierarchyElementComponentAdd ( sDimName_Tgt, sHierName_Main , sElParentBS5, sElParentBS4, sWeight ) ;
+        
+     elseif ( sElParentBS6 @<> ''  ) ;
+
+        sWeight = StringToNumber (CellGetS (sCub_Src, sElParentBS5,'Child Weight'));        
+        # HierarchyElementComponentAdd ( sDimName_Tgt , sHierName_Tgt1 , sElParentBS6, sElParentBS5 , sWeight );             
+        HierarchyElementComponentAdd ( sDimName_Tgt, sHierName_Main , sElParentBS6, sElParentBS5, sWeight ) ;
+
+     elseif ( sElParentBS7 @<> '') ;
+
+        sWeight = StringToNumber (CellGetS (sCub_Src, sElParentBS6,'Child Weight'));        
+        # HierarchyElementComponentAdd ( sDimName_Tgt , sHierName_Tgt1 , sElParentBS7, sElParentBS6 , sWeight );             
+        HierarchyElementComponentAdd ( sDimName_Tgt, sHierName_Main , sElParentBS7, sElParentBS6, sWeight ) ; 
+        
+     elseif ( sElParentBS8 @<> '') ;
+
+        sWeight = StringToNumber (CellGetS (sCub_Src, sElParentBS7,'Child Weight'));        
+        # HierarchyElementComponentAdd ( sDimName_Tgt , sHierName_Tgt1 , sElParentBS8, sElParentBS7 , sWeight );             
+        HierarchyElementComponentAdd ( sDimName_Tgt, sHierName_Main , sElParentBS8, sElParentBS7, sWeight ) ; 
+     elseif ( sElParentBS9 @<> '' ) ;
+
+        sWeight = StringToNumber (CellGetS (sCub_Src, sElParentBS8,'Child Weight'));        
+        # HierarchyElementComponentAdd ( sDimName_Tgt , sHierName_Tgt1 , sElParentBS9, sElParentBS8 , sWeight );             
+        HierarchyElementComponentAdd ( sDimName_Tgt, sHierName_Main , sElParentBS9, sElParentBS8, sWeight ) ;
+        
+     elseif ( sElParentBS10 @<> '' ) ;
+
+        sWeight = StringToNumber (CellGetS (sCub_Src, sElParentBS9,'Child Weight'));        
+        # HierarchyElementComponentAdd ( sDimName_Tgt , sHierName_Tgt1 , sElParentBS10, sElParentBS9 , sWeight );             
+        HierarchyElementComponentAdd ( sDimName_Tgt, sHierName_Main , sElParentBS10, sElParentBS9, sWeight ) ;
+
+     endif ;
+
+endif;            
+#EndRegion
+
+#Region To ensure all the parents are attached correctly to their children 
+         
+if ( sElParent10 @<> '' & sElParent9 @<> '' & sElParent8 @<> '' & sElParent7 @<> '' & sElParent6 @<> '' & sElParent5 @<> '' & sElParent4 @<> '' & sElParent3 @<> '' & sElParent2 @<> '' & sElParent1 @<> '' ) ;
+    
+    if( sElBalanceSheetFlag @<> 'Y');
+        # HierarchyElementComponentAdd ( sDimName_Tgt, sHierName_Tgt , sElTopParent , sElParent10, sElWeight ) ;
+        # HierarchyElementComponentAdd ( sDimName_Tgt, sHierName_Tgt , sElParent10 , sElParent9, sElWeight ) ;
+        # HierarchyElementComponentAdd ( sDimName_Tgt, sHierName_Tgt , sElParent9 , sElParent8, sElWeight ) ;   
+        # HierarchyElementComponentAdd ( sDimName_Tgt, sHierName_Tgt , sElParent8 , sElParent7, sElWeight ) ;
+        # HierarchyElementComponentAdd ( sDimName_Tgt, sHierName_Tgt , sElParent7 , sElParent6, sElWeight ) ;
+        # HierarchyElementComponentAdd ( sDimName_Tgt, sHierName_Tgt , sElParent6 , sElParent5, sElWeight ) ;                     
+        # HierarchyElementComponentAdd ( sDimName_Tgt, sHierName_Tgt , sElParent5 , sElParent4, sElWeight ) ;
+        # HierarchyElementComponentAdd ( sDimName_Tgt, sHierName_Tgt , sElParent4 , sElParent3, sElWeight ) ;
+        # HierarchyElementComponentAdd ( sDimName_Tgt, sHierName_Tgt , sElParent3 , sElParent2, sElWeight ) ;
+        # HierarchyElementComponentAdd ( sDimName_Tgt, sHierName_Tgt , sElParent2 , sElParent1, sElWeight ) ;
+        
+        # Alternative hierarchy in GLAccount Main hierarchy
+        
+        HierarchyElementComponentAdd ( sDimName_Tgt, sHierName_Main , sElTopParent , sElParent10, sElWeight ) ;
+        HierarchyElementComponentAdd ( sDimName_Tgt, sHierName_Main , sElParent10 , sElParent9, sElWeight ) ;
+        HierarchyElementComponentAdd ( sDimName_Tgt, sHierName_Main , sElParent9 , sElParent8, sElWeight ) ;   
+        HierarchyElementComponentAdd ( sDimName_Tgt, sHierName_Main , sElParent8 , sElParent7, sElWeight ) ;
+        HierarchyElementComponentAdd ( sDimName_Tgt, sHierName_Main , sElParent7 , sElParent6, sElWeight ) ;
+        HierarchyElementComponentAdd ( sDimName_Tgt, sHierName_Main , sElParent6 , sElParent5, sElWeight ) ;                     
+        HierarchyElementComponentAdd ( sDimName_Tgt, sHierName_Main , sElParent5 , sElParent4, sElWeight ) ;
+        HierarchyElementComponentAdd ( sDimName_Tgt, sHierName_Main , sElParent4 , sElParent3, sElWeight ) ;
+        HierarchyElementComponentAdd ( sDimName_Tgt, sHierName_Main , sElParent3 , sElParent2, sElWeight ) ;
+        HierarchyElementComponentAdd ( sDimName_Tgt, sHierName_Main , sElParent2 , sElParent1, sElWeight ) ;
+        
+    endif; 
+endif; 
+              
+if( sElBalanceSheetFlag @= 'Y');
+    if ( sElParentBS10 @<> '' & sElParentBS9 @<> '' & sElParentBS8 @<> '' & sElParentBS7 @<> '' &  sElParentBS6 @<> '' & sElParentBS5 @<> '' & sElParentBS4 @<> '' & sElParentBS3 @<> '' & sElParentBS2 @<> '' & sElParentBS1 @<> '' ) ;
+
+    # HierarchyElementComponentAdd ( sDimName_Tgt, sHierName_Tgt1 , sElTopParent1 , sElParentBS10, sElWeight ) ;
+    # HierarchyElementComponentAdd ( sDimName_Tgt, sHierName_Tgt1 , sElParentBS10 , sElParentBS9, sElWeight ) ;
+    # HierarchyElementComponentAdd ( sDimName_Tgt, sHierName_Tgt1 , sElParentBS9 , sElParentBS8, sElWeight ) ;
+    # HierarchyElementComponentAdd ( sDimName_Tgt, sHierName_Tgt1 , sElParentBS8 , sElParentBS7, sElWeight ) ;
+    # HierarchyElementComponentAdd ( sDimName_Tgt, sHierName_Tgt1 , sElParentBS7 , sElParentBS6, sElWeight ) ;
+    # HierarchyElementComponentAdd ( sDimName_Tgt, sHierName_Tgt1 , sElParentBS6 , sElParentBS5, sElWeight ) ; 
+    # HierarchyElementComponentAdd ( sDimName_Tgt, sHierName_Tgt1 , sElParentBS5 , sElParentBS4, sElWeight ) ;
+    # HierarchyElementComponentAdd ( sDimName_Tgt, sHierName_Tgt1 , sElParentBS4 , sElParentBS3, sElWeight ) ;
+    # HierarchyElementComponentAdd ( sDimName_Tgt, sHierName_Tgt1 , sElParentBS3 , sElParentBS2, sElWeight ) ;
+    # HierarchyElementComponentAdd ( sDimName_Tgt, sHierName_Tgt1 , sElParentBS2 , sElParentBS1, sElWeight ) ;
+
+    # Alternative hierarchy in GLAccount Main hierarchy  
+
+    HierarchyElementComponentAdd ( sDimName_Tgt, sHierName_Main , sElTopParent1 , sElParentBS10, sElWeight ) ;
+    HierarchyElementComponentAdd ( sDimName_Tgt, sHierName_Main , sElParentBS10 , sElParentBS9, sElWeight ) ;
+    HierarchyElementComponentAdd ( sDimName_Tgt, sHierName_Main , sElParentBS9 , sElParentBS8, sElWeight ) ;
+    HierarchyElementComponentAdd ( sDimName_Tgt, sHierName_Main , sElParentBS8 , sElParentBS7, sElWeight ) ;
+    HierarchyElementComponentAdd ( sDimName_Tgt, sHierName_Main , sElParentBS7 , sElParentBS6, sElWeight ) ;
+    HierarchyElementComponentAdd ( sDimName_Tgt, sHierName_Main , sElParentBS6 , sElParentBS5, sElWeight ) ; 
+    HierarchyElementComponentAdd ( sDimName_Tgt, sHierName_Main , sElParentBS5 , sElParentBS4, sElWeight ) ;
+    HierarchyElementComponentAdd ( sDimName_Tgt, sHierName_Main , sElParentBS4 , sElParentBS3, sElWeight ) ;
+    HierarchyElementComponentAdd ( sDimName_Tgt, sHierName_Main , sElParentBS3 , sElParentBS2, sElWeight ) ;
+    HierarchyElementComponentAdd ( sDimName_Tgt, sHierName_Main , sElParentBS2 , sElParentBS1, sElWeight ) ;        
+        
+    endif;
+endif;
+              
+if( sElBalanceSheetFlag @<> 'Y');                
+    if (  sElParent10 @= '' & sElParent9 @<> '' & sElParent8 @<> '' & sElParent7 @<> '' & sElParent6 @<> '' & sElParent5 @<> '' & sElParent4 @<> '' & sElParent3 @<> '' & sElParent2 @<> '' & sElParent1 @<> '' ) ;
+    # HierarchyElementComponentAdd ( sDimName_Tgt, sHierName_Tgt , sElTopParent , sElParent9, sElWeight ) ;
+    # HierarchyElementComponentAdd ( sDimName_Tgt, sHierName_Tgt , sElParent9 , sElParent8, sElWeight ) ;   
+    # HierarchyElementComponentAdd ( sDimName_Tgt, sHierName_Tgt , sElParent8 , sElParent7, sElWeight ) ;
+    # HierarchyElementComponentAdd ( sDimName_Tgt, sHierName_Tgt , sElParent7 , sElParent6, sElWeight ) ;
+    # HierarchyElementComponentAdd ( sDimName_Tgt, sHierName_Tgt , sElParent6 , sElParent5, sElWeight ) ;                     
+    # HierarchyElementComponentAdd ( sDimName_Tgt, sHierName_Tgt , sElParent5 , sElParent4, sElWeight ) ;
+    # HierarchyElementComponentAdd ( sDimName_Tgt, sHierName_Tgt , sElParent4 , sElParent3, sElWeight ) ;
+    # HierarchyElementComponentAdd ( sDimName_Tgt, sHierName_Tgt , sElParent3 , sElParent2, sElWeight ) ;
+    # HierarchyElementComponentAdd ( sDimName_Tgt, sHierName_Tgt , sElParent2 , sElParent1, sElWeight ) ;
+    
+    # Alternative hierarchy in GLAccount Main hierarchy
+    
+    HierarchyElementComponentAdd ( sDimName_Tgt, sHierName_Main , sElTopParent , sElParent9, sElWeight ) ;
+    HierarchyElementComponentAdd ( sDimName_Tgt, sHierName_Main , sElParent9 , sElParent8, sElWeight ) ;   
+    HierarchyElementComponentAdd ( sDimName_Tgt, sHierName_Main , sElParent8 , sElParent7, sElWeight ) ;
+    HierarchyElementComponentAdd ( sDimName_Tgt, sHierName_Main , sElParent7 , sElParent6, sElWeight ) ;
+    HierarchyElementComponentAdd ( sDimName_Tgt, sHierName_Main , sElParent6 , sElParent5, sElWeight ) ;                     
+    HierarchyElementComponentAdd ( sDimName_Tgt, sHierName_Main , sElParent5 , sElParent4, sElWeight ) ;
+    HierarchyElementComponentAdd ( sDimName_Tgt, sHierName_Main , sElParent4 , sElParent3, sElWeight ) ;
+    HierarchyElementComponentAdd ( sDimName_Tgt, sHierName_Main , sElParent3 , sElParent2, sElWeight ) ;
+    HierarchyElementComponentAdd ( sDimName_Tgt, sHierName_Main , sElParent2 , sElParent1, sElWeight ) ;
+    endif;
+endif;
+               
+if(sElBalanceSheetFlag @= 'Y');
+    if ( sElParentBS10  @= '' & sElParentBS9 @<> '' & sElParentBS8 @<> '' & sElParentBS7 @<> '' & sElParentBS6 @<> '' & sElParentBS5 @<> '' & sElParentBS4 @<> '' & sElParentBS3 @<> '' & sElParentBS2 @<> '' & sElParentBS1 @<> '' ) ;
+    # HierarchyElementComponentAdd ( sDimName_Tgt, sHierName_Tgt1 , sElTopParent1 , sElParentBS9, sElWeight ) ;
+    # HierarchyElementComponentAdd ( sDimName_Tgt, sHierName_Tgt1 , sElParentBS9 , sElParentBS8, sElWeight ) ;
+    # HierarchyElementComponentAdd ( sDimName_Tgt, sHierName_Tgt1 , sElParentBS8 , sElParentBS7, sElWeight ) ;
+    # HierarchyElementComponentAdd ( sDimName_Tgt, sHierName_Tgt1 , sElParentBS7 , sElParentBS6, sElWeight ) ;
+    # HierarchyElementComponentAdd ( sDimName_Tgt, sHierName_Tgt1 , sElParentBS6 , sElParentBS5, sElWeight ) ; 
+    # HierarchyElementComponentAdd ( sDimName_Tgt, sHierName_Tgt1 , sElParentBS5 , sElParentBS4, sElWeight ) ;
+    # HierarchyElementComponentAdd ( sDimName_Tgt, sHierName_Tgt1 , sElParentBS4 , sElParentBS3, sElWeight ) ;
+    # HierarchyElementComponentAdd ( sDimName_Tgt, sHierName_Tgt1 , sElParentBS3 , sElParentBS2, sElWeight ) ;
+    # HierarchyElementComponentAdd ( sDimName_Tgt, sHierName_Tgt1 , sElParentBS2 , sElParentBS1, sElWeight ) ;
+
+    # Alternative hierarchy in GLAccount Main hierarchy  
+
+    HierarchyElementComponentAdd ( sDimName_Tgt, sHierName_Main , sElTopParent1 , sElParentBS9, sElWeight ) ;
+    HierarchyElementComponentAdd ( sDimName_Tgt, sHierName_Main , sElParentBS9 , sElParentBS8, sElWeight ) ;
+    HierarchyElementComponentAdd ( sDimName_Tgt, sHierName_Main , sElParentBS8 , sElParentBS7, sElWeight ) ;
+    HierarchyElementComponentAdd ( sDimName_Tgt, sHierName_Main , sElParentBS7 , sElParentBS6, sElWeight ) ;
+    HierarchyElementComponentAdd ( sDimName_Tgt, sHierName_Main , sElParentBS6 , sElParentBS5, sElWeight ) ; 
+    HierarchyElementComponentAdd ( sDimName_Tgt, sHierName_Main , sElParentBS5 , sElParentBS4, sElWeight ) ;
+    HierarchyElementComponentAdd ( sDimName_Tgt, sHierName_Main , sElParentBS4 , sElParentBS3, sElWeight ) ;
+    HierarchyElementComponentAdd ( sDimName_Tgt, sHierName_Main , sElParentBS3 , sElParentBS2, sElWeight ) ;
+    HierarchyElementComponentAdd ( sDimName_Tgt, sHierName_Main , sElParentBS2 , sElParentBS1, sElWeight ) ;        
+        
+    endif;
+endif;
+           
+if ( sElParent10 @= '' & sElParent9 @= '' & sElParent8 @<> '' & sElParent7 @<> '' & sElParent6 @<> '' & sElParent5 @<> '' & sElParent4 @<> '' & sElParent3 @<> '' & sElParent2 @<> '' & sElParent1 @<> '' ) ;
+    if( sElBalanceSheetFlag @<> 'Y');
+    # HierarchyElementComponentAdd ( sDimName_Tgt, sHierName_Tgt , sElTopParent , sElParent8, sElWeight ) ;
+    # HierarchyElementComponentAdd ( sDimName_Tgt, sHierName_Tgt , sElParent8 , sElParent7, sElWeight ) ;
+    # HierarchyElementComponentAdd ( sDimName_Tgt, sHierName_Tgt , sElParent7 , sElParent6, sElWeight ) ;
+    # HierarchyElementComponentAdd ( sDimName_Tgt, sHierName_Tgt , sElParent6, sElParent5, sElWeight ) ;
+    # HierarchyElementComponentAdd ( sDimName_Tgt, sHierName_Tgt , sElParent5, sElParent4, sElWeight ) ;
+    # HierarchyElementComponentAdd ( sDimName_Tgt, sHierName_Tgt , sElParent4, sElParent3, sElWeight ) ;
+    # HierarchyElementComponentAdd ( sDimName_Tgt, sHierName_Tgt , sElParent3, sElParent2, sElWeight ) ;
+    # HierarchyElementComponentAdd ( sDimName_Tgt, sHierName_Tgt , sElParent2, sElParent1, sElWeight ) ;
+    
+    # Alternative hierarchy in GLAccount Main hierarchy
+    
+    HierarchyElementComponentAdd ( sDimName_Tgt, sHierName_Main, sElTopParent , sElParent8, sElWeight ) ;
+    HierarchyElementComponentAdd ( sDimName_Tgt, sHierName_Main, sElParent8 , sElParent7, sElWeight ) ;
+    HierarchyElementComponentAdd ( sDimName_Tgt, sHierName_Main, sElParent7 , sElParent6, sElWeight ) ;
+    HierarchyElementComponentAdd ( sDimName_Tgt, sHierName_Main, sElParent6, sElParent5, sElWeight ) ;
+    HierarchyElementComponentAdd ( sDimName_Tgt, sHierName_Main, sElParent5, sElParent4, sElWeight ) ;
+    HierarchyElementComponentAdd ( sDimName_Tgt, sHierName_Main, sElParent4, sElParent3, sElWeight ) ;
+    HierarchyElementComponentAdd ( sDimName_Tgt, sHierName_Main, sElParent3, sElParent2, sElWeight ) ;
+    HierarchyElementComponentAdd ( sDimName_Tgt, sHierName_Main, sElParent2, sElParent1, sElWeight ) ;
+    endif;
+endif;
+
+              if(sElBalanceSheetFlag @= 'Y');
+              if ( sElParentBS10 @= '' & sElParentBS9 @= '' & sElParentBS8 @<> '' & sElParentBS7 @<> '' & sElParentBS6 @<> '' & sElParentBS5 @<> '' & sElParentBS4 @<> '' & sElParentBS3 @<> '' & sElParentBS2 @<> '' & sElParentBS1 @<> '' ) ;
+                HierarchyElementComponentAdd ( sDimName_Tgt, sHierName_Main , sElTopParent1 , sElParentBS8, sElWeight ) ;
+                HierarchyElementComponentAdd ( sDimName_Tgt, sHierName_Main , sElParentBS8 , sElParentBS7, sElWeight ) ;
+                HierarchyElementComponentAdd ( sDimName_Tgt, sHierName_Main , sElParentBS7 , sElParentBS6, sElWeight ) ;
+                HierarchyElementComponentAdd ( sDimName_Tgt, sHierName_Main , sElParentBS6 , sElParentBS5, sElWeight ) ; 
+                HierarchyElementComponentAdd ( sDimName_Tgt, sHierName_Main , sElParentBS5 , sElParentBS4, sElWeight ) ;
+                HierarchyElementComponentAdd ( sDimName_Tgt, sHierName_Main , sElParentBS4 , sElParentBS3, sElWeight ) ;
+                HierarchyElementComponentAdd ( sDimName_Tgt, sHierName_Main , sElParentBS3 , sElParentBS2, sElWeight ) ;
+                HierarchyElementComponentAdd ( sDimName_Tgt, sHierName_Main , sElParentBS2 , sElParentBS1, sElWeight ) ;
+              endif;       
+              endif; 
+         
+            
+if ( sElParent10 @= '' & sElParent9 @= '' & sElParent8 @= '' & sElParent7 @<> '' & sElParent6 @<> '' & sElParent5 @<> '' & sElParent4 @<> '' & sElParent3 @<> '' & sElParent2 @<> '' & sElParent1 @<> '' ) ;
+    if( sElBalanceSheetFlag @<> 'Y');
+        # HierarchyElementComponentAdd ( sDimName_Tgt, sHierName_Tgt , sElTopParent , sElParent7, sElWeight ) ;
+        # HierarchyElementComponentAdd ( sDimName_Tgt, sHierName_Tgt , sElParent7 , sElParent6, sElWeight ) ;
+        # HierarchyElementComponentAdd ( sDimName_Tgt, sHierName_Tgt , sElParent6, sElParent5, sElWeight ) ;
+        # HierarchyElementComponentAdd ( sDimName_Tgt, sHierName_Tgt , sElParent5, sElParent4, sElWeight ) ;
+        # HierarchyElementComponentAdd ( sDimName_Tgt, sHierName_Tgt , sElParent4, sElParent3, sElWeight ) ;
+        # HierarchyElementComponentAdd ( sDimName_Tgt, sHierName_Tgt , sElParent3, sElParent2, sElWeight ) ;
+        # HierarchyElementComponentAdd ( sDimName_Tgt, sHierName_Tgt , sElParent2, sElParent1, sElWeight ) ;
+        
+        # Alternative hierarchy in GLAccount Main hierarchy
+        
+        HierarchyElementComponentAdd ( sDimName_Tgt, sHierName_Main, sElTopParent , sElParent7, sElWeight ) ;
+        HierarchyElementComponentAdd ( sDimName_Tgt, sHierName_Main, sElParent7 , sElParent6, sElWeight ) ;
+        HierarchyElementComponentAdd ( sDimName_Tgt, sHierName_Main, sElParent6, sElParent5, sElWeight ) ;
+        HierarchyElementComponentAdd ( sDimName_Tgt, sHierName_Main, sElParent5, sElParent4, sElWeight ) ;
+        HierarchyElementComponentAdd ( sDimName_Tgt, sHierName_Main, sElParent4, sElParent3, sElWeight ) ;
+        HierarchyElementComponentAdd ( sDimName_Tgt, sHierName_Main, sElParent3, sElParent2, sElWeight ) ;
+        HierarchyElementComponentAdd ( sDimName_Tgt, sHierName_Main, sElParent2, sElParent1, sElWeight ) ;
+    endif;
+endif;
+                
+                   if(sElBalanceSheetFlag @= 'Y');
+                   if ( sElParentBS10 @= '' & sElParentBS9 @= '' & sElParentBS8 @= '' & sElParentBS7 @<> '' & sElParentBS6 @<> '' & sElParentBS5 @<> '' & sElParentBS4 @<> '' & sElParentBS3 @<> '' & sElParentBS2 @<> '' & sElParentBS1 @<> '' ) ;
+                      HierarchyElementComponentAdd ( sDimName_Tgt, sHierName_Main , sElTopParent1 , sElParentBS7, sElWeight ) ;
+                      HierarchyElementComponentAdd ( sDimName_Tgt, sHierName_Main , sElParentBS7 , sElParentBS6, sElWeight ) ;
+                      HierarchyElementComponentAdd ( sDimName_Tgt, sHierName_Main , sElParentBS6 , sElParentBS5, sElWeight ) ; 
+                      HierarchyElementComponentAdd ( sDimName_Tgt, sHierName_Main , sElParentBS5 , sElParentBS4, sElWeight ) ;
+                      HierarchyElementComponentAdd ( sDimName_Tgt, sHierName_Main , sElParentBS4 , sElParentBS3, sElWeight ) ;
+                      HierarchyElementComponentAdd ( sDimName_Tgt, sHierName_Main , sElParentBS3 , sElParentBS2, sElWeight ) ;
+                      HierarchyElementComponentAdd ( sDimName_Tgt, sHierName_Main , sElParentBS2 , sElParentBS1, sElWeight ) ;
+                endif;       
+                endif; 
+            
+if ( sElParent10 @= '' & sElParent9 @= '' & sElParent8 @= '' & sElParent7 @= '' & sElParent6 @<> '' & sElParent5 @<> '' & sElParent4 @<> '' & sElParent3 @<> '' & sElParent2 @<> '' & sElParent1 @<> '' ) ;
+    if( sElBalanceSheetFlag @<> 'Y');
+        # HierarchyElementComponentAdd ( sDimName_Tgt, sHierName_Tgt , sElTopParent, sElParent6, sElWeight ) ;
+        # HierarchyElementComponentAdd ( sDimName_Tgt, sHierName_Tgt , sElParent6, sElParent5, sElWeight ) ;
+        # HierarchyElementComponentAdd ( sDimName_Tgt, sHierName_Tgt , sElParent5, sElParent4, sElWeight ) ;
+        # HierarchyElementComponentAdd ( sDimName_Tgt, sHierName_Tgt , sElParent4, sElParent3, sElWeight ) ;
+        # HierarchyElementComponentAdd ( sDimName_Tgt, sHierName_Tgt , sElParent3, sElParent2, sElWeight ) ;
+        # HierarchyElementComponentAdd ( sDimName_Tgt, sHierName_Tgt , sElParent2, sElParent1, sElWeight ) ;
+        
+        # Alternative hierarchy in GLAccount Main hierarchy
+        
+        HierarchyElementComponentAdd ( sDimName_Tgt, sHierName_Main, sElTopParent, sElParent6, sElWeight ) ;
+        HierarchyElementComponentAdd ( sDimName_Tgt, sHierName_Main, sElParent6, sElParent5, sElWeight ) ;
+        HierarchyElementComponentAdd ( sDimName_Tgt, sHierName_Main, sElParent5, sElParent4, sElWeight ) ;
+        HierarchyElementComponentAdd ( sDimName_Tgt, sHierName_Main, sElParent4, sElParent3, sElWeight ) ;
+        HierarchyElementComponentAdd ( sDimName_Tgt, sHierName_Main, sElParent3, sElParent2, sElWeight ) ;
+        HierarchyElementComponentAdd ( sDimName_Tgt, sHierName_Main, sElParent2, sElParent1, sElWeight ) ;
+    endif;
+endif;
+             
+                      if(sElBalanceSheetFlag @= 'Y');
+                      if ( sElParentBS10 @= '' & sElParentBS9 @= '' & sElParentBS8 @= '' & sElParentBS7 @= '' & sElParentBS6 @<> '' & sElParentBS5 @<> '' & sElParentBS4 @<> '' & sElParentBS3 @<> '' & sElParentBS2 @<> '' & sElParentBS1 @<> '' ) ;
+            
+                        HierarchyElementComponentAdd ( sDimName_Tgt, sHierName_Main , sElTopParent1 , sElParentBS6, 1 ) ;
+                        HierarchyElementComponentAdd ( sDimName_Tgt, sHierName_Main , sElParentBS6 , sElParentBS5, sElWeight ) ; 
+                        HierarchyElementComponentAdd ( sDimName_Tgt, sHierName_Main , sElParentBS5 , sElParentBS4, sElWeight ) ;
+                        HierarchyElementComponentAdd ( sDimName_Tgt, sHierName_Main , sElParentBS4 , sElParentBS3, sElWeight ) ;
+                        HierarchyElementComponentAdd ( sDimName_Tgt, sHierName_Main , sElParentBS3 , sElParentBS2, sElWeight ) ;
+                        HierarchyElementComponentAdd ( sDimName_Tgt, sHierName_Main , sElParentBS2 , sElParentBS1, sElWeight ) ;
+                          
+                      endif; 
+                      endif;
+                     
+            
+if ( sElParent10 @= '' & sElParent9 @= '' & sElParent8 @= '' & sElParent7 @= '' & sElParent6 @= '' & sElParent5 @<> '' & sElParent4 @<> '' & sElParent3 @<> '' & sElParent2 @<> '' & sElParent1 @<> '' ) ;
+    if( sElBalanceSheetFlag @<> 'Y');
+        # HierarchyElementComponentAdd ( sDimName_Tgt, sHierName_Tgt , sElTopParent, sElParent5, sElWeight ) ;
+        # HierarchyElementComponentAdd ( sDimName_Tgt, sHierName_Tgt , sElParent5, sElParent4, sElWeight ) ;
+        # HierarchyElementComponentAdd ( sDimName_Tgt, sHierName_Tgt , sElParent4, sElParent3, sElWeight ) ;
+        # HierarchyElementComponentAdd ( sDimName_Tgt, sHierName_Tgt , sElParent3, sElParent2, sElWeight ) ;
+        # HierarchyElementComponentAdd ( sDimName_Tgt, sHierName_Tgt , sElParent2, sElParent1, sElWeight ) ;
+        
+        # Alternative hierarchy in GLAccount Main hierarchy
+        
+        HierarchyElementComponentAdd ( sDimName_Tgt, sHierName_Main, sElTopParent, sElParent5, sElWeight ) ;
+        HierarchyElementComponentAdd ( sDimName_Tgt, sHierName_Main, sElParent5, sElParent4, sElWeight ) ;
+        HierarchyElementComponentAdd ( sDimName_Tgt, sHierName_Main, sElParent4, sElParent3, sElWeight ) ;
+        HierarchyElementComponentAdd ( sDimName_Tgt, sHierName_Main, sElParent3, sElParent2, sElWeight ) ;
+        HierarchyElementComponentAdd ( sDimName_Tgt, sHierName_Main, sElParent2, sElParent1, sElWeight ) ;               
+    endif;
+endif;
+                 
+                            if(sElBalanceSheetFlag @= 'Y');
+                            if ( sElParentBS10 @= '' & sElParentBS9 @= '' & sElParentBS8 @= '' & sElParentBS7 @= '' & sElParentBS6 @= '' & sElParentBS5 @<> '' & sElParentBS4 @<> '' & sElParentBS3 @<> '' & sElParentBS2 @<> '' & sElParentBS1 @<> '' ) ;
+                
+                              HierarchyElementComponentAdd ( sDimName_Tgt, sHierName_Main , sElTopParent1 , sElParentBS5, 1 ) ;
+                              HierarchyElementComponentAdd ( sDimName_Tgt, sHierName_Main , sElParentBS5 , sElParentBS4, sElWeight ) ;
+                              HierarchyElementComponentAdd ( sDimName_Tgt, sHierName_Main , sElParentBS4 , sElParentBS3, sElWeight ) ;
+                              HierarchyElementComponentAdd ( sDimName_Tgt, sHierName_Main , sElParentBS3 , sElParentBS2, sElWeight ) ;
+                              HierarchyElementComponentAdd ( sDimName_Tgt, sHierName_Main , sElParentBS2 , sElParentBS1, sElWeight ) ;
+                              
+                            endif;  
+                            endif;  
+     
+            
+if ( sElParent10 @= '' & sElParent9 @= '' & sElParent8 @= '' & sElParent7 @= '' & sElParent6 @= '' & sElParent5 @= '' & sElParent4 @<> '' & sElParent3 @<> '' & sElParent2 @<> '' & sElParent1 @<> '' ) ;
+    if( sElBalanceSheetFlag @<> 'Y');
+        # HierarchyElementComponentAdd ( sDimName_Tgt, sHierName_Tgt , sElTopParent, sElParent4, sElWeight ) ;
+        # HierarchyElementComponentAdd ( sDimName_Tgt, sHierName_Tgt , sElParent4, sElParent3, sElWeight ) ;
+        # HierarchyElementComponentAdd ( sDimName_Tgt, sHierName_Tgt , sElParent3, sElParent2, sElWeight ) ;
+        # HierarchyElementComponentAdd ( sDimName_Tgt, sHierName_Tgt , sElParent2, sElParent1, sElWeight ) ;
+        
+        # Alternative hierarchy in GLAccount Main hierarchy
+        
+        HierarchyElementComponentAdd ( sDimName_Tgt, sHierName_Main, sElTopParent, sElParent4, sElWeight ) ;
+        HierarchyElementComponentAdd ( sDimName_Tgt, sHierName_Main, sElParent4, sElParent3, sElWeight ) ;
+        HierarchyElementComponentAdd ( sDimName_Tgt, sHierName_Main, sElParent3, sElParent2, sElWeight ) ;
+        HierarchyElementComponentAdd ( sDimName_Tgt, sHierName_Main, sElParent2, sElParent1, sElWeight ) ;               
+    endif;
+endif;
+               
+if(sElBalanceSheetFlag @= 'Y');
+    if ( sElParentBS10 @= '' & sElParentBS9 @= '' & sElParentBS8 @= '' & sElParentBS7 @= '' & sElParentBS6 @= '' & sElParentBS5 @= '' & sElParentBS4 @<> '' & sElParentBS3 @<> '' & sElParentBS2 @<> '' & sElParentBS1 @<> '' ) ;
+
+        HierarchyElementComponentAdd ( sDimName_Tgt, sHierName_Main , sElTopParent1 , sElParentBS4, sElWeight ) ;
+        HierarchyElementComponentAdd ( sDimName_Tgt, sHierName_Main , sElParentBS4 , sElParentBS3, sElWeight ) ;
+        HierarchyElementComponentAdd ( sDimName_Tgt, sHierName_Main , sElParentBS3 , sElParentBS2, sElWeight ) ;
+        HierarchyElementComponentAdd ( sDimName_Tgt, sHierName_Main , sElParentBS2 , sElParentBS1, sElWeight ) ;
+
+        # Alternative hierarchy in GLAccount Main hierarchy
+
+        # HierarchyElementComponentAdd ( sDimName_Tgt, sHierName_Tgt1 , sElTopParent1 , sElParentBS4, sElWeight ) ;
+        # HierarchyElementComponentAdd ( sDimName_Tgt, sHierName_Tgt1 , sElParentBS4 , sElParentBS3, sElWeight ) ;
+        # HierarchyElementComponentAdd ( sDimName_Tgt, sHierName_Tgt1 , sElParentBS3 , sElParentBS2, sElWeight ) ;
+        # HierarchyElementComponentAdd ( sDimName_Tgt, sHierName_Tgt1 , sElParentBS2 , sElParentBS1, sElWeight ) ;        
+        
+    endif;   
+endif ;
+           
+if ( sElParent10 @= '' & sElParent9 @= '' & sElParent8 @= '' & sElParent7 @= '' & sElParent6 @= '' & sElParent5 @= '' & sElParent4 @= '' & sElParent3 @<> '' & sElParent2 @<> '' & sElParent1 @<> '' ) ;
+    if( sElBalanceSheetFlag @<> 'Y');
+        # HierarchyElementComponentAdd ( sDimName_Tgt, sHierName_Tgt , sElTopParent, sElParent3, sElWeight ) ;
+        # HierarchyElementComponentAdd ( sDimName_Tgt, sHierName_Tgt , sElParent3, sElParent2, sElWeight ) ;
+        # HierarchyElementComponentAdd ( sDimName_Tgt, sHierName_Tgt , sElParent2, sElParent1, sElWeight ) ;
+        
+        # Alternative hierarchy in GLAccount Main hierarchy
+        
+        HierarchyElementComponentAdd ( sDimName_Tgt, sHierName_Main, sElTopParent, sElParent3, sElWeight ) ;
+        HierarchyElementComponentAdd ( sDimName_Tgt, sHierName_Main, sElParent3, sElParent2, sElWeight ) ;
+        HierarchyElementComponentAdd ( sDimName_Tgt, sHierName_Main, sElParent2, sElParent1, sElWeight ) ;
+    endif;
+endif;
+               
+            if(sElBalanceSheetFlag @= 'Y');
+            if ( sElParentBS10 @= '' & 
+                sElParentBS9 @= '' & 
+                sElParentBS8 @= '' & 
+                sElParentBS7 @= '' & 
+                sElParentBS6 @= '' & 
+                sElParentBS5 @= '' & 
+                sElParentBS4 @= '' & 
+                sElParentBS3 @<> '' & 
+                sElParentBS2 @<> '' & 
+                sElParentBS1 @<> '' ) ;
+
+                HierarchyElementComponentAdd ( sDimName_Tgt, sHierName_Main , sElTopParent1 , sElParentBS3, sElWeight ) ;
+                HierarchyElementComponentAdd ( sDimName_Tgt, sHierName_Main , sElParentBS3 , sElParentBS2, sElWeight ) ;
+                HierarchyElementComponentAdd ( sDimName_Tgt, sHierName_Main , sElParentBS2 , sElParentBS1, sElWeight ) ;
+              
+            endif; 
+            endif ;
+            
+if ( sElParent10 @= '' & sElParent9 @= '' & sElParent8 @= '' & sElParent7 @= '' & sElParent6 @= '' & sElParent5 @= '' & sElParent4 @= '' & sElParent3 @= '' & sElParent2 @<> '' & sElParent1 @<> '' ) ;
+    if( sElBalanceSheetFlag @<> 'Y');
+        # HierarchyElementComponentAdd ( sDimName_Tgt, sHierName_Tgt , sElTopParent, sElParent2, sElWeight ) ;
+        # HierarchyElementComponentAdd ( sDimName_Tgt, sHierName_Tgt , sElParent2, sElParent1, sElWeight ) ;
+        
+        # Alternative hierarchy in GLAccount Main hierarchy
+        
+        HierarchyElementComponentAdd ( sDimName_Tgt, sHierName_Main, sElTopParent, sElParent2, sElWeight ) ;
+        HierarchyElementComponentAdd ( sDimName_Tgt, sHierName_Main, sElParent2, sElParent1, sElWeight ) ;
+    endif;
+endif;
+             
+if(sElBalanceSheetFlag @= 'Y');
+    if ( sElParentBS10 @= '' & sElParentBS9 @= '' & sElParentBS8 @= '' & sElParentBS7 @= '' & sElParentBS6 @= '' & sElParentBS5 @= '' & sElParentBS4 @= '' & sElParentBS3 @= '' & sElParentBS2 @<> '' & sElParentBS1 @<> '' ) ;
+
+        HierarchyElementComponentAdd ( sDimName_Tgt, sHierName_Main , sElTopParent1 , sElParentBS2, sElWeight ) ;
+        HierarchyElementComponentAdd ( sDimName_Tgt, sHierName_Main , sElParentBS2 , sElParentBS1, sElWeight ) ;
+    
+        # Alternative hierarchy in GLAccount Main hierarchy
+    
+        # HierarchyElementComponentAdd ( sDimName_Tgt, sHierName_Tgt1 , sElTopParent1 , sElParentBS2, sElWeight ) ;
+        # HierarchyElementComponentAdd ( sDimName_Tgt, sHierName_Tgt1 , sElParentBS2 , sElParentBS1, sElWeight ) ;         
+
+    endif;
+endif ; 
+            
+if ( sElParent10 @= '' & sElParent9 @= '' & sElParent8 @= '' & sElParent7 @= '' & sElParent6 @= '' & sElParent5 @= '' & sElParent4 @= '' & sElParent3 @= '' & sElParent2 @= '' & sElParent1 @<> '' ) ;
+    if( sElBalanceSheetFlag @<> 'Y');
+        # HierarchyElementComponentAdd ( sDimName_Tgt, sHierName_Tgt , sElTopParent, sElParent1, sElWeight ) ;
+
+        # Alternative hierarchy in GLAccount Main hierarchy
+
+        HierarchyElementComponentAdd ( sDimName_Tgt, sHierName_Main , sElTopParent, sElParent1, sElWeight ) ; 
+    endif;
+endif;
+                 
+if(sElBalanceSheetFlag @= 'Y');
+    if ( sElParentBS10 @= '' & sElParentBS9 @= '' & sElParentBS8 @= '' & sElParentBS7 @= '' & sElParentBS6 @= '' & sElParentBS5 @= '' & sElParentBS4 @= '' & sElParentBS3 @= '' & sElParentBS2 @= '' & sElParentBS1 @<> '' ) ;
+        # HierarchyElementComponentAdd ( sDimName_Tgt, sHierName_Tgt1 , sElTopParent1 , sElParentBS1, sElWeight ) ;
+
+        # Alternative hierarchy in GLAccount Main hierarchy        
+        
+        HierarchyElementComponentAdd ( sDimName_Tgt, sHierName_Main , sElTopParent1 , sElParentBS1, sElWeight ) ;        
+    endif;
+endif ; 
+#EndRegion            
+                  
+#endregion
+#region Data
+#****Begin: Generated Statements***
+#****End: Generated Statements****
+
+# sElParent1 = CellGetS(sCub_Src, vGL, 'Parent Level 1' )  ;
+# sExpClassify = CellGetS(sCub_Src, vGL, 'Expense Classify' )  ;
+
+# if ( sElParent1 @<> '' ) ;
+# AttrPutS( sElParent1 , 'GLAccount', vGL, 'Rollup' );
+# AttrPutS( sExpClassify , 'GLAccount', vGL, 'ExpenseClassify' );
+# endif ;
+
+# Add Attributes
+
+
+#endregion
+#region Epilog
+#****Begin: Generated Statements***
+#****End: Generated Statements****
+            
+#----------------------------------------------------------------------------------------------------------------------------
+#Region ~~~~~~~~~~Logging ~~~~~~~~~~~~~~~#
+#----------------------------------------------------------------------------------------------------------------------------
+# Finish Process log 1
+nErrors = MetaDataMinorErrorCount + DataMinorErrorCount ;
+If( GetProcessErrorFilename() @<> '' % nErrors > 0 );
+  sLogLevel = 'ERROR';
+  sLogReference = GetProcessErrorFilename();
+  sMessage = 'Process completed with ' | NumberToString( nErrors ) | ' minor errors';
+Else;
+  sLogLevel = 'INFO';
+  sLogReference = '';
+  sMessage = 'Process completed successfully. Total records: ' | NumberToString (nRecordCountMetadata  )   ;
+EndIf;
+
+#logoutput( 'INFO', sMessage );
+ExecuteProcess('syProcessLogMessage', 'psProcessName', csProcessReference , 'psLogLevel', sLogLevel, 'psMessage', sMessage , 'psProcessErrorReference' , sLogReference );
+
+## Finish TI Tracker Process Logging - 2
+IF( psTITracker @= 'Y' );
+ # Check for minor errors
+ IF ( sSystemMessage @= '' );
+   IF ( DataMinorErrorCount = 0 & PrologMinorErrorCount = 0 & MetaDataMinorErrorCount = 0 );
+     sSystemMessage = 'Successful';
+   ELSE;
+     IF ( DataMinorErrorCount <> 0 );
+       sSystemMessage = NumberToString ( DataMinorErrorCount ) | ' data error/s; ';
+     ENDIF;
+     IF ( PrologMinorErrorCount <> 0 );
+       sSystemMessage =NumberToString ( PrologMinorErrorCount ) | ' prolog error/s; ';
+     ENDIF;
+     IF ( MetaDataMinorErrorCount <> 0 );
+       sSystemMessage = NumberToString ( MetaDataMinorErrorCount ) | ' metadata error/s';
+     ENDIF;
+         sSystemMessage= sSystemMessage ;
+    ENDIF;
+ ENDIF;
+
+  ExecuteProcess('syTITracker',
+   'pProcessName', GetProcessName,
+   'pTime', nStartTime ,
+   'pStatus', 0,
+   'pTM1User', sUserName,
+   'pSystemMessage', sSystemMessage,
+   'pRecordCount', nRecordCountData + nRecordCountMetadata,
+   'pPrologMinorErrorCount', PrologMinorErrorCount,
+   'pMetaDataMinorErrorCount', MetaDataMinorErrorCount,
+   'pDataMinorErrorCount', DataMinorErrorCount,
+   'pDebug', 1 );
+ENDIF;
+#EndRegion
+#endregion

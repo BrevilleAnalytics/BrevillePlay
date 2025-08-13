@@ -1,0 +1,29 @@
+{
+	"@type":"Process",
+	"Name":"{f9ee214c-dc41-4a83-afb9-88e514fb61ce}",
+	"HasSecurityAccess":false,
+	"Code@Code.link":"{f9ee214c-dc41-4a83-afb9-88e514fb61ce}.ti",
+	"DataSource":
+	{
+		"Type":"ASCII",
+		"asciiDecimalSeparator":".",
+		"asciiDelimiterChar":",",
+		"asciiDelimiterType":"Character",
+		"asciiHeaderRecords":1,
+		"asciiQuoteCharacter":"\"",
+		"asciiThousandSeparator":",",
+		"dataSourceNameForClient":"",
+		"dataSourceNameForServer":"model_upload\\BV_Measure.csv"
+	},
+	"Parameters":[],
+	"Variables":
+	[
+		{
+			"Name":"vLevel0",
+			"Type":"String",
+			"Position":1,
+			"StartByte":0,
+			"EndByte":0
+		}
+	]
+}

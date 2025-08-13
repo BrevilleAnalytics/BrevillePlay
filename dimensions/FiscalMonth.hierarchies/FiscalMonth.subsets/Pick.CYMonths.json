@@ -1,0 +1,5 @@
+{
+	"@type":"Subset",
+	"Name":"Pick.CYMonths",
+	"Expression":"{EXCEPT(DRILLDOWNMEMBER({[FiscalMonth].[FiscalMonth].[FY24]} , {[FiscalMonth].[FiscalMonth].[FY24]} , RECURSIVE) , {[FiscalMonth].[FiscalMonth].[FY24]})}"
+}

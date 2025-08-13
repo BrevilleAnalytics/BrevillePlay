@@ -1,0 +1,148 @@
+#region Prolog
+
+#****Begin: Generated Statements***
+#****End: Generated Statements****
+
+#------------------------------------------------------------------------------------------
+#Region # Process Summary
+# This process identifies orphans elements and puts them into a bucket (consol)
+
+
+#------------------------------------------------------------------------------------------
+#<Changes Log>
+# v.01 24.05.2020 - Mariusz Perz - Initial draft
+
+#<Maintenance Log\>
+
+#<Execute Method>
+# Daily Schedule
+#<Execute Method\>
+
+#<Processes Executed>
+# syProcessLogInitialise
+# syProcessLogMessage
+#<Processes Executed\>
+
+#<Execute Schedule>
+# Daily after metadata update
+#<Execute Schedule\>
+
+#<Estimated Run Time>
+# ~
+#<Estimated Run Time\>
+
+#EndRegion # Process Summary
+#------------------------------------------------------------------------------------------
+
+#------------------------------------------------------------------------------------------
+#Region # Process logger
+sProcessName = GetProcessName();
+
+nTIStartTime= NOW;
+If( pProcessNameForLogging @<> '' );
+  sProcessName = pProcessNameForLogging;	
+Else;
+  ExecuteProcess( 'syProcessLogInitialise',
+    'psProcessName', sProcessName );
+EndIf;
+
+sMessage = 'Executing Orphan Process for ' | pDimName | ' dim';
+ExecuteProcess( 'syProcessLogMessage',
+  'psProcessName', sProcessName,
+  'psLogLevel', 'INFO',
+  'psMessage', sMessage );
+
+#EndRegion # Process logger
+#------------------------------------------------------------------------------------------
+
+#------------------------------------------------------------------------------------------
+#Region # Variables
+
+sDim = pDimName;
+
+If( pOrphanBucket @= '' );
+  sOrphanBucket = 'Unassigned';
+Else;
+  sOrphanBucket = pOrphanBucket;
+EndIf;
+
+nOrphanCount = 0;
+nOrphanDeletedConsol = 0;
+
+#EndRegion # Variables
+#------------------------------------------------------------------------------------------
+
+#------------------------------------------------------------------------------------------
+#Region # Process orphans
+
+nElements = DIMSIZ( sDim );
+While( nElements > 0 );
+  sElement = DIMNM( sDim, nElements );
+
+  sElType = DTYPE( sDim, sElement ) ;
+  sElParent = ELPAR( sDim, sElement, 1);
+  nElTotalChildren = ElCompN( sDim, sElement );
+
+  # Orphan N Element
+  If( sElType @= 'N' & sElParent @= '' );
+
+    If( DIMIX( sDim, sOrphanBucket ) = 0 );
+      DimensionElementInsertDirect( sDim, '', sOrphanBucket, 'C' );
+    EndIf;
+    DimensionElementComponentAddDirect( sDim,  sOrphanBucket, sElement, 1 );
+    nOrphanCount = nOrphanCount + 1;
+
+  # Orphan C Element
+  ElseIf(sElType @= 'C' & nElTotalChildren = 0 & sElParent @='' & sElement @<> sOrphanBucket );
+
+    If( DIMIX( sDim, sOrphanBucket ) = 0 );
+      DimensionElementInsertDirect( sDim, '', sOrphanBucket, 'C' );
+    EndIf;
+
+    If( pDeleteEmptyConsols @= 'Y' );
+      DimensionElementDeleteDirect( sDim, sElement );
+      nOrphanCount = nOrphanCount + 1;
+      nOrphanDeletedConsol = nOrphanDeletedConsol + 1;
+    Else;
+      DimensionElementComponentAddDirect( sDim, sOrphanBucket, sElement, 1 );
+      nOrphanCount = nOrphanCount + 1;
+    EndIf;
+
+  EndIf;
+
+nElements = nElements - 1;
+End;
+
+If( DIMIX( sDim, sOrphanBucket ) > 0 & ELCOMPN( sDim, sOrphanBucket ) = 0 );
+  DimensionElementDeleteDirect( sDim, sOrphanBucket );
+EndIf;
+
+#EndRegion # Process orphans
+#------------------------------------------------------------------------------------------
+#endregion
+#region Metadata
+
+#****Begin: Generated Statements***
+#****End: Generated Statements****
+#endregion
+#region Data
+
+#****Begin: Generated Statements***
+#****End: Generated Statements****
+#endregion
+#region Epilog
+
+#****Begin: Generated Statements***
+#****End: Generated Statements****
+
+#------------------------------------------------------------------------------------------
+#Region # Process logger
+sMessage =  'Process Orphans completed for ' | pDimName  | ' . ' | 'No of Orphans Identified: ' | NumberToString( nOrphanCount ) | ' | No of Empty Consols deleted: ' | NumberToString( nOrphanDeletedConsol );
+LogOutPut( 'info', sMessage );
+ExecuteProcess( 'syProcessLogMessage',
+  'psProcessName', sProcessName,
+  'psLogLevel', 'INFO',
+  'psMessage', sMessage );
+#EndRegion # Process logger
+#------------------------------------------------------------------------------------------
+#endregion

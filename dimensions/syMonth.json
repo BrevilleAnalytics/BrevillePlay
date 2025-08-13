@@ -1,0 +1,13 @@
+{
+	"@type":"Dimension",
+	"Name":"syMonth",
+	"AllLeavesHierarchyName":"",
+	"DefaultHierarchy":
+	{
+		"@id":"Dimensions('syMonth')/Hierarchies('syMonth')"
+	},
+	"Hierarchies@Code.links":
+	[
+		"syMonth.hierarchies/syMonth.json"
+	]
+}

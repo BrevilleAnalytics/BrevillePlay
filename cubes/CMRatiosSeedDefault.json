@@ -1,0 +1,20 @@
+{
+	"@type":"Cube",
+	"Name":"CMRatiosSeedDefault",
+	"Dimensions":
+	[
+		{
+			"@id":"Dimensions('CMRatios')"
+		},
+		{
+			"@id":"Dimensions('Version')"
+		},
+		{
+			"@id":"Dimensions('CMRatiosSeedDefaultMeasure')"
+		}
+	],
+	"Views@Code.links":
+	[
+		"CMRatiosSeedDefault.views/App.RunRateGroupDefaults.json"
+	]
+}

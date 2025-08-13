@@ -1,0 +1,13 @@
+{
+	"@type":"Dimension",
+	"Name":"syEnvironmentMeasure",
+	"AllLeavesHierarchyName":"",
+	"DefaultHierarchy":
+	{
+		"@id":"Dimensions('syEnvironmentMeasure')/Hierarchies('syEnvironmentMeasure')"
+	},
+	"Hierarchies@Code.links":
+	[
+		"syEnvironmentMeasure.hierarchies/syEnvironmentMeasure.json"
+	]
+}

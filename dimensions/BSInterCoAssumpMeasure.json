@@ -1,0 +1,13 @@
+{
+	"@type":"Dimension",
+	"Name":"BSInterCoAssumpMeasure",
+	"AllLeavesHierarchyName":"",
+	"DefaultHierarchy":
+	{
+		"@id":"Dimensions('BSInterCoAssumpMeasure')/Hierarchies('BSInterCoAssumpMeasure')"
+	},
+	"Hierarchies@Code.links":
+	[
+		"BSInterCoAssumpMeasure.hierarchies/BSInterCoAssumpMeasure.json"
+	]
+}

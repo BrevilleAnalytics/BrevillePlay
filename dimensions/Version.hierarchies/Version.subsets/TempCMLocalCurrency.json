@@ -1,0 +1,10 @@
+{
+	"@type":"Subset",
+	"Name":"TempCMLocalCurrency",
+	"Elements":
+	[
+		{
+			"@id":"Dimensions('Version')/Hierarchies('Version')/Elements('Actual')"
+		}
+	]
+}

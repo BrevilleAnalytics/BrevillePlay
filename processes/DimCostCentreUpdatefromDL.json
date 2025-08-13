@@ -1,0 +1,52 @@
+{
+	"@type":"Process",
+	"Name":"DimCostCentreUpdatefromDL",
+	"HasSecurityAccess":false,
+	"Code@Code.link":"DimCostCentreUpdatefromDL.ti",
+	"UIData":"_ParameterConstraints=e30=€",
+	"VariablesUIData":
+	[
+		"VarType=32€ColType=827€"
+	],
+	"DataSource":
+	{
+		"Type":"ODBC",
+		"dataSourceNameForClient":"prd-aea-asyn-abi-fpa-ibm",
+		"dataSourceNameForServer":"prd-aea-asyn-abi-fpa-ibm",
+		"password":"ikY62SLwRnw0caf_DnZOTzKU^Xuie`1f8i<YXbBbzP3]]YRD\\O]XNHqf@1yo^M|`[@[Kt<r=\\:;X]k3atN=9e=;?;R}GLy?Km8mKHapZr4<NVC$415sHOHN]E8t7fHnaT_Pcdq8@P4j1=oVSBHvs0NwbXL2KY1>GPn9Pb>JMnQhjG`=9q<<p;_bkvopQ5+3ZpzEuogtp",
+		"query":"SET NOCOUNT ON; \r\n  SELECT distinct  [costCentre]\r\n  FROM [dbo].[Actual_Expenses]\r\n  ",
+		"userName":"sql_fpa_ibm_prd_readonly",
+		"usesUnicode":true
+	},
+	"Parameters":
+	[
+		{
+			"Name":"psProcessReference",
+			"Prompt":"",
+			"Value":"",
+			"Type":"String"
+		},
+		{
+			"Name":"pssyProcessLog",
+			"Prompt":"To enable or disable Process Log - Y/N",
+			"Value":"",
+			"Type":"String"
+		},
+		{
+			"Name":"psTITracker",
+			"Prompt":"To enable or disable syTI Tracker - Y/N",
+			"Value":"",
+			"Type":"String"
+		}
+	],
+	"Variables":
+	[
+		{
+			"Name":"vCC",
+			"Type":"String",
+			"Position":1,
+			"StartByte":0,
+			"EndByte":0
+		}
+	]
+}

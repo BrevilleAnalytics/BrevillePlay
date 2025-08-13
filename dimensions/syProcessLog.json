@@ -1,0 +1,13 @@
+{
+	"@type":"Dimension",
+	"Name":"syProcessLog",
+	"AllLeavesHierarchyName":"",
+	"DefaultHierarchy":
+	{
+		"@id":"Dimensions('syProcessLog')/Hierarchies('syProcessLog')"
+	},
+	"Hierarchies@Code.links":
+	[
+		"syProcessLog.hierarchies/syProcessLog.json"
+	]
+}

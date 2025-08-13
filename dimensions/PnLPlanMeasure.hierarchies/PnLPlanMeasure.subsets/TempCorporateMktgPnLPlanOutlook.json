@@ -1,0 +1,10 @@
+{
+	"@type":"Subset",
+	"Name":"TempCorporateMktgPnLPlanOutlook",
+	"Elements":
+	[
+		{
+			"@id":"Dimensions('PnLPlanMeasure')/Hierarchies('PnLPlanMeasure')/Elements('Amount')"
+		}
+	]
+}
